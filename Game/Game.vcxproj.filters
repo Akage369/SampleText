@@ -13,5 +13,48 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Archivos de recursos\Application">
+      <UniqueIdentifier>{c9d65626-9fec-4b04-8853-5848bcbe3e60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de recursos\Modules">
+      <UniqueIdentifier>{0c9981dc-30a5-4fae-b91b-929d7e6cd352}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\Application.cpp">
+      <Filter>Archivos de recursos\Application</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Main.cpp">
+      <Filter>Archivos de recursos\Application</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Dummy.cpp">
+      <Filter>Archivos de recursos\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DummyEsc.cpp">
+      <Filter>Archivos de recursos\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Module.cpp">
+      <Filter>Archivos de recursos\Modules</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\Application.h">
+      <Filter>Archivos de recursos\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Globals.h">
+      <Filter>Archivos de recursos\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MemLeaks.h">
+      <Filter>Archivos de recursos\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Dummy.h">
+      <Filter>Archivos de recursos\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DummyEsc.h">
+      <Filter>Archivos de recursos\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Module.h">
+      <Filter>Archivos de recursos\Modules</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

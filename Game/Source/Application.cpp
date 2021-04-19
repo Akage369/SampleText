@@ -45,7 +45,7 @@ update_status Application::Update()
 	// TODO 5: Make sure that App exits correctly if Init/PreUpdate/Update/PostUpdate/CleanUp return exit
 	return ret;
 }
- 
+
 bool Application::CleanUp()
 {
 	// TODO 3: Make sure all modules have a chance to cleanup
