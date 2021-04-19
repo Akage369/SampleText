@@ -3,10 +3,19 @@
 
 #include "Globals.h"
 
-// TODO 7: Create your new module "DummyESC".
-#define NUM_MODULES 2
+#define NUM_MODULES 10
 
 class Module;
+class ModuleWindow;
+class ModuleInput;
+class ModuleTextures;
+class ModuleAudio;
+class ModulePlayer;
+class ModuleScene;
+class ModuleParticles;
+class ModuleCollisions;
+class ModuleEnemies;
+class ModuleRender;
 
 class Application
 {
@@ -15,6 +24,9 @@ public:
 
 	//Constructor. Creates all necessary modules for the application
 	Application();
+
+	//Destructor. Removes all module objects
+	~Application();
 
 	//Initializes all modules
 	bool Init();
@@ -26,9 +38,26 @@ public:
 	bool CleanUp();
 
 public:
-
+	// An array to store all modules
 	Module* modules[NUM_MODULES];
 
+	// All the modules stored individually
+	ModuleWindow* window = nullptr;
+	ModuleInput* input = nullptr;
+	ModuleTextures* textures = nullptr;
+	ModuleAudio* audio = nullptr;
+
+	ModulePlayer* player = nullptr;
+	ModuleScene* scene = nullptr;
+	ModuleEnemies* enemies = nullptr;
+	ModuleParticles* particles = nullptr;
+
+	ModuleCollisions* collisions = nullptr;
+
+	ModuleRender* render = nullptr;
 };
+
+// Global var made extern for Application ---
+extern Application* App;
 
 #endif // __APPLICATION_H__

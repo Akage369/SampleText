@@ -2,6 +2,11 @@
 #include "Globals.h"
 #include "MemLeaks.h"
 
+#include "SDL/include/SDL.h"
+#pragma comment( lib, "SDL/libx86/SDL2.lib")
+#pragma comment( lib, "SDL/libx86/SDL2main.lib")
+
+
 enum class main_states
 {
 	MAIN_CREATION,
@@ -11,13 +16,14 @@ enum class main_states
 	MAIN_EXIT
 };
 
-int main()
+Application* App = nullptr;
+
+int main(int argc, char* argv[])
 {
 	ReportMemoryLeaks();
 
 	int main_return = EXIT_FAILURE;
 	main_states state = main_states::MAIN_CREATION;
-	Application* App = nullptr;
 
 	while (state != main_states::MAIN_EXIT)
 	{
@@ -59,8 +65,6 @@ int main()
 			}
 		}	break;
 
-		// TODO 1: Implement case MAIN_FINISH
-		// Remember to quit the game with EXIT_SUCCESS if everything went well :)
 		case main_states::MAIN_FINISH:
 		{
 			LOG("Application Finish --------------\n");
@@ -79,7 +83,6 @@ int main()
 
 	LOG("\nBye :)\n");
 
-	// TODO 6: Remove ALL memory leaks
 	delete App;
 
 	return main_return;

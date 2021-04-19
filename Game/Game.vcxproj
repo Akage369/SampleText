@@ -72,6 +72,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(SolutionDir)/Game/Source/External;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)/Game/Source/External;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -140,18 +142,51 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\Application.cpp" />
-    <ClCompile Include="Source\Dummy.cpp" />
-    <ClCompile Include="Source\DummyEsc.cpp" />
+    <ClCompile Include="Source\Collider.cpp" />
+    <ClCompile Include="Source\Enemy.cpp" />
+    <ClCompile Include="Source\Enemy_BrownShip.cpp" />
+    <ClCompile Include="Source\Enemy_Mech.cpp" />
+    <ClCompile Include="Source\Enemy_RedBird.cpp" />
+    <ClCompile Include="Source\Globals.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Module.cpp" />
+    <ClCompile Include="Source\ModuleAudio.cpp" />
+    <ClCompile Include="Source\ModuleCollisions.cpp" />
+    <ClCompile Include="Source\ModuleEnemies.cpp" />
+    <ClCompile Include="Source\ModuleInput.cpp" />
+    <ClCompile Include="Source\ModuleParticles.cpp" />
+    <ClCompile Include="Source\ModulePlayer.cpp" />
+    <ClCompile Include="Source\ModuleRender.cpp" />
+    <ClCompile Include="Source\ModuleScene.cpp" />
+    <ClCompile Include="Source\ModuleTextures.cpp" />
+    <ClCompile Include="Source\ModuleWindow.cpp" />
+    <ClCompile Include="Source\Particle.cpp" />
+    <ClCompile Include="Source\Path.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Animation.h" />
     <ClInclude Include="Source\Application.h" />
-    <ClInclude Include="Source\Dummy.h" />
-    <ClInclude Include="Source\DummyEsc.h" />
+    <ClInclude Include="Source\Collider.h" />
+    <ClInclude Include="Source\Enemy.h" />
+    <ClInclude Include="Source\Enemy_BrownShip.h" />
+    <ClInclude Include="Source\Enemy_Mech.h" />
+    <ClInclude Include="Source\Enemy_RedBird.h" />
     <ClInclude Include="Source\Globals.h" />
     <ClInclude Include="Source\MemLeaks.h" />
     <ClInclude Include="Source\Module.h" />
+    <ClInclude Include="Source\ModuleAudio.h" />
+    <ClInclude Include="Source\ModuleCollisions.h" />
+    <ClInclude Include="Source\ModuleEnemies.h" />
+    <ClInclude Include="Source\ModuleInput.h" />
+    <ClInclude Include="Source\ModuleParticles.h" />
+    <ClInclude Include="Source\ModulePlayer.h" />
+    <ClInclude Include="Source\ModuleRender.h" />
+    <ClInclude Include="Source\ModuleScene.h" />
+    <ClInclude Include="Source\ModuleTextures.h" />
+    <ClInclude Include="Source\ModuleWindow.h" />
+    <ClInclude Include="Source\p2Point.h" />
+    <ClInclude Include="Source\Particle.h" />
+    <ClInclude Include="Source\Path.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

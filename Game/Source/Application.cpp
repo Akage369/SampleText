@@ -1,64 +1,84 @@
 #include "Application.h"
 
 #include "Module.h"
-#include "Dummy.h"
-#include "DummyEsc.h"
+#include "ModuleWindow.h"
+#include "ModuleInput.h"
+#include "ModuleTextures.h"
+#include "ModuleAudio.h"
+#include "ModulePlayer.h"
+#include "ModuleScene.h"
+#include "ModuleParticles.h"
+#include "ModuleEnemies.h"
+#include "ModuleCollisions.h"
+#include "ModuleRender.h"
 
 Application::Application()
 {
-	modules[0] = new ModuleDummy();
+	// The order in which the modules are added is very important.
+	// It will define the order in which Pre/Update/Post will be called
+	// Render should always be last, as our last action should be updating the screen
+	modules[0] = window = new ModuleWindow();
+	modules[1] = input = new ModuleInput();
+	modules[2] = textures = new ModuleTextures();
+	modules[3] = audio = new ModuleAudio();
 
-	// TODO 7: Create your new module "DummyESC".
-	// It should check if the player hits ESC key. Use _kbhit() and _getch().
-	modules[1] = new ModuleDummyESC();
+	modules[4] = scene = new ModuleScene();
+	modules[5] = player = new ModulePlayer();
+	modules[6] = particles = new ModuleParticles();
+	modules[7] = enemies = new ModuleEnemies();
+
+	modules[8] = collisions = new ModuleCollisions();
+
+	modules[9] = render = new ModuleRender();
 }
 
-// INIT all modules
-bool Application::Init()
+Application::~Application()
 {
 	for (int i = 0; i < NUM_MODULES; ++i)
 	{
-		modules[i]->Init();
+		//Important: when deleting a pointer, set it to nullptr afterwards
+		//It allows us for null check in other parts of the code
+		delete modules[i];
+		modules[i] = nullptr;
 	}
+}
 
-	// TODO 5: Make sure that App exits correctly if Init/PreUpdate/Update/PostUpdate/CleanUp return exit
+bool Application::Init()
+{
+	bool ret = true;
 
-	return true;
+	for (int i = 0; i < NUM_MODULES && ret; ++i)
+		ret = modules[i]->Init();
+
+	//By now we will consider that all modules are always active
+	for (int i = 0; i < NUM_MODULES && ret; ++i)
+		ret = modules[i]->Start();
+
+	return ret;
 }
 
 update_status Application::Update()
 {
 	update_status ret = update_status::UPDATE_CONTINUE;
 
-	// TODO 4: Add PreUpdate and PostUpdate calls
 	for (int i = 0; i < NUM_MODULES && ret == update_status::UPDATE_CONTINUE; ++i)
 		ret = modules[i]->PreUpdate();
 
-	// TODO 2: Make sure all modules receive its update
 	for (int i = 0; i < NUM_MODULES && ret == update_status::UPDATE_CONTINUE; ++i)
 		ret = modules[i]->Update();
 
-	// TODO 4: Add PreUpdate and PostUpdate calls
 	for (int i = 0; i < NUM_MODULES && ret == update_status::UPDATE_CONTINUE; ++i)
 		ret = modules[i]->PostUpdate();
 
-	// TODO 5: Make sure that App exits correctly if Init/PreUpdate/Update/PostUpdate/CleanUp return exit
 	return ret;
 }
 
 bool Application::CleanUp()
 {
-	// TODO 3: Make sure all modules have a chance to cleanup
 	bool ret = true;
 
 	for (int i = NUM_MODULES - 1; i >= 0 && ret; --i)
-	{
 		ret = modules[i]->CleanUp();
-
-		// TODO 6: Remove ALL memory leaks
-		delete modules[i];
-		modules[i] = nullptr;
-	}
 
 	return ret;
 }
