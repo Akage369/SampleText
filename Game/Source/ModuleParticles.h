@@ -17,7 +17,7 @@ class ModuleParticles : public Module
 public:
 	// Constructor
 	// Initializes all the particles in the array to nullptr
-	ModuleParticles();
+	ModuleParticles(bool startEnabled);
 
 	//Destructor
 	~ModuleParticles();
@@ -26,14 +26,18 @@ public:
 	// Loads the necessary textures for the particles
 	bool Start() override;
 
+	// Called at the beginning of the application loop
+	// Removes all particles pending to delete
+	Update_Status PreUpdate() override;
+
 	// Called at the middle of the application loop
 	// Iterates all the particles and calls its Update()
 	// Removes any "dead" particles
-	update_status Update() override;
+	Update_Status Update() override;
 
 	// Called at the end of the application loop
 	// Iterates all the particles and draws them
-	update_status PostUpdate() override;
+	Update_Status PostUpdate() override;
 
 	// Called on application exit
 	// Destroys all active particles left in the array
@@ -46,7 +50,14 @@ public:
 	// Param particle	- A template particle from which the new particle will be created
 	// Param x, y		- Position x,y in the screen (upper left axis)
 	// Param delay		- Delay time from the moment the function is called until the particle is displayed in screen
-	void AddParticle(const Particle& particle, int x, int y, Collider::Type colliderType = Collider::Type::NONE, uint delay = 0);
+	Particle* AddParticle(const Particle& particle, int x, int y, Collider::Type colliderType = Collider::Type::NONE, uint delay = 0);
+
+public:
+	//Template particle for an explosion
+	Particle explosion;
+
+	//Template particle for a laser
+	Particle laser;
 
 private:
 	// Particles spritesheet loaded into an SDL Texture
@@ -55,12 +66,6 @@ private:
 	// An array to store and handle all the particles
 	Particle* particles[MAX_ACTIVE_PARTICLES] = { nullptr };
 
-public:
-	//Template particle for an explosion
-	Particle explosion;
-
-	//Template particle for a laser
-	Particle laser;
 };
 
 #endif // !__MODULEPARTICLES_H__

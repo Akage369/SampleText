@@ -7,7 +7,7 @@
 #include "SDL_image/include/SDL_image.h"
 #pragma comment( lib, "SDL_image/libx86/SDL2_image.lib" )
 
-ModuleTextures::ModuleTextures() : Module()
+ModuleTextures::ModuleTextures(bool startEnabled) : Module(startEnabled)
 {
 	for (uint i = 0; i < MAX_TEXTURES; ++i)
 		textures[i] = nullptr;
@@ -87,4 +87,30 @@ SDL_Texture* const ModuleTextures::Load(const char* path)
 	}
 
 	return texture;
+}
+
+bool ModuleTextures::Unload(SDL_Texture* texture)
+{
+	bool ret = false;
+
+	if (texture != nullptr)
+	{
+		for (int i = 0; i < MAX_TEXTURES; ++i)
+		{
+			if (textures[i] == texture)
+			{
+				textures[i] = nullptr;
+				ret = true;
+				break;
+			}
+		}
+		SDL_DestroyTexture(texture);
+	}
+
+	return ret;
+}
+
+void ModuleTextures::GetTextureSize(const SDL_Texture* texture, uint& width, uint& height) const
+{
+	SDL_QueryTexture((SDL_Texture*)texture, NULL, NULL, (int*)&width, (int*)&height);
 }

@@ -6,7 +6,7 @@
 #include "ModuleInput.h"
 #include "SDL/include/SDL_Scancode.h"
 
-ModuleCollisions::ModuleCollisions()
+ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 {
 	for (uint i = 0; i < MAX_COLLIDERS; ++i)
 		colliders[i] = nullptr;
@@ -48,7 +48,7 @@ ModuleCollisions::~ModuleCollisions()
 
 }
 
-update_status ModuleCollisions::PreUpdate()
+Update_Status ModuleCollisions::PreUpdate()
 {
 	// Remove all colliders scheduled for deletion
 	for (uint i = 0; i < MAX_COLLIDERS; ++i)
@@ -80,34 +80,34 @@ update_status ModuleCollisions::PreUpdate()
 
 			c2 = colliders[k];
 
-			if (c1->Intersects(c2->rect))
+			if (matrix[c1->type][c2->type] && c1->Intersects(c2->rect))
 			{
-				if (matrix[c1->type][c2->type] && c1->listener)
-					c1->listener->OnCollision(c1, c2);
+				for (uint i = 0; i < MAX_LISTENERS; ++i)
+					if (c1->listeners[i] != nullptr) c1->listeners[i]->OnCollision(c1, c2);
 
-				if (matrix[c2->type][c1->type] && c2->listener)
-					c2->listener->OnCollision(c2, c1);
+				for (uint i = 0; i < MAX_LISTENERS; ++i)
+					if (c2->listeners[i] != nullptr) c2->listeners[i]->OnCollision(c2, c1);
 			}
 		}
 	}
 
-	return update_status::UPDATE_CONTINUE;
+	return Update_Status::UPDATE_CONTINUE;
 }
 
-update_status ModuleCollisions::Update()
+Update_Status ModuleCollisions::Update()
 {
 	if (App->input->keys[SDL_SCANCODE_F1] == KEY_DOWN)
 		debug = !debug;
 
-	return update_status::UPDATE_CONTINUE;
+	return Update_Status::UPDATE_CONTINUE;
 }
 
-update_status ModuleCollisions::PostUpdate()
+Update_Status ModuleCollisions::PostUpdate()
 {
 	if (debug)
 		DebugDraw();
 
-	return update_status::UPDATE_CONTINUE;
+	return Update_Status::UPDATE_CONTINUE;
 }
 
 void ModuleCollisions::DebugDraw()
@@ -173,4 +173,16 @@ Collider* ModuleCollisions::AddCollider(SDL_Rect rect, Collider::Type type, Modu
 	}
 
 	return ret;
+}
+
+void ModuleCollisions::RemoveCollider(Collider* collider)
+{
+	for (uint i = 0; i < MAX_COLLIDERS; ++i)
+	{
+		if (colliders[i] == collider)
+		{
+			delete colliders[i];
+			colliders[i] = nullptr;
+		}
+	}
 }

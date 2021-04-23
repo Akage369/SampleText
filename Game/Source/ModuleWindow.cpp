@@ -6,7 +6,7 @@
 #include "SDL/include/SDL.h"
 
 
-ModuleWindow::ModuleWindow() : Module()
+ModuleWindow::ModuleWindow(bool startEnabled) : Module(startEnabled)
 {}
 
 ModuleWindow::~ModuleWindow()
@@ -39,7 +39,7 @@ bool ModuleWindow::Init()
 		if (WIN_FULLSCREEN_DESKTOP == true)
 			flags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
 
-		window = SDL_CreateWindow("Super Soukoban", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH * SCREEN_SIZE, SCREEN_HEIGHT * SCREEN_SIZE, flags);
+		window = SDL_CreateWindow("Project 9 - Fonts", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH * SCREEN_SIZE, SCREEN_HEIGHT * SCREEN_SIZE, flags);
 
 		if (window == nullptr)
 		{
@@ -68,4 +68,7 @@ bool ModuleWindow::CleanUp()
 
 	return true;
 }
+
+
+
 

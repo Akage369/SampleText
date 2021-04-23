@@ -9,7 +9,7 @@ void log(const char file[], int line, const char* format, ...);
 #define EXIT_FAILURE 1
 #define EXIT_SUCCESS 0
 
-enum class update_status
+enum class Update_Status
 {
 	UPDATE_CONTINUE = 1,
 	UPDATE_STOP,
@@ -21,7 +21,7 @@ typedef unsigned int uint;
 
 // Window Configuration -----------
 #define SCREEN_WIDTH 384
-#define SCREEN_HEIGHT 240
+#define SCREEN_HEIGHT 256
 
 #define SCREEN_SIZE 3
 #define WIN_FULLSCREEN 0

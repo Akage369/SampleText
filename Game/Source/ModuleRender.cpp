@@ -7,9 +7,8 @@
 #include "ModuleInput.h"
 
 #include "SDL/include/SDL_render.h"
-#include "SDL/include/SDL_scancode.h"
 
-ModuleRender::ModuleRender() : Module()
+ModuleRender::ModuleRender(bool startEnabled) : Module(startEnabled)
 {
 
 }
@@ -42,7 +41,7 @@ bool ModuleRender::Init()
 }
 
 // Called every draw update
-update_status ModuleRender::PreUpdate()
+Update_Status ModuleRender::PreUpdate()
 {
 	//Set the color used for drawing operations
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
@@ -50,10 +49,10 @@ update_status ModuleRender::PreUpdate()
 	//Clear rendering target
 	SDL_RenderClear(renderer);
 
-	return update_status::UPDATE_CONTINUE;
+	return Update_Status::UPDATE_CONTINUE;
 }
 
-update_status ModuleRender::Update()
+Update_Status ModuleRender::Update()
 {
 	//Handle positive vertical movement
 	if (App->input->keys[SDL_SCANCODE_UP] == KEY_REPEAT)
@@ -71,15 +70,15 @@ update_status ModuleRender::Update()
 		camera.x += cameraSpeed;
 
 
-	return update_status::UPDATE_CONTINUE;
+	return Update_Status::UPDATE_CONTINUE;
 }
 
-update_status ModuleRender::PostUpdate()
+Update_Status ModuleRender::PostUpdate()
 {
 	//Update the screen
 	SDL_RenderPresent(renderer);
 
-	return update_status::UPDATE_CONTINUE;
+	return Update_Status::UPDATE_CONTINUE;
 }
 
 bool ModuleRender::CleanUp()
@@ -94,30 +93,33 @@ bool ModuleRender::CleanUp()
 }
 
 // Blit to screen
-bool ModuleRender::Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* section, float speed)
+bool ModuleRender::Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* section, float speed, bool useCamera)
 {
 	bool ret = true;
 
-	SDL_Rect rect{
-		(int)(-camera.x * speed) + x * SCREEN_SIZE,
-		(int)(-camera.y * speed) + y * SCREEN_SIZE,
-		0, 0 };
+	SDL_Rect dstRect{ x * SCREEN_SIZE, y * SCREEN_SIZE, 0, 0 };
+
+	if (useCamera)
+	{
+		dstRect.x -= (camera.x * speed);
+		dstRect.y -= (camera.y * speed);
+	}
 
 	if (section != nullptr)
 	{
-		rect.w = section->w;
-		rect.h = section->h;
+		dstRect.w = section->w;
+		dstRect.h = section->h;
 	}
 	else
 	{
 		//Collect the texture size into rect.w and rect.h variables
-		SDL_QueryTexture(texture, nullptr, nullptr, &rect.w, &rect.h);
+		SDL_QueryTexture(texture, nullptr, nullptr, &dstRect.w, &dstRect.h);
 	}
 
-	rect.w *= SCREEN_SIZE;
-	rect.h *= SCREEN_SIZE;
+	dstRect.w *= SCREEN_SIZE;
+	dstRect.h *= SCREEN_SIZE;
 
-	if (SDL_RenderCopy(renderer, texture, section, &rect) != 0)
+	if (SDL_RenderCopy(renderer, texture, section, &dstRect) != 0)
 	{
 		LOG("Cannot blit to screen. SDL_RenderCopy error: %s", SDL_GetError());
 		ret = false;
@@ -126,17 +128,21 @@ bool ModuleRender::Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* sect
 	return ret;
 }
 
-bool ModuleRender::DrawQuad(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a, float speed)
+bool ModuleRender::DrawQuad(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a, float speed, bool useCamera)
 {
+
 	bool ret = true;
 
 	SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
 	SDL_SetRenderDrawColor(renderer, r, g, b, a);
 
-	SDL_Rect dstRect{
-		(int)(-camera.x * speed) + rect.x * SCREEN_SIZE,
-		(int)(-camera.y * speed) + rect.y * SCREEN_SIZE,
-		rect.w * SCREEN_SIZE, rect.h * SCREEN_SIZE };
+	SDL_Rect dstRect{ rect.x * SCREEN_SIZE, rect.y * SCREEN_SIZE, rect.w * SCREEN_SIZE, rect.h * SCREEN_SIZE };
+
+	if (useCamera)
+	{
+		dstRect.x -= (camera.x * speed);
+		dstRect.y -= (camera.y * speed);
+	}
 
 	if (SDL_RenderFillRect(renderer, &dstRect) != 0)
 	{

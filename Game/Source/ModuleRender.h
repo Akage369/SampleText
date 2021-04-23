@@ -11,7 +11,7 @@ class ModuleRender : public Module
 {
 public:
 	//Constructor
-	ModuleRender();
+	ModuleRender(bool startEnabled);
 
 	//Destructor
 	~ModuleRender();
@@ -22,16 +22,16 @@ public:
 
 	// Called at the beginning of the application loop
 	// Clears the rendering context to a background color
-	update_status PreUpdate() override;
+	Update_Status PreUpdate() override;
 
 	// Called at the middle of the application loop
 	// Handles camera movement
-	update_status Update() override;
+	Update_Status Update() override;
 
 	// Called at the end of the application loop
 	// Displays a rectangle in the rendering context
 	// Updates the screen with the rendered content
-	update_status PostUpdate() override;
+	Update_Status PostUpdate() override;
 
 	// Called on application exit
 	// Destroys the rendering context
@@ -42,9 +42,9 @@ public:
 	// Param x,y		- Position x,y in the screen (upper left axis)
 	// Param section	- The portion of the texture we want to copy. nullptr for the entire texture
 	// Param speed		- The amount of effect that is applied to the sprite depending on the camera
-	bool Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* section = nullptr, float speed = 1.0f);
+	bool Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* section = nullptr, float speed = 1.0f, bool useCamera = true);
 
-	bool DrawQuad(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a, float speed = 1.0f);
+	bool DrawQuad(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a, float speed = 1.0f, bool useCamera = true);
 
 public:
 	// Rendering context used for any rendering action
@@ -60,4 +60,3 @@ public:
 };
 
 #endif //__MODULE_RENDER_H__
-

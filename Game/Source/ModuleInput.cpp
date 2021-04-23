@@ -3,7 +3,7 @@
 #include "ModuleInput.h"
 #include "SDL/include/SDL.h"
 
-ModuleInput::ModuleInput() : Module()
+ModuleInput::ModuleInput(bool startEnabled) : Module(startEnabled)
 {}
 
 ModuleInput::~ModuleInput()
@@ -24,13 +24,13 @@ bool ModuleInput::Init()
 	return ret;
 }
 
-update_status ModuleInput::PreUpdate()
+Update_Status ModuleInput::PreUpdate()
 {
 	//Read new SDL events, mostly from the window
 	SDL_Event event;
 	if (SDL_PollEvent(&event))
 	{
-		if (event.type == SDL_QUIT)	return update_status::UPDATE_STOP;
+		if (event.type == SDL_QUIT)	return Update_Status::UPDATE_STOP;
 	}
 
 	//Read all keyboard data and update our custom array
@@ -45,7 +45,7 @@ update_status ModuleInput::PreUpdate()
 	}
 
 
-	return update_status::UPDATE_CONTINUE;
+	return Update_Status::UPDATE_CONTINUE;
 }
 
 bool ModuleInput::CleanUp()

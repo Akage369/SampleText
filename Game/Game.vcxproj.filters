@@ -75,9 +75,6 @@
     <ClCompile Include="Source\ModulePlayer.cpp">
       <Filter>Archivos de recursos\Modules\Gameplay</Filter>
     </ClCompile>
-    <ClCompile Include="Source\ModuleScene.cpp">
-      <Filter>Archivos de recursos\Modules\Gameplay</Filter>
-    </ClCompile>
     <ClCompile Include="Source\ModuleEnemies.cpp">
       <Filter>Archivos de recursos\Modules\Gameplay</Filter>
     </ClCompile>
@@ -98,6 +95,18 @@
     </ClCompile>
     <ClCompile Include="Source\Enemy_RedBird.cpp">
       <Filter>Archivos de recursos\Entities\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ModuleFadeToBlack.cpp">
+      <Filter>Archivos de recursos\Modules\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ModuleFonts.cpp">
+      <Filter>Archivos de recursos\Modules\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SceneIntro.cpp">
+      <Filter>Archivos de recursos\Modules\Gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SceneLevel1.cpp">
+      <Filter>Archivos de recursos\Modules\Gameplay</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -140,9 +149,6 @@
     <ClInclude Include="Source\ModulePlayer.h">
       <Filter>Archivos de recursos\Modules\Gameplay</Filter>
     </ClInclude>
-    <ClInclude Include="Source\ModuleScene.h">
-      <Filter>Archivos de recursos\Modules\Gameplay</Filter>
-    </ClInclude>
     <ClInclude Include="Source\ModuleEnemies.h">
       <Filter>Archivos de recursos\Modules\Gameplay</Filter>
     </ClInclude>
@@ -169,6 +175,18 @@
     </ClInclude>
     <ClInclude Include="Source\Enemy_RedBird.h">
       <Filter>Archivos de recursos\Entities\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ModuleFadeToBlack.h">
+      <Filter>Archivos de recursos\Modules\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ModuleFonts.h">
+      <Filter>Archivos de recursos\Modules\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SceneIntro.h">
+      <Filter>Archivos de recursos\Modules\Gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SceneLevel1.h">
+      <Filter>Archivos de recursos\Modules\Gameplay</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

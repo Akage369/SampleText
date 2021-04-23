@@ -5,13 +5,7 @@
 
 #define MAX_ENEMIES 100
 
-// TODO 2: Add a new enemy: Brown Cookies!
-
-// TODO 3: Have the Brown Cookies describe a path in the screen
-
-// TODO 4: Create a new enemy type: the Mech
-
-enum class ENEMY_TYPE
+enum class Enemy_Type
 {
 	NO_TYPE,
 	REDBIRD,
@@ -21,7 +15,7 @@ enum class ENEMY_TYPE
 
 struct EnemySpawnpoint
 {
-	ENEMY_TYPE type = ENEMY_TYPE::NO_TYPE;
+	Enemy_Type type = Enemy_Type::NO_TYPE;
 	int x, y;
 };
 
@@ -32,7 +26,7 @@ class ModuleEnemies : public Module
 {
 public:
 	// Constructor
-	ModuleEnemies();
+	ModuleEnemies(bool startEnabled);
 
 	// Destructor
 	~ModuleEnemies();
@@ -41,13 +35,17 @@ public:
 	// Loads the necessary textures for the enemies
 	bool Start() override;
 
+	// Called at the beginning of the application loop
+	// Removes all enemies pending to delete
+	Update_Status PreUpdate() override;
+
 	// Called at the middle of the application loop
 	// Handles all enemies logic and spawning/despawning
-	update_status Update() override;
+	Update_Status Update() override;
 
 	// Called at the end of the application loop
 	// Iterates all the enemies and draws them
-	update_status PostUpdate() override;
+	Update_Status PostUpdate() override;
 
 	// Called on application exit
 	// Destroys all active enemies left in the array
@@ -58,7 +56,7 @@ public:
 	void OnCollision(Collider* c1, Collider* c2) override;
 
 	// Add an enemy into the queue to be spawned later
-	bool AddEnemy(ENEMY_TYPE type, int x, int y);
+	bool AddEnemy(Enemy_Type type, int x, int y);
 
 	// Iterates the queue and checks for camera position
 	void HandleEnemiesSpawn();

@@ -8,7 +8,7 @@
 
 #include "SDL/include/SDL_timer.h"
 
-ModuleParticles::ModuleParticles()
+ModuleParticles::ModuleParticles(bool startEnabled) : Module(startEnabled)
 {
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 		particles[i] = nullptr;
@@ -43,6 +43,21 @@ bool ModuleParticles::Start()
 	return true;
 }
 
+Update_Status ModuleParticles::PreUpdate()
+{
+	// Remove all particles scheduled for deletion
+	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
+	{
+		if (particles[i] != nullptr && particles[i]->pendingToDelete)
+		{
+			delete particles[i];
+			particles[i] = nullptr;
+		}
+	}
+
+	return Update_Status::UPDATE_CONTINUE;
+}
+
 bool ModuleParticles::CleanUp()
 {
 	LOG("Unloading particles");
@@ -67,14 +82,14 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 		// Always destroy particles that collide
 		if (particles[i] != nullptr && particles[i]->collider == c1)
 		{
-			delete particles[i];
-			particles[i] = nullptr;
+			particles[i]->pendingToDelete = true;
+			particles[i]->collider->pendingToDelete = true;
 			break;
 		}
 	}
 }
 
-update_status ModuleParticles::Update()
+Update_Status ModuleParticles::Update()
 {
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
@@ -85,15 +100,14 @@ update_status ModuleParticles::Update()
 		// Call particle Update. If it has reached its lifetime, destroy it
 		if (particle->Update() == false)
 		{
-			delete particle;
-			particles[i] = nullptr;
+			particles[i]->SetToDelete();
 		}
 	}
 
-	return update_status::UPDATE_CONTINUE;
+	return Update_Status::UPDATE_CONTINUE;
 }
 
-update_status ModuleParticles::PostUpdate()
+Update_Status ModuleParticles::PostUpdate()
 {
 	//Iterating all particle array and drawing any active particles
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
@@ -106,28 +120,31 @@ update_status ModuleParticles::PostUpdate()
 		}
 	}
 
-	return update_status::UPDATE_CONTINUE;
+	return Update_Status::UPDATE_CONTINUE;
 }
 
-void ModuleParticles::AddParticle(const Particle& particle, int x, int y, Collider::Type colliderType, uint delay)
+Particle* ModuleParticles::AddParticle(const Particle& particle, int x, int y, Collider::Type colliderType, uint delay)
 {
+	Particle* newParticle = nullptr;
+
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
 		//Finding an empty slot for a new particle
 		if (particles[i] == nullptr)
 		{
-			Particle* p = new Particle(particle);
-
-			p->frameCount = -(int)delay;			// We start the frameCount as the negative delay
-			p->position.x = x;						// so when frameCount reaches 0 the particle will be activated
-			p->position.y = y;
+			newParticle = new Particle(particle);
+			newParticle->frameCount = -(int)delay;			// We start the frameCount as the negative delay
+			newParticle->position.x = x;						// so when frameCount reaches 0 the particle will be activated
+			newParticle->position.y = y;
 
 			//Adding the particle's collider
 			if (colliderType != Collider::Type::NONE)
-				p->collider = App->collisions->AddCollider(p->anim.GetCurrentFrame(), colliderType, this);
+				newParticle->collider = App->collisions->AddCollider(newParticle->anim.GetCurrentFrame(), colliderType, this);
 
-			particles[i] = p;
+			particles[i] = newParticle;
 			break;
 		}
 	}
+
+	return newParticle;
 }
