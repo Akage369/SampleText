@@ -140,6 +140,7 @@ Update_Status ModulePlayer::PostUpdate()
 	///
  
 	///Nivel 1
+	/// Paredes
 	App->tiles->BlitScene(312, 24, lvl1_map, "W");
 	App->tiles->BlitScene(312, 48, lvl1_map, "W");
 	App->tiles->BlitScene(312, 72, lvl1_map, "W");
@@ -175,6 +176,42 @@ Update_Status ModulePlayer::PostUpdate()
 	App->tiles->BlitScene(432, 24, lvl1_map, "w");
 	App->tiles->BlitScene(456, 24, lvl1_map, "W");
 	App->tiles->BlitScene(456, 48, lvl1_map, "W");
+	App->tiles->BlitScene(432, 120, lvl1_map, "w");
+	///Suelo
+	App->tiles->BlitScene(336, 48, lvl1_map, "b");
+	App->tiles->BlitScene(360, 48, lvl1_map, "b");
+	App->tiles->BlitScene(384, 48, lvl1_map, "b");
+	App->tiles->BlitScene(408, 48, lvl1_map, "b");
+	App->tiles->BlitScene(432, 48, lvl1_map, "b");
+
+	App->tiles->BlitScene(336, 72, lvl1_map, "b");
+	App->tiles->BlitScene(360, 72, lvl1_map, "b");
+	App->tiles->BlitScene(384, 72, lvl1_map, "b");
+
+	App->tiles->BlitScene(360, 96, lvl1_map, "b");
+	App->tiles->BlitScene(384, 96, lvl1_map, "b");
+	App->tiles->BlitScene(408, 96, lvl1_map, "b");
+	App->tiles->BlitScene(432, 96, lvl1_map, "b");
+	App->tiles->BlitScene(456, 96, lvl1_map, "b");
+
+	App->tiles->BlitScene(312, 120, lvl1_map, "b");
+	App->tiles->BlitScene(336, 120, lvl1_map, "b");
+	App->tiles->BlitScene(360, 120, lvl1_map, "b");
+	App->tiles->BlitScene(408, 120, lvl1_map, "b");
+	App->tiles->BlitScene(456, 120, lvl1_map, "b");
+
+	App->tiles->BlitScene(312, 144, lvl1_map, "b");
+	App->tiles->BlitScene(336, 144, lvl1_map, "b");
+	App->tiles->BlitScene(360, 144, lvl1_map, "b");
+	App->tiles->BlitScene(408, 144, lvl1_map, "b");
+	App->tiles->BlitScene(432, 144, lvl1_map, "b");
+	App->tiles->BlitScene(456, 144, lvl1_map, "b");
+
+	App->tiles->BlitScene(312, 168, lvl1_map, "b");
+	App->tiles->BlitScene(336, 168, lvl1_map, "b");
+	App->tiles->BlitScene(360, 168, lvl1_map, "b");
+	
+
 	
 	// TODO 3: Blit the text of the score in at the bottom of the screen
 	App->fonts->BlitText(58, 248, scoreFont, scoreText);
