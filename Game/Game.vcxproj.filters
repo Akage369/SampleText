@@ -108,6 +108,9 @@
     <ClCompile Include="Source\SceneLevel1.cpp">
       <Filter>Archivos de recursos\Modules\Gameplay</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Tiles.cpp">
+      <Filter>Archivos de recursos\Utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Application.h">
@@ -187,6 +190,9 @@
     </ClInclude>
     <ClInclude Include="Source\SceneLevel1.h">
       <Filter>Archivos de recursos\Modules\Gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Tiles.h">
+      <Filter>Archivos de recursos\Utils</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

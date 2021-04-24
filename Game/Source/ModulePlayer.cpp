@@ -9,6 +9,8 @@
 #include "ModuleCollisions.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleFonts.h"
+///Tiles
+#include "Tiles.h"
 
 #include <stdio.h>
 
@@ -60,8 +62,9 @@ bool ModulePlayer::Start()
 
 	// TODO 4: Try loading "rtype_font3.png" that has two rows to test if all calculations are correct
 	char lookupTable[] = { "! @,_./0123456789$;< ?abcdefghijklmnopqrstuvwxyz" };
+	char tilesetTable[] = { "WwobCcB" };
 	scoreFont = App->fonts->Load("Assets/Textures/rtype_font3.png", lookupTable, 2);
-
+	lvl1_map = App->tiles->Load("Assets/Textures/spritesheet_tiles.png", tilesetTable, 1);
 	return ret;
 }
 
@@ -129,6 +132,11 @@ Update_Status ModulePlayer::PostUpdate()
 
 	// Draw UI (score) --------------------------------------
 	sprintf_s(scoreText, 10, "%7d", score);
+
+
+	///Tiles
+	App->tiles->BlitScene(0, 120,lvl1_map, "WwobCcBwwWBBC");
+
 
 	// TODO 3: Blit the text of the score in at the bottom of the screen
 	App->fonts->BlitText(58, 248, scoreFont, scoreText);

@@ -165,6 +165,7 @@
     <ClCompile Include="Source\Particle.cpp" />
     <ClCompile Include="Source\Path.cpp" />
     <ClCompile Include="Source\SceneIntro.cpp" />
+    <ClCompile Include="Source\Tiles.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Animation.h" />
@@ -193,6 +194,7 @@
     <ClInclude Include="Source\Particle.h" />
     <ClInclude Include="Source\Path.h" />
     <ClInclude Include="Source\SceneIntro.h" />
+    <ClInclude Include="Source\Tiles.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

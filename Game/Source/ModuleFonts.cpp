@@ -51,6 +51,8 @@ int ModuleFonts::Load(const char* texture_path, const char* characters, uint row
 	font.texture = tex;
 	font.rows = rows;
 
+	
+
 	// TODO 1: Finish storing font data
 
 	// totalLength ---	length of the lookup table
@@ -90,6 +92,7 @@ void ModuleFonts::BlitText(int x, int y, int font_id, const char* text) const
 		LOG("Unable to render text with bmp font id %d", font_id);
 		return;
 	}
+
 
 	const Font* font = &fonts[font_id];
 	SDL_Rect spriteRect;

@@ -65,7 +65,8 @@ public:
 	uint score = 000;
 	int scoreFont = -1;
 	char scoreText[10] = { "\0" };
-
+	///Level1_Tiles
+	int lvl1_map = -1;
 };
 
 #endif //!__MODULE_PLAYER_H__
