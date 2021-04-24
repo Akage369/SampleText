@@ -177,6 +177,7 @@ Update_Status ModulePlayer::PostUpdate()
 	App->tiles->BlitScene(456, 24, lvl1_map, "W");
 	App->tiles->BlitScene(456, 48, lvl1_map, "W");
 	App->tiles->BlitScene(432, 120, lvl1_map, "w");
+	
 	///Suelo
 	App->tiles->BlitScene(336, 48, lvl1_map, "b");
 	App->tiles->BlitScene(360, 48, lvl1_map, "b");
@@ -206,12 +207,19 @@ Update_Status ModulePlayer::PostUpdate()
 	App->tiles->BlitScene(408, 144, lvl1_map, "b");
 	App->tiles->BlitScene(432, 144, lvl1_map, "b");
 	App->tiles->BlitScene(456, 144, lvl1_map, "b");
-
 	App->tiles->BlitScene(312, 168, lvl1_map, "b");
 	App->tiles->BlitScene(336, 168, lvl1_map, "b");
 	App->tiles->BlitScene(360, 168, lvl1_map, "b");
 	
+	///cajas
+	App->tiles->BlitScene(360, 96, lvl1_map, "C");
+	App->tiles->BlitScene(336, 144, lvl1_map, "C");
+	App->tiles->BlitScene(408, 120, lvl1_map, "C");
 
+	//bolas
+	App->tiles->BlitScene(432, 48, lvl1_map, "B");
+	App->tiles->BlitScene(408, 48, lvl1_map, "B");
+	App->tiles->BlitScene(384, 48, lvl1_map, "B");
 	
 	// TODO 3: Blit the text of the score in at the bottom of the screen
 	App->fonts->BlitText(58, 248, scoreFont, scoreText);
