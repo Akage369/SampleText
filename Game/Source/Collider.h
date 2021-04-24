@@ -32,6 +32,7 @@ struct Collider
 
 	//Variables
 	SDL_Rect rect;
+
 	bool pendingToDelete = false;
 	Type type;
 	Module* listeners[MAX_LISTENERS] = { nullptr };

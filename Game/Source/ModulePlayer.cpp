@@ -134,8 +134,14 @@ Update_Status ModulePlayer::PostUpdate()
 	sprintf_s(scoreText, 10, "%7d", score);
 
 
-	///Tiles
-	App->tiles->BlitScene(0, 120,lvl1_map, "WwobCcBwwWBBC");
+	///Tiles ///Imprime todas las texturas seguidas
+	/// 
+	//App->tiles->BlitScene(0, 120,lvl1_map, "WwobCcBwwWBBC");
+	///
+ 
+	///Nivel 1
+	App->tiles->BlitScene(0, 24, lvl1_map, "W");
+	App->tiles->BlitScene(0, 0, lvl1_map, "W");
 
 
 	// TODO 3: Blit the text of the score in at the bottom of the screen

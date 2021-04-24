@@ -125,6 +125,11 @@ void Tiles::BlitScene(int x, int y, int tile_id, const char* map) const
 
 		App->render->Blit(tilesptr->texture, x, y, &spriteRect, 0.0f, false);
 
+		/// Intento de mapeo para futuro collider (no funciona)
+		/*switch (map[tile_id]) {
+		case 'W': App->render->Blit(tilesptr->texture, 250, 300, &spriteRect, 0.0f, false);
+		}*/
+
 		// Advance the position where we blit the next character
 		x += spriteRect.w-2;
 		if (x >= 192) {
