@@ -303,7 +303,7 @@ Update_Status ModulePlayer::PostUpdate()
 	// TODO 3: Blit the text of the score in at the bottom of the screen
 	App->fonts->BlitText(58, 248, scoreFont, scoreText);
 
-	App->fonts->BlitText(150, 248, scoreFont, "this is just a font test");
+	App->fonts->BlitText(150, 248, scoreFont, "vamos chavales podemos :)");
 
 	return Update_Status::UPDATE_CONTINUE;
 }
