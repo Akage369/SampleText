@@ -144,6 +144,7 @@
     <ClCompile Include="Source\Application.cpp" />
     <ClCompile Include="Source\Collider.cpp" />
     <ClCompile Include="Source\Enemy.cpp" />
+    <ClCompile Include="Source\Enemy_ Box.cpp" />
     <ClCompile Include="Source\Enemy_BrownShip.cpp" />
     <ClCompile Include="Source\Enemy_Mech.cpp" />
     <ClCompile Include="Source\Enemy_RedBird.cpp" />
@@ -170,6 +171,7 @@
   <ItemGroup>
     <ClInclude Include="Source\Animation.h" />
     <ClInclude Include="Source\Application.h" />
+    <ClInclude Include="Source\Enemy_Box.h" />
     <ClInclude Include="Source\Collider.h" />
     <ClInclude Include="Source\Enemy.h" />
     <ClInclude Include="Source\Enemy_BrownShip.h" />

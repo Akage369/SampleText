@@ -111,6 +111,9 @@
     <ClCompile Include="Source\Tiles.cpp">
       <Filter>Archivos de recursos\Utils</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Enemy_ Box.cpp">
+      <Filter>Archivos de recursos\Entities\Enemies</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Application.h">
@@ -193,6 +196,9 @@
     </ClInclude>
     <ClInclude Include="Source\Tiles.h">
       <Filter>Archivos de recursos\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Enemy_Box.h">
+      <Filter>Archivos de recursos\Entities\Enemies</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
