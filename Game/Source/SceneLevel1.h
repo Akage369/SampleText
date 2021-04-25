@@ -33,7 +33,7 @@ public:
 public:
 
 	// The scene sprite sheet loaded into an SDL_Texture
-	SDL_Texture* nivel1 = nullptr;
+	SDL_Texture* bgTexture = nullptr;
 	///tiles
 	SDL_Texture* bgTiles = nullptr;
 };
