@@ -25,11 +25,12 @@ bool SceneLevel1::Start()
 
 	bool ret = true;
 
-	bgTexture = App->textures->Load("Assets/Textures/background.png");
+	nivel1 = App->textures->Load("Assets/Textures/nivel_1.png");
 	App->audio->PlayMusic("Assets/Audio/Music/stage1.ogg", 1.0f);
 
 	///tiles
 	bgTiles = App->textures->Load("Assets/Textures/spritesheet_tiles.png");
+	bgTiles = App->textures->Load("Assets/Textures/nivel_1.png");
 
 	//Bottomside collider
 	App->collisions->AddCollider({ 0, 224, 3930, 16 }, Collider::Type::WALL);
@@ -76,7 +77,7 @@ Update_Status SceneLevel1::Update()
 Update_Status SceneLevel1::PostUpdate()
 {
 	// Draw everything --------------------------------------
-	App->render->Blit(bgTexture, 0, 0, NULL);
+	App->render->Blit(nivel1, 0, 2, NULL);
 	return Update_Status::UPDATE_CONTINUE;
 }
 

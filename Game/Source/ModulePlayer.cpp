@@ -138,10 +138,11 @@ Update_Status ModulePlayer::PostUpdate()
 	/// 
 	//App->tiles->BlitScene(0, 120,lvl1_map, "WwobCcBwwWBBC");
 	///
- 
+
+
 	///Nivel 1
 	/// Paredes
-	App->tiles->BlitScene(312, 24, lvl1_map, "W");
+	/*App->tiles->BlitScene(312, 24, lvl1_map, "W");
 	App->tiles->BlitScene(312, 48, lvl1_map, "W");
 	App->tiles->BlitScene(312, 72, lvl1_map, "W");
 	App->tiles->BlitScene(312, 96, lvl1_map, "w");
@@ -219,7 +220,7 @@ Update_Status ModulePlayer::PostUpdate()
 	///cajas
 	App->tiles->BlitScene(360, 96, lvl1_map, "C");
 	App->tiles->BlitScene(336, 144, lvl1_map, "C");
-	App->tiles->BlitScene(408, 120, lvl1_map, "C");
+	App->tiles->BlitScene(408, 120, lvl1_map, "C");*/
 
 	///nivel 2
 	/// Paredes
