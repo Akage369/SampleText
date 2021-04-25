@@ -119,17 +119,23 @@ void Tiles::BlitScene(int x, int y, int tile_id, const char* map) const
 			}
 		}
 
-		// Retrieve the position of the current character in the sprite
-		spriteRect.x = spriteRect.w * (charIndex % tilesptr->columns);
-		spriteRect.y = spriteRect.h * (charIndex / tilesptr->columns);
-
-		App->render->Blit(tilesptr->texture, x, y, &spriteRect, 0.0f, false);
-
-		// Advance the position where we blit the next character
-		x += spriteRect.w-2;
-		if (x >= 192) {
+		if (map[i] == ',') {
 			x = 0;
-			y += tilesptr->tile_h;
+			y += tilesptr->tile_h - 2;
 		}
+
+		else {
+			// Retrieve the position of the current character in the sprite
+			spriteRect.x = spriteRect.w * (charIndex % tilesptr->columns);
+			spriteRect.y = spriteRect.h * (charIndex / tilesptr->columns);
+
+			App->render->Blit(tilesptr->texture, x, y, &spriteRect, 0.0f, false);
+
+			// Advance the position where we blit the next character
+			x += spriteRect.w - 2;
+		}
+
+		
+		
 	}
 }

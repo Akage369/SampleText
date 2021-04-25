@@ -7,6 +7,7 @@
 #include "ModuleCollisions.h"
 #include "ModuleEnemies.h"
 #include "ModulePlayer.h"
+#include "Tiles.h"
 
 SceneLevel1::SceneLevel1(bool startEnabled) : Module(startEnabled)
 {
@@ -24,7 +25,7 @@ bool SceneLevel1::Start()
 	LOG("Loading background assets");
 
 	bool ret = true;
-
+	/*
 	bgTexture = App->textures->Load("Assets/Textures/background.png");
 	App->audio->PlayMusic("Assets/Audio/Music/stage1.ogg", 1.0f);
 
@@ -37,8 +38,9 @@ bool SceneLevel1::Start()
 	//First two columns colliders
 	App->collisions->AddCollider({ 1375, 0, 111, 96 }, Collider::Type::WALL);
 	App->collisions->AddCollider({ 1375, 145, 111, 96 }, Collider::Type::WALL);
-
+	*/
 	// Enemies ---
+	
 	App->enemies->AddEnemy(Enemy_Type::REDBIRD, 600, 80);
 	App->enemies->AddEnemy(Enemy_Type::REDBIRD, 625, 80);
 	App->enemies->AddEnemy(Enemy_Type::REDBIRD, 640, 80);
@@ -59,15 +61,20 @@ bool SceneLevel1::Start()
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
 
+	App->tiles->Enable();
 	App->player->Enable();
 	App->enemies->Enable();
+	char tilesetTable[] = { "WwobCcB" };
+	lvl1_map = App->tiles->Load("Assets/Textures/spritesheet_tiles.png", tilesetTable, 1);
+	
+	
 
 	return ret;
 }
 
 Update_Status SceneLevel1::Update()
 {
-	App->render->camera.x += 3;
+	//App->render->camera.x += 3;
 
 	return Update_Status::UPDATE_CONTINUE;
 }
@@ -77,6 +84,15 @@ Update_Status SceneLevel1::PostUpdate()
 {
 	// Draw everything --------------------------------------
 	App->render->Blit(bgTexture, 0, 0, NULL);
+	
+	///Tiles
+	App->tiles->BlitScene(0, 0, lvl1_map, "ooooooooooo,ooWwwwwwWoo,ooWbbBBBWoo,ooWbbbwwwWo,oWwwbbbbbWo,oWbbbWbwbWo,oWbbbWbbbWo,oWbbbWwwwwo,owwwwwooooo,ooooooooooo");
+
+	///Cajas
+	App->tiles->BlitScene(96, 96, lvl1_map, "C");
+	App->tiles->BlitScene(144, 120, lvl1_map, "C");
+	App->tiles->BlitScene(72, 144, lvl1_map, "C");
+	///App->tiles->BlitScene(0, 120, lvl1_map, "oooooooooooooWwwwwwWooooWbbBBBWooooWbbbwwwWooWwwCbbbbWooWbbbWCwbWooWbCbWbbbWooWbbbWwwwwoowwwwwoooooooooooooooo");
 	return Update_Status::UPDATE_CONTINUE;
 }
 

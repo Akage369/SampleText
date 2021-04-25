@@ -5,6 +5,7 @@
 #include "Animation.h"
 #include "p2Point.h"
 
+
 struct SDL_Texture;
 struct Collider;
 
@@ -31,7 +32,8 @@ public:
 
 	// Collision callback, called when the player intersects with another collider
 	void OnCollision(Collider* c1, Collider* c2) override;
-
+	void walkx();
+	void walky();
 public:
 	// Position of the player in the map
 	iPoint position;
@@ -47,9 +49,9 @@ public:
 	Animation* currentAnimation = nullptr;
 
 	// A set of animations
-	Animation idleAnim;
-	Animation upAnim;
-	Animation downAnim;
+	Animation idleDown, idleUp, idleRight, idleLeft;
+	Animation walkDown, walkUp, walkRight, walkLeft;
+	Animation pushDown, pushUp, pushRight, pushLeft;
 
 	// The player's collider
 	Collider* collider = nullptr;
@@ -65,8 +67,21 @@ public:
 	uint score = 000;
 	int scoreFont = -1;
 	char scoreText[10] = { "\0" };
-	///Level1_Tiles
-	int lvl1_map = -1;
+
+	///frames
+	const int FPS = 60;
+	const int frameDelay = 1000 / FPS;
+
+	Uint32 frameStart;
+	int frameTime;
+	
+	int countx = 0;
+	int county = 0;
+	int movx;
+	int movy;
+
+	bool posInix = true;
+	bool posIniy = true;
 };
 
 #endif //!__MODULE_PLAYER_H__

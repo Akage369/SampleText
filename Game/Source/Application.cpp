@@ -36,8 +36,9 @@ Application::Application()
 	modules[9] = collisions = new ModuleCollisions(true);
 	modules[10] = fade = new ModuleFadeToBlack(true);
 	modules[11] = fonts = new ModuleFonts(true);
-	modules[12] = render = new ModuleRender(true);
-	modules[13] = tiles = new Tiles(true); 
+	
+	modules[12] = tiles = new Tiles(false); 
+	modules[13] = render = new ModuleRender(true);
 }
 
 Application::~Application()

@@ -45,12 +45,13 @@ public:
 	void UnLoad(int tileIndex);
 
 	// Create a surface from text
-	void BlitScene(int x, int y, int tileIndex, const char* map) const;
+	void BlitScene(int x, int y, int tileIndex,const char* map) const;
 
 private:
 	// An array to keep track and store all loaded fonts
 	Tile tiles[MAX_TILESETS];
 };
+
 
 
 #endif // __Tiles_H__

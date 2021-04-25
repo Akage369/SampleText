@@ -36,6 +36,9 @@ public:
 	SDL_Texture* bgTexture = nullptr;
 	///tiles
 	SDL_Texture* bgTiles = nullptr;
+
+	///Level1_Tiles
+	int lvl1_map = -1;
 };
 
 #endif

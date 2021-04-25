@@ -11,25 +11,77 @@
 #include "ModuleFonts.h"
 ///Tiles
 #include "Tiles.h"
+#include "SDL/include/SDL.h"
 
 #include <stdio.h>
+
 
 ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 {
 	// idle animation - just one sprite
-	idleAnim.PushBack({ 66, 1, 32, 14 });
-
-	// move upwards
-	upAnim.PushBack({ 100, 1, 32, 14 });
-	upAnim.PushBack({ 132, 0, 32, 14 });
-	upAnim.loop = false;
-	upAnim.speed = 0.1f;
+	
+	idleDown.PushBack({ 1, 1, 24, 24 });
+	idleUp.PushBack({ 1, 27, 24, 24 });
+	idleRight.PushBack({ 1, 53, 24, 24 });
+	idleLeft.PushBack({ 1, 79, 24, 24 });
 
 	// Move down
-	downAnim.PushBack({ 33, 1, 32, 14 });
-	downAnim.PushBack({ 0, 1, 32, 14 });
-	downAnim.loop = false;
-	downAnim.speed = 0.1f;
+	
+	walkDown.PushBack({ 27, 105, 24, 24 });
+	walkDown.PushBack({ 53, 105, 24, 24 });
+	walkDown.PushBack({ 79, 105, 24, 24 });
+	walkDown.PushBack({ 105, 105, 24, 24 });
+	walkDown.PushBack({ 131, 105, 24, 24 });
+	walkDown.PushBack({ 157, 105, 24, 24 });
+	walkDown.PushBack({ 183, 105, 24, 24 });
+	walkDown.PushBack({ 1, 105, 24, 24 });
+
+	walkDown.loop = false;
+	walkDown.speed = 0.1f;
+
+	// move upwards
+
+	walkUp.PushBack({ 27, 131, 24, 24 });
+	walkUp.PushBack({ 53, 131, 24, 24 });
+	walkUp.PushBack({ 79, 131, 24, 24 });
+	walkUp.PushBack({ 105, 131, 24, 24 });
+	walkUp.PushBack({ 131, 131, 24, 24 });
+	walkUp.PushBack({ 157, 131, 24, 24 });
+	walkUp.PushBack({ 183, 131, 24, 24 });
+	walkUp.PushBack({ 1, 131, 24, 24 });
+
+	walkUp.loop = false;
+	walkUp.speed = 0.1f;
+
+	// move right
+	
+	walkRight.PushBack({ 27, 157, 24, 24 });
+	walkRight.PushBack({ 53, 157, 24, 24 });
+	walkRight.PushBack({ 79, 157, 24, 24 });
+	walkRight.PushBack({ 105, 157, 24, 24 });
+	walkRight.PushBack({ 131, 157, 24, 24 });
+	walkRight.PushBack({ 157, 157, 24, 24 });
+	walkRight.PushBack({ 183, 157, 24, 24 });
+	walkRight.PushBack({ 1, 157, 24, 24 });
+
+	walkRight.loop = false;
+	walkRight.speed = 0.1f;
+
+	// move left
+
+	walkLeft.PushBack({ 27, 183, 24, 24 });
+	walkLeft.PushBack({ 53, 183, 24, 24 });
+	walkLeft.PushBack({ 79, 183, 24, 24 });
+	walkLeft.PushBack({ 105, 183, 24, 24 });
+	walkLeft.PushBack({ 131, 183, 24, 24 });
+	walkLeft.PushBack({ 157, 183, 24, 24 });
+	walkLeft.PushBack({ 183, 183, 24, 24 });
+	walkLeft.PushBack({ 1, 183, 24, 24 });
+
+	walkLeft.loop = false;
+	walkLeft.speed = 0.1f;
+
+	
 }
 
 ModulePlayer::~ModulePlayer()
@@ -42,65 +94,136 @@ bool ModulePlayer::Start()
 	LOG("Loading player textures");
 
 	bool ret = true;
+	///Lookup table
+	char lookupTable[] = { "! @,_./0123456789$;< ?abcdefghijklmnopqrstuvwxyz" };
+	
+	scoreFont = App->fonts->Load("Assets/Textures/rtype_font3.png", lookupTable, 2);
+	
 
-	texture = App->textures->Load("Assets/Textures/ship.png");
-	currentAnimation = &idleAnim;
+	texture = App->textures->Load("Assets/Textures/spritesheet_player.png");
+	currentAnimation = &idleLeft;
 
 	laserFx = App->audio->LoadFx("Assets/Audio/Fx/laser.wav");
 	explosionFx = App->audio->LoadFx("Assets/Audio/Fx/explosion.wav");
 
-	position.x = 150;
-	position.y = 120;
+	position.x = 96;
+	position.y = 48;
 
 	destroyed = false;
 
-	collider = App->collisions->AddCollider({ position.x, position.y, 32, 16 }, Collider::Type::PLAYER, this);
+	collider = App->collisions->AddCollider({ position.x, position.y, 24, 24 }, Collider::Type::PLAYER, this);
 
 	// TODO 0: Notice how a font is loaded and the meaning of all its arguments 
 	//char lookupTable[] = { "!  ,_./0123456789$;<&?abcdefghijklmnopqrstuvwxyz" };
 	//scoreFont = App->fonts->Load("Assets/Fonts/rtype_font.png", "! @,_./0123456789$;<&?abcdefghijklmnopqrstuvwxyz", 1);
 
 	// TODO 4: Try loading "rtype_font3.png" that has two rows to test if all calculations are correct
-	char lookupTable[] = { "! @,_./0123456789$;< ?abcdefghijklmnopqrstuvwxyz" };
-	char tilesetTable[] = { "WwobCcB" };
-	scoreFont = App->fonts->Load("Assets/Textures/rtype_font3.png", lookupTable, 2);
-	lvl1_map = App->tiles->Load("Assets/Textures/spritesheet_tiles.png", tilesetTable, 1);
+	
 	return ret;
 }
+void ModulePlayer::walkx() {
+	if (posInix == true) {
+		posInix = false;
+	}
+	countx = position.x;
+	
+	
+}
+void ModulePlayer::walky() {
+	if (posIniy == true) {
+		posIniy = false;
+	}
+	county = position.y;
+	
 
+}
 Update_Status ModulePlayer::Update()
 {
+	if (countx < movx) {
+		countx+=2;
+	}
+	else if (countx > movx) {
+		countx-=2;
+	}
+
+	if (county < movy) {
+		county += 2 ;
+	}
+	else if (county > movy) {
+		county -= 2;
+	}
+
+	if (!posInix) {
+		position.x = countx;
+		
+	}
+	if (!posIniy) {
+		position.y = county;
+
+	}
+
+
+	frameStart = SDL_GetTicks();
+	frameTime = SDL_GetTicks() - frameStart;
+	
+	if (frameDelay > frameTime) {
+		SDL_Delay(frameDelay - frameTime);
+	}
 	// Moving the player with the camera scroll
-	App->player->position.x += 1;
-
-	if (App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT)
+	//App->player->position.x += 1;
+	
+	//position.x = count;
+	if (App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_DOWN)
 	{
-		position.x -= speed;
+		
+		movx = position.x - 24;
+		walkx();
+
+	
+
+		
+		
+			walkLeft.Reset();
+			currentAnimation = &walkLeft;
+		 
 	}
 
-	if (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT)
+	if (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_DOWN)
 	{
-		position.x += speed;
+		
+		movx = position.x + 24;
+		walkx();
+
+			walkRight.Reset();
+			currentAnimation = &walkRight;
+
 	}
 
-	if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT)
+	if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_DOWN)
 	{
-		position.y += speed;
-		if (currentAnimation != &downAnim)
-		{
-			downAnim.Reset();
-			currentAnimation = &downAnim;
-		}
+		
+		movy = position.y + 24;
+		walky();
+
+			walkDown.Reset();
+			currentAnimation = &walkDown;
+		
 	}
 
-	if (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT)
+	if (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_DOWN)
 	{
-		position.y -= speed;
-		if (currentAnimation != &upAnim)
-		{
-			upAnim.Reset();
-			currentAnimation = &upAnim;
-		}
+		
+		movy = position.y - 24;
+		walky();
+
+		walkRight.Reset();
+		currentAnimation = &walkRight;
+
+		
+		
+			walkUp.Reset();
+			currentAnimation = &walkUp;
+		
 	}
 
 	if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN)
@@ -111,9 +234,9 @@ Update_Status ModulePlayer::Update()
 	}
 
 	// If no up/down movement detected, set the current animation back to idle
-	if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE
-		&& App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE)
-		currentAnimation = &idleAnim;
+	///if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE
+		///&& App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE)
+	///	currentAnimation = &idleAnim;
 
 	collider->SetPos(position.x, position.y);
 
@@ -134,8 +257,7 @@ Update_Status ModulePlayer::PostUpdate()
 	sprintf_s(scoreText, 10, "%7d", score);
 
 
-	///Tiles
-	App->tiles->BlitScene(0, 120,lvl1_map, "WwobCcBwwWBBC");
+	
 
 
 	// TODO 3: Blit the text of the score in at the bottom of the screen
