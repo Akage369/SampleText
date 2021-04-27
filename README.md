@@ -1,6 +1,7 @@
 # SampleText
 Project I - My first amazing arcade game
 https://github.com/Akage369/SampleText
+
 -Xavier Casadó, Akage 369
 -Pau Almendrote, PauAL19
 -Alejandro Belchí, Bright-Me
