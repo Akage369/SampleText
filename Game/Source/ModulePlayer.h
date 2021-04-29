@@ -109,6 +109,8 @@ public:
 	bool isBlockedU = false;
 	bool isBlockedD = false;
 
+
+
 	int lvl;
 };
 

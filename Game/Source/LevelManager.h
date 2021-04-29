@@ -21,15 +21,17 @@ public:
 
 	void lvlChange(int change, char op);
 
-	void BoxesDone();
+	void Lose();
 	
 	void LevelComplete();
 	
 	int Getlvl();
 
+	int steps = 0;
+	
+	int win =0;
 
-	
-	
+	int max_steps = 0;
 };
 
 #endif

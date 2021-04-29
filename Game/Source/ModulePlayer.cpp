@@ -244,6 +244,11 @@ void ModulePlayer::spawn(int lvl) {
 Update_Status ModulePlayer::Update()
 {
 	
+	score = App->lvlManage->boxes_lvl;
+	if (App->lvlManage->steps >= App->lvlManage->max_steps) {
+		App->lvlManage->Lose();
+		
+	}
 
 	
 	if (countx < movx) {
@@ -344,11 +349,12 @@ Update_Status ModulePlayer::Update()
 			if (movy == county) {
 				if (movx == countx) {
 					movx = position.x - 24;
-
+					App->lvlManage->steps++;
 				}
 				else {
 					if (countx - movx ==0) {
 						movx -= 24;
+						App->lvlManage->steps++;
 					}
 
 				}
@@ -369,12 +375,14 @@ Update_Status ModulePlayer::Update()
 			if (movy == county) {
 				if (movx == countx) {
 					movx = position.x + 24;
+					App->lvlManage->steps++;
 
 
 				}
 				else {
 					if (movx - countx ==0) {
 						movx += 24;
+						App->lvlManage->steps++;
 					}
 
 				}
@@ -391,11 +399,12 @@ Update_Status ModulePlayer::Update()
 			if (movx == countx) {
 				if (movy == county) {
 					movy = position.y + 24;
-
+					App->lvlManage->steps++;
 				}
 				else {
 					if (movy - county ==0) {
 						movy += 24;
+						App->lvlManage->steps++;
 					}
 
 				}
@@ -413,11 +422,13 @@ Update_Status ModulePlayer::Update()
 			if (movx == countx) {
 				if (movy == county) {
 					movy = position.y - 24;
+					App->lvlManage->steps++;
 
 				}
 				else {
 					if (county - movy ==0) {
 						movy -= 24;
+						App->lvlManage->steps++;
 					}
 
 				}
@@ -492,7 +503,7 @@ Update_Status ModulePlayer::PostUpdate()
 	
 
 	// Draw UI (score) --------------------------------------
-	sprintf_s(scoreText, 10, "%7d", score);
+	sprintf_s(scoreText, 10, "%7d", App->lvlManage->steps);
 
 
 	
@@ -501,7 +512,20 @@ Update_Status ModulePlayer::PostUpdate()
 	// TODO 3: Blit the text of the score in at the bottom of the screen
 	App->fonts->BlitText(58, 248, scoreFont, scoreText);
 
-	App->fonts->BlitText(150, 248, scoreFont, "this is just a font test");
+	if (App->lvlManage->win == 0) {
+		App->fonts->BlitText(150, 248, scoreFont, " ");
+	}
+	else if (App->lvlManage->win == 1) {
+		
+		App->fonts->BlitText(150, 248, scoreFont, "Win!");
+	}
+	else if (App->lvlManage->win == 2) {
+		App->fonts->BlitText(150, 248, scoreFont, "Game Over!");
+	}
+
+	
+
+	
 
 	return Update_Status::UPDATE_CONTINUE;
 }
@@ -567,5 +591,6 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		//	score += 23;
 		//}
 	//}
+
 }
 

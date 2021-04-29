@@ -31,7 +31,7 @@ public:
 	bool CleanUp();
 
 public:
-
+	bool isIni = false;
 	// The scene sprite sheet loaded into an SDL_Texture
 	SDL_Texture* bgTexture = nullptr;
 	///tiles
