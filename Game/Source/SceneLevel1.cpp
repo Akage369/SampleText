@@ -84,7 +84,7 @@ Update_Status SceneLevel1::PostUpdate()
 {
 	switch (App->lvlManage->Getlvl()) {
 	case 1:
-<<<<<<< Updated upstream
+////// Updated upstream
 		App->tiles->BlitScene(-1, -1, lvl1_map, "oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooWwwwwwWoooooo,oooooooWbbBBBWoooooo,ooooooWbbbwwwWoooooo,ooooooWwwbbbbbWooooo,ooooooWbbbWbwbWooooo,ooooooWbbbWbbbWooooo,ooooooWbbbWwwwwooooo,oooooowwwwwooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo");
 		break;
 	case 2:
@@ -92,11 +92,11 @@ Update_Status SceneLevel1::PostUpdate()
 		break;
 	case 3:
 		App->tiles->BlitScene(-1, -1, lvl1_map, "oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooWwwwwwWooooooo,oooooooWbbBBBWooooooo,ooooooWbbbwwwWooooooo,ooooooWwwbbbbbWoooooo,ooooooWbbbWbwbWoooooo,ooooooWbbbWbbbWooooooo,ooooooWbbbWwwwwoooooo,oooooowwwwwoooooooooo,ooooooooooooooooooooo,oooooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo");
-=======
-		App->tiles->BlitScene(-1, -1, lvl1_map, "ooooooooooo,ooWwwwwwWoo,ooWbbBBBWoo,ooWbbbwwwWo,oWwwbbbbbWo,oWbbbWbwbWo,oWbbbWbbbWo,oWbbbWwwwwo,owwwwwooooo,ooooooooooo");
+///
+		//App->tiles->BlitScene(-1, -1, lvl1_map, "ooooooooooo,ooWwwwwwWoo,ooWbbBBBWoo,ooWbbbwwwWo,oWwwbbbbbWo,oWbbbWbwbWo,oWbbbWbbbWo,oWbbbWwwwwo,owwwwwooooo,ooooooooooo");
 		//App->lvlManage->boxes_lvl = 3;
 		
->>>>>>> Stashed changes
+///// Stashed changes
 		break;
 	default:
 		break;
