@@ -45,10 +45,10 @@ bool SceneLevel1::Start()
 	// Enemies ---
 	
 
-	App->boxes->AddBox(Box_Type::BOX, 96, 96); 
+	App->boxes->AddBox(Box_Type::BOX, 216, 192); 
 	//App->boxes->AddBox(Box_Type::BOX, 144, 48);
-	App->boxes->AddBox(Box_Type::BOX, 144, 120);
-	App->boxes->AddBox(Box_Type::BOX, 72, 144);
+	App->boxes->AddBox(Box_Type::BOX, 264, 216);
+	App->boxes->AddBox(Box_Type::BOX, 192, 240);
 
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
@@ -83,7 +83,7 @@ Update_Status SceneLevel1::PostUpdate()
 {
 	switch (App->lvlManage->Getlvl() == 1) {
 	case 1:
-		App->tiles->BlitScene(-1, -1, lvl1_map, "oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooWwwwwwWooooooo,oooooooWbbBBBWooooooo,ooooooWbbbwwwWooooooo,ooooooWwwbbbbbWoooooo,ooooooWbbbWbwbWoooooo,ooooooWbbbWbbbWooooooo,ooooooWbbbWwwwwoooooo,oooooowwwwwoooooooooo,ooooooooooooooooooooo,oooooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo");
+		App->tiles->BlitScene(-1, -1, lvl1_map, "oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooWwwwwwWoooooo,oooooooWbbBBBWoooooo,ooooooWbbbwwwWoooooo,ooooooWwwbbbbbWooooo,ooooooWbbbWbwbWooooo,ooooooWbbbWbbbWooooo,ooooooWbbbWwwwwooooo,oooooowwwwwooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo");
 		break;
 	case 2:
 		App->tiles->BlitScene(-1, -1, lvl1_map, "oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooWwwwwwWooooooo,oooooooWbbBBBWooooooo,ooooooWbbbwwwWooooooo,ooooooWwwbbbbbWoooooo,ooooooWbbbWbwbWoooooo,ooooooWbbbWbbbWooooooo,ooooooWbbbWwwwwoooooo,oooooowwwwwoooooooooo,ooooooooooooooooooooo,oooooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo");
