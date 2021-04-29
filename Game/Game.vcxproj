@@ -165,6 +165,7 @@
     <ClCompile Include="Source\ModulePlayer.cpp" />
     <ClCompile Include="Source\ModuleRender.cpp" />
     <ClCompile Include="Source\OrangeObject.cpp" />
+    <ClCompile Include="Source\Presentacion.cpp" />
     <ClCompile Include="Source\SceneLevel1.cpp" />
     <ClCompile Include="Source\ModuleTextures.cpp" />
     <ClCompile Include="Source\ModuleWindow.cpp" />
@@ -200,6 +201,7 @@
     <ClInclude Include="Source\ModulePlayer.h" />
     <ClInclude Include="Source\ModuleRender.h" />
     <ClInclude Include="Source\OrangeObject.h" />
+    <ClInclude Include="Source\Presentacion.h" />
     <ClInclude Include="Source\SceneLevel1.h" />
     <ClInclude Include="Source\ModuleTextures.h" />
     <ClInclude Include="Source\ModuleWindow.h" />

@@ -129,8 +129,8 @@
     <ClCompile Include="Source\OrangeObject.cpp">
       <Filter>Archivos de recursos\Utils</Filter>
     </ClCompile>
-    <ClCompile Include="Source\BallObject.cpp">
-      <Filter>Archivos de recursos\Utils</Filter>
+    <ClCompile Include="Source\Presentacion.cpp">
+      <Filter>Archivos de recursos\Modules\Gameplay</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -233,8 +233,8 @@
     <ClInclude Include="Source\OrangeObject.h">
       <Filter>Archivos de recursos\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="Source\BallObject.h">
-      <Filter>Archivos de recursos\Utils</Filter>
+    <ClInclude Include="Source\Presentacion.h">
+      <Filter>Archivos de recursos\Modules\Gameplay</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
