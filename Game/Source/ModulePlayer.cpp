@@ -228,8 +228,8 @@ void ModulePlayer::spawn(int lvl) {
 		position.y = 0;
 		break;
 	case 1:
-		position.x = 216;
-		position.y = 144;
+		position.x = 96;
+		position.y = 48;
 		break;
 	case 2:
 		position.x = 72;
