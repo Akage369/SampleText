@@ -58,7 +58,6 @@ Update_Status SceneIntro::PostUpdate()
 	App->render->Blit(bgTexture, 0, 0, NULL);
 	App->render->Blit(bgTexture, 256, 0, NULL);
 	App->render->Blit(bgTexture, 512, 0, NULL);
-	//App->render->Blit(bgTexture, 0, 0, NULL);
 	App->render->Blit(bgTexto, 250, 125, NULL);
 
 	return Update_Status::UPDATE_CONTINUE;
