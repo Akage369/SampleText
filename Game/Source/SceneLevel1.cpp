@@ -83,13 +83,13 @@ Update_Status SceneLevel1::PostUpdate()
 {
 	switch (App->lvlManage->Getlvl() == 1) {
 	case 1:
-		App->tiles->BlitScene(-1, -1, lvl1_map, "oooooooooooooooooooo,oooooooWwwwwwWooooooo,oooooooWbbBBBWooooooo,ooooooWbbbwwwWooooooo,ooooooWwwbbbbbWoooooo,ooooooWbbbWbwbWoooooo,ooooooWbbbWbbbWooooooo,ooooooWbbbWwwwwoooooo,oooooowwwwwoooooooooo,ooooooooooooooooooooooo");
+		App->tiles->BlitScene(-1, -1, lvl1_map, "oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooWwwwwwWooooooo,oooooooWbbBBBWooooooo,ooooooWbbbwwwWooooooo,ooooooWwwbbbbbWoooooo,ooooooWbbbWbwbWoooooo,ooooooWbbbWbbbWooooooo,ooooooWbbbWwwwwoooooo,oooooowwwwwoooooooooo,ooooooooooooooooooooo,oooooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo");
 		break;
 	case 2:
-		App->tiles->BlitScene(-1, -1, lvl1_map, "oooooooooooooooooooo,oooooooWwwwwwWooooooo,oooooooWbbBBBWooooooo,ooooooWbbbwwwWooooooo,ooooooWwwbbbbbWoooooo,ooooooWbbbWbwbWoooooo,ooooooWbbbWbbbWooooooo,ooooooWbbbWwwwwoooooo,oooooowwwwwoooooooooo,ooooooooooooooooooooooo");
+		App->tiles->BlitScene(-1, -1, lvl1_map, "oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooWwwwwwWooooooo,oooooooWbbBBBWooooooo,ooooooWbbbwwwWooooooo,ooooooWwwbbbbbWoooooo,ooooooWbbbWbwbWoooooo,ooooooWbbbWbbbWooooooo,ooooooWbbbWwwwwoooooo,oooooowwwwwoooooooooo,ooooooooooooooooooooo,oooooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo");
 		break;
 	case 3:
-		App->tiles->BlitScene(-1, -1, lvl1_map, "oooooooooooooooooooo,oooooooWwwwwwWooooooo,oooooooWbbBBBWooooooo,ooooooWbbbwwwWooooooo,ooooooWwwbbbbbWoooooo,ooooooWbbbWbwbWoooooo,ooooooWbbbWbbbWooooooo,ooooooWbbbWwwwwoooooo,oooooowwwwwoooooooooo,ooooooooooooooooooooooo");
+		App->tiles->BlitScene(-1, -1, lvl1_map, "oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooWwwwwwWooooooo,oooooooWbbBBBWooooooo,ooooooWbbbwwwWooooooo,ooooooWwwbbbbbWoooooo,ooooooWbbbWbwbWoooooo,ooooooWbbbWbbbWooooooo,ooooooWbbbWwwwwoooooo,oooooowwwwwoooooooooo,ooooooooooooooooooooo,oooooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo");
 		break;
 	default:
 		break;
