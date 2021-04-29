@@ -11,7 +11,6 @@
 #include "LevelManager.h"
 #include "ModuleBoxes.h"
 
-
 SceneLevel1::SceneLevel1(bool startEnabled) : Module(startEnabled)
 {
 
@@ -46,10 +45,10 @@ bool SceneLevel1::Start()
 	// Enemies ---
 	
 
-	App->boxes->AddBox(Box_Type::BOX, 216, 192); 
+	App->boxes->AddBox(Box_Type::BOX, 96, 96); 
 	//App->boxes->AddBox(Box_Type::BOX, 144, 48);
-	App->boxes->AddBox(Box_Type::BOX, 264, 216);
-	App->boxes->AddBox(Box_Type::BOX, 192, 240);
+	App->boxes->AddBox(Box_Type::BOX, 144, 120);
+	App->boxes->AddBox(Box_Type::BOX, 72, 144);
 
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
@@ -82,21 +81,28 @@ Update_Status SceneLevel1::Update()
 // Update: draw background
 Update_Status SceneLevel1::PostUpdate()
 {
-	switch (App->lvlManage->Getlvl()) {
+	switch (App->lvlManage->Getlvl() == 1) {
 	case 1:
+<<<<<<< HEAD
 ////// Updated upstream
 		App->tiles->BlitScene(-1, -1, lvl1_map, "oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooWwwwwwWoooooo,oooooooWbbBBBWoooooo,ooooooWbbbwwwWoooooo,ooooooWwwbbbbbWooooo,ooooooWbbbWbwbWooooo,ooooooWbbbWbbbWooooo,ooooooWbbbWwwwwooooo,oooooowwwwwooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo");
+=======
+		App->tiles->BlitScene(-1, -1, lvl1_map, "oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooWwwwwwWooooooo,oooooooWbbBBBWooooooo,ooooooWbbbwwwWooooooo,ooooooWwwbbbbbWoooooo,ooooooWbbbWbwbWoooooo,ooooooWbbbWbbbWooooooo,ooooooWbbbWwwwwoooooo,oooooowwwwwoooooooooo,ooooooooooooooooooooo,oooooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo");
+>>>>>>> 954f52a16c7624cb0c96a82df09477473fe138a2
 		break;
 	case 2:
 		App->tiles->BlitScene(-1, -1, lvl1_map, "oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooWwwwwwWooooooo,oooooooWbbBBBWooooooo,ooooooWbbbwwwWooooooo,ooooooWwwbbbbbWoooooo,ooooooWbbbWbwbWoooooo,ooooooWbbbWbbbWooooooo,ooooooWbbbWwwwwoooooo,oooooowwwwwoooooooooo,ooooooooooooooooooooo,oooooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo");
 		break;
 	case 3:
 		App->tiles->BlitScene(-1, -1, lvl1_map, "oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooWwwwwwWooooooo,oooooooWbbBBBWooooooo,ooooooWbbbwwwWooooooo,ooooooWwwbbbbbWoooooo,ooooooWbbbWbwbWoooooo,ooooooWbbbWbbbWooooooo,ooooooWbbbWwwwwoooooo,oooooowwwwwoooooooooo,ooooooooooooooooooooo,oooooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo,oooooooooooooooooooo");
+<<<<<<< HEAD
 ///
 		//App->tiles->BlitScene(-1, -1, lvl1_map, "ooooooooooo,ooWwwwwwWoo,ooWbbBBBWoo,ooWbbbwwwWo,oWwwbbbbbWo,oWbbbWbwbWo,oWbbbWbbbWo,oWbbbWwwwwo,owwwwwooooo,ooooooooooo");
 		//App->lvlManage->boxes_lvl = 3;
 		
 ///// Stashed changes
+=======
+>>>>>>> 954f52a16c7624cb0c96a82df09477473fe138a2
 		break;
 	default:
 		break;

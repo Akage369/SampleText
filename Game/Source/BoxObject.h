@@ -44,7 +44,6 @@ public:
 	bool posIniy = true;
 
 	
-	
 	//Collider* colliders[4] = { nullptr ,nullptr ,nullptr ,nullptr };
 	Collider* colliderBR = nullptr;
 	Collider* colliderBL = nullptr;

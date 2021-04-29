@@ -36,8 +36,6 @@ void Box::Update()
 	if (collider != nullptr) {
 		collider->SetPos(position.x, position.y);
 	}
-
-
 	
 }
 
@@ -66,20 +64,6 @@ Collider* Box::GetLateralColliderBU()
 Collider* Box::GetLateralColliderBD()
 {
 	return collider;
-}
-
-void Box::BoxesDone() {
-	if (sendBox == true) {
-		App->lvlManage->boxes_lvl++;
-		sendBox = false;
-	}
-}
-
-void Box::BoxesQuit() {
-	if (sendBox == false) {
-		App->lvlManage->boxes_lvl--;
-		//sendBox = true;
-	}
 }
 
 void Box::OnCollision(Collider* collider)
