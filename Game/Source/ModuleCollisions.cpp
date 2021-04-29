@@ -16,6 +16,7 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::WALL][Collider::Type::TOUCH] = true;
 	matrix[Collider::Type::WALL][Collider::Type::BOX] = false;
 	matrix[Collider::Type::WALL][Collider::Type::TOUCHB] = true;
+	matrix[Collider::Type::WALL][Collider::Type::BALL] = true;
 
 
 	matrix[Collider::Type::PLAYER][Collider::Type::WALL] = false;
@@ -23,24 +24,38 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::PLAYER][Collider::Type::TOUCH] = false;
 	matrix[Collider::Type::PLAYER][Collider::Type::BOX] = false;
 	matrix[Collider::Type::PLAYER][Collider::Type::TOUCHB] = true;
+	matrix[Collider::Type::PLAYER][Collider::Type::BALL] = false;
 
 	matrix[Collider::Type::TOUCH][Collider::Type::WALL] = true;
 	matrix[Collider::Type::TOUCH][Collider::Type::PLAYER] = false;
 	matrix[Collider::Type::TOUCH][Collider::Type::TOUCH] = false;
 	matrix[Collider::Type::TOUCH][Collider::Type::BOX] = true;
 	matrix[Collider::Type::TOUCH][Collider::Type::TOUCHB] = false;
+	matrix[Collider::Type::TOUCH][Collider::Type::BALL] = false;
 
 	matrix[Collider::Type::BOX][Collider::Type::WALL] = false;
 	matrix[Collider::Type::BOX][Collider::Type::PLAYER] = false;
 	matrix[Collider::Type::BOX][Collider::Type::TOUCH] = true;
 	matrix[Collider::Type::BOX][Collider::Type::BOX] = false;
 	matrix[Collider::Type::BOX][Collider::Type::TOUCHB] = true;
+	matrix[Collider::Type::BOX][Collider::Type::BALL] = true;
 
 	matrix[Collider::Type::TOUCHB][Collider::Type::WALL] = true;
 	matrix[Collider::Type::TOUCHB][Collider::Type::PLAYER] = true;
 	matrix[Collider::Type::TOUCHB][Collider::Type::TOUCH] = false;
 	matrix[Collider::Type::TOUCHB][Collider::Type::BOX] = true;
 	matrix[Collider::Type::TOUCHB][Collider::Type::TOUCHB] = false;
+	matrix[Collider::Type::TOUCHB][Collider::Type::BALL] = false;
+
+	matrix[Collider::Type::BALL][Collider::Type::WALL] = false;
+	matrix[Collider::Type::BALL][Collider::Type::PLAYER] = false;
+	matrix[Collider::Type::BALL][Collider::Type::TOUCH] = false;
+	matrix[Collider::Type::BALL][Collider::Type::BOX] = true;
+	matrix[Collider::Type::BALL][Collider::Type::TOUCHB] = false;
+	matrix[Collider::Type::BALL][Collider::Type::BALL] = false;
+
+
+
 
 }
 
@@ -137,8 +152,11 @@ void ModuleCollisions::DebugDraw()
 		case Collider::Type::BOX: // yellow
 			App->render->DrawQuad(colliders[i]->rect, 255, 255, 0, alpha);
 			break;
-		case Collider::Type::TOUCHB: // yellow
+		case Collider::Type::TOUCHB: // celeste
 			App->render->DrawQuad(colliders[i]->rect, 0, 255, 255, alpha);
+			break;
+		case Collider::Type::BALL: // yellow
+			App->render->DrawQuad(colliders[i]->rect, 255, 0, 255, alpha);
 			break;
 		}
 	}
