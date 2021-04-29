@@ -11,6 +11,7 @@
 #include "LevelManager.h"
 #include "ModuleBoxes.h"
 
+
 SceneLevel1::SceneLevel1(bool startEnabled) : Module(startEnabled)
 {
 
@@ -81,9 +82,11 @@ Update_Status SceneLevel1::Update()
 // Update: draw background
 Update_Status SceneLevel1::PostUpdate()
 {
-	switch (App->lvlManage->Getlvl() == 1) {
+	switch (App->lvlManage->Getlvl()) {
 	case 1:
 		App->tiles->BlitScene(-1, -1, lvl1_map, "ooooooooooo,ooWwwwwwWoo,ooWbbBBBWoo,ooWbbbwwwWo,oWwwbbbbbWo,oWbbbWbwbWo,oWbbbWbbbWo,oWbbbWwwwwo,owwwwwooooo,ooooooooooo");
+		//App->lvlManage->boxes_lvl = 3;
+		
 		break;
 	default:
 		break;

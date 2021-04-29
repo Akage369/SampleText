@@ -37,6 +37,8 @@ public:
 	// Collision response
 	virtual void OnCollision(Collider* collider);
 	
+	virtual void BoxesDone();
+	virtual void BoxesQuit();
 
 	// Sets flag for deletion and for the collider aswell
 	virtual void SetToDelete();
@@ -65,6 +67,10 @@ public:
 	bool isStoppedL = false;
 	bool isStoppedU = false;
 	bool isStoppedD = false;
+
+	bool sendBox = false;
+	bool isReady = false;
+	bool hasEntered = false;
 	
 protected:
 	// A ptr to the current animation

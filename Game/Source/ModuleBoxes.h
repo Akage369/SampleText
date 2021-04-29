@@ -2,6 +2,8 @@
 #define __MODULE_BOXES_H__
 
 #include "Module.h"
+#include "LevelManager.h"
+#include "Application.h"
 
 #define MAX_BOXES 75
 
@@ -10,6 +12,7 @@ enum class Box_Type {
 	BOX,
 	WALL,
 	OR_FLOOR,
+	BALL,
 };
 
 struct BoxSpawnpoint
@@ -65,6 +68,7 @@ public:
 	
 	
 
+
 private:
 	// Spawns a new enemy using the data from the queue
 	void SpawnBox(const BoxSpawnpoint& info);
@@ -75,6 +79,8 @@ private:
 
 	// All spawned enemies in the scene
 	Box* boxes[MAX_BOXES] = { nullptr };
+	
+	///Box* boxeslvl[] = { nullptr };
 
 	// The enemies sprite sheet
 	SDL_Texture* texture = nullptr;
