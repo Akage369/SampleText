@@ -43,7 +43,8 @@ bool SceneLevel1::Start()
 	App->collisions->AddCollider({ 1375, 145, 111, 96 }, Collider::Type::WALL);
 	*/
 	// Enemies ---
-	
+	App->audio->PlayMusic("Assets/Audio/Music/stage1.ogg", 1.0f);
+
 
 	App->boxes->AddBox(Box_Type::BOX, 96, 96); 
 	//App->boxes->AddBox(Box_Type::BOX, 144, 48);

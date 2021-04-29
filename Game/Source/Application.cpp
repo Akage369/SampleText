@@ -1,5 +1,5 @@
 #include "Application.h"
-
+#include "Presentacion.h"
 #include "Module.h"
 #include "ModuleWindow.h"
 #include "ModuleInput.h"
@@ -17,7 +17,7 @@
 #include "Tiles.h"
 #include "LevelManager.h"
 #include "ModuleBoxes.h"
-
+#include "Presentacion.h"
 Application::Application()
 {
 	// The order in which the modules are added is very important.
@@ -28,23 +28,24 @@ Application::Application()
 	modules[1] = input = new ModuleInput(true);
 	modules[2] = textures = new ModuleTextures(true);
 	modules[3] = audio = new ModuleAudio(true);
+	
+	modules[4] = presentacion = new Presentacion(true);
+	modules[5] = sceneIntro = new SceneIntro(false);
+	modules[6] = tiles = new Tiles(true);
+	modules[7] = sceneLevel_1 = new SceneLevel1(false);		//Gameplay scene starts disabled
+	modules[8] = player = new ModulePlayer(false);	//Player starts disabled
+	modules[9] = particles = new ModuleParticles(true);
+	modules[10] = boxes = new ModuleBoxes(false);
+	modules[11] = enemies = new ModuleEnemies(false);	//Enemies start disabled
 
-	modules[4] = sceneIntro = new SceneIntro(true);
-	modules[5] = tiles = new Tiles(true);
-	modules[6] = sceneLevel_1 = new SceneLevel1(false);		//Gameplay scene starts disabled
-	modules[7] = player = new ModulePlayer(false);	//Player starts disabled
-	modules[8] = particles = new ModuleParticles(true);
-	modules[9] = boxes = new ModuleBoxes(false);
-	modules[10] = enemies = new ModuleEnemies(false);	//Enemies start disabled
-
-	modules[11] = collisions = new ModuleCollisions(false);
-	modules[12] = fade = new ModuleFadeToBlack(true);
-	modules[13] = fonts = new ModuleFonts(true);
+	modules[12] = collisions = new ModuleCollisions(false);
+	modules[13] = fade = new ModuleFadeToBlack(true);
+	modules[14] = fonts = new ModuleFonts(true);
 	
 	
-	modules[14] = lvlManage = new LevelManager(true);
+	modules[15] = lvlManage = new LevelManager(true);
 
-	modules[15] = render = new ModuleRender(true);
+	modules[16] = render = new ModuleRender(true);
 }
 
 Application::~Application()
