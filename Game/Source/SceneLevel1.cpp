@@ -65,6 +65,8 @@ bool SceneLevel1::Start()
 
 	char tilesetTable[] = { "WwobCcB" };
 	lvl1_map = App->tiles->Load("Assets/Textures/spritesheet_tiles.png", tilesetTable, 1);
+	
+	
 
 	
 	
@@ -85,8 +87,12 @@ Update_Status SceneLevel1::PostUpdate()
 	switch (App->lvlManage->Getlvl()) {
 	case 1:
 		App->tiles->BlitScene(-1, -1, lvl1_map, "ooooooooooo,ooWwwwwwWoo,ooWbbBBBWoo,ooWbbbwwwWo,oWwwbbbbbWo,oWbbbWbwbWo,oWbbbWbbbWo,oWbbbWwwwwo,owwwwwooooo,ooooooooooo");
-		//App->lvlManage->boxes_lvl = 3;
-		
+		break;
+	case 2:
+		App->tiles->BlitScene(-1, -1, lvl1_map, "ooooooooooooooooooooo,oooooWwWwwWoWwwwWoooo,ooooWwbwbbwwWbbbwWoooo,oooooWbbbbbbbwbbbbWooooo,oooooWbbbbbWbbbbbbWooooo,oooooWWWbWWwwWWbbbWooooo,oooooWwwbwWbbWwbwWwooooo,oooooWbbbbwwwwbBBWoooooo,oooooWbbbbbbbbBBBWoooooo,oooooWbbbbWwwWBBBWoooooo,oooooWbbbbWooWBBBWoooooo,oooooWbbWwwoowwwwwoooooo,ooooowwwwooooooooooooooo" );
+		break;
+	case 3: 
+		App->tiles->BlitScene(-1, -1, lvl1_map, "");
 		break;
 	default:
 		break;
