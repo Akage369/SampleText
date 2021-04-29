@@ -139,17 +139,30 @@ void Tiles::BlitScene(int x, int y, int tile_id, const char* map) const
 			//}
 			
 		}
-		else {
+		else if (map[i] == 'B') {
 			// Retrieve the position of the current character in the sprite
 			//if (tilesptr == nullptr) {
 				spriteRect.x = spriteRect.w * (charIndex % tilesptr->columns);
 				spriteRect.y = spriteRect.h * (charIndex / tilesptr->columns);
 
 				App->render->Blit(tilesptr->texture, x, y, &spriteRect, 0.0f, false);
-
+				
+				App->boxes->AddBox(Box_Type::BALL, x + 1, y + 1);
 				// Advance the position where we blit the next character
 				x += spriteRect.w - 2;
 			//}
+		}
+		else {
+		// Retrieve the position of the current character in the sprite
+		//if (tilesptr == nullptr) {
+		spriteRect.x = spriteRect.w * (charIndex % tilesptr->columns);
+		spriteRect.y = spriteRect.h * (charIndex / tilesptr->columns);
+
+		App->render->Blit(tilesptr->texture, x, y, &spriteRect, 0.0f, false);
+
+		// Advance the position where we blit the next character
+		x += spriteRect.w - 2;
+		//}
 		}
 		
 		

@@ -11,6 +11,7 @@
 #include "LevelManager.h"
 #include "ModuleBoxes.h"
 
+
 SceneLevel1::SceneLevel1(bool startEnabled) : Module(startEnabled)
 {
 
@@ -65,6 +66,8 @@ bool SceneLevel1::Start()
 
 	char tilesetTable[] = { "WwobCcB" };
 	lvl1_map = App->tiles->Load("Assets/Textures/spritesheet_tiles.png", tilesetTable, 1);
+	
+	
 
 	
 	
@@ -82,9 +85,15 @@ Update_Status SceneLevel1::Update()
 // Update: draw background
 Update_Status SceneLevel1::PostUpdate()
 {
-	switch (App->lvlManage->Getlvl() == 1) {
+	switch (App->lvlManage->Getlvl()) {
 	case 1:
 		App->tiles->BlitScene(-1, -1, lvl1_map, "ooooooooooo,ooWwwwwwWoo,ooWbbBBBWoo,ooWbbbwwwWo,oWwwbbbbbWo,oWbbbWbwbWo,oWbbbWbbbWo,oWbbbWwwwwo,owwwwwooooo,ooooooooooo");
+		break;
+	case 2:
+		App->tiles->BlitScene(-1, -1, lvl1_map, "ooooooooooooooooooooo,oooooWwWwwWoWwwwWoooo,ooooWwbwbbwwWbbbwWoooo,oooooWbbbbbbbwbbbbWooooo,oooooWbbbbbWbbbbbbWooooo,oooooWWWbWWwwWWbbbWooooo,oooooWwwbwWbbWwbwWwooooo,oooooWbbbbwwwwbBBWoooooo,oooooWbbbbbbbbBBBWoooooo,oooooWbbbbWwwWBBBWoooooo,oooooWbbbbWooWBBBWoooooo,oooooWbbWwwoowwwwwoooooo,ooooowwwwooooooooooooooo" );
+		break;
+	case 3: 
+		App->tiles->BlitScene(-1, -1, lvl1_map, "");
 		break;
 	default:
 		break;

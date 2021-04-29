@@ -90,6 +90,7 @@ void Box_Obj::walky() {
 void Box_Obj::Update()
 {
 
+	
 	if ( App->player->collider->rect.y == colliderBR->rect.y && (App->player->collider->rect.x +1 == colliderBR->rect.x ||
 		App->player->collider->rect.x  == 1+ colliderBR->rect.x|| App->player->collider->rect.x + 2 == colliderBR->rect.x ||
 		App->player->collider->rect.x == 2 + colliderBR->rect.x) ){
@@ -135,6 +136,44 @@ void Box_Obj::Update()
 		inContactD = false;
 	}
 
+	
+	/*
+	if ( App->player->collider->rect.y == colliderBR->rect.y && App->player->collider->rect.x  == colliderBR->rect.x ){
+		
+		inContactR = true;
+		inContactL = false;
+		inContactU = false;
+		inContactD = false;
+		
+		
+	}
+	else if (App->player->collider->rect.y == colliderBL->rect.y && App->player->collider->rect.x == colliderBL->rect.x) {
+
+		inContactR = false;
+		inContactL = true;
+		inContactU = false;
+		inContactD = false;
+
+	}
+	else if (App->player->collider->rect.y == colliderBU->rect.y && App->player->collider->rect.x == colliderBU->rect.x) {
+
+		inContactR = false;
+		inContactL = false;
+		inContactU = true;
+		inContactD = false;
+	}
+	else if (App->player->collider->rect.y == colliderBD->rect.y && App->player->collider->rect.x == colliderBD->rect.x) {
+		inContactR = false;
+		inContactL = false;
+		inContactU = false;
+		inContactD = true;
+	}
+	else {
+		inContactR = false;
+		inContactL = false;
+		inContactU = false;
+		inContactD = false;
+	}*/
 	/*
 	else if (App->player->collider->rect.x == colliderBR->rect.x && App->player->collider->rect.y == colliderBR->rect.y) ||
 		(App->player->collider->rect.x == colliderBL->rect.x && App->player->collider->rect.y == colliderBL->rect.y) ||

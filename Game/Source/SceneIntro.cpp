@@ -9,6 +9,7 @@
 #include "ModulePlayer.h"
 #include "LevelManager.h"
 
+
 SceneIntro::SceneIntro(bool startEnabled) : Module(startEnabled)
 {
 	
@@ -56,7 +57,9 @@ Update_Status SceneIntro::PostUpdate()
 {
 	// Draw everything --------------------------------------
 	App->render->Blit(bgTexture, 0, 0, NULL);
-	App->render->Blit(bgTexto, 15, 50, NULL);
+	App->render->Blit(bgTexture, 256, 0, NULL);
+	App->render->Blit(bgTexture, 512, 0, NULL);
+	App->render->Blit(bgTexto, 140, 125, NULL);
 
 	return Update_Status::UPDATE_CONTINUE;
 }
