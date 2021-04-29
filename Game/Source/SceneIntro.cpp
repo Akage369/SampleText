@@ -28,7 +28,8 @@ bool SceneIntro::Start()
 
 	bool ret = true;
 
-	bgTexture = App->textures->Load("Assets/Textures/startScreen.png");
+	bgTexture = App->textures->Load("Assets/Textures/spritesheet_intro_fondo.png");
+	bgTexto = App->textures->Load("Assets/Textures/spritesheet_intro_texto.png");
 	App->audio->PlayMusic("Assets/Audio/Music/introTitle.ogg", 1.0f);
 
 	App->render->camera.x = 0;
@@ -56,6 +57,9 @@ Update_Status SceneIntro::PostUpdate()
 {
 	// Draw everything --------------------------------------
 	App->render->Blit(bgTexture, 0, 0, NULL);
+	App->render->Blit(bgTexture, 256, 0, NULL);
+	App->render->Blit(bgTexture, 512, 0, NULL);
+	App->render->Blit(bgTexto, 140, 125, NULL);
 
 	return Update_Status::UPDATE_CONTINUE;
 }
