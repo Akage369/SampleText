@@ -17,7 +17,6 @@ struct Collider
 		TOUCH,
 		BOX,
 		TOUCHB,
-		BALL,
 
 		MAX
 	};

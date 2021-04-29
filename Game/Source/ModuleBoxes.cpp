@@ -10,12 +10,10 @@
 #include "BoxObject.h"
 #include "WallObject.h"
 #include "OrangeObject.h"
-#include "BallObject.h"
 
 #include "Collider.h"
 #include "ModulePlayer.h"
 #include "ModuleBoxes.h"
-#include "LevelManager.h"
 
 #define SPAWN_MARGIN 50
 
@@ -174,9 +172,6 @@ void ModuleBoxes::SpawnBox(const BoxSpawnpoint& info)
 				break;
 			case Box_Type::OR_FLOOR:
 				boxes[i] = new Orange_Obj(info.x, info.y);
-				break;
-			case Box_Type::BALL:
-				boxes[i] = new Ball_Obj(info.x, info.y);  
 				break;
 
 
@@ -374,10 +369,7 @@ void ModuleBoxes::OnCollision(Collider* c1, Collider* c2)
 				//if (c1->rect.x == c2->rect.x && c1->rect.y == c2->rect.y) {
 				//if (c1->rect.x +6== c2->rect.x && c1->rect.y == c2->rect.y|| c1->rect.x  == 6 + c2->rect.x && c1->rect.y == c2->rect.y || c1->rect.x == c2->rect.x && c1->rect.y == c2->rect.y ||
 				//	c1->rect.x == c2->rect.x && c1->rect.y + 6 == c2->rect.y || c1->rect.x == c2->rect.x && c1->rect.y == 6 + c2->rect.y) {
-				if ((c1->rect.x == c2->rect.x && c1->rect.y == c2->rect.y)|| (c1->rect.x+1 == c2->rect.x && c1->rect.y == c2->rect.y) ||(c1->rect.x == 1+c2->rect.x && c1->rect.y == c2->rect.y)
-					||(c1->rect.x + 2 == c2->rect.x && c1->rect.y == c2->rect.y) || (c1->rect.x == 2 + c2->rect.x && c1->rect.y == c2->rect.y)||
-					(c1->rect.x == c2->rect.x && c1->rect.y +1 == c2->rect.y) || (c1->rect.x ==  c2->rect.x && c1->rect.y == 1+ c2->rect.y)||
-					(c1->rect.x == c2->rect.x && c1->rect.y + 2 == c2->rect.y) || (c1->rect.x == c2->rect.x && c1->rect.y == 2 + c2->rect.y)) {
+				if (c1->rect.x == c2->rect.x && c1->rect.y == c2->rect.y) {
 					if (c2 == App->player->colliderL) {
 						App->player->Push('L'); //Notify the enemy of a collision
 					}
@@ -391,19 +383,7 @@ void ModuleBoxes::OnCollision(Collider* c1, Collider* c2)
 						App->player->Push('D'); //Notify the enemy of a collision
 					}
 
-
-					if (boxes[i]->isStoppedR == true && c2 == App->player->colliderR) {
-						App->player->isBlockedR = true;
-					}
-					if (boxes[i]->isStoppedL == true && c2 == App->player->colliderL) {
-						App->player->isBlockedL = true;
-					}
-					if (boxes[i]->isStoppedU == true && c2 == App->player->colliderU) {
-						App->player->isBlockedU = true;
-					}
-					if (boxes[i]->isStoppedD == true && c2==App->player->colliderD) {
-						App->player->isBlockedD = true;
-					}
+					
 
 
 
@@ -417,40 +397,7 @@ void ModuleBoxes::OnCollision(Collider* c1, Collider* c2)
 					break;
 				}
 			}
-		
-		//else if (c1->type == Collider::Type::TOUCH && c2->type == Collider::Type::BOX) 
-		//{////////////CHOQUE DEL PLAYER CON LAS CAJAS
-			
-//			if (boxes[i] != nullptr && boxes[i]->GetCollider() == c2)
-//			{
-//				if (c1->rect.x == c2->rect.x && c1->rect.y == c2->rect.y) {
-
-					
-					
-
-
-
-
-//					break;
-//			}
-//				else {
-
-
-					//App->player->isBlockedR = false;
-					//App->player->isBlockedL = false;
-					//App->player->isBlockedU = false;
-					//App->player->isBlockedD = false;
-
-//					break;
-//				}
-
-
-//			}
-			
-
 		}
-
-
 		///SOLO CON 1 CAJA 
 		/*
 		else if (c1->type == Collider::Type::TOUCHB && c2->type == Collider::Type::PLAYER) {
@@ -590,49 +537,7 @@ void ModuleBoxes::OnCollision(Collider* c1, Collider* c2)
 			}
 		}
 		*/
-		else if (c1->type == Collider::Type::BOX && c2->type == Collider::Type::BALL) {
-			if (boxes[i] != nullptr && boxes[i]->GetCollider() == c2) {
-
-				
-				
-				if (c1->rect.x == c2->rect.x && c1->rect.y == c2->rect.y) {
-
-					boxes[i]->hasEntered = true;
-					boxes[i]->BoxesDone();
-					boxes[i]->sendBox = false;
-					//App->lvlManage->BoxesDone(boxes[i]);
-					
-					App->lvlManage->LevelComplete();
-					
-					
-				}
-				else {
-					if (boxes[i]->hasEntered == true) {
-						boxes[i]->BoxesQuit();
-						
-					}
-					
-					boxes[i]->sendBox = true;
-					
-					
-				}
-
-				
-				
-				
-					
-				
-				
-
-				
-				
-				//boxes[i]->sendBox = false;
-
-				App->lvlManage->LevelComplete();
-
-			}
-			
-		}
+		
 	}
 	
 	

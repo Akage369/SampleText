@@ -142,7 +142,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\Application.cpp" />
-    <ClCompile Include="Source\BallObject.cpp" />
     <ClCompile Include="Source\Boxes.cpp" />
     <ClCompile Include="Source\BoxObject.cpp" />
     <ClCompile Include="Source\Collider.cpp" />
@@ -177,7 +176,6 @@
   <ItemGroup>
     <ClInclude Include="Source\Animation.h" />
     <ClInclude Include="Source\Application.h" />
-    <ClInclude Include="Source\BallObject.h" />
     <ClInclude Include="Source\Boxes.h" />
     <ClInclude Include="Source\BoxObject.h" />
     <ClInclude Include="Source\Collider.h" />

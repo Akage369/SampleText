@@ -35,7 +35,7 @@ public:
 	// The scene sprite sheet loaded into an SDL_Texture
 	SDL_Texture* bgTexture = nullptr;
 	///tiles
-	//SDL_Texture* bgTiles = nullptr;
+	SDL_Texture* bgTiles = nullptr;
 
 	///Level1_Tiles
 	int lvl1_map = -1;

@@ -75,7 +75,7 @@ public:
 	uint explosionFx = 0;
 
 	// Font score index
-	int score = 000;
+	uint score = 000;
 	int scoreFont = -1;
 	char scoreText[10] = { "\0" };
 
@@ -103,11 +103,6 @@ public:
 	bool isPushingL = false;
 	bool isPushingU = false;
 	bool isPushingD = false;
-
-	bool isBlockedR = false;
-	bool isBlockedL = false;
-	bool isBlockedU = false;
-	bool isBlockedD = false;
 
 	int lvl;
 };

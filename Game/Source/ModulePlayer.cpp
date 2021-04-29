@@ -170,10 +170,16 @@ bool ModulePlayer::Start()
 	
 	posInix = true;
 	posIniy = true;
- 
+	/*
+	if (lvl == 1) {
+		position.x = 97;
+		position.y = 49;
+	}*/
 	lvl = App->lvlManage->Getlvl();
 	spawn(lvl);
-	 
+	
+	//position.x = 96;
+	//position.y = 48;
 
 	//if (destroyed == true) {
 	//	App->collisions->RemoveCollider(collider);
@@ -257,9 +263,7 @@ Update_Status ModulePlayer::Update()
 		}
 	}
 	else if (countx == movx) {
-		if (currentAnimation == &walkRight) {
-			walkRight.Reset();
-		}
+		walkRight.Reset();
 	}
 
 
@@ -274,9 +278,7 @@ Update_Status ModulePlayer::Update()
 		}
 	}
 	else if (countx == movx) {
-		if (currentAnimation == &walkLeft) {
-			walkLeft.Reset();
-		}
+		walkLeft.Reset();
 	}
 
 	if (county < movy) {
@@ -290,9 +292,7 @@ Update_Status ModulePlayer::Update()
 		}
 	}
 	else if (county == movy) {
-		if (currentAnimation == &walkDown) {
-			walkDown.Reset();
-		}
+		walkDown.Reset();
 	}
 
 	if (county > movy) {
@@ -301,15 +301,12 @@ Update_Status ModulePlayer::Update()
 			currentAnimation = &pushUp;
 		}
 		else {
-
 			currentAnimation = &walkUp;
 		}
 		
 	}
 	else if (county == movy) {
-		if (currentAnimation == &walkUp) {
-			walkUp.Reset();
-		}
+		walkUp.Reset();
 	}
 
 	if (!posInix) {
@@ -338,7 +335,7 @@ Update_Status ModulePlayer::Update()
 	if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT)&& (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_IDLE)
 		&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE))
 	{
-		if (isTouchingL == false && isBlockedL ==false) {
+		if (isTouchingL == false) {
 
 		
 			if (movy == county) {
@@ -347,14 +344,13 @@ Update_Status ModulePlayer::Update()
 
 				}
 				else {
-					if (countx - movx ==0) {
+					if (countx - movx < 4) {
 						movx -= 24;
 					}
 
 				}
 
 				walkx();
-
 			}
 			
 		}
@@ -365,7 +361,7 @@ Update_Status ModulePlayer::Update()
 	if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT)
 		&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE))
 	{
-		if (isTouchingR == false && isBlockedR == false) {
+		if (isTouchingR == false) {
 			if (movy == county) {
 				if (movx == countx) {
 					movx = position.x + 24;
@@ -373,7 +369,7 @@ Update_Status ModulePlayer::Update()
 
 				}
 				else {
-					if (movx - countx ==0) {
+					if (movx - countx < 4) {
 						movx += 24;
 					}
 
@@ -387,20 +383,19 @@ Update_Status ModulePlayer::Update()
 	if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_IDLE)
 		&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE))
 	{
-		if (isTouchingD == false && isBlockedD == false) {
+		if (isTouchingD == false) {
 			if (movx == countx) {
 				if (movy == county) {
 					movy = position.y + 24;
 
 				}
 				else {
-					if (movy - county ==0) {
+					if (movy - county < 4) {
 						movy += 24;
 					}
 
 				}
 				walky();
-				
 			}
 		}
 	}
@@ -409,14 +404,14 @@ Update_Status ModulePlayer::Update()
 	if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_IDLE)
 		&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT))
 	{
-		if (isTouchingU == false && isBlockedU == false) {
+		if (isTouchingU == false) {
 			if (movx == countx) {
 				if (movy == county) {
 					movy = position.y - 24;
 
 				}
 				else {
-					if (county - movy ==0) {
+					if (county - movy < 4) {
 						movy -= 24;
 					}
 
@@ -468,12 +463,6 @@ Update_Status ModulePlayer::Update()
 
 Update_Status ModulePlayer::PostUpdate()
 {
-	
-	isBlockedR = false;
-	isBlockedL = false;
-	isBlockedU = false;
-	isBlockedD = false;
-
 	isTouchingL = false;
 	isTouchingR = false;
 	isTouchingU = false;
