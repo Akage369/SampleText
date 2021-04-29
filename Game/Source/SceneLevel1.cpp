@@ -83,13 +83,7 @@ Update_Status SceneLevel1::PostUpdate()
 {
 	switch (App->lvlManage->Getlvl() == 1) {
 	case 1:
-		App->tiles->BlitScene(-1, -1, lvl1_map, "oooooooooooooooo,ooWwwwwwWoo,ooWbbBBBWoo,ooWbbbwwwWo,oWwwbbbbbWo,oWbbbWbwbWo,oWbbbWbbbWo,oWbbbWwwwwo,owwwwwooooo,oooooooooooo");
-		break;
-	case 2:
-		App->tiles->BlitScene(-1, -1, lvl1_map, "oooooooooooooooo,ooWwwwwwWoo,ooWbbBBBWoo,ooWbbbwwwWo,oWwwbbbbbWo,oWbbbWbwbWo,oWbbbWbbbWo,oWbbbWwwwwo,owwwwwooooo,oooooooooooo");
-		break;
-	case 3:
-		App->tiles->BlitScene(-1, -1, lvl1_map, "oooooooooooooooo,ooWwwwwwWoo,ooWbbBBBWoo,ooWbbbwwwWo,oWwwbbbbbWo,oWbbbWbwbWo,oWbbbWbbbWo,oWbbbWwwwwo,owwwwwooooo,oooooooooooo");
+		App->tiles->BlitScene(-1, -1, lvl1_map, "ooooooooooo,ooWwwwwwWoo,ooWbbBBBWoo,ooWbbbwwwWo,oWwwbbbbbWo,oWbbbWbwbWo,oWbbbWbbbWo,oWbbbWwwwwo,owwwwwooooo,ooooooooooo");
 		break;
 	default:
 		break;
