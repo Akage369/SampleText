@@ -16,4 +16,8 @@ The movement is based on WASD, the movement isn't automatic while pressing, the 
 
 With F1 it is possible to see the colisions.
 
-SPACE to skip presentation screen, intro and advance/repeat a level.
+F2 used for game over condition, SPACE after F2 repeat level
+
+F3 skip level
+
+SPACE to skip presentation screen
