@@ -10,6 +10,7 @@
 #include "Tiles.h"
 #include "LevelManager.h"
 #include "ModuleBoxes.h"
+#include "ModuleInput.h"
 
 
 SceneLevel1::SceneLevel1(bool startEnabled) : Module(startEnabled)
@@ -68,6 +69,11 @@ bool SceneLevel1::Start()
 
 	App->lvlManage->boxes_lvl = 0;
 	
+	if (App->lvlManage->Getlvl() == 1) {
+		App->lvlManage->max_steps = 90;
+	}
+
+	App->lvlManage->win = 0;
 
 	return ret;
 }
@@ -86,7 +92,7 @@ Update_Status SceneLevel1::PostUpdate()
 	case 1:
 		App->tiles->BlitScene(-1, -1, lvl1_map, "ooooooooooo,ooWwwwwwWoo,ooWbbBBBWoo,ooWbbbwwwWo,oWwwbbbbbWo,oWbbbWbwbWo,oWbbbWbbbWo,oWbbbWwwwwo,owwwwwooooo,ooooooooooo");
 		//App->lvlManage->boxes_lvl = 3;
-		App->lvlManage->max_steps = 90;
+		
 		//App->lvlManage->max_steps = 750;
 		//App->lvlManage->max_steps = 700;
 		break;
@@ -94,7 +100,19 @@ Update_Status SceneLevel1::PostUpdate()
 		break;
 	}
 	
+	if (App->input->keys[SDL_SCANCODE_F2] == KEY_DOWN) {
+		App->lvlManage->max_steps = 0;
+		App->lvlManage->Lose();
+		
+	}
 
+	if (App->input->keys[SDL_SCANCODE_F3] == KEY_DOWN) {
+		
+		App->lvlManage->lvlChange(1, '+');
+		App->lvlManage->LevelComplete();
+
+	}
+		
 
 	
 	// Draw everything --------------------------------------

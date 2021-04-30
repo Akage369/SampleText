@@ -45,6 +45,7 @@ void LevelManager::Lose()
 		
 		boxes_lvl = 0;
 		win = 0;
+		steps = 0;
 	}
 
 }
@@ -63,6 +64,7 @@ void LevelManager::LevelComplete()
 				lvlChange(1, '+');
 				boxes_lvl = 0;
 				win = 0;
+				steps = 0;
 				}
 			
 		}
@@ -77,6 +79,7 @@ void LevelManager::LevelComplete()
 				lvlChange(1, '+');
 				boxes_lvl = 0;
 				win = 0;
+				steps = 0;
 			}
 		}
 		break;
@@ -89,6 +92,7 @@ void LevelManager::LevelComplete()
 				lvlChange(1, '+');
 				boxes_lvl = 0;
 				win = 0;
+				steps = 0;
 			}
 		}
 		break;

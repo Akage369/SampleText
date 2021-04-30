@@ -517,10 +517,10 @@ Update_Status ModulePlayer::PostUpdate()
 	}
 	else if (App->lvlManage->win == 1) {
 		
-		App->fonts->BlitText(150, 248, scoreFont, "Win!");
+		App->fonts->BlitText(150, 248, scoreFont, "you win!");
 	}
 	else if (App->lvlManage->win == 2) {
-		App->fonts->BlitText(150, 248, scoreFont, "Game Over!");
+		App->fonts->BlitText(150, 248, scoreFont, "you lose!");
 	}
 
 	

@@ -132,6 +132,9 @@
     <ClCompile Include="Source\Presentacion.cpp">
       <Filter>Archivos de recursos\Modules\Gameplay</Filter>
     </ClCompile>
+    <ClCompile Include="Source\BallObject.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Application.h">
@@ -235,6 +238,9 @@
     </ClInclude>
     <ClInclude Include="Source\Presentacion.h">
       <Filter>Archivos de recursos\Modules\Gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\BallObject.h">
+      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

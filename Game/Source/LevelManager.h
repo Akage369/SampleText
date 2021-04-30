@@ -8,7 +8,7 @@ class LevelManager: public Module
 {
 private:
 	
-	int lvl = 1;
+	int lvl = 0;
 
 public:
 
