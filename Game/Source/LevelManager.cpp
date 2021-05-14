@@ -5,6 +5,8 @@
 #include "Boxes.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleInput.h"
+#include "ModuleRender.h"
+#include "SceneLevel1.h"
 
 LevelManager::LevelManager(bool isEnabled) : Module(isEnabled)
 {
@@ -38,9 +40,10 @@ void LevelManager::lvlChange(int change, char op)
 
 void LevelManager::Lose()
 {
-	win = 2;
+	win = 2;	
 	if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN) {
 		App->lvlManage->lvlChange(1, '-');
+
 		App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneLevel_1, 90);
 		
 		boxes_lvl = 0;

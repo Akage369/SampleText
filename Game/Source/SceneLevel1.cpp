@@ -11,6 +11,7 @@
 #include "LevelManager.h"
 #include "ModuleBoxes.h"
 #include "ModuleInput.h"
+#include "Boxes.h"
 
 
 SceneLevel1::SceneLevel1(bool startEnabled) : Module(startEnabled)
@@ -27,8 +28,8 @@ SceneLevel1::~SceneLevel1()
 bool SceneLevel1::Start()
 {
 	LOG("Loading background assets");
-
 	bool ret = true;
+	loseTexture = App->textures->Load("Assets/Textures/spritesheet_menus.png");
 	/*
 	bgTexture = App->textures->Load("Assets/Textures/background.png");
 	
@@ -81,25 +82,27 @@ bool SceneLevel1::Start()
 Update_Status SceneLevel1::Update()
 {
 	//App->render->camera.x += 3;
-
-	return Update_Status::UPDATE_CONTINUE;
-}
-
-// Update: draw background
-Update_Status SceneLevel1::PostUpdate()
-{
 	switch (App->lvlManage->Getlvl()) {
 	case 1:
 		App->tiles->BlitScene(-1, -1, lvl1_map, "ooooooooooo,ooWwwwwwWoo,ooWbbBBBWoo,ooWbbbwwwWo,oWwwbbbbbWo,oWbbbWbwbWo,oWbbbWbbbWo,oWbbbWwwwwo,owwwwwooooo,ooooooooooo");
 		//App->lvlManage->boxes_lvl = 3;
-		
+
 		//App->lvlManage->max_steps = 750;
 		//App->lvlManage->max_steps = 700;
 		break;
 	default:
 		break;
 	}
+	return Update_Status::UPDATE_CONTINUE;
+}
+
+// Update: draw background
+Update_Status SceneLevel1::PostUpdate()
+{
 	
+
+
+
 	if (App->input->keys[SDL_SCANCODE_F2] == KEY_DOWN) {
 		App->lvlManage->max_steps = 0;
 		App->lvlManage->Lose();
@@ -112,11 +115,23 @@ Update_Status SceneLevel1::PostUpdate()
 		App->lvlManage->LevelComplete();
 
 	}
-		
+	if (!App->player->destroyed)
+	{
+		SDL_Rect rect = App->player->currentAnimation->GetCurrentFrame();
+		App->render->Blit(App->player->texture, App->player->position.x, App->player->position.y, &rect);
 
+	}
 	
+
+
+	if (App->lvlManage->win == 2) {
+		SDL_Rect rectlose = {124, 268, 120, 64};
+		App->render->Blit(App->sceneLevel_1->loseTexture, (SCREEN_WIDTH - 120) / 2, (SCREEN_HEIGHT - 64)/2,&rectlose, 0.0f, false);
+		//App->render->Blit(App->sceneLevel_1->loseTexture,0,0,&rectlose, 0.0f, false);
+	
+	}
 	// Draw everything --------------------------------------
-	App->render->Blit(bgTexture, 0, 0, NULL);
+	//App->render->Blit(bgTexture, 0, 0, NULL);
 	
 	///Tiles
 	

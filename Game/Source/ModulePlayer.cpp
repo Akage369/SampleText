@@ -9,6 +9,7 @@
 #include "ModuleCollisions.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleFonts.h"
+#include "SceneLevel1.h"
 ///Tiles
 #include "Tiles.h"
 #include "LevelManager.h"
@@ -340,113 +341,114 @@ Update_Status ModulePlayer::Update()
 	//App->player->position.x += 1;
 	
 	//position.x = count;
-	if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT)&& (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_IDLE)
-		&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE))
-	{
-		if (isTouchingL == false && isBlockedL ==false) {
-
-		
-			if (movy == county) {
-				if (movx == countx) {
-					movx = position.x - 24;
-					App->lvlManage->steps++;
-				}
-				else {
-					if (countx - movx ==0) {
-						movx -= 24;
-						App->lvlManage->steps++;
-					}
-
-				}
-
-				walkx();
-
-			}
-			
-		}
-	}
-
-	
-	
-	if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT)
-		&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE))
-	{
-		if (isTouchingR == false && isBlockedR == false) {
-			if (movy == county) {
-				if (movx == countx) {
-					movx = position.x + 24;
-					App->lvlManage->steps++;
+	if (App->lvlManage->win == 0) {
+		if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT) && (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_IDLE)
+			&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE))
+		{
+			if (isTouchingL == false && isBlockedL == false) {
 
 
-				}
-				else {
-					if (movx - countx ==0) {
-						movx += 24;
-						App->lvlManage->steps++;
-					}
-
-				}
-				walkx();
-			}
-		}
-	}
-
-	
-	if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_IDLE)
-		&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE))
-	{
-		if (isTouchingD == false && isBlockedD == false) {
-			if (movx == countx) {
 				if (movy == county) {
-					movy = position.y + 24;
-					App->lvlManage->steps++;
-				}
-				else {
-					if (movy - county ==0) {
-						movy += 24;
+					if (movx == countx) {
+						movx = position.x - 24;
 						App->lvlManage->steps++;
 					}
+					else {
+						if (countx - movx == 0) {
+							movx -= 24;
+							App->lvlManage->steps++;
+						}
+
+					}
+
+					walkx();
 
 				}
-				walky();
-				
+
 			}
 		}
-	}
 
 
-	if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_IDLE)
-		&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT))
-	{
-		if (isTouchingU == false && isBlockedU == false) {
-			if (movx == countx) {
+
+		if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT)
+			&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE))
+		{
+			if (isTouchingR == false && isBlockedR == false) {
 				if (movy == county) {
-					movy = position.y - 24;
-					App->lvlManage->steps++;
+					if (movx == countx) {
+						movx = position.x + 24;
+						App->lvlManage->steps++;
 
+
+					}
+					else {
+						if (movx - countx == 0) {
+							movx += 24;
+							App->lvlManage->steps++;
+						}
+
+					}
+					walkx();
 				}
-				else {
-					if (county - movy ==0) {
-						movy -= 24;
+			}
+		}
+
+
+		if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_IDLE)
+			&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE))
+		{
+			if (isTouchingD == false && isBlockedD == false) {
+				if (movx == countx) {
+					if (movy == county) {
+						movy = position.y + 24;
 						App->lvlManage->steps++;
 					}
+					else {
+						if (movy - county == 0) {
+							movy += 24;
+							App->lvlManage->steps++;
+						}
+
+					}
+					walky();
+
+				}
+			}
+		}
+
+
+		if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_IDLE)
+			&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT))
+		{
+			if (isTouchingU == false && isBlockedU == false) {
+				if (movx == countx) {
+					if (movy == county) {
+						movy = position.y - 24;
+						App->lvlManage->steps++;
+
+					}
+					else {
+						if (county - movy == 0) {
+							movy -= 24;
+							App->lvlManage->steps++;
+						}
+
+					}
+
+					walky();
+
+
 
 				}
 
-				walky();
 
 
 
 			}
 
-			
-			
-
 		}
-		
+
 	}
-
-
 	if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN)
 	{
 		//Particle* newParticle = App->particles->AddParticle(App->particles->laser, position.x + 20, position.y, Collider::Type::PLAYER_SHOT);
@@ -495,11 +497,7 @@ Update_Status ModulePlayer::PostUpdate()
 	isPushingU = false;
 	isPushingD = false;
 
-	if (!destroyed)
-	{
-		SDL_Rect rect = currentAnimation->GetCurrentFrame();
-		App->render->Blit(texture, position.x, position.y, &rect);
-	}
+
 	
 
 	// Draw UI (score) --------------------------------------
