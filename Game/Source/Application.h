@@ -3,7 +3,7 @@
 
 #include "Globals.h"
 
-#define NUM_MODULES 19
+#define NUM_MODULES 18
 
 class Module;
 class ModuleWindow;
@@ -24,7 +24,7 @@ class LevelManager;
 class ModuleBoxes;
 class Presentacion;
 class PackInVideo;
-class menuSoukoban;
+
 class Application
 {
 
@@ -60,7 +60,6 @@ public:
 	PackInVideo* packInVideo = nullptr;
 	Presentacion* presentacion = nullptr;
 	SceneIntro* sceneIntro = nullptr;
-	menuSoukoban* menusoukoban = nullptr;
 	SceneLevel1* sceneLevel_1 = nullptr;
 
 	ModuleEnemies* enemies = nullptr;

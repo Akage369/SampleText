@@ -60,7 +60,7 @@ void LevelManager::LevelComplete()
 
 		
 
-		if (boxes_lvl == 2*3) {
+		if (boxes_lvl == 3) {
 			win = 1;
 			if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN) {
 				App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneLevel_1, 90);
@@ -75,7 +75,7 @@ void LevelManager::LevelComplete()
 
 		break;
 	case 2:
-		if (boxes_lvl == 2 * 11) {
+		if (boxes_lvl == 11) {
 			win = 1;
 			if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN) {
 				App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneLevel_1, 90);
@@ -88,7 +88,7 @@ void LevelManager::LevelComplete()
 		break;
 
 	case 3:
-		if (boxes_lvl == 2 * 12) {
+		if (boxes_lvl == 12) {
 			win = 1;
 			if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN) {
 				App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneLevel_1, 90);

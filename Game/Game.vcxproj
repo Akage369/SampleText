@@ -155,7 +155,6 @@
     <ClCompile Include="Source\Globals.cpp" />
     <ClCompile Include="Source\LevelManager.cpp" />
     <ClCompile Include="Source\Main.cpp" />
-    <ClCompile Include="Source\menuSoukoban.cpp" />
     <ClCompile Include="Source\Module.cpp" />
     <ClCompile Include="Source\ModuleAudio.cpp" />
     <ClCompile Include="Source\ModuleBoxes.cpp" />
@@ -193,7 +192,6 @@
     <ClInclude Include="Source\Globals.h" />
     <ClInclude Include="Source\LevelManager.h" />
     <ClInclude Include="Source\MemLeaks.h" />
-    <ClInclude Include="Source\menuSoukoban.h" />
     <ClInclude Include="Source\Module.h" />
     <ClInclude Include="Source\ModuleAudio.h" />
     <ClInclude Include="Source\ModuleBoxes.h" />

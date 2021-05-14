@@ -56,7 +56,7 @@ bool SceneLevel1::Start()
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
 
-	App->lvlManage->lvlChange(1, '+'); 
+	//App->lvlManage->lvlChange(1, '+'); 
 
 	App->player->Enable();
 	App->boxes->Enable();
@@ -70,12 +70,19 @@ bool SceneLevel1::Start()
 
 	App->lvlManage->boxes_lvl = 0;
 	
-	if (App->lvlManage->Getlvl() == 1) {
+	switch(App->lvlManage->Getlvl()){
+	case 1:
+		App->tiles->genObjects(-1, -1, lvl1_map, "ooooooooooo,ooWwwwwwWoo,ooWbbBBBWoo,ooWbbbwwwWo,oWwwbbbbbWo,oWbbbWbwbWo,oWbbbWbbbWo,oWbbbWwwwwo,owwwwwooooo,ooooooooooo");
 		App->lvlManage->max_steps = 90;
+		break;
+	case 2:
+		App->tiles->genObjects(-1, -1, lvl1_map, "ooooooooooo,ooWwwwwwWoo,ooWbbBBBWoo,ooWbbbwwwWo,oWwwbbbbbWo,oWbbbWbwbWo,oWbbbWbbbWo,oWbbbWwwwwo,owwwwwooooo,ooooooooooo");
+		App->lvlManage->max_steps = 90;
+		break;
 	}
 
 	App->lvlManage->win = 0;
-
+	
 	return ret;
 }
 
@@ -84,11 +91,14 @@ Update_Status SceneLevel1::Update()
 	//App->render->camera.x += 3;
 	switch (App->lvlManage->Getlvl()) {
 	case 1:
-		App->tiles->BlitScene(-1, -1, lvl1_map, "ooooooooooo,ooWwwwwwWoo,ooWbbBBBWoo,ooWbbbwwwWo,oWwwbbbbbWo,oWbbbWbwbWo,oWbbbWbbbWo,oWbbbWwwwwo,owwwwwooooo,ooooooooooo");
+		App->tiles->BlitScene(-1, -1, lvl1_map, "ooooooooooo,ooWwwwwwWoo,ooWbbBBBWoo,ooWbbbwwwWo,oWwwCbbbbWo,oWbbbWbwCWo,oWbCbWbbbWo,oWbbbWwwwwo,owwwwwooooo,ooooooooooo");
 		//App->lvlManage->boxes_lvl = 3;
 
 		//App->lvlManage->max_steps = 750;
 		//App->lvlManage->max_steps = 700;
+		break;
+	case 2:
+		App->tiles->BlitScene(-1, -1, lvl1_map, "ooooooooooo,ooWwwwwwWoo,ooWbbBBBWoo,ooWbbbwwwWo,oWwwbbbbbWo,oWbbbWbwbWo,oWbbbWbbbWo,oWbbbWwwwwo,owwwwwooooo,ooooooooooo");
 		break;
 	default:
 		break;

@@ -1,6 +1,5 @@
 #include "Application.h"
 #include "PackInVideo.h"
-#include "menuSoukoban.h"
 #include "Module.h"
 #include "ModuleWindow.h"
 #include "ModuleInput.h"
@@ -33,22 +32,21 @@ Application::Application()
 	modules[4] = presentacion = new Presentacion(true);
 	modules[5] = packInVideo = new PackInVideo(false);
 	modules[6] = sceneIntro = new SceneIntro(false);
-	modules[7] = menusoukoban = new menuSoukoban(false);
-	modules[8] = tiles = new Tiles(true);
-	modules[9] = sceneLevel_1 = new SceneLevel1(false);		//Gameplay scene starts disabled
-	modules[10] = player = new ModulePlayer(false);	//Player starts disabled
-	modules[11] = particles = new ModuleParticles(true);
-	modules[12] = boxes = new ModuleBoxes(false);
-	modules[13] = enemies = new ModuleEnemies(false);	//Enemies start disabled
+	modules[7] = tiles = new Tiles(true);
+	modules[8] = sceneLevel_1 = new SceneLevel1(false);		//Gameplay scene starts disabled
+	modules[9] = player = new ModulePlayer(false);	//Player starts disabled
+	modules[10] = particles = new ModuleParticles(true);
+	modules[11] = boxes = new ModuleBoxes(false);
+	modules[12] = enemies = new ModuleEnemies(false);	//Enemies start disabled
 
-	modules[14] = collisions = new ModuleCollisions(false);
-	modules[15] = fade = new ModuleFadeToBlack(true);
-	modules[16] = fonts = new ModuleFonts(true);
+	modules[13] = collisions = new ModuleCollisions(false);
+	modules[14] = fade = new ModuleFadeToBlack(true);
+	modules[15] = fonts = new ModuleFonts(true);
 	
 	
-	modules[17] = lvlManage = new LevelManager(true);
+	modules[16] = lvlManage = new LevelManager(true);
 
-	modules[18] = render = new ModuleRender(true);
+	modules[17] = render = new ModuleRender(true);
 }
 
 Application::~Application()

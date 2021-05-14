@@ -44,9 +44,10 @@ Update_Status SceneIntro::Update()
 	{
 		
 		
-		App->fade->FadeToBlack(this, (Module*)App->menusoukoban, 20);
+		App->fade->FadeToBlack(this, (Module*)App->sceneLevel_1, 20);
 		//lvl++;
 		//App->player->spawn(lvl);
+		App->lvlManage->lvlChange(1, '+');
 	}
 
 	return Update_Status::UPDATE_CONTINUE;
