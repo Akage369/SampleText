@@ -138,6 +138,9 @@
     <ClCompile Include="Source\PackInVideo.cpp">
       <Filter>Archivos de recursos\Modules\Gameplay</Filter>
     </ClCompile>
+    <ClCompile Include="Source\menuSoukoban.cpp">
+      <Filter>Archivos de recursos\Modules\Gameplay</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Application.h">
@@ -246,6 +249,9 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="Source\PackInVideo.h">
+      <Filter>Archivos de recursos\Modules\Gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\menuSoukoban.h">
       <Filter>Archivos de recursos\Modules\Gameplay</Filter>
     </ClInclude>
   </ItemGroup>

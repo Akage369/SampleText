@@ -1,4 +1,6 @@
 #include "SceneIntro.h"
+#include "PackInVideo.h"
+#include "menuSoukoban.h"
 #include "Presentacion.h"
 #include "Application.h"
 #include "ModuleTextures.h"
@@ -9,28 +11,27 @@
 #include "ModulePlayer.h"
 #include "LevelManager.h"
 
-
-SceneIntro::SceneIntro(bool startEnabled) : Module(startEnabled)
+menuSoukoban::menuSoukoban(bool startEnabled) : Module(startEnabled)
 {
-	
+
 }
 
-SceneIntro::~SceneIntro()
+menuSoukoban::~menuSoukoban()
 {
 
 }
 
 // Load assets
-bool SceneIntro::Start()
+bool menuSoukoban::Start()
 {
-	
+
 	LOG("Loading background assets");
-	
+
 	bool ret = true;
 
-	bgTexture = App->textures->Load("Assets/Textures/spritesheet_intro_fondo.png");
-	bgTexto = App->textures->Load("Assets/Textures/spritesheet_intro_texto.png");
-	App->audio->PlayMusic("Assets/Audio/Music/introTitle.ogg", 1.0f);
+	bgTexture = App->textures->Load("Assets/Textures/menuSoukoban.png");
+	//bgTexto = App->textures->Load("Assets/Textures/spritesheet_intro_texto.png");
+	//App->audio->PlayMusic("Assets/Audio/Music/introTitle.ogg", 1.0f);
 
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
@@ -38,13 +39,13 @@ bool SceneIntro::Start()
 	return ret;
 }
 
-Update_Status SceneIntro::Update()
+Update_Status menuSoukoban::Update()
 {
 	if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN)
 	{
-		
-		
-		App->fade->FadeToBlack(this, (Module*)App->menusoukoban, 20);
+
+
+		App->fade->FadeToBlack(this, (Module*)App->sceneLevel_1, 20);
 		//lvl++;
 		//App->player->spawn(lvl);
 	}
@@ -53,13 +54,11 @@ Update_Status SceneIntro::Update()
 }
 
 // Update: draw background
-Update_Status SceneIntro::PostUpdate()
+Update_Status menuSoukoban::PostUpdate()
 {
 	// Draw everything --------------------------------------
-	App->render->Blit(bgTexture, 0, 0, NULL);
-	App->render->Blit(bgTexture, 256, 0, NULL);
-	App->render->Blit(bgTexture, 512, 0, NULL);
-	App->render->Blit(bgTexto, 140, 125, NULL);
+	App->render->Blit(bgTexture, 0,0, NULL);
+	App->render->Blit(bgTexto, 15, 50, NULL);
 
 	return Update_Status::UPDATE_CONTINUE;
 }
