@@ -26,12 +26,12 @@ public:
 	// Called at the end of the application loop.
 	// Performs the render call of all the parts of the scene's background
 	Update_Status PostUpdate() override;
-	
+
 public:
 	// The scene sprite sheet loaded into an SDL_Texture
 	SDL_Texture* bgTexture = nullptr;
 	SDL_Texture* bgTexto = nullptr;
-	SDL_Texture * puntero = nullptr;
+	SDL_Texture* puntero = nullptr;
 	SDL_Texture* scroller1 = nullptr;
 	SDL_Texture* scroller2 = nullptr;
 	int scrollerY = 0;
@@ -58,6 +58,7 @@ public:
 	uint nextFx = 0;
 	uint backFx = 0;
 
+	bool nextScene;
 };
 
 #endif

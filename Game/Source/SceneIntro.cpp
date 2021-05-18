@@ -12,7 +12,7 @@
 
 SceneIntro::SceneIntro(bool startEnabled) : Module(startEnabled)
 {
-	
+
 }
 
 SceneIntro::~SceneIntro()
@@ -23,9 +23,9 @@ SceneIntro::~SceneIntro()
 // Load assets
 bool SceneIntro::Start()
 {
-	
+
 	LOG("Loading background assets");
-	
+
 	bool ret = true;
 
 	scroller1 = App->textures->Load("Assets/Textures/spritesheet_intro_fondo.png");
@@ -46,6 +46,8 @@ bool SceneIntro::Start()
 	nextFx = App->audio->LoadFx("Assets"); //Falta por determinar sonido
 	backFx = App->audio->LoadFx("Assets"); //Falta por determinar sonido
 
+	nextScene = false;
+
 	return ret;
 }
 
@@ -64,12 +66,16 @@ Update_Status SceneIntro::Update()
 	//input teclas
 	if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN)
 	{
-		
+
 		App->audio->PlayFx(selectFx);
 		App->fade->FadeToBlack(this, (Module*)App->sceneLevel_1, 20);
 		//lvl++;
 		//App->player->spawn(lvl);
-		App->lvlManage->lvlChange(1, '+');
+		if (nextScene == false) {
+			nextScene = true;
+			App->lvlManage->lvlChange(1, '+');
+
+		}
 	}
 
 	if (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_DOWN) {
