@@ -43,7 +43,7 @@ public:
 	// Sets flag for deletion and for the collider aswell
 	virtual void SetToDelete();
 
-	void changeContact(char dir);
+	void changeContact();
 	///
 	virtual void Stop(char dir);
 	

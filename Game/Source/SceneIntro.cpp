@@ -35,6 +35,8 @@ bool SceneIntro::Start()
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
 
+	nextScene = false;
+
 	return ret;
 }
 
@@ -47,7 +49,13 @@ Update_Status SceneIntro::Update()
 		App->fade->FadeToBlack(this, (Module*)App->sceneLevel_1, 20);
 		//lvl++;
 		//App->player->spawn(lvl);
-		App->lvlManage->lvlChange(1, '+');
+		if (nextScene == false) {
+			nextScene = true;
+			App->lvlManage->lvlChange(1, '+');
+			
+		}
+		
+		
 	}
 
 	return Update_Status::UPDATE_CONTINUE;

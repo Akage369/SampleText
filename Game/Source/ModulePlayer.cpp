@@ -223,20 +223,21 @@ void ModulePlayer::spawn(int lvl) {
 		position.y = 0;
 		break;
 	case 1:
-		position.x = 96;
-		position.y = 48;
+		position.x = 96 + 10*24; //336
+		position.y = 48 + 8*24; //240
+		
 		break;
 	case 2:
-		position.x = 72;
-		position.y = 48;
+		position.x = 72 + 10*24;
+		position.y = 48 + 8*24;
 		break;
 	case 3:
-		position.x = 384;
-		position.y = 240;
+		position.x = 384 + 10*24;
+		position.y = 240 + 8*24;
 		break;
 	default:
-		position.x = 384;
-		position.y = 240;
+		position.x = 0;
+		position.y = 0;
 		break;
 
 	}
@@ -251,11 +252,12 @@ Update_Status ModulePlayer::Update()
 		
 	}
 
+	///////MOVIMIENTO CON SPRITES QUE NO SE PARAN AL DETENERSE
 	
 	if (countx < movx) {
-		countx+=1;
-		
-		if (isPushingR==true) {
+		countx += 1;
+
+		if (isPushingR == true) {
 			currentAnimation = &pushRight;
 		}
 		else {
@@ -286,8 +288,8 @@ Update_Status ModulePlayer::Update()
 	}
 
 	if (county < movy) {
-		county += 1 ;
-		
+		county += 1;
+
 		if (isPushingD == true) {
 			currentAnimation = &pushDown;
 		}
@@ -303,7 +305,7 @@ Update_Status ModulePlayer::Update()
 
 	if (county > movy) {
 		county -= 1;
-		if (isPushingU == true) {
+		if (isPushingU == true ) {
 			currentAnimation = &pushUp;
 		}
 		else {
@@ -317,7 +319,150 @@ Update_Status ModulePlayer::Update()
 			walkUp.Reset();
 		}
 	}
+	
 
+	///////MOVIMIENTO CON SPRITES QUE SE PARAN AL DETENERSE BUG
+	/*
+	if (countx < movx) {
+		countx+=1;
+
+		if (isPushingR==true && countx<movx) {
+			currentAnimation = &pushRight;
+		}
+		else {
+			currentAnimation = &walkRight;
+		}
+	}
+	else if (countx == movx) {
+		if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_IDLE)
+			&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE)) {
+			if (currentAnimation == &walkRight) {
+				walkRight.Reset();
+			}
+		}
+	}
+
+
+	if (countx > movx) {
+		countx-=1;
+
+		if (isPushingL == true && countx > movx) {
+			currentAnimation = &pushLeft;
+		}
+		else {
+			currentAnimation = &walkLeft;
+		}
+	}
+	else if (countx == movx) {
+		if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_IDLE)
+			&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE)) {
+			if (currentAnimation == &walkLeft) {
+
+				walkLeft.Reset();
+			}
+		}
+	}
+
+	if (county < movy) {
+		county += 1 ;
+
+		if (isPushingD == true ) {
+			currentAnimation = &pushDown;
+		}else{
+			currentAnimation = &walkDown;
+		}
+
+
+	}
+	else  if (countx == movx)
+	{
+		if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_IDLE)
+			&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE)) {
+			if (currentAnimation == &walkDown) {
+				walkDown.Reset();
+			}
+			
+		}
+		//if (currentAnimation == &walkDown) {
+
+		//}
+	}
+
+	if (county > movy) {
+		county -= 1;
+		if (isPushingU == true && county > movy) {
+			currentAnimation = &pushUp;
+		}
+		else {
+
+			currentAnimation = &walkUp;
+		}
+
+	}
+	else if (county == movy) {
+		if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_IDLE)
+			&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE)) {
+			if (currentAnimation == &walkUp) {
+
+				walkUp.Reset();
+			}
+		}
+	}
+	*/
+	///////MOVIMIENTO CON SPRITES QUE SE PARAN AL DETENERSE
+	/*
+	if (countx < movx) {
+		countx += 1;
+
+		if (isPushingR == true && countx < movx) {
+			currentAnimation = &pushRight;
+		}
+		else {
+			currentAnimation = &walkRight;
+		}
+	}
+	
+
+
+	if (countx > movx) {
+		countx -= 1;
+
+		if (isPushingL == true && countx > movx) {
+			currentAnimation = &pushLeft;
+		}
+		else {
+			currentAnimation = &walkLeft;
+		}
+	}
+	
+
+	if (county < movy) {
+		county += 1;
+
+		if (isPushingD == true) {
+			currentAnimation = &pushDown;
+		}
+		else {
+			currentAnimation = &walkDown;
+		}
+
+
+	}
+	
+
+	if (county > movy) {
+		county -= 1;
+		if (isPushingU == true && county > movy) {
+			currentAnimation = &pushUp;
+		}
+		else {
+
+			currentAnimation = &walkUp;
+		}
+
+	}
+	
+	*/
 	if (!posInix) {
 		position.x = countx;
 		
@@ -456,6 +601,30 @@ Update_Status ModulePlayer::Update()
 		//App->audio->PlayFx(laserFx);
 	}
 
+	if (countx == movx && county == movy)
+			{
+		//if (isPushingD == false && isPushingL == false && isPushingR == false && isPushingU == false) {
+		
+			if (currentAnimation == &walkDown || currentAnimation == &pushDown) {
+				currentAnimation = &walkDown;
+				walkDown.Reset();
+
+			}
+			if (currentAnimation == &walkLeft || currentAnimation == &pushLeft) {
+				currentAnimation = &walkLeft;
+				walkLeft.Reset();
+			}
+			if (currentAnimation == &walkUp || currentAnimation == &pushUp) {
+				currentAnimation = &walkUp;
+				walkUp.Reset();
+			}
+			if (currentAnimation == &walkRight || currentAnimation == &pushRight) {
+				currentAnimation = &walkRight;
+				walkRight.Reset();
+			}
+		
+	}
+	
 	// If no up/down movement detected, set the current animation back to idle
 	///if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE
 		///&& App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE)

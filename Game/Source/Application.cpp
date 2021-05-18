@@ -33,10 +33,10 @@ Application::Application()
 	modules[5] = packInVideo = new PackInVideo(false);
 	modules[6] = sceneIntro = new SceneIntro(false);
 	modules[7] = tiles = new Tiles(true);
-	modules[8] = sceneLevel_1 = new SceneLevel1(false);		//Gameplay scene starts disabled
+	modules[8] = boxes = new ModuleBoxes(false);
 	modules[9] = player = new ModulePlayer(false);	//Player starts disabled
 	modules[10] = particles = new ModuleParticles(true);
-	modules[11] = boxes = new ModuleBoxes(false);
+	modules[11] = sceneLevel_1 = new SceneLevel1(false);		//Gameplay scene starts disabled
 	modules[12] = enemies = new ModuleEnemies(false);	//Enemies start disabled
 
 	modules[13] = collisions = new ModuleCollisions(false);

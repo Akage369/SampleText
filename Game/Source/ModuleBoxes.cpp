@@ -373,6 +373,10 @@ void ModuleBoxes::OnCollision(Collider* c1, Collider* c2)
 				//if (c1->rect.x == c2->rect.x && c1->rect.y == c2->rect.y) {
 				//if (c1->rect.x +6== c2->rect.x && c1->rect.y == c2->rect.y|| c1->rect.x  == 6 + c2->rect.x && c1->rect.y == c2->rect.y || c1->rect.x == c2->rect.x && c1->rect.y == c2->rect.y ||
 				//	c1->rect.x == c2->rect.x && c1->rect.y + 6 == c2->rect.y || c1->rect.x == c2->rect.x && c1->rect.y == 6 + c2->rect.y) {
+
+
+				///////CON MARGEN
+				
 				if ((c1->rect.x == c2->rect.x && c1->rect.y == c2->rect.y)|| (c1->rect.x+1 == c2->rect.x && c1->rect.y == c2->rect.y) ||(c1->rect.x == 1+c2->rect.x && c1->rect.y == c2->rect.y)
 					||(c1->rect.x + 2 == c2->rect.x && c1->rect.y == c2->rect.y) || (c1->rect.x == 2 + c2->rect.x && c1->rect.y == c2->rect.y)||
 					(c1->rect.x == c2->rect.x && c1->rect.y +1 == c2->rect.y) || (c1->rect.x ==  c2->rect.x && c1->rect.y == 1+ c2->rect.y)||
@@ -415,6 +419,52 @@ void ModuleBoxes::OnCollision(Collider* c1, Collider* c2)
 					
 					break;
 				}
+				
+				///////SIN TANTO MARGEN
+				/*
+				if ((c1->rect.x == c2->rect.x && c1->rect.y == c2->rect.y) ||
+					(c1->rect.x + 1 == c2->rect.x && c1->rect.y == c2->rect.y) || (c1->rect.x == 1 + c2->rect.x && c1->rect.y == c2->rect.y)||
+					(c1->rect.x == c2->rect.x && c1->rect.y + 1 == c2->rect.y) || (c1->rect.x == c2->rect.x && c1->rect.y == 1 + c2->rect.y)) {
+					if (c2 == App->player->colliderL) {
+						App->player->Push('L'); //Notify the enemy of a collision
+					}
+					if (c2 == App->player->colliderR) {
+						App->player->Push('R'); //Notify the enemy of a collision
+					}
+					if (c2 == App->player->colliderU) {
+						App->player->Push('U'); //Notify the enemy of a collision
+					}
+					if (c2 == App->player->colliderD) {
+						App->player->Push('D'); //Notify the enemy of a collision
+					}
+
+
+					if (boxes[i]->isStoppedR == true && c2 == App->player->colliderR) {
+						App->player->isBlockedR = true;
+					}
+					if (boxes[i]->isStoppedL == true && c2 == App->player->colliderL) {
+						App->player->isBlockedL = true;
+					}
+					if (boxes[i]->isStoppedU == true && c2 == App->player->colliderU) {
+						App->player->isBlockedU = true;
+					}
+					if (boxes[i]->isStoppedD == true && c2 == App->player->colliderD) {
+						App->player->isBlockedD = true;
+					}
+
+
+
+					break;
+				}
+				else {
+
+
+					App->player->Push('N'); //Notify the enemy of a collision
+
+					break;
+				}
+				*/
+				
 			}
 		
 		//else if (c1->type == Collider::Type::TOUCH && c2->type == Collider::Type::BOX) 
@@ -600,8 +650,7 @@ void ModuleBoxes::OnCollision(Collider* c1, Collider* c2)
 					boxes[i]->BoxesDone();
 					boxes[i]->sendBox = false;
 					//App->lvlManage->BoxesDone(boxes[i]);
-					
-					
+					boxes[i]->isReady = true;
 					App->lvlManage->LevelComplete();
 					
 					
@@ -611,24 +660,26 @@ void ModuleBoxes::OnCollision(Collider* c1, Collider* c2)
 						boxes[i]->BoxesQuit();
 						
 					}
-					
 					boxes[i]->sendBox = true;
 					
-					
 				}
-
-				
-				
-				
-					
-				
-				
-
-				
-				
 				//boxes[i]->sendBox = false;
 
 				App->lvlManage->LevelComplete();
+
+			}
+			if (boxes[i] != nullptr && boxes[i]->GetCollider() == c1) {
+
+
+
+				if (c1->rect.x == c2->rect.x && c1->rect.y == c2->rect.y) {
+					boxes[i]->isReady = true;
+
+				}
+				else {
+					boxes[i]->isReady = false;
+				}
+
 
 			}
 			

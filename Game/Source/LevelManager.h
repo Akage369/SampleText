@@ -12,6 +12,10 @@ private:
 
 public:
 
+	Update_Status Update() override;
+
+	Update_Status PostUpdate() override;
+
 	int boxes_lvl=0;
 	bool boxes_done[3] = {false, false, false};
 

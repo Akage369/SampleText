@@ -56,8 +56,8 @@ public:
 
 private:
 	// The path that will define the position in the world
-	Path boxpath;
-	Path pathready;
+	//Path boxpath;
+	//Path pathready;
 
 	// Enemy animations
 	Animation boxanim;

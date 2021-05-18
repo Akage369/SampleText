@@ -16,16 +16,17 @@ Box_Obj::Box_Obj(int x, int y) : Box(x, y)
 	
 
 	boxanim.PushBack({ 105,1,24,24 });
+	boxready.PushBack({ 131,1,24,24 });
 
 	currentAnim = &boxanim;
 	countx = 0;
 	county = 0;
-	boxpath.PushBack({ 0.0f, 0.0f }, 100, &boxanim);
+	//boxpath.PushBack({ 0.0f, 0.0f }, 100, &boxanim);
 
-	boxready.PushBack({ 131,1,24,24 });
-	countx = 0;
-	county = 0;
-	boxpath.PushBack({ 0.0f, 0.0f },100, &boxready);
+	//boxready.PushBack({ 131,1,24,24 });
+	//countx = 0;
+	//county = 0;
+	//boxpath.PushBack({ 0.0f, 0.0f },100, &boxready); 
 
 	collider = App->collisions->AddCollider({ 0, 0, 24, 24 }, Collider::Type::BOX, (Module*)App->boxes);
 	colliderBR = App->collisions->AddCollider({ position.x + 24, position.y, 24, 24 }, Collider::Type::TOUCHB, (Module*)App->boxes);
@@ -91,6 +92,7 @@ void Box_Obj::walky() {
 }
 
 
+
 void Box_Obj::Update()
 {
 
@@ -105,10 +107,8 @@ void Box_Obj::Update()
 		//currentAnim = boxpath.GetCurrentAnimation();
 
 	//}
-	
-	if ( App->player->collider->rect.y == colliderBR->rect.y && (App->player->collider->rect.x +1 == colliderBR->rect.x ||
-		App->player->collider->rect.x  == 1+ colliderBR->rect.x|| App->player->collider->rect.x + 2 == colliderBR->rect.x ||
-		App->player->collider->rect.x == 2 + colliderBR->rect.x) ){
+	///////////////el que va mejor
+	if ( App->player->collider->rect.y == colliderBR->rect.y && (App->player->collider->rect.x == colliderBR->rect.x || App->player->collider->rect.x + 1 == colliderBR->rect.x ) ){
 		
 		inContactR = true;
 		inContactL = false;
@@ -117,9 +117,7 @@ void Box_Obj::Update()
 		
 		
 	}
-	else if (App->player->collider->rect.y == colliderBL->rect.y && (App->player->collider->rect.x + 1 == colliderBL->rect.x ||
-		App->player->collider->rect.x == 1 + colliderBL->rect.x || App->player->collider->rect.x + 2 == colliderBL->rect.x ||
-		App->player->collider->rect.x == 2 + colliderBL->rect.x)) {
+	else if (App->player->collider->rect.y == colliderBL->rect.y && (App->player->collider->rect.x == colliderBL->rect.x || App->player->collider->rect.x == 1 + colliderBL->rect.x )) {
 
 		inContactR = false;
 		inContactL = true;
@@ -127,18 +125,14 @@ void Box_Obj::Update()
 		inContactD = false;
 
 	}
-	else if (App->player->collider->rect.x == colliderBU->rect.x && (App->player->collider->rect.y + 1 == colliderBU->rect.y ||
-		App->player->collider->rect.y == 1 + colliderBU->rect.y || App->player->collider->rect.y + 2 == colliderBU->rect.y ||
-		App->player->collider->rect.y == 2 + colliderBU->rect.y)) {
+	else if (App->player->collider->rect.x == colliderBU->rect.x && (App->player->collider->rect.y == colliderBU->rect.y || App->player->collider->rect.y  == 1+colliderBU->rect.y)) {
 
 		inContactR = false;
 		inContactL = false;
 		inContactU = true;
 		inContactD = false;
 	}
-	else if (App->player->collider->rect.x == colliderBD->rect.x && (App->player->collider->rect.y + 1 == colliderBD->rect.y ||
-		App->player->collider->rect.y == 1 + colliderBD->rect.y || App->player->collider->rect.y + 2 == colliderBD->rect.y ||
-		App->player->collider->rect.y == 2 + colliderBD->rect.y)) {
+	else if (App->player->collider->rect.x == colliderBD->rect.x && (App->player->collider->rect.y  == colliderBD->rect.y || App->player->collider->rect.y + 1 == colliderBD->rect.y )) {
 		inContactR = false;
 		inContactL = false;
 		inContactU = false;
@@ -150,7 +144,53 @@ void Box_Obj::Update()
 		inContactU = false;
 		inContactD = false;
 	}
+	
+	/* ////////////Original de colisiones
+	if ( App->player->collider->rect.y == colliderBR->rect.y && (App->player->collider->rect.x == colliderBR->rect.x || 
+		App->player->collider->rect.x + 1 == colliderBR->rect.x ||  App->player->collider->rect.x  == 1+ colliderBR->rect.x||
+		App->player->collider->rect.x + 2 == colliderBR->rect.x || App->player->collider->rect.x == 2 + colliderBR->rect.x) ){
+		
+		inContactR = true;
+		inContactL = false;
+		inContactU = false;
+		inContactD = false;
+		
+		
+	}
+	else if (App->player->collider->rect.y == colliderBL->rect.y && (App->player->collider->rect.x == colliderBL->rect.x || 
+		App->player->collider->rect.x + 1 == colliderBL->rect.x || App->player->collider->rect.x == 1 + colliderBL->rect.x ||
+		App->player->collider->rect.x + 2 == colliderBL->rect.x || App->player->collider->rect.x == 2 + colliderBL->rect.x)) {
 
+		inContactR = false;
+		inContactL = true;
+		inContactU = false;
+		inContactD = false;
+
+	}
+	else if (App->player->collider->rect.x == colliderBU->rect.x && (App->player->collider->rect.y == colliderBU->rect.y || 
+		App->player->collider->rect.y + 1 == colliderBU->rect.y || App->player->collider->rect.y == 1 + colliderBU->rect.y ||
+		App->player->collider->rect.y + 2 == colliderBU->rect.y || App->player->collider->rect.y == 2 + colliderBU->rect.y)) {
+
+		inContactR = false;
+		inContactL = false;
+		inContactU = true;
+		inContactD = false;
+	}
+	else if (App->player->collider->rect.x == colliderBD->rect.x && (App->player->collider->rect.y + 1 == colliderBD->rect.y || 
+		App->player->collider->rect.y + 1 == colliderBD->rect.y || App->player->collider->rect.y == 1 + colliderBD->rect.y ||
+		App->player->collider->rect.y + 2 == colliderBD->rect.y || App->player->collider->rect.y == 2 + colliderBD->rect.y)) {
+		inContactR = false;
+		inContactL = false;
+		inContactU = false;
+		inContactD = true;
+	}
+	else {
+		inContactR = false;
+		inContactL = false;
+		inContactU = false;
+		inContactD = false;
+	}
+	*/
 	
 	/*
 	if ( App->player->collider->rect.y == colliderBR->rect.y && App->player->collider->rect.x  == colliderBR->rect.x ){
@@ -203,7 +243,7 @@ void Box_Obj::Update()
 
 	//boxpath.Update();
 	//position = spawnPos + boxpath.GetRelativePosition();
-	currentAnim = boxpath.GetCurrentAnimation();
+	//currentAnim = boxpath.GetCurrentAnimation();
 
 	// Call to the base class. It must be called at the end
 	// It will update the collider depending on the position
@@ -356,6 +396,17 @@ void Box_Obj::Update()
 
 		
 	}
+
+	if (isReady == false) {
+		currentAnim = &boxanim;
+	}
+	else if (movx == countx && movy == county) {
+		{
+			currentAnim = &boxready;
+		}
+	}
+	
+
 	collider->SetPos(position.x, position.y);
 	colliderBR->SetPos(position.x + 24, position.y);
 	colliderBL->SetPos(position.x - 24, position.y);

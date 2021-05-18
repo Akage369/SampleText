@@ -164,7 +164,7 @@ void Box::SetToDelete()
 
 
 
-void Box::changeContact(char dir) {
+void Box::changeContact() {
 	/*switch (dir) {
 	case 'R':
 		this->inContactR = true;

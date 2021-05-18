@@ -36,10 +36,41 @@ void LevelManager::lvlChange(int change, char op)
 	
 }
 
+Update_Status LevelManager::Update() {
+	switch (win) {
+	case 0:
+		break;
+	case 1:
+		break;
+	case 2:
+		if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN) {
+			//App->lvlManage->lvlChange(1, '-');
 
+			App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneLevel_1, 90);
+
+			boxes_lvl = 0;
+			//win = 0;
+			steps = 0;
+		}
+		break;
+	}
+	return Update_Status::UPDATE_CONTINUE;
+}
+
+
+Update_Status LevelManager::PostUpdate() {
+	/*if (win == 2) {
+		SDL_Rect rectlose = { 124, 268, 120, 64 };
+		App->render->Blit(App->sceneLevel_1->loseTexture, (SCREEN_WIDTH - 120) / 2, (SCREEN_HEIGHT - 64) / 2, &rectlose, 0.0f, true);
+		//App->render->Blit(App->sceneLevel_1->loseTexture,0,0,&rectlose, 0.0f, false);
+
+	}
+	*/
+	return Update_Status::UPDATE_CONTINUE;
+}
 
 void LevelManager::Lose()
-{
+{/*
 	win = 2;	
 	if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN) {
 		App->lvlManage->lvlChange(1, '-');
@@ -50,7 +81,9 @@ void LevelManager::Lose()
 		win = 0;
 		steps = 0;
 	}
-
+	*/
+	win = 2;
+	
 }
 
 void LevelManager::LevelComplete()
