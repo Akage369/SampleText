@@ -5,6 +5,7 @@
 #include "Tiles.h"
 #include "ModuleCollisions.h"
 #include "ModuleBoxes.h"
+#include "LevelManager.h"
 
 #include<string.h>
 
@@ -90,9 +91,22 @@ void Tiles::UnLoad(int font_id)
 		LOG("Successfully Unloaded BMP font_id %d", font_id);
 	}
 }
+Update_Status Tiles:: Update() {
+	/*if (App->lvlManage->Getlvl() == 1) {
+		zoom = 3;
+	}
+	else {
+		zoom = 1;
+	}
+	*/
+	return Update_Status::UPDATE_CONTINUE;
+}
 
-void Tiles::BlitScene(int x, int y, int tile_id, const char* map) const
+void Tiles::BlitScene(int x, int y, int tile_id, const char* map, int zoom) const
 {
+	int x0 = x;
+	int y0 = y;
+
 	if (map == nullptr || tile_id < 0 || tile_id >= MAX_TILESETS || tiles[tile_id].texture == nullptr)
 	{
 		LOG("Unable to render text with bmp font id %d", tile_id);
@@ -123,8 +137,8 @@ void Tiles::BlitScene(int x, int y, int tile_id, const char* map) const
 		}
 
 		if (map[i] == ',') {
-			x = -1;
-			y += tilesptr->tile_h - 2;
+			x = x0;
+			y += (tilesptr->tile_h - 2)*zoom;
 		}
 		else if(map[i] == 'W'|| map[i] == 'w') {
 			//if (tilesptr == nullptr) {
@@ -132,13 +146,13 @@ void Tiles::BlitScene(int x, int y, int tile_id, const char* map) const
 				spriteRect.x = spriteRect.w * (charIndex % tilesptr->columns);
 				spriteRect.y = spriteRect.h * (charIndex / tilesptr->columns);
 
-				App->render->Blit(tilesptr->texture, x, y, &spriteRect, 0.0f, false);
+				App->render->Blit(tilesptr->texture, x, y, &spriteRect, 0.0f, false,zoom);
 				//App->collisions->AddCollider({ x+1, y+1, 24, 24 }, Collider::Type::WALL);
 				
 					//App->boxes->AddBox(Box_Type::WALL, x + 1, y + 1);
 				
 				// Advance the position where we blit the next character
-				x += spriteRect.w - 2;
+				x += (spriteRect.w - 2)*zoom;
 			//}
 			
 		}
@@ -148,22 +162,22 @@ void Tiles::BlitScene(int x, int y, int tile_id, const char* map) const
 				spriteRect.x = spriteRect.w * (charIndex % tilesptr->columns);
 				spriteRect.y = spriteRect.h * (charIndex / tilesptr->columns);
 
-				App->render->Blit(tilesptr->texture, x, y, &spriteRect, 0.0f, false);
+				App->render->Blit(tilesptr->texture, x, y, &spriteRect, 0.0f, false,zoom);
 				
 				//App->boxes->AddBox(Box_Type::BALL, x + 1, y + 1);
 				// Advance the position where we blit the next character
-				x += spriteRect.w - 2;
+				x += (spriteRect.w - 2)*zoom;
 			//}
 		}
 		else if (map[i] == 'C') {
 			spriteRect.x = spriteRect.w * (charIndex % tilesptr->columns);
 			spriteRect.y = spriteRect.h * (charIndex / tilesptr->columns);
 
-			App->render->Blit(tilesptr->texture, x+1, y+1, &floorRect, 0.0f, false);
+			App->render->Blit(tilesptr->texture, x+zoom, y+zoom, &floorRect, 0.0f, false,zoom);
 
 			
 			// Advance the position where we blit the next character
-			x += spriteRect.w - 2;
+			x += (spriteRect.w - 2)*zoom;
 		}
 		else {
 		// Retrieve the position of the current character in the sprite
@@ -171,10 +185,10 @@ void Tiles::BlitScene(int x, int y, int tile_id, const char* map) const
 		spriteRect.x = spriteRect.w * (charIndex % tilesptr->columns);
 		spriteRect.y = spriteRect.h * (charIndex / tilesptr->columns);
 
-		App->render->Blit(tilesptr->texture, x, y, &spriteRect, 0.0f, false);
+		App->render->Blit(tilesptr->texture, x, y, &spriteRect, 0.0f, false,zoom);
 
 		// Advance the position where we blit the next character
-		x += spriteRect.w - 2;
+		x += (spriteRect.w - 2)*zoom;
 		//}
 		}
 		
@@ -184,8 +198,11 @@ void Tiles::BlitScene(int x, int y, int tile_id, const char* map) const
 	
 }
 
-void Tiles::genObjects(int x, int y, int tile_id, const char* map) const
+void Tiles::genObjects(int x, int y, int tile_id, const char* map, int zoom) const
 {
+	int x0 = x;
+	int y0 = y;
+
 	if (map == nullptr || tile_id < 0 || tile_id >= MAX_TILESETS || tiles[tile_id].texture == nullptr)
 	{
 		LOG("Unable to render text with bmp font id %d", tile_id);
@@ -216,8 +233,8 @@ void Tiles::genObjects(int x, int y, int tile_id, const char* map) const
 		}
 
 		if (map[i] == ',') {
-			x = -1;
-			y += tilesptr->tile_h - 2;
+			x = x0;
+			y += (tilesptr->tile_h - 2)*zoom;
 		}
 		else if (map[i] == 'W' || map[i] == 'w') {
 			//if (tilesptr == nullptr) {
@@ -227,10 +244,10 @@ void Tiles::genObjects(int x, int y, int tile_id, const char* map) const
 
 			//App->collisions->AddCollider({ x+1, y+1, 24, 24 }, Collider::Type::WALL);
 
-			App->boxes->AddBox(Box_Type::WALL, x + 1, y + 1);
+			App->boxes->AddBox(Box_Type::WALL, x + zoom, y + zoom);
 
 			// Advance the position where we blit the next character
-			x += spriteRect.w - 2;
+			x += (spriteRect.w - 2) * zoom;
 			//}
 
 		}
@@ -240,19 +257,19 @@ void Tiles::genObjects(int x, int y, int tile_id, const char* map) const
 			spriteRect.x = spriteRect.w * (charIndex % tilesptr->columns);
 			spriteRect.y = spriteRect.h * (charIndex / tilesptr->columns);
 
-			App->boxes->AddBox(Box_Type::BALL, x + 1, y + 1);
+			App->boxes->AddBox(Box_Type::BALL, x + zoom, y + zoom);
 			// Advance the position where we blit the next character
-			x += spriteRect.w - 2;
+			x += (spriteRect.w - 2) * zoom;
 			//}
 		}
 		else if (map[i] == 'C') {
 			spriteRect.x = spriteRect.w * (charIndex % tilesptr->columns);
 			spriteRect.y = spriteRect.h * (charIndex / tilesptr->columns);
 
-			App->boxes->AddBox(Box_Type::BOX, x + 1, y + 1);
+			App->boxes->AddBox(Box_Type::BOX, x + zoom, y + zoom);
 
 			// Advance the position where we blit the next character
-			x += spriteRect.w - 2;
+			x += (spriteRect.w - 2) * zoom;
 		}
 		else {
 			// Retrieve the position of the current character in the sprite
@@ -261,7 +278,7 @@ void Tiles::genObjects(int x, int y, int tile_id, const char* map) const
 			spriteRect.y = spriteRect.h * (charIndex / tilesptr->columns);
 
 			// Advance the position where we blit the next character
-			x += spriteRect.w - 2;
+			x += (spriteRect.w - 2) * zoom;
 			//}
 		}
 

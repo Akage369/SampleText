@@ -71,6 +71,8 @@ public:
 	bool sendBox = false;
 	bool isReady = false;
 	bool hasEntered = false;
+
+	int zoom =1;
 	
 protected:
 	// A ptr to the current animation

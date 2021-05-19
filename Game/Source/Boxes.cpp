@@ -47,8 +47,13 @@ void Box::Stop(char dir) {
 
 void Box::Draw()
 {
-	if (currentAnim != nullptr)
-		App->render->Blit(texture, position.x, position.y, &(currentAnim->GetCurrentFrame()));
+	if (currentAnim != nullptr) {
+		
+			App->render->Blit(texture, position.x, position.y, &(currentAnim->GetCurrentFrame()), 1.0f, true, zoom);
+		
+		
+	}
+	
 }
 
 Collider* Box::GetLateralColliderBR() 

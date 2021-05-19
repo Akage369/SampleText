@@ -15,7 +15,12 @@
 Wall_Obj::Wall_Obj(int x, int y) : Box(x, y)
 {
 
-
+	if (App->lvlManage->Getlvl() == 1) {
+		zoom = 3;
+	}
+	else {
+		zoom = 1;
+	}
 
 	//wallanim.PushBack({ 1,1,24,24 });
 	currentAnim = &wallanim;
@@ -24,7 +29,7 @@ Wall_Obj::Wall_Obj(int x, int y) : Box(x, y)
 
 	wallpath.PushBack({ 0.0f, 0.0f }, 1, &wallanim);
 
-	collider = App->collisions->AddCollider({ 0, 0, 24, 24 }, Collider::Type::WALL, (Module*)App->boxes);
+	collider = App->collisions->AddCollider({ 0, 0, 24*zoom, 24 * zoom }, Collider::Type::WALL, (Module*)App->boxes);
 	
 
 }

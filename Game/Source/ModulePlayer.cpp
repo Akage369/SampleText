@@ -173,6 +173,12 @@ bool ModulePlayer::Start()
 	posIniy = true;
  
 	lvl = App->lvlManage->Getlvl();
+	if (lvl == 1) {
+		zoom = 3;
+	}
+	else {
+		zoom = 1;
+	}
 	spawn(lvl);
 	 
 
@@ -184,12 +190,12 @@ bool ModulePlayer::Start()
 	
 	destroyed = false;
 
-	collider = App->collisions->AddCollider({ position.x, position.y, 24, 24 }, Collider::Type::PLAYER, this);
+	collider = App->collisions->AddCollider({ position.x*zoom, position.y*zoom, 24*zoom, 24*zoom }, Collider::Type::PLAYER, this);
 
-	colliderR = App->collisions->AddCollider({ position.x+24, position.y, 24, 24 }, Collider::Type::TOUCH, this); 
-	colliderL = App->collisions->AddCollider({ position.x-24, position.y, 24, 24 }, Collider::Type::TOUCH, this);
-	colliderU = App->collisions->AddCollider({ position.x, position.y-24, 24, 24 }, Collider::Type::TOUCH, this);
-	colliderD = App->collisions->AddCollider({ position.x, position.y+24, 24, 24 }, Collider::Type::TOUCH, this);
+	colliderR = App->collisions->AddCollider({ (position.x+24)*zoom, position.y*zoom, 24*zoom, 24*zoom }, Collider::Type::TOUCH, this); 
+	colliderL = App->collisions->AddCollider({ (position.x-24)*zoom, position.y*zoom, 24*zoom, 24*zoom }, Collider::Type::TOUCH, this);
+	colliderU = App->collisions->AddCollider({ position.x*zoom, (position.y-24)*zoom, 24*zoom, 24*zoom }, Collider::Type::TOUCH, this);
+	colliderD = App->collisions->AddCollider({ position.x*zoom, (position.y+24)*zoom, 24*zoom, 24*zoom }, Collider::Type::TOUCH, this);
 
 	// TODO 0: Notice how a font is loaded and the meaning of all its arguments 
 	//char lookupTable[] = { "!  ,_./0123456789$;<&?abcdefghijklmnopqrstuvwxyz" };
@@ -223,8 +229,10 @@ void ModulePlayer::spawn(int lvl) {
 		position.y = 0;
 		break;
 	case 1:
-		position.x = 96 + 10*24; //336
-		position.y = 48 + 8*24; //240
+		//position.x = 96 + 10*24; //336
+		//position.y = 48 + 8*24; //240
+		position.x = -12 + 96*zoom;  //336
+		position.y = -24 + 48*zoom; //240
 		
 		break;
 	case 2:
@@ -255,7 +263,7 @@ Update_Status ModulePlayer::Update()
 	///////MOVIMIENTO CON SPRITES QUE NO SE PARAN AL DETENERSE
 	
 	if (countx < movx) {
-		countx += 1;
+		countx += 1*zoom;
 
 		if (isPushingR == true) {
 			currentAnimation = &pushRight;
@@ -272,7 +280,7 @@ Update_Status ModulePlayer::Update()
 
 
 	if (countx > movx) {
-		countx-=1;
+		countx-=1*zoom;
 		
 		if (isPushingL == true) {
 			currentAnimation = &pushLeft;
@@ -288,7 +296,7 @@ Update_Status ModulePlayer::Update()
 	}
 
 	if (county < movy) {
-		county += 1;
+		county += 1*zoom;
 
 		if (isPushingD == true) {
 			currentAnimation = &pushDown;
@@ -304,7 +312,7 @@ Update_Status ModulePlayer::Update()
 	}
 
 	if (county > movy) {
-		county -= 1;
+		county -= 1*zoom;
 		if (isPushingU == true ) {
 			currentAnimation = &pushUp;
 		}
@@ -495,12 +503,12 @@ Update_Status ModulePlayer::Update()
 
 				if (movy == county) {
 					if (movx == countx) {
-						movx = position.x - 24;
+						movx = position.x - 24*zoom;
 						App->lvlManage->steps++;
 					}
 					else {
 						if (countx - movx == 0) {
-							movx -= 24;
+							movx -= 24*zoom;
 							App->lvlManage->steps++;
 						}
 
@@ -521,14 +529,14 @@ Update_Status ModulePlayer::Update()
 			if (isTouchingR == false && isBlockedR == false) {
 				if (movy == county) {
 					if (movx == countx) {
-						movx = position.x + 24;
+						movx = position.x + 24*zoom;
 						App->lvlManage->steps++;
 
 
 					}
 					else {
 						if (movx - countx == 0) {
-							movx += 24;
+							movx += 24 * zoom;
 							App->lvlManage->steps++;
 						}
 
@@ -545,12 +553,12 @@ Update_Status ModulePlayer::Update()
 			if (isTouchingD == false && isBlockedD == false) {
 				if (movx == countx) {
 					if (movy == county) {
-						movy = position.y + 24;
+						movy = position.y + 24 * zoom;
 						App->lvlManage->steps++;
 					}
 					else {
 						if (movy - county == 0) {
-							movy += 24;
+							movy += 24 * zoom;
 							App->lvlManage->steps++;
 						}
 
@@ -568,13 +576,13 @@ Update_Status ModulePlayer::Update()
 			if (isTouchingU == false && isBlockedU == false) {
 				if (movx == countx) {
 					if (movy == county) {
-						movy = position.y - 24;
+						movy = position.y - 24 * zoom;
 						App->lvlManage->steps++;
 
 					}
 					else {
 						if (county - movy == 0) {
-							movy -= 24;
+							movy -= 24 * zoom;
 							App->lvlManage->steps++;
 						}
 
@@ -632,10 +640,10 @@ Update_Status ModulePlayer::Update()
 
 	collider->SetPos(position.x, position.y);
 
-	colliderR->SetPos(position.x+24, position.y);
-	colliderL->SetPos(position.x-24, position.y);
-	colliderU->SetPos(position.x, position.y-24);
-	colliderD->SetPos(position.x, position.y+24);
+	colliderR->SetPos(position.x+24 * zoom, position.y);
+	colliderL->SetPos(position.x-24 * zoom, position.y);
+	colliderU->SetPos(position.x, position.y-24 * zoom);
+	colliderD->SetPos(position.x, position.y+24 * zoom);
 	
 
 	currentAnimation->Update();

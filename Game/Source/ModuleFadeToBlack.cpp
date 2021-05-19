@@ -86,5 +86,7 @@ bool ModuleFadeToBlack::FadeToBlack(Module* moduleToDisable, Module* moduleToEna
 		ret = true;
 	}
 	
+	
+
 	return ret;
 }

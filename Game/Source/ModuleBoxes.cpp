@@ -376,11 +376,11 @@ void ModuleBoxes::OnCollision(Collider* c1, Collider* c2)
 
 
 				///////CON MARGEN
-				
-				if ((c1->rect.x == c2->rect.x && c1->rect.y == c2->rect.y)|| (c1->rect.x+1 == c2->rect.x && c1->rect.y == c2->rect.y) ||(c1->rect.x == 1+c2->rect.x && c1->rect.y == c2->rect.y)
-					||(c1->rect.x + 2 == c2->rect.x && c1->rect.y == c2->rect.y) || (c1->rect.x == 2 + c2->rect.x && c1->rect.y == c2->rect.y)||
-					(c1->rect.x == c2->rect.x && c1->rect.y +1 == c2->rect.y) || (c1->rect.x ==  c2->rect.x && c1->rect.y == 1+ c2->rect.y)||
-					(c1->rect.x == c2->rect.x && c1->rect.y + 2 == c2->rect.y) || (c1->rect.x == c2->rect.x && c1->rect.y == 2 + c2->rect.y)) {
+				int zoom = boxes[i]->zoom;
+				if ((c1->rect.x == c2->rect.x && c1->rect.y == c2->rect.y)|| (c1->rect.x+1*zoom == c2->rect.x && c1->rect.y == c2->rect.y) ||(c1->rect.x == 1 * zoom +c2->rect.x && c1->rect.y == c2->rect.y)
+					||(c1->rect.x + 2 * zoom == c2->rect.x && c1->rect.y == c2->rect.y) || (c1->rect.x == 2 * zoom + c2->rect.x && c1->rect.y == c2->rect.y)||
+					(c1->rect.x == c2->rect.x && c1->rect.y +1 * zoom == c2->rect.y) || (c1->rect.x ==  c2->rect.x && c1->rect.y == 1 * zoom + c2->rect.y)||
+					(c1->rect.x == c2->rect.x && c1->rect.y + 2 * zoom == c2->rect.y) || (c1->rect.x == c2->rect.x && c1->rect.y == 2 * zoom + c2->rect.y)) {
 					if (c2 == App->player->colliderL) {
 						App->player->Push('L'); //Notify the enemy of a collision
 					}

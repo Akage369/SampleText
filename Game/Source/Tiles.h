@@ -45,8 +45,10 @@ public:
 	void UnLoad(int tileIndex);
 
 	// Create a surface from text
-	void BlitScene(int x, int y, int tileIndex,const char* map) const;
-	void genObjects(int x, int y, int tileIndex, const char* map) const;
+	void BlitScene(int x, int y, int tileIndex,const char* map, int zoom) const;
+	void genObjects(int x, int y, int tileIndex, const char* map, int zoom) const;
+	Update_Status Update();
+	//int zoom;
 
 private:
 	// An array to keep track and store all loaded fonts

@@ -57,7 +57,7 @@ Update_Status PackInVideo::Update()
 Update_Status PackInVideo::PostUpdate()
 {
 	// Draw everything --------------------------------------
-	App->render->Blit(bgTexture, (SCREEN_WIDTH - 164)/2, (SCREEN_HEIGHT-107)/2, NULL);
+	App->render->Blit(bgTexture, (SCREEN_WIDTH - 164*3)/2, (SCREEN_HEIGHT-107*3)/2, NULL, 1.0f, true, 3);
 	App->render->Blit(bgTexto, 15, 50, NULL);
 
 	return Update_Status::UPDATE_CONTINUE;

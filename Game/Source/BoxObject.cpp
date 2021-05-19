@@ -8,11 +8,17 @@
 #include <stdio.h>
 #include "SDL/include/SDL.h"
 #include "ModulePlayer.h"
+#include "LevelManager.h"
 
 
 Box_Obj::Box_Obj(int x, int y) : Box(x, y)
 {
-
+	if (App->lvlManage->Getlvl() == 1) {
+		zoom = 3;
+	}
+	else {
+		zoom = 1;
+	}
 	
 
 	boxanim.PushBack({ 105,1,24,24 });
@@ -28,11 +34,11 @@ Box_Obj::Box_Obj(int x, int y) : Box(x, y)
 	//county = 0;
 	//boxpath.PushBack({ 0.0f, 0.0f },100, &boxready); 
 
-	collider = App->collisions->AddCollider({ 0, 0, 24, 24 }, Collider::Type::BOX, (Module*)App->boxes);
-	colliderBR = App->collisions->AddCollider({ position.x + 24, position.y, 24, 24 }, Collider::Type::TOUCHB, (Module*)App->boxes);
-	colliderBL = App->collisions->AddCollider({ position.x - 24, position.y, 24, 24 }, Collider::Type::TOUCHB, (Module*)App->boxes);
-	colliderBU = App->collisions->AddCollider({ position.x, position.y - 24, 24, 24 }, Collider::Type::TOUCHB, (Module*)App->boxes);
-	colliderBD = App->collisions->AddCollider({ position.x, position.y + 24, 24, 24 }, Collider::Type::TOUCHB, (Module*)App->boxes);
+	collider = App->collisions->AddCollider({ 0, 0, 24*zoom, 24 * zoom }, Collider::Type::BOX, (Module*)App->boxes);
+	colliderBR = App->collisions->AddCollider({( position.x + 24)* zoom, position.y, 24 * zoom, 24 * zoom }, Collider::Type::TOUCHB, (Module*)App->boxes);
+	colliderBL = App->collisions->AddCollider({ (position.x - 24) * zoom, position.y, 24 * zoom, 24 * zoom }, Collider::Type::TOUCHB, (Module*)App->boxes);
+	colliderBU = App->collisions->AddCollider({ position.x * zoom, (position.y - 24) * zoom, 24 * zoom, 24 * zoom }, Collider::Type::TOUCHB, (Module*)App->boxes);
+	colliderBD = App->collisions->AddCollider({ position.x * zoom, (position.y + 24) * zoom, 24 * zoom, 24 * zoom }, Collider::Type::TOUCHB, (Module*)App->boxes);
 
 }
 
@@ -108,7 +114,7 @@ void Box_Obj::Update()
 
 	//}
 	///////////////el que va mejor
-	if ( App->player->collider->rect.y == colliderBR->rect.y && (App->player->collider->rect.x == colliderBR->rect.x || App->player->collider->rect.x + 1 == colliderBR->rect.x ) ){
+	if ( App->player->collider->rect.y == colliderBR->rect.y && (App->player->collider->rect.x == colliderBR->rect.x || App->player->collider->rect.x + zoom == colliderBR->rect.x ) ){
 		
 		inContactR = true;
 		inContactL = false;
@@ -117,7 +123,7 @@ void Box_Obj::Update()
 		
 		
 	}
-	else if (App->player->collider->rect.y == colliderBL->rect.y && (App->player->collider->rect.x == colliderBL->rect.x || App->player->collider->rect.x == 1 + colliderBL->rect.x )) {
+	else if (App->player->collider->rect.y == colliderBL->rect.y && (App->player->collider->rect.x == colliderBL->rect.x || App->player->collider->rect.x == zoom + colliderBL->rect.x )) {
 
 		inContactR = false;
 		inContactL = true;
@@ -125,14 +131,14 @@ void Box_Obj::Update()
 		inContactD = false;
 
 	}
-	else if (App->player->collider->rect.x == colliderBU->rect.x && (App->player->collider->rect.y == colliderBU->rect.y || App->player->collider->rect.y  == 1+colliderBU->rect.y)) {
+	else if (App->player->collider->rect.x == colliderBU->rect.x && (App->player->collider->rect.y == colliderBU->rect.y || App->player->collider->rect.y  == zoom+colliderBU->rect.y)) {
 
 		inContactR = false;
 		inContactL = false;
 		inContactU = true;
 		inContactD = false;
 	}
-	else if (App->player->collider->rect.x == colliderBD->rect.x && (App->player->collider->rect.y  == colliderBD->rect.y || App->player->collider->rect.y + 1 == colliderBD->rect.y )) {
+	else if (App->player->collider->rect.x == colliderBD->rect.x && (App->player->collider->rect.y  == colliderBD->rect.y || App->player->collider->rect.y + zoom == colliderBD->rect.y )) {
 		inContactR = false;
 		inContactL = false;
 		inContactU = false;
@@ -250,21 +256,21 @@ void Box_Obj::Update()
 
 	///Movimiento player
 	if (countx < movx) {
-		countx += 1;
+		countx += 1*zoom;
 
 	}
 
 	if (countx > movx) {
-		countx -= 1;
+		countx -= 1 * zoom;
 
 	}
 
 	if (county < movy) {
-		county += 1;
+		county += 1 * zoom;
 	}
 
 	if (county > movy) {
-		county -= 1;
+		county -= 1 * zoom;
 	}
 
 
@@ -299,12 +305,12 @@ void Box_Obj::Update()
 
 				if (movy == county) {
 					if (movx == countx) {
-						movx = position.x - 24;
+						movx = position.x - 24 * zoom;
 
 					}
 					else {
 						if (countx - movx < 4) {
-							movx -= 24;
+							movx -= 24 * zoom;
 						}
 
 					}
@@ -324,13 +330,13 @@ void Box_Obj::Update()
 			if (inContactL == true && isStoppedR == false) {
 				if (movy == county) {
 					if (movx == countx) {
-						movx = position.x + 24;
+						movx = position.x + 24 * zoom;
 
 
 					}
 					else {
 						if (movx - countx < 4) {
-							movx += 24;
+							movx += 24 * zoom;
 						}
 					}
 					///walkx();
@@ -348,12 +354,12 @@ void Box_Obj::Update()
 			if (inContactU == true && isStoppedD == false) {
 				if (movx == countx) {
 					if (movy == county) {
-						movy = position.y + 24;
+						movy = position.y + 24 * zoom;
 
 					}
 					else {
 						if (movy - county < 4) {
-							movy += 24;
+							movy += 24 * zoom;
 						}
 
 					}
@@ -373,12 +379,12 @@ void Box_Obj::Update()
 			if (inContactD == true && isStoppedU == false) {
 				if (movx == countx) {
 					if (movy == county) {
-						movy = position.y - 24;
+						movy = position.y - 24 * zoom;
 
 					}
 					else {
 						if (county - movy < 4) {
-							movy -= 24;
+							movy -= 24 * zoom;
 						}
 
 					}
@@ -408,10 +414,10 @@ void Box_Obj::Update()
 	
 
 	collider->SetPos(position.x, position.y);
-	colliderBR->SetPos(position.x + 24, position.y);
-	colliderBL->SetPos(position.x - 24, position.y);
-	colliderBU->SetPos(position.x, position.y - 24);
-	colliderBD->SetPos(position.x, position.y + 24);
+	colliderBR->SetPos(position.x + 24 * zoom, position.y);
+	colliderBL->SetPos(position.x - 24 * zoom, position.y);
+	colliderBU->SetPos(position.x, position.y - 24 * zoom);
+	colliderBD->SetPos(position.x, position.y + 24 * zoom);
 
 	
 Box::Update();

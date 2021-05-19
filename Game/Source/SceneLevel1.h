@@ -40,6 +40,8 @@ public:
 
 	///Level1_Tiles
 	int lvl1_map = -1;
+	int zoom=1;
+	int lvl = 0;
 };
 
 #endif

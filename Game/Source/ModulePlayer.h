@@ -80,7 +80,7 @@ public:
 
 	///frames
 	const int FPS = 60;
-	const int frameDelay = 1000 / FPS;
+	const int frameDelay = 500 / FPS;
 
 	Uint32 frameStart;
 	int frameTime;
@@ -108,7 +108,7 @@ public:
 	bool isBlockedU = false;
 	bool isBlockedD = false;
 
-
+	int zoom;
 
 	int lvl;
 };
