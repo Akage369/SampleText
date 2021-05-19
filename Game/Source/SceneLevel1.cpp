@@ -172,9 +172,16 @@ Update_Status SceneLevel1::PostUpdate()
 
 	if (App->lvlManage->win == 2) {
 		SDL_Rect rectlose = {124, 268, 120, 64};
-		App->render->Blit(App->sceneLevel_1->loseTexture, (SCREEN_WIDTH - 120) / 2, (SCREEN_HEIGHT - 64)/2,&rectlose, 0.0f, true);
+		App->render->Blit(App->sceneLevel_1->loseTexture, (SCREEN_WIDTH - 120*3) / 2, (SCREEN_HEIGHT - 64*3)/2,&rectlose, 0.0f, true, 3);
 		//App->render->Blit(App->sceneLevel_1->loseTexture,0,0,&rectlose, 0.0f, false);
 	
+	}
+
+	if (App->lvlManage->win == 1) {
+		SDL_Rect rectlose = { 2, 268, 120, 64 };
+		App->render->Blit(App->sceneLevel_1->loseTexture, (SCREEN_WIDTH - 120 * 3) / 2, (SCREEN_HEIGHT - 64 * 3) / 2, &rectlose, 0.0f, true, 3);
+		//App->render->Blit(App->sceneLevel_1->loseTexture,0,0,&rectlose, 0.0f, false);
+
 	}
 	
 	// Draw everything --------------------------------------

@@ -236,20 +236,20 @@ void ModuleBoxes::OnCollision(Collider* c1, Collider* c2)
 				boxes[i]->GetLateralColliderBU() == c2 || boxes[i]->GetLateralColliderBD() == c2))
 			{
 				if (c1->rect.x == c2->rect.x && c1->rect.y == c2->rect.y) {
-
-					if ((c1->rect.x == 24 + boxes[i]->position.x) && ((c1->rect.y == boxes[i]->position.y))) {//Caja a la izquierda
+					int zoom = boxes[i]->zoom;
+					if ((c1->rect.x == 24*zoom + boxes[i]->position.x) && ((c1->rect.y == boxes[i]->position.y))) {//Caja a la izquierda
 						boxes[i]->isStoppedR = true;
 						//boxes[i]->isStoppedL = false; 
 					}
-					if ((c1->rect.x + 24 == boxes[i]->position.x) && ((c1->rect.y == boxes[i]->position.y))) {//Caja a la derecha
+					if ((c1->rect.x + 24*zoom == boxes[i]->position.x) && ((c1->rect.y == boxes[i]->position.y))) {//Caja a la derecha
 						boxes[i]->isStoppedL = true;
 						//boxes[i]->isStoppedR = false;
 					}
-					if ((c1->rect.x == boxes[i]->position.x) && ((c1->rect.y +24 ==  boxes[i]->position.y))) {//Caja abajo
+					if ((c1->rect.x == boxes[i]->position.x) && ((c1->rect.y +24*zoom ==  boxes[i]->position.y))) {//Caja abajo
 						boxes[i]->isStoppedU = true;
 						//boxes[i]->isStoppedD = false;
 					}
-					if ((c1->rect.x == boxes[i]->position.x) && ((c1->rect.y == 24 + boxes[i]->position.y))) {//Caja arriba
+					if ((c1->rect.x == boxes[i]->position.x) && ((c1->rect.y == 24*zoom + boxes[i]->position.y))) {//Caja arriba
 						boxes[i]->isStoppedD = true;
 						//boxes[i]->isStoppedU = false;
 					}
@@ -308,20 +308,20 @@ void ModuleBoxes::OnCollision(Collider* c1, Collider* c2)
 				boxes[i]->GetLateralColliderBU() == c2 || boxes[i]->GetLateralColliderBD() == c2))
 			{
 				if (c1->rect.x == c2->rect.x && c1->rect.y == c2->rect.y) {
-
-					if ((c1->rect.x == 24 + boxes[i]->position.x) && ((c1->rect.y == boxes[i]->position.y))) {//Caja a la izquierda
+					int zoom = boxes[i]->zoom;
+					if ((c1->rect.x == 24*zoom + boxes[i]->position.x) && ((c1->rect.y == boxes[i]->position.y))) {//Caja a la izquierda
 						boxes[i]->isStoppedR = true;
 						//boxes[i]->isStoppedL = false; 
 					}
-					if ((c1->rect.x + 24 == boxes[i]->position.x) && ((c1->rect.y == boxes[i]->position.y))) {//Caja a la derecha
+					if ((c1->rect.x + 24*zoom == boxes[i]->position.x) && ((c1->rect.y == boxes[i]->position.y))) {//Caja a la derecha
 						boxes[i]->isStoppedL = true;
 						//boxes[i]->isStoppedR = false;
 					}
-					if ((c1->rect.x == boxes[i]->position.x) && ((c1->rect.y + 24 == boxes[i]->position.y))) {//Caja abajo
+					if ((c1->rect.x == boxes[i]->position.x) && ((c1->rect.y + 24*zoom == boxes[i]->position.y))) {//Caja abajo
 						boxes[i]->isStoppedU = true;
 						//boxes[i]->isStoppedD = false;
 					}
-					if ((c1->rect.x == boxes[i]->position.x) && ((c1->rect.y == 24 + boxes[i]->position.y))) {//Caja arriba
+					if ((c1->rect.x == boxes[i]->position.x) && ((c1->rect.y == 24*zoom + boxes[i]->position.y))) {//Caja arriba
 						boxes[i]->isStoppedD = true;
 						//boxes[i]->isStoppedU = false;
 					}
