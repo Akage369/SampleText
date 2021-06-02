@@ -235,30 +235,99 @@ void ModuleBoxes::OnCollision(Collider* c1, Collider* c2)
 			if (boxes[i] != nullptr && (boxes[i]->GetLateralColliderBR() == c2|| boxes[i]->GetLateralColliderBL() == c2 || 
 				boxes[i]->GetLateralColliderBU() == c2 || boxes[i]->GetLateralColliderBD() == c2))
 			{
-				if (c1->rect.x == c2->rect.x && c1->rect.y == c2->rect.y) {
-					int zoom = boxes[i]->zoom;
-					if (((c1->rect.x == 24*zoom + boxes[i]->position.x)) && ((c1->rect.y == boxes[i]->position.y))) {//Caja a la izquierda
+				
+
+				int zoom = boxes[i]->zoom;
+
+
+				if (c2 == boxes[i]->GetLateralColliderBR()) {
+					if ((c1->rect.x == c2->rect.x && c1->rect.y == c2->rect.y)) {
 						boxes[i]->isStoppedR = true;
-						//boxes[i]->isStoppedL = false; 
 					}
-					if ((c1->rect.x + 24*zoom == boxes[i]->position.x) && ((c1->rect.y == boxes[i]->position.y))) {//Caja a la derecha
+					else {
+						boxes[i]->isStoppedR = false;
+					}
+				}
+
+				if (c2 == boxes[i]->GetLateralColliderBL()) {
+					if ((c1->rect.x == c2->rect.x && c1->rect.y == c2->rect.y)) {
 						boxes[i]->isStoppedL = true;
-						//boxes[i]->isStoppedR = false;
 					}
-					if ((c1->rect.x == boxes[i]->position.x) && ((c1->rect.y +24*zoom ==  boxes[i]->position.y))) {//Caja abajo
-						boxes[i]->isStoppedU = true;
-						//boxes[i]->isStoppedD = false;
+					else {
+						boxes[i]->isStoppedL = false;
 					}
-					if ((c1->rect.x == boxes[i]->position.x) && ((c1->rect.y == 24*zoom + boxes[i]->position.y))) {//Caja arriba
+				}
+
+				if (c2 == boxes[i]->GetLateralColliderBU()) {
+					if ((c1->rect.x == c2->rect.x && c1->rect.y == c2->rect.y)) {
+						boxes[i]->isStoppedU= true;
+					}
+					else {
+						boxes[i]->isStoppedU = false;
+					}
+				}
+
+				if (c2 == boxes[i]->GetLateralColliderBD()) {
+					if ((c1->rect.x == c2->rect.x && c1->rect.y == c2->rect.y)) {
 						boxes[i]->isStoppedD = true;
-						//boxes[i]->isStoppedU = false;
 					}
+					else {
+						boxes[i]->isStoppedD = false;
+					}
+				}
+
+				/*
+				if ((c1->rect.x == c2->rect.x && c1->rect.y == c2->rect.y)|| 
+					(c1->rect.x + 1*zoom == c2->rect.x && c1->rect.y == c2->rect.y) ||
+					(c1->rect.x + 2 * zoom == c2->rect.x && c1->rect.y == c2->rect.y) ||
+					(c1->rect.x  == c2->rect.x + 1 * zoom && c1->rect.y == c2->rect.y) ||
+					(c1->rect.x  == c2->rect.x + 2 * zoom && c1->rect.y == c2->rect.y)||
+						(c1->rect.x  == c2->rect.x && c1->rect.y + 1 * zoom == c2->rect.y) ||
+						(c1->rect.x == c2->rect.x && c1->rect.y + 2 * zoom == c2->rect.y) ||
+						(c1->rect.x == c2->rect.x  && c1->rect.y == c2->rect.y + 1 * zoom) ||
+						(c1->rect.x == c2->rect.x  && c1->rect.y == c2->rect.y + 2 * zoom)) {
+					*/
+				/**/
+				if ((c1->rect.x == c2->rect.x && c1->rect.y == c2->rect.y)){
 
 					
-					break;
+					
+					//if (((c1->rect.x >=  boxes[i]->position.x)) && ((c1->rect.y == boxes[i]->position.y))) {//Caja a la izquierda
+				//		boxes[i]->isStoppedR = true;
+						//boxes[i]->isStoppedL = false; 
+					//}
+					//else {
+						//boxes[i]->isStoppedR = false;
+				//	}
+					if ((c1->rect.x < boxes[i]->position.x) && ((c1->rect.y == boxes[i]->position.y))) {//Caja a la derecha
+						//boxes[i]->isStoppedL = true;
+						//boxes[i]->isStoppedR = false;
+					}
+					else {
+						//boxes[i]->isStoppedL = false;
+					}
+					if ((c1->rect.x == boxes[i]->position.x) && ((c1->rect.y < boxes[i]->position.y))) {//Caja abajo
+						//boxes[i]->isStoppedU = true;
+						//boxes[i]->isStoppedD = false;
+					}
+					else {
+						//boxes[i]->isStoppedU = false;
+					}
+					if ((c1->rect.x == boxes[i]->position.x) && ((c1->rect.y > boxes[i]->position.y))) {//Caja arriba
+						//boxes[i]->isStoppedD = true;
+						//boxes[i]->isStoppedU = false;
+					}
+					else {
+						//boxes[i]->isStoppedD = false;
+					}
+					//break;
 				}
 				else {
-					//boxes[i]->Stop('N'); //Notify the enemy of a collision
+					//boxes[i]->isStoppedR = false;
+				//	boxes[i]->isStoppedL = false;
+				//	boxes[i]->isStoppedU = false;
+					//boxes[i]->isStoppedD = false;
+				//	boxes[i]->Stop('N'); //Notify the enemy of a collision
 					boxes[i]->OnCollision(c1); //Notify the enemy of a collision
 				}
 			}
@@ -307,6 +376,52 @@ void ModuleBoxes::OnCollision(Collider* c1, Collider* c2)
 			if (boxes[i] != nullptr && (boxes[i]->GetLateralColliderBR() == c2 || boxes[i]->GetLateralColliderBL() == c2 ||
 				boxes[i]->GetLateralColliderBU() == c2 || boxes[i]->GetLateralColliderBD() == c2))
 			{
+				
+				int zoom = boxes[i]->zoom;
+
+				if (c2 == boxes[i]->GetLateralColliderBR()) {
+					//if (((c1->rect.x == c2->rect.x + zoom)||(c1->rect.x == c2->rect.x)) && c1->rect.y == c2->rect.y) {
+					if(c1->rect.x >= c2->rect.x  && c1->rect.y == c2->rect.y) {
+						boxes[i]->isStoppedR = true;
+					}
+					else {
+						boxes[i]->isStoppedR = false;
+					}
+				}
+
+				if (c2 == boxes[i]->GetLateralColliderBL()) {
+					if (((c1->rect.x <= c2->rect.x) || (c1->rect.x == c2->rect.x)) && c1->rect.y == c2->rect.y) {
+						boxes[i]->isStoppedL = true;
+					}
+					else {
+						boxes[i]->isStoppedL = false;
+					}
+				}
+
+				if (c2 == boxes[i]->GetLateralColliderBU()) {
+					if ((c1->rect.x == c2->rect.x && c1->rect.y <= c2->rect.y)) {
+						boxes[i]->isStoppedU = true;
+					}
+					else {
+						boxes[i]->isStoppedU = false;
+					}
+				}
+
+				if (c2 == boxes[i]->GetLateralColliderBD()) {
+					if ((c1->rect.x == c2->rect.x && c1->rect.y >= c2->rect.y)) {
+						boxes[i]->isStoppedD = true;
+					}
+					else {
+						boxes[i]->isStoppedD = false;
+					}
+				}
+				
+				/*
+
+
+
+
+
 				if (c1->rect.x == c2->rect.x && c1->rect.y == c2->rect.y) {
 					int zoom = boxes[i]->zoom;
 					if ((c1->rect.x == 24*zoom + boxes[i]->position.x) && ((c1->rect.y == boxes[i]->position.y))) {//Caja a la izquierda
@@ -361,7 +476,7 @@ void ModuleBoxes::OnCollision(Collider* c1, Collider* c2)
 						boxes[i]->isStoppedL = false;
 						boxes[i]->isStoppedR = false;
 					}
-				}
+				}*/
 			}
 
 		}
@@ -377,6 +492,231 @@ void ModuleBoxes::OnCollision(Collider* c1, Collider* c2)
 
 				///////CON MARGEN
 				int zoom = boxes[i]->zoom;
+/*
+				if (c2 == App->player->colliderL) {
+					if (c1->rect.x + zoom == c2->rect.x  && c1->rect.y == c2->rect.y) {
+						App->player->isPushingL = true;
+					}
+					else {
+						App->player->isPushingL = false;
+					}
+					
+				}
+
+
+				if (c2 == App->player->colliderR) {
+					if (c1->rect.x == c2->rect.x + zoom && c1->rect.y == c2->rect.y) {
+						App->player->isPushingR = true;
+					}
+					else {
+						App->player->isPushingR = false;
+					}
+				}
+
+				if (c2 == App->player->colliderU) {
+					if (c1->rect.x == c2->rect.x && c1->rect.y + zoom == c2->rect.y) {
+						App->player->isPushingU = true;
+					}
+					else {
+						App->player->isPushingU = false;
+					}
+				}
+
+				if (c2 == App->player->colliderD) {
+					if (c1->rect.x == c2->rect.x && c1->rect.y == c2->rect.y + zoom) {
+						App->player->isPushingD = true;
+					}
+					else {
+						App->player->isPushingD = false;
+					}
+				}
+				*/
+				/*
+				if (App->player->collider->rect.y == colliderBR->rect.y && (App->player->collider->rect.x >= colliderBR->rect.x)) {
+
+					inContactR = true;
+					inContactL = false;
+					inContactU = false;
+					inContactD = false;
+
+
+				}
+				else if (App->player->collider->rect.y == colliderBL->rect.y && (App->player->collider->rect.x <= colliderBL->rect.x)) {
+
+					inContactR = false;
+					inContactL = true;
+					inContactU = false;
+					inContactD = false;
+
+				}
+				else if (App->player->collider->rect.x == colliderBU->rect.x && (App->player->collider->rect.y <= colliderBU->rect.y)) {
+
+					inContactR = false;
+					inContactL = false;
+					inContactU = true;
+					inContactD = false;
+				}
+				else if (App->player->collider->rect.x == colliderBD->rect.x && (App->player->collider->rect.y >= colliderBD->rect.y)) {
+					inContactR = false;
+					inContactL = false;
+					inContactU = false;
+					inContactD = true;
+				}
+				else {
+					inContactR = false;
+					inContactL = false;
+					inContactU = false;
+					inContactD = false;
+				}
+				*/
+				if (c2 == App->player->colliderL) {
+					if (c1->rect.x == c2->rect.x && c1->rect.y == c2->rect.y) {
+						App->player->inContactL = true;
+						//boxes[i]->inContactL = false;
+						//boxes[i]->inContactR = true;
+						//boxes[i]->inContactU = false;
+						//boxes[i]->inContactD = false;
+					}
+					else {
+						App->player->inContactL = false;
+						//boxes[i]->inContactL = false;
+						//boxes[i]->inContactR = false;
+						//boxes[i]->inContactU = false;
+						//boxes[i]->inContactD = false;
+					}
+
+					if (c1->rect.x >= c2->rect.x && c1->rect.y == c2->rect.y) {
+						boxes[i]->inContactL = false;
+						boxes[i]->inContactR = true;
+						boxes[i]->inContactU = false;
+						boxes[i]->inContactD = false;
+
+					}
+					else {
+						boxes[i]->inContactL = false;
+						boxes[i]->inContactR = false;
+						boxes[i]->inContactU = false;
+						boxes[i]->inContactD = false;
+					}
+
+					if (boxes[i]->isStoppedL == true) {
+						App->player->isBlockedL = true;
+					}
+
+				}
+
+
+				if (c2 == App->player->colliderR) {
+					if (c1->rect.x == c2->rect.x  && c1->rect.y == c2->rect.y) {
+						App->player->inContactR = true;
+						//boxes[i]->inContactL = true;
+						//boxes[i]->inContactR = false;
+						////boxes[i]->inContactU = false;
+						boxes[i]->inContactD = false;
+					}
+					else {
+						App->player->inContactR = false;
+						//boxes[i]->inContactL = false;
+						//boxes[i]->inContactR = false;
+						//boxes[i]->inContactU = false;
+						//boxes[i]->inContactD = false;
+					}
+
+					if (c1->rect.x <= c2->rect.x && c1->rect.y == c2->rect.y) {
+						boxes[i]->inContactL = true;
+						boxes[i]->inContactR = false;
+						boxes[i]->inContactU = false;
+						boxes[i]->inContactD = false;
+
+					}
+					else {
+						boxes[i]->inContactL = false;
+						boxes[i]->inContactR = false;
+						boxes[i]->inContactU = false;
+						boxes[i]->inContactD = false;
+					}
+
+					if (boxes[i]->isStoppedR == true) {
+						App->player->isBlockedR = true;
+					}
+				}
+
+				if (c2 == App->player->colliderU) {
+					if (c1->rect.x == c2->rect.x && c1->rect.y  == c2->rect.y) {
+						App->player->inContactU = true;
+						//boxes[i]->inContactL = false;
+						//boxes[i]->inContactR = false;
+						//boxes[i]->inContactU = false;
+						//boxes[i]->inContactD = true;
+					}
+					else {
+						App->player->inContactU = false;
+						//boxes[i]->inContactL = false;
+						//boxes[i]->inContactR = false;
+						//boxes[i]->inContactU = false;
+						//boxes[i]->inContactD = false;
+					}
+
+					if (c1->rect.x == c2->rect.x && c1->rect.y >= c2->rect.y) {
+						boxes[i]->inContactL = false;
+						boxes[i]->inContactR = false;
+						boxes[i]->inContactU = false;
+						boxes[i]->inContactD = true;
+
+					}
+					else {
+						boxes[i]->inContactL = false;
+						boxes[i]->inContactR = false;
+						boxes[i]->inContactU = false;
+						boxes[i]->inContactD = false;
+					}
+
+					if (boxes[i]->isStoppedU == true) {
+						App->player->isBlockedU = true;
+					}
+				}
+
+				if (c2 == App->player->colliderD) {
+					if (c1->rect.x == c2->rect.x && c1->rect.y == c2->rect.y) {
+						App->player->inContactD = true;
+						//boxes[i]->inContactL = false;
+						//boxes[i]->inContactR = false;
+						//boxes[i]->inContactU = true;
+						//boxes[i]->inContactD = false;
+					}
+					else {
+						App->player->inContactD = false;
+						//boxes[i]->inContactL = false;
+						//boxes[i]->inContactR = false;
+						//boxes[i]->inContactU = false;
+						//boxes[i]->inContactD = false;
+					}
+
+					if (c1->rect.x == c2->rect.x && c1->rect.y <= c2->rect.y) {
+						boxes[i]->inContactL = false;
+						boxes[i]->inContactR = false;
+						boxes[i]->inContactU = true;
+						boxes[i]->inContactD = false;
+
+					}
+					else {
+						boxes[i]->inContactL = false;
+						boxes[i]->inContactR = false;
+						boxes[i]->inContactU = false;
+						boxes[i]->inContactD = false;
+					}
+
+					if (boxes[i]->isStoppedD == true) {
+						App->player->isBlockedD = true;
+					}
+
+
+				}
+
+
+
+
+				/*
 				if ((c1->rect.x == c2->rect.x && c1->rect.y == c2->rect.y)|| (c1->rect.x+1*zoom == c2->rect.x && c1->rect.y == c2->rect.y) ||(c1->rect.x == 1 * zoom +c2->rect.x && c1->rect.y == c2->rect.y)
 					||(c1->rect.x + 2 * zoom == c2->rect.x && c1->rect.y == c2->rect.y) || (c1->rect.x == 2 * zoom + c2->rect.x && c1->rect.y == c2->rect.y)||
 					(c1->rect.x == c2->rect.x && c1->rect.y +1 * zoom == c2->rect.y) || (c1->rect.x ==  c2->rect.x && c1->rect.y == 1 * zoom + c2->rect.y)||
@@ -419,7 +759,9 @@ void ModuleBoxes::OnCollision(Collider* c1, Collider* c2)
 					
 					break;
 				}
-				
+				*/
+
+
 				///////SIN TANTO MARGEN
 				/*
 				if ((c1->rect.x == c2->rect.x && c1->rect.y == c2->rect.y) ||

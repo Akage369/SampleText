@@ -51,7 +51,7 @@ public:
 	Collider* colliderBU = nullptr;
 	Collider* colliderBD = nullptr;
 
-	
+	bool canStart = false;
 	
 
 private:

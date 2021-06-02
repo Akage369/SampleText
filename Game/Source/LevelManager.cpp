@@ -55,7 +55,7 @@ Update_Status LevelManager::Update() {
 	if (App->input->keys[SDL_SCANCODE_F4] == KEY_DOWN) {
 		//App->lvlManage->max_steps = 0;
 		
-		App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneLevel_1, 90);
+		App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneLevel_1, 30);
 		
 		lvlChange(1, '-');
 		boxes_lvl = 0;
@@ -98,7 +98,7 @@ Update_Status LevelManager::Update() {
 		break;
 	case 1:
 		if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN) {
-			App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneLevel_1, 90);
+			App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneLevel_1, 30);
 			lvlChange(1, '+');
 			//boxes_lvl = 0;
 			//win = 0;
@@ -109,7 +109,7 @@ Update_Status LevelManager::Update() {
 		if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN) {
 			//App->lvlManage->lvlChange(1, '-');
 
-			App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneLevel_1, 90);
+			App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneLevel_1, 30);
 
 			boxes_lvl = 0;
 			//win = 0;

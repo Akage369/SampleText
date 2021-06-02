@@ -203,7 +203,8 @@ bool ModulePlayer::Start()
 		break;
 	}
 
-	spawn(lvl);
+
+	
 	 
 
 	//if (destroyed == true) {
@@ -221,12 +222,29 @@ bool ModulePlayer::Start()
 	colliderU = App->collisions->AddCollider({ position.x*zoom, (position.y-24)*zoom, 24*zoom, 24*zoom }, Collider::Type::TOUCH, this);
 	colliderD = App->collisions->AddCollider({ position.x*zoom, (position.y+24)*zoom, 24*zoom, 24*zoom }, Collider::Type::TOUCH, this);
 
+	spawn(lvl);
+
 	// TODO 0: Notice how a font is loaded and the meaning of all its arguments 
 	//char lookupTable[] = { "!  ,_./0123456789$;<&?abcdefghijklmnopqrstuvwxyz" };
 	//scoreFont = App->fonts->Load("Assets/Fonts/rtype_font.png", "! @,_./0123456789$;<&?abcdefghijklmnopqrstuvwxyz", 1);
 
 	// TODO 4: Try loading "rtype_font3.png" that has two rows to test if all calculations are correct
 	
+	isTouchingL = false;
+	isTouchingR = false;
+	isTouchingU = false;
+	isTouchingD = false;
+
+	inContactL = false;
+	inContactR = false;
+	inContactU = false;
+	inContactD = false;
+	
+
+	lastTime = SDL_GetTicks();
+	
+	 canStart = false;
+
 	return ret;
 }
 void ModulePlayer::walkx() {
@@ -273,6 +291,9 @@ void ModulePlayer::spawn(int lvl) {
 		break;
 
 	}*/
+
+	
+
 	switch (lvl) {
 	case 0:
 		position.x = 0;
@@ -307,10 +328,22 @@ void ModulePlayer::spawn(int lvl) {
 		break;
 
 	}
+
+	collider->SetPos(0,0);
+	colliderR->SetPos(0,0);
+	colliderL->SetPos(0, 0);
+	colliderU->SetPos(0, 0);
+	colliderD->SetPos(0, 0);
+
 }
 
 Update_Status ModulePlayer::Update()
 {
+
+	
+
+	currentTime = SDL_GetTicks();
+	
 	
 	score = App->lvlManage->boxes_lvl;
 	if (App->lvlManage->steps >= App->lvlManage->max_steps) {
@@ -320,357 +353,389 @@ Update_Status ModulePlayer::Update()
 
 	///////MOVIMIENTO CON SPRITES QUE NO SE PARAN AL DETENERSE
 	
-	if (countx < movx) {
-		countx += 1*zoom;
+	if ((currentTime > lastTime + delay)) {
 
-		if (isPushingR == true) {
-			currentAnimation = &pushRight;
+		if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_DOWN) || (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_DOWN)
+			|| (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_DOWN) || (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_DOWN))
+		{
+			canStart = true;
 		}
-		else {
-			currentAnimation = &walkRight;
-		}
-	}
-	else if (countx == movx) {
-		if (currentAnimation == &walkRight) {
-			walkRight.Reset();
-		}
-	}
 
+		if (countx < movx) {
+			countx += 1 * zoom;
 
-	if (countx > movx) {
-		countx-=1*zoom;
-		
-		if (isPushingL == true) {
-			currentAnimation = &pushLeft;
-		}
-		else {
-			currentAnimation = &walkLeft;
-		}
-	}
-	else if (countx == movx) {
-		if (currentAnimation == &walkLeft) {
-			walkLeft.Reset();
-		}
-	}
-
-	if (county < movy) {
-		county += 1*zoom;
-
-		if (isPushingD == true) {
-			currentAnimation = &pushDown;
-		}
-		else {
-			currentAnimation = &walkDown;
-		}
-	}
-	else if (county == movy) {
-		if (currentAnimation == &walkDown) {
-			walkDown.Reset();
-		}
-	}
-
-	if (county > movy) {
-		county -= 1*zoom;
-		if (isPushingU == true ) {
-			currentAnimation = &pushUp;
-		}
-		else {
-
-			currentAnimation = &walkUp;
-		}
-		
-	}
-	else if (county == movy) {
-		if (currentAnimation == &walkUp) {
-			walkUp.Reset();
-		}
-	}
-	
-
-	///////MOVIMIENTO CON SPRITES QUE SE PARAN AL DETENERSE BUG
-	/*
-	if (countx < movx) {
-		countx+=1;
-
-		if (isPushingR==true && countx<movx) {
-			currentAnimation = &pushRight;
-		}
-		else {
-			currentAnimation = &walkRight;
-		}
-	}
-	else if (countx == movx) {
-		if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_IDLE)
-			&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE)) {
-			if (currentAnimation == &walkRight) {
-				walkRight.Reset();
+			if (isPushingR == true) {
+				currentAnimation = &pushRight;
+			}
+			else {
+				currentAnimation = &walkRight;
 			}
 		}
-	}
 
-
-	if (countx > movx) {
-		countx-=1;
-
-		if (isPushingL == true && countx > movx) {
-			currentAnimation = &pushLeft;
-		}
-		else {
-			currentAnimation = &walkLeft;
-		}
-	}
-	else if (countx == movx) {
-		if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_IDLE)
-			&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE)) {
-			if (currentAnimation == &walkLeft) {
-
-				walkLeft.Reset();
-			}
-		}
-	}
-
-	if (county < movy) {
-		county += 1 ;
-
-		if (isPushingD == true ) {
-			currentAnimation = &pushDown;
-		}else{
-			currentAnimation = &walkDown;
-		}
-
-
-	}
-	else  if (countx == movx)
-	{
-		if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_IDLE)
-			&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE)) {
-			if (currentAnimation == &walkDown) {
-				walkDown.Reset();
-			}
-			
-		}
-		//if (currentAnimation == &walkDown) {
-
+		//else if (countx == movx) {
+		//	if (currentAnimation == &walkRight) {
+		//		walkRight.Reset();
+		//	}
 		//}
-	}
 
-	if (county > movy) {
-		county -= 1;
-		if (isPushingU == true && county > movy) {
-			currentAnimation = &pushUp;
-		}
-		else {
 
-			currentAnimation = &walkUp;
-		}
+		if (countx > movx) {
+			countx -= 1 * zoom;
 
-	}
-	else if (county == movy) {
-		if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_IDLE)
-			&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE)) {
-			if (currentAnimation == &walkUp) {
-
-				walkUp.Reset();
+			if (isPushingL == true) {
+				currentAnimation = &pushLeft;
+			}
+			else {
+				currentAnimation = &walkLeft;
 			}
 		}
-	}
-	*/
-	///////MOVIMIENTO CON SPRITES QUE SE PARAN AL DETENERSE
-	/*
-	if (countx < movx) {
-		countx += 1;
+		//else if (countx == movx) {
+		//	if (currentAnimation == &walkLeft) {
+		//		walkLeft.Reset();
+		//	}
+		//}
 
-		if (isPushingR == true && countx < movx) {
-			currentAnimation = &pushRight;
-		}
-		else {
-			currentAnimation = &walkRight;
-		}
-	}
-	
+		if (county < movy) {
+			county += 1 * zoom;
 
-
-	if (countx > movx) {
-		countx -= 1;
-
-		if (isPushingL == true && countx > movx) {
-			currentAnimation = &pushLeft;
-		}
-		else {
-			currentAnimation = &walkLeft;
-		}
-	}
-	
-
-	if (county < movy) {
-		county += 1;
-
-		if (isPushingD == true) {
-			currentAnimation = &pushDown;
-		}
-		else {
-			currentAnimation = &walkDown;
-		}
-
-
-	}
-	
-
-	if (county > movy) {
-		county -= 1;
-		if (isPushingU == true && county > movy) {
-			currentAnimation = &pushUp;
-		}
-		else {
-
-			currentAnimation = &walkUp;
-		}
-
-	}
-	
-	*/
-	if (!posInix) {
-		position.x = countx;
-		
-	}
-	if (!posIniy) {
-		position.y = county;
-
-	}
-
-	//if (App->input->keys[SDL_SCANCODE_R] == Key_State::KEY_DOWN) {
-	//	App->lvlManage->lvlChange(1,'+');
-	//}
-
-	frameStart = SDL_GetTicks();
-	frameTime = SDL_GetTicks() - frameStart;
-	
-	if (frameDelay > frameTime) {
-		SDL_Delay(frameDelay - frameTime);
-	}
-	// Moving the player with the camera scroll
-	//App->player->position.x += 1;
-	
-	//position.x = count;
-	if (App->lvlManage->win == 0) {
-		if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT) && (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_IDLE)
-			&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE))
-		{
-			if (isTouchingL == false && isBlockedL == false) {
-
-
-				if (movy == county) {
-					if (movx == countx) {
-						movx = position.x - 24*zoom;
-						App->lvlManage->steps++;
-					}
-					else {
-						if (countx - movx == 0) {
-							movx -= 24*zoom;
-							App->lvlManage->steps++;
-						}
-
-					}
-
-					walkx();
-
-				}
-
+			if (isPushingD == true) {
+				currentAnimation = &pushDown;
+			}
+			else {
+				currentAnimation = &walkDown;
 			}
 		}
+		//else if (county == movy) {
+		//	if (currentAnimation == &walkDown) {
+		//		walkDown.Reset();
+		//	}
+		//}
+
+		if (county > movy) {
+			county -= 1 * zoom;
+			if (isPushingU == true) {
+				currentAnimation = &pushUp;
+			}
+			else {
+
+				currentAnimation = &walkUp;
+			}
+
+		}
+		//else if (county == movy) {
+		//	if (currentAnimation == &walkUp) {
+		//		walkUp.Reset();
+		//	}
+		//}
 
 
+		///////MOVIMIENTO CON SPRITES QUE SE PARAN AL DETENERSE BUG
+		/*
+		if (countx < movx) {
+			countx+=1;
 
-		if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT)
-			&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE))
-		{
-			if (isTouchingR == false && isBlockedR == false) {
-				if (movy == county) {
-					if (movx == countx) {
-						movx = position.x + 24*zoom;
-						App->lvlManage->steps++;
-
-
-					}
-					else {
-						if (movx - countx == 0) {
-							movx += 24 * zoom;
-							App->lvlManage->steps++;
-						}
-
-					}
-					walkx();
+			if (isPushingR==true && countx<movx) {
+				currentAnimation = &pushRight;
+			}
+			else {
+				currentAnimation = &walkRight;
+			}
+		}
+		else if (countx == movx) {
+			if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_IDLE)
+				&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE)) {
+				if (currentAnimation == &walkRight) {
+					walkRight.Reset();
 				}
 			}
 		}
 
 
-		if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_IDLE)
-			&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE))
-		{
-			if (isTouchingD == false && isBlockedD == false) {
-				if (movx == countx) {
-					if (movy == county) {
-						movy = position.y + 24 * zoom;
-						App->lvlManage->steps++;
-					}
-					else {
-						if (movy - county == 0) {
-							movy += 24 * zoom;
-							App->lvlManage->steps++;
-						}
+		if (countx > movx) {
+			countx-=1;
 
-					}
-					walky();
+			if (isPushingL == true && countx > movx) {
+				currentAnimation = &pushLeft;
+			}
+			else {
+				currentAnimation = &walkLeft;
+			}
+		}
+		else if (countx == movx) {
+			if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_IDLE)
+				&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE)) {
+				if (currentAnimation == &walkLeft) {
 
+					walkLeft.Reset();
 				}
 			}
 		}
 
+		if (county < movy) {
+			county += 1 ;
 
-		if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_IDLE)
-			&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT))
+			if (isPushingD == true ) {
+				currentAnimation = &pushDown;
+			}else{
+				currentAnimation = &walkDown;
+			}
+
+
+		}
+		else  if (countx == movx)
 		{
-			if (isTouchingU == false && isBlockedU == false) {
-				if (movx == countx) {
-					if (movy == county) {
-						movy = position.y - 24 * zoom;
-						App->lvlManage->steps++;
-
-					}
-					else {
-						if (county - movy == 0) {
-							movy -= 24 * zoom;
-							App->lvlManage->steps++;
-						}
-
-					}
-
-					walky();
-
-
-
+			if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_IDLE)
+				&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE)) {
+				if (currentAnimation == &walkDown) {
+					walkDown.Reset();
 				}
 
+			}
+			//if (currentAnimation == &walkDown) {
+
+			//}
+		}
+
+		if (county > movy) {
+			county -= 1;
+			if (isPushingU == true && county > movy) {
+				currentAnimation = &pushUp;
+			}
+			else {
+
+				currentAnimation = &walkUp;
+			}
+
+		}
+		else if (county == movy) {
+			if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_IDLE)
+				&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE)) {
+				if (currentAnimation == &walkUp) {
+
+					walkUp.Reset();
+				}
+			}
+		}
+		*/
+		///////MOVIMIENTO CON SPRITES QUE SE PARAN AL DETENERSE
+		/*
+		if (countx < movx) {
+			countx += 1;
+
+			if (isPushingR == true && countx < movx) {
+				currentAnimation = &pushRight;
+			}
+			else {
+				currentAnimation = &walkRight;
+			}
+		}
 
 
 
+		if (countx > movx) {
+			countx -= 1;
+
+			if (isPushingL == true && countx > movx) {
+				currentAnimation = &pushLeft;
+			}
+			else {
+				currentAnimation = &walkLeft;
+			}
+		}
+
+
+		if (county < movy) {
+			county += 1;
+
+			if (isPushingD == true) {
+				currentAnimation = &pushDown;
+			}
+			else {
+				currentAnimation = &walkDown;
+			}
+
+
+		}
+
+
+		if (county > movy) {
+			county -= 1;
+			if (isPushingU == true && county > movy) {
+				currentAnimation = &pushUp;
+			}
+			else {
+
+				currentAnimation = &walkUp;
 			}
 
 		}
 
-	}
-	if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN)
-	{
-		//Particle* newParticle = App->particles->AddParticle(App->particles->laser, position.x + 20, position.y, Collider::Type::PLAYER_SHOT);
-		//newParticle->collider->AddListener(this);
-		//App->audio->PlayFx(laserFx);
-	}
+		*/
+		if (!posInix) {
+			position.x = countx;
 
-	if (countx == movx && county == movy)
+		}
+		if (!posIniy) {
+			position.y = county;
+
+		}
+
+		//if (App->input->keys[SDL_SCANCODE_R] == Key_State::KEY_DOWN) {
+		//	App->lvlManage->lvlChange(1,'+');
+		//}
+
+		frameStart = SDL_GetTicks();
+		frameTime = SDL_GetTicks() - frameStart;
+
+		if (frameDelay > frameTime) {
+			SDL_Delay(frameDelay - frameTime);
+		}
+		// Moving the player with the camera scroll
+		//App->player->position.x += 1;
+
+		//position.x = count;
+		if (App->lvlManage->win == 0) {
+			if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT) && (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_IDLE)
+				&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE) && canStart == true)
 			{
-		//if (isPushingD == false && isPushingL == false && isPushingR == false && isPushingU == false) {
-		
+				if (isTouchingL == false && isBlockedL == false) {
+
+					if (inContactL == true) {
+						isPushingL = true;
+					}
+
+					if (movy == county) {
+						if (movx == countx) {
+							movx = position.x - 24 * zoom;
+							App->lvlManage->steps++;
+						}
+						else {
+							if (countx - movx == 0) {
+								movx -= 24 * zoom;
+								App->lvlManage->steps++;
+							}
+
+						}
+
+						walkx();
+
+					}
+
+				}
+			}
+
+
+
+			if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT)
+				&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE) && canStart == true)
+			{
+				if (isTouchingR == false && isBlockedR == false) {
+
+					if (inContactR == true) {
+						isPushingR = true;
+					}
+
+					if (movy == county) {
+						if (movx == countx) {
+							movx = position.x + 24 * zoom;
+							App->lvlManage->steps++;
+
+
+						}
+						else {
+							if (movx - countx == 0) {
+								movx += 24 * zoom;
+								App->lvlManage->steps++;
+							}
+
+						}
+						walkx();
+					}
+				}
+			}
+
+
+			if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_IDLE)
+				&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE) && canStart == true)
+			{
+				if (isTouchingD == false && isBlockedD == false) {
+
+					if (inContactD == true) {
+						isPushingD = true;
+					}
+
+					if (movx == countx) {
+						if (movy == county) {
+							movy = position.y + 24 * zoom;
+							App->lvlManage->steps++;
+						}
+						else {
+							if (movy - county == 0) {
+								movy += 24 * zoom;
+								App->lvlManage->steps++;
+							}
+
+						}
+						walky();
+
+					}
+				}
+			}
+
+
+			if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_IDLE)
+				&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT)&& canStart==true)
+			{
+				if (isTouchingU == false && isBlockedU == false) {
+
+					if (inContactU == true) {
+						isPushingU = true;
+					}
+
+					if (movx == countx) {
+						if (movy == county) {
+							movy = position.y - 24 * zoom;
+							App->lvlManage->steps++;
+
+						}
+						else {
+							if (county - movy == 0) {
+								movy -= 24 * zoom;
+								App->lvlManage->steps++;
+							}
+
+						}
+
+						walky();
+
+
+
+					}
+
+
+
+
+				}
+
+			}
+
+		}
+		if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN)
+		{
+			//Particle* newParticle = App->particles->AddParticle(App->particles->laser, position.x + 20, position.y, Collider::Type::PLAYER_SHOT);
+			//newParticle->collider->AddListener(this);
+			//App->audio->PlayFx(laserFx);
+		}
+
+		if (countx == movx && county == movy)
+		{
+			//if (isPushingD == false && isPushingL == false && isPushingR == false && isPushingU == false) {
+
+			isPushingL = false;
+			isPushingR = false;
+			isPushingU = false;
+			isPushingD = false;
+
 			if (currentAnimation == &walkDown || currentAnimation == &pushDown) {
 				currentAnimation = &walkDown;
 				walkDown.Reset();
@@ -688,23 +753,26 @@ Update_Status ModulePlayer::Update()
 				currentAnimation = &walkRight;
 				walkRight.Reset();
 			}
-		
+
+		}
+
+		// If no up/down movement detected, set the current animation back to idle
+		///if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE
+			///&& App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE)
+		///	currentAnimation = &idleAnim;
+
+		collider->SetPos(position.x, position.y);
+
+		colliderR->SetPos(position.x + 24 * zoom, position.y);
+		colliderL->SetPos(position.x - 24 * zoom, position.y);
+		colliderU->SetPos(position.x, position.y - 24 * zoom);
+		colliderD->SetPos(position.x, position.y + 24 * zoom);
+
+
+		currentAnimation->Update();
 	}
+
 	
-	// If no up/down movement detected, set the current animation back to idle
-	///if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE
-		///&& App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE)
-	///	currentAnimation = &idleAnim;
-
-	collider->SetPos(position.x, position.y);
-
-	colliderR->SetPos(position.x+24 * zoom, position.y);
-	colliderL->SetPos(position.x-24 * zoom, position.y);
-	colliderU->SetPos(position.x, position.y-24 * zoom);
-	colliderD->SetPos(position.x, position.y+24 * zoom);
-	
-
-	currentAnimation->Update();
 
 	return Update_Status::UPDATE_CONTINUE;
 
@@ -727,10 +795,7 @@ Update_Status ModulePlayer::PostUpdate()
 	isTouchingU = false;
 	isTouchingD = false;
 
-	isPushingL = false;
-	isPushingR = false;
-	isPushingU = false;
-	isPushingD = false;
+	
 
 
 	

@@ -158,6 +158,8 @@ bool SceneLevel1::Start()
 	sprintf_s(stageText, 3, "%02d", lvl);
 	sprintf_s(limitText, 5, "%04d", App->lvlManage->max_steps);
 
+	
+
 	//App->lvlManage->max_steps = 90;
 	App->lvlManage->win = 0;
 	
@@ -166,6 +168,8 @@ bool SceneLevel1::Start()
 
 Update_Status SceneLevel1::Update()
 {
+
+	
 	/*
 	//App->render->camera.x += 3;
 	switch (App->lvlManage->Getlvl()) {

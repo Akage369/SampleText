@@ -87,19 +87,20 @@ void Box::BoxesQuit() {
 	}
 }
 
-void Box::OnCollision(Collider* collider)
+void Box::OnCollision(Collider* collisionWall)
 {
 	//App->particles->AddParticle(App->particles->explosion, position.x, position.y);
-	isStoppedD = false;
-	isStoppedU = false;
-	isStoppedL = false;
-	isStoppedR = false;
-
+	//isStoppedD = false;
+	//isStoppedU = false;
+	//isStoppedL = false;
+	//isStoppedR = false;
+	/*
 	if(position.x > collider->rect.x && position.y == collider->rect.y ){//&& App->player->isPushingL==true){ //Caja a la derecha
 		isStoppedL = true;
 	}
 
-	if (position.x < collider->rect.x && position.y == collider->rect.y ){//&& App->player->isPushingR == true) { //Caja a la izquierda
+	//if (((position.x == collider->rect.x)|| (position.x +1*zoom == collider->rect.x)|| (position.x + 2 * zoom == collider->rect.x)|| (position.x  == collider->rect.x + 1 * zoom) || (position.x == collider->rect.x + 2 * zoom)) && position.y == collider->rect.y ){//&& App->player->isPushingR == true) { //Caja a la izquierda
+	if (position.x < collider->rect.x && position.y == collider->rect.y){
 		isStoppedR = true;
 	}
 	
@@ -111,7 +112,78 @@ void Box::OnCollision(Collider* collider)
 		isStoppedD = true;
 
 	}
+	*/
 	
+	if (position.x > collisionWall->rect.x && position.y == collisionWall->rect.y) {//&& App->player->isPushingL==true){ //Caja a la derecha
+		isStoppedL = true;
+		
+		
+	}
+
+	if (position.x < collisionWall->rect.x && position.y == collisionWall->rect.y) {//&& App->player->isPushingR == true) { //Caja a la izquierda
+		isStoppedR = true;
+	
+		
+	}
+
+	if (position.x == collisionWall->rect.x && position.y > collisionWall->rect.y) {//&& App->player->isPushingU == true) { //Caja abajo
+		isStoppedU = true;
+		
+		
+	}
+
+	if (position.x == collisionWall->rect.x && position.y < collisionWall->rect.y) { //&& App->player->isPushingD == true) { //Caja arriba
+		isStoppedD = true;
+		
+
+	}
+	
+
+	/*
+	
+		if (collisionWall->rect.y == GetLateralColliderBR()->rect.y && (collisionWall->rect.x >= GetLateralColliderBR()->rect.x )) { //caja a la izquierda
+			isStoppedR = true;
+
+
+		}
+		else {
+			//isStoppedR = false;
+		}
+
+		if (collisionWall->rect.y == GetLateralColliderBL()->rect.y && (collisionWall->rect.x <= GetLateralColliderBL()->rect.x)){
+
+			isStoppedL = true;
+
+
+		}
+		else {
+			//isStoppedL = false;
+		}
+
+		if (collisionWall->rect.y <= GetLateralColliderBU()->rect.y && (collisionWall->rect.x == GetLateralColliderBU()->rect.x)) {
+
+			isStoppedU = true;
+
+
+		}
+		else {
+			//isStoppedU = false;
+		}
+		if (collisionWall->rect.y >= GetLateralColliderBD()->rect.y && (collisionWall->rect.x == GetLateralColliderBD()->rect.x)) {
+
+			isStoppedD = true;
+
+
+		}
+		else {
+			//isStoppedD = false;
+		}
+		
+	
+	*/
+
+
+
 	/*switch (dir) {
 	case 'R':
 		isStoppedR = true;

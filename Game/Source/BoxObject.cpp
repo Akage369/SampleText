@@ -54,6 +54,8 @@ Box_Obj::Box_Obj(int x, int y) : Box(x, y)
 	colliderBU = App->collisions->AddCollider({ position.x * zoom, (position.y - 24) * zoom, 24 * zoom, 24 * zoom }, Collider::Type::TOUCHB, (Module*)App->boxes);
 	colliderBD = App->collisions->AddCollider({ position.x * zoom, (position.y + 24) * zoom, 24 * zoom, 24 * zoom }, Collider::Type::TOUCHB, (Module*)App->boxes);
 
+	canStart = false;
+
 }
 
 Collider* Box_Obj::GetLateralColliderBR(){
@@ -70,6 +72,7 @@ Collider* Box_Obj::GetLateralColliderBD() {
 }
 
 void Box_Obj::Stop(char dir) {
+	/*
 	switch (dir) {
 	case'R':
 		isStoppedR = true;
@@ -92,6 +95,7 @@ void Box_Obj::Stop(char dir) {
 		isStoppedD = false;
 		break;
 	}
+	*/
 }
 
 void Box_Obj::walkx() {
@@ -116,6 +120,12 @@ void Box_Obj::walky() {
 void Box_Obj::Update()
 {
 
+	if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_DOWN) || (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_DOWN)
+		|| (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_DOWN) || (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_DOWN))
+	{
+		canStart = true;
+	}
+
 	//if (boxready == true) {
 	//	currentAnim = &boxready;
 		//boxpath.Update();
@@ -128,6 +138,8 @@ void Box_Obj::Update()
 
 	//}
 	///////////////el que va mejor
+
+	/*
 	if ( App->player->collider->rect.y == colliderBR->rect.y && (App->player->collider->rect.x == colliderBR->rect.x || App->player->collider->rect.x + zoom == colliderBR->rect.x ) ){
 		
 		inContactR = true;
@@ -164,7 +176,46 @@ void Box_Obj::Update()
 		inContactU = false;
 		inContactD = false;
 	}
-	
+	*/
+	/*
+	if (App->player->collider->rect.y == colliderBR->rect.y && (App->player->collider->rect.x >= colliderBR->rect.x )) {
+
+		inContactR = true;
+		inContactL = false;
+		inContactU = false;
+		inContactD = false;
+
+
+	}
+	else if (App->player->collider->rect.y == colliderBL->rect.y && (App->player->collider->rect.x <= colliderBL->rect.x )) {
+
+		inContactR = false;
+		inContactL = true;
+		inContactU = false;
+		inContactD = false;
+
+	}
+	else if (App->player->collider->rect.x == colliderBU->rect.x && (App->player->collider->rect.y <= colliderBU->rect.y )) {
+
+		inContactR = false;
+		inContactL = false;
+		inContactU = true;
+		inContactD = false;
+	}
+	else if (App->player->collider->rect.x == colliderBD->rect.x && (App->player->collider->rect.y >= colliderBD->rect.y)) {
+		inContactR = false;
+		inContactL = false;
+		inContactU = false;
+		inContactD = true;
+	}
+	else {
+		inContactR = false;
+		inContactL = false;
+		inContactU = false;
+		inContactD = false;
+	}
+	*/
+
 	/* ////////////Original de colisiones
 	if ( App->player->collider->rect.y == colliderBR->rect.y && (App->player->collider->rect.x == colliderBR->rect.x || 
 		App->player->collider->rect.x + 1 == colliderBR->rect.x ||  App->player->collider->rect.x  == 1+ colliderBR->rect.x||
@@ -312,7 +363,7 @@ void Box_Obj::Update()
 
 		//position.x = count;
 		if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT) && (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_IDLE)
-			&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE))
+			&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE)&& canStart==true)
 		{
 
 			if (inContactR==true && isStoppedL==false) {
@@ -339,7 +390,7 @@ void Box_Obj::Update()
 		}
 
 		if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT)
-			&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE))
+			&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE) && canStart == true)
 		{
 			if (inContactL == true && isStoppedR == false) {
 				if (movy == county) {
@@ -363,7 +414,7 @@ void Box_Obj::Update()
 		}
 
 		if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_IDLE)
-			&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE))
+			&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE) && canStart == true)
 		{
 			if (inContactU == true && isStoppedD == false) {
 				if (movx == countx) {
@@ -388,7 +439,7 @@ void Box_Obj::Update()
 		}
 
 		if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_IDLE)
-			&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT))
+			&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT) && canStart == true)
 		{
 			if (inContactD == true && isStoppedU == false) {
 				if (movx == countx) {
@@ -432,6 +483,11 @@ void Box_Obj::Update()
 	colliderBL->SetPos(position.x - 24 * zoom, position.y);
 	colliderBU->SetPos(position.x, position.y - 24 * zoom);
 	colliderBD->SetPos(position.x, position.y + 24 * zoom);
+
+	//isStoppedR = false;
+	//isStoppedL = false;
+	//isStoppedU = false;
+	//isStoppedD = false;
 
 	
 Box::Update();

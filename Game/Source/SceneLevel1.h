@@ -65,6 +65,7 @@ public:
 	iPoint positionUI;
 
 	Collider* colliderUI = nullptr;
+
 };
 
 #endif

@@ -108,9 +108,24 @@ public:
 	bool isBlockedU = false;
 	bool isBlockedD = false;
 
+	bool inContactR = false;
+	bool inContactL = false;
+	bool inContactU = false;
+	bool inContactD = false;
+
+
+
+	bool canStart = false;
+
 	int zoom;
 
 	int lvl;
+
+	unsigned int currentTime;
+
+	unsigned int lastTime = 0;
+
+	int delay = 300;
 };
 
 #endif //!__MODULE_PLAYER_H__
