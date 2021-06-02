@@ -1,19 +1,19 @@
-#ifndef __PACK_IN_VIDEO_H__
-#define __PACK_IN_VIDEO_H__
+#ifndef __LEVEL_MENU_H__
+#define __LEVEL_MENU_H__
 
 #include "Module.h"
 #include "Animation.h"
 
 struct SDL_Texture;
 
-class PackInVideo : public Module
+class LevelMenu : public Module
 {
 public:
 	//Constructor
-	PackInVideo(bool startEnabled);
+	LevelMenu(bool startEnabled);
 
 	//Destructor
-	~PackInVideo();
+	~LevelMenu();
 
 	// Called when the module is activated
 	// Loads the necessary textures for the map background
@@ -30,13 +30,8 @@ public:
 public:
 	// The scene sprite sheet loaded into an SDL_Texture
 	SDL_Texture* bgTexture = nullptr;
-
 	SDL_Texture* bgTexto = nullptr;
-
-	SDL_Rect rect = { 2, 372, 164, 107 };
-	int zoom=3;
 };
 
-#endif 
-
+#endif
 

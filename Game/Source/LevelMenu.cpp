@@ -1,5 +1,5 @@
 #include "SceneIntro.h"
-#include "Presentacion.h"
+#include "Presentation.h"
 #include "Application.h"
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
@@ -8,28 +8,29 @@
 #include "ModuleFadeToBlack.h"
 #include "ModulePlayer.h"
 #include "LevelManager.h"
-#include "Presentacion.h"
+#include "LevelMenu.h"
+#include "Pointer.h"
 
-Presentacion::Presentacion(bool startEnabled) : Module(startEnabled)
+LevelMenu::LevelMenu(bool startEnabled) : Module(startEnabled)
 {
 
 }
 
-Presentacion::~Presentacion()
+LevelMenu::~LevelMenu()
 {
 
 }
 
 // Load assets
-bool Presentacion::Start()
+bool LevelMenu::Start()
 {
 
 	LOG("Loading background assets");
 
 	bool ret = true;
+	App->pointer->Enable();
+	bgTexture = App->textures->Load("Assets/Textures/menuSoukoban.png");
 
-	bgTexture = App->textures->Load("Assets/Textures/presentacion.png");
-	//bgTexto = App->textures->Load("Assets/Textures/spritesheet_intro_texto.png");
 	//App->audio->PlayMusic("Assets/Audio/Music/introTitle.ogg", 1.0f);
 
 	App->render->camera.x = 0;
@@ -38,26 +39,30 @@ bool Presentacion::Start()
 	return ret;
 }
 
-Update_Status Presentacion::Update()
+Update_Status LevelMenu::Update()
 {
 	if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN)
 	{
 
+		App->fade->FadeToBlack(this, (Module*)App->sceneLevel_1, 20);
+		App->pointer->Disable();
 
-		App->fade->FadeToBlack(this, (Module*)App->packInVideo, 20);
 		//lvl++;
 		//App->player->spawn(lvl);
+		App->lvlManage->lvlChange(1, '+');
 	}
 
 	return Update_Status::UPDATE_CONTINUE;
 }
 
 // Update: draw background
-Update_Status Presentacion::PostUpdate()
+Update_Status LevelMenu::PostUpdate()
 {
 	// Draw everything --------------------------------------
 	App->render->Blit(bgTexture, 0, 0, NULL);
-	App->render->Blit(bgTexto, 15, 50, NULL);
+	/*App->render->Blit(bgTexture, 256, 0, NULL);
+	App->render->Blit(bgTexture, 512, 0, NULL);
+	App->render->Blit(bgTexto, 140, 125, NULL);*/
 
 	return Update_Status::UPDATE_CONTINUE;
 }

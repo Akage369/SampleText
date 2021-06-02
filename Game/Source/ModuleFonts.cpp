@@ -85,21 +85,23 @@ void ModuleFonts::UnLoad(int font_id)
 	}
 }
 
-void ModuleFonts::BlitText(int x, int y, int font_id, const char* text) const
+void ModuleFonts::BlitText(int x, int y, int font_id, const char* text, int zoom, int r, int g, int b, int max, int down) const
 {
 	if (text == nullptr || font_id < 0 || font_id >= MAX_FONTS || fonts[font_id].texture == nullptr)
 	{
 		LOG("Unable to render text with bmp font id %d", font_id);
 		return;
 	}
-
+	int x0 = x;
+	int y0 = y;
 
 	const Font* font = &fonts[font_id];
 	SDL_Rect spriteRect;
+	//SDL_Rect fontRect{ 79, 1, 24, 24 };
 	uint len = strlen(text);
 
-	spriteRect.w = font->char_w;
-	spriteRect.h = font->char_h;
+	spriteRect.w = 9;//*zoom;//font->char_w;
+	spriteRect.h = 8;// *zoom;// font->char_h;
 
 	for (uint i = 0; i < len; ++i)
 	{
@@ -118,11 +120,36 @@ void ModuleFonts::BlitText(int x, int y, int font_id, const char* text) const
 
 		// Retrieve the position of the current character in the sprite
 		spriteRect.x = spriteRect.w * (charIndex % font->columns);
-		spriteRect.y = spriteRect.h * (charIndex / font->columns);
+		spriteRect.y = 348;//spriteRect.h * (charIndex / font->columns);
 
-		App->render->Blit(font->texture, x, y, &spriteRect, 0.0f, false);
+		if( text[i] == '|') {
+			x = x0;
+			y += spriteRect.h * zoom + zoom * down;
+		}else if (text[i] == 'I') {
+			App->render->Blit(font->texture, x -2*zoom+zoom, y + zoom, &spriteRect, 0.0f, false, zoom,  r,  g,  b);
+			x += spriteRect.w * zoom - zoom-5*zoom;
+		}
+		else if(text[i]=='T'){
+			App->render->Blit(font->texture, x + zoom, y + zoom, &spriteRect, 0.0f, false, zoom,  r,  g,  b);
+			x += spriteRect.w * zoom - 2*zoom;
+		}
+		//else if (text[i] == ('0'||'1'||'2' || '3' || '4' || '5' || '6' || '7' || '8' || '9' )) {
+		else if (text[i] == '0'|| text[i] == '1' || text[i] == '2' || text[i] == '3' || text[i] == '4' || text[i] == '5' || text[i] == '6' || text[i] == '7' || text[i] == '8' || text[i] == '9' ) {
+			App->render->Blit(font->texture, x + zoom, y + zoom, &spriteRect, 0.0f, false, zoom,  r,  g,  b);
+			x += spriteRect.w * zoom - 2*zoom;
+		}
+		else {
+			App->render->Blit(font->texture, x + zoom, y + zoom, &spriteRect, 0.0f, false, zoom,  r,  g,  b);
+			x += spriteRect.w * zoom - zoom;
+		}
 
+		if (x > max) {
+			x = x0;
+			y += spriteRect.h * zoom + zoom*down;
+		}
+
+		
 		// Advance the position where we blit the next character
-		x += spriteRect.w;
+		
 	}
 }

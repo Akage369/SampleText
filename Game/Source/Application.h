@@ -3,7 +3,7 @@
 
 #include "Globals.h"
 
-#define NUM_MODULES 18
+#define NUM_MODULES 20
 
 class Module;
 class ModuleWindow;
@@ -22,8 +22,10 @@ class ModuleRender;
 class Tiles;
 class LevelManager;
 class ModuleBoxes;
-class Presentacion;
+class Presentation;
 class PackInVideo;
+class LevelMenu;
+class Pointer;
 
 class Application
 {
@@ -58,9 +60,12 @@ public:
 	ModulePlayer* player = nullptr;
 
 	PackInVideo* packInVideo = nullptr;
-	Presentacion* presentacion = nullptr;
+	Presentation* presentation = nullptr;
 	SceneIntro* sceneIntro = nullptr;
 	SceneLevel1* sceneLevel_1 = nullptr;
+
+	LevelMenu* levelMenu = nullptr;
+	Pointer* pointer = nullptr;
 
 	ModuleEnemies* enemies = nullptr;
 	ModuleParticles* particles = nullptr;

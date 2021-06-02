@@ -90,33 +90,25 @@ void Box::BoxesQuit() {
 void Box::OnCollision(Collider* collider)
 {
 	//App->particles->AddParticle(App->particles->explosion, position.x, position.y);
-	
+	isStoppedD = false;
+	isStoppedU = false;
+	isStoppedL = false;
+	isStoppedR = false;
+
 	if(position.x > collider->rect.x && position.y == collider->rect.y ){//&& App->player->isPushingL==true){ //Caja a la derecha
 		isStoppedL = true;
-		isStoppedR = false;
-		isStoppedD = false;
-		isStoppedU = false;
 	}
 
 	if (position.x < collider->rect.x && position.y == collider->rect.y ){//&& App->player->isPushingR == true) { //Caja a la izquierda
 		isStoppedR = true;
-		isStoppedL = false;
-		isStoppedD = false;
-		isStoppedU = false;
 	}
 	
 	if (position.x == collider->rect.x && position.y > collider->rect.y ){//&& App->player->isPushingU == true) { //Caja abajo
 		isStoppedU = true;
-		isStoppedD = false;
-		isStoppedL = false;
-		isStoppedR = false;
 	}
 	
 	if (position.x == collider->rect.x && position.y < collider->rect.y){ //&& App->player->isPushingD == true) { //Caja arriba
 		isStoppedD = true;
-		isStoppedU = false;
-		isStoppedL = false;
-		isStoppedR = false;
 
 	}
 	

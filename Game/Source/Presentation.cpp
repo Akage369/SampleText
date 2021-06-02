@@ -1,6 +1,4 @@
 #include "SceneIntro.h"
-#include "PackInVideo.h"
-#include "Presentation.h"
 #include "Application.h"
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
@@ -9,26 +7,27 @@
 #include "ModuleFadeToBlack.h"
 #include "ModulePlayer.h"
 #include "LevelManager.h"
+#include "Presentation.h"
 
-PackInVideo::PackInVideo(bool startEnabled) : Module(startEnabled)
+Presentation::Presentation(bool startEnabled) : Module(startEnabled)
 {
 
 }
 
-PackInVideo::~PackInVideo()
+Presentation::~Presentation()
 {
 
 }
 
 // Load assets
-bool PackInVideo::Start()
+bool Presentation::Start()
 {
 
 	LOG("Loading background assets");
 
 	bool ret = true;
 
-	bgTexture = App->textures->Load("Assets/Textures/spritesheet_menus.png");
+	bgTexture = App->textures->Load("Assets/Textures/presentacion.png");
 	//bgTexto = App->textures->Load("Assets/Textures/spritesheet_intro_texto.png");
 	//App->audio->PlayMusic("Assets/Audio/Music/introTitle.ogg", 1.0f);
 
@@ -38,13 +37,13 @@ bool PackInVideo::Start()
 	return ret;
 }
 
-Update_Status PackInVideo::Update()
+Update_Status Presentation::Update()
 {
 	if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN)
 	{
 
 
-		App->fade->FadeToBlack(this, (Module*)App->sceneIntro, 20);
+		App->fade->FadeToBlack(this, (Module*)App->packInVideo, 20);
 		//lvl++;
 		//App->player->spawn(lvl);
 	}
@@ -53,11 +52,11 @@ Update_Status PackInVideo::Update()
 }
 
 // Update: draw background
-Update_Status PackInVideo::PostUpdate()
+Update_Status Presentation::PostUpdate()
 {
 	// Draw everything --------------------------------------
-	App->render->Blit(bgTexture, (SCREEN_WIDTH - rect.w *zoom)/2, (SCREEN_HEIGHT- rect.h *zoom)/2,&rect, 1.0f, true, zoom);
-	//App->render->Blit(bgTexto, 15, 50, NULL);
+	App->render->Blit(bgTexture, 0, 0, NULL);
+	App->render->Blit(bgTexto, 15, 50, NULL);
 
 	return Update_Status::UPDATE_CONTINUE;
 }

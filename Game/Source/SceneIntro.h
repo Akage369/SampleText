@@ -34,15 +34,21 @@ public:
 	SDL_Texture* puntero = nullptr;
 	SDL_Texture* scroller1 = nullptr;
 	SDL_Texture* scroller2 = nullptr;
-	int scrollerY = 0;
-	int scroller2Y = -512;
+	SDL_Texture* introMenu = nullptr;
+	int scrollerY;
+	int scroller2Y;
+	int scroller3Y;
 	SDL_Texture* BoxMenu = nullptr;
 
 	int p_x = 155;
 	int p_y = 145;
 
 	SDL_Rect p_pos;
-
+	SDL_Rect scrollers = { 1,631,256,520 };
+	SDL_Rect title = { 1,499,215,130 };
+	SDL_Rect copyright = { 259, 1083, 245, 16 };
+	SDL_Rect options = { 273, 84, 112, 47 };
+	
 	Animation intro;
 
 	int menuFont = -1;
@@ -59,6 +65,16 @@ public:
 	uint backFx = 0;
 
 	bool nextScene;
+
+	int titleY;
+
+	unsigned int currentTime;
+
+	unsigned int lastTime = 0;
+
+	int delay = 1000;
+
+	int optFont = -1;
 };
 
 #endif

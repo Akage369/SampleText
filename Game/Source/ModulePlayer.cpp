@@ -158,9 +158,11 @@ bool ModulePlayer::Start()
 
 	bool ret = true;
 	///Lookup table
-	char lookupTable[] = { "! @,_./0123456789$;< ?abcdefghijklmnopqrstuvwxyz" };
-	
-	scoreFont = App->fonts->Load("Assets/Textures/rtype_font3.png", lookupTable, 2);
+	//char lookupTable[] = { "! @,_./0123456789$;< ?abcdefghijklmnopqrstuvwxyz" };
+	///char lookupTableChars[] = {"ABCDEFGHIJKLMNOPQRSTUVWXYZ.-?!0123456789@ "};
+	//scoreFont = App->fonts->Load("Assets/Textures/rtype_font3.png", lookupTable, 2);
+	///scoreFont = App->fonts->Load("Assets/Textures/spritesheet_menus.png", lookupTableChars, 1 );
+	//scoreFont = App->fonts->Load("Assets/Textures/spritesheet_menus.png", lookupTable, 2);
 	
 
 	texture = App->textures->Load("Assets/Textures/spritesheet_player.png");
@@ -173,12 +175,34 @@ bool ModulePlayer::Start()
 	posIniy = true;
  
 	lvl = App->lvlManage->Getlvl();
-	if (lvl == 1) {
+	//if (lvl == 1) {
+	//	zoom = 3;
+	//}
+	//else {
+	//	zoom = 1;
+	//}
+
+	switch (App->lvlManage->Getlvl()) {
+	case 1:
 		zoom = 3;
-	}
-	else {
+		break;
+	case 2:
+		zoom = 2;
+		break;
+	case 3:
 		zoom = 1;
+		break;
+	case 4:
+		zoom = 1;
+		break;
+	case 5:
+		zoom = 1;
+		break;
+	default:
+		zoom = 1;
+		break;
 	}
+
 	spawn(lvl);
 	 
 
@@ -222,7 +246,7 @@ void ModulePlayer::walky() {
 
 }
 void ModulePlayer::spawn(int lvl) {
-	
+	/*
 	switch (lvl) {
 	case 0:
 		position.x = 0;
@@ -242,6 +266,40 @@ void ModulePlayer::spawn(int lvl) {
 	case 3:
 		position.x = 384 + 10*24;
 		position.y = 240 + 8*24;
+		break;
+	default:
+		position.x = 0;
+		position.y = 0;
+		break;
+
+	}*/
+	switch (lvl) {
+	case 0:
+		position.x = 0;
+		position.y = 0;
+		break;
+	case 1:
+		//position.x = 96 + 10*24; //336
+		//position.y = 48 + 8*24; //240
+		position.x = -12 + 96 * zoom;  //336
+		position.y = -24 + 48 * zoom; //240
+
+		break;
+	case 2:
+		position.x = 72 * zoom;
+		position.y = 48 * zoom;
+		break;
+	case 3:
+		position.x = 504 * zoom;
+		position.y = 312 * zoom;
+		break;
+	case 4:
+		position.x = 360 * zoom;
+		position.y = 312 * zoom;
+		break;
+	case 5:
+		position.x = 48 * zoom;
+		position.y = 192 * zoom;
 		break;
 	default:
 		position.x = 0;
@@ -678,24 +736,24 @@ Update_Status ModulePlayer::PostUpdate()
 	
 
 	// Draw UI (score) --------------------------------------
-	sprintf_s(scoreText, 10, "%7d", App->lvlManage->steps);
+	//sprintf_s(scoreText, 10, "%7d", App->lvlManage->steps);
 
 
 	
 
 
 	// TODO 3: Blit the text of the score in at the bottom of the screen
-	App->fonts->BlitText(58, 248, scoreFont, scoreText);
+	//App->fonts->BlitText(58, 248, scoreFont, scoreText);
 
 	if (App->lvlManage->win == 0) {
-		App->fonts->BlitText(150, 248, scoreFont, " ");
+		//App->fonts->BlitText(10, 10, scoreFont, "ABCDEFGHIJKLMNOPQRSTUVWXY Z.-?!0123456789",3);
 	}
 	else if (App->lvlManage->win == 1) {
 		
-		App->fonts->BlitText(150, 248, scoreFont, "you win!");
+		//App->fonts->BlitText(150, 248, scoreFont, "you win!");
 	}
 	else if (App->lvlManage->win == 2) {
-		App->fonts->BlitText(150, 248, scoreFont, "you lose!");
+		//App->fonts->BlitText(150, 248, scoreFont, "you lose!");
 	}
 
 	

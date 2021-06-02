@@ -75,8 +75,8 @@ public:
 
 	// Font score index
 	int score = 000;
-	int scoreFont = -1;
-	char scoreText[10] = { "\0" };
+	//int scoreFont = -1;
+	//char scoreText[10] = { "\0" };
 
 	///frames
 	const int FPS = 60;

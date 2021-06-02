@@ -3,7 +3,7 @@
 
 #include "SDL/include/SDL_Rect.h"
 
-#define MAX_LISTENERS 5
+#define MAX_LISTENERS 10
 
 class Module;
 
@@ -18,6 +18,7 @@ struct Collider
 		BOX,
 		TOUCHB,
 		BALL,
+		UI,
 
 		MAX
 	};

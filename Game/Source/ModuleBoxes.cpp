@@ -237,7 +237,7 @@ void ModuleBoxes::OnCollision(Collider* c1, Collider* c2)
 			{
 				if (c1->rect.x == c2->rect.x && c1->rect.y == c2->rect.y) {
 					int zoom = boxes[i]->zoom;
-					if ((c1->rect.x == 24*zoom + boxes[i]->position.x) && ((c1->rect.y == boxes[i]->position.y))) {//Caja a la izquierda
+					if (((c1->rect.x == 24*zoom + boxes[i]->position.x)) && ((c1->rect.y == boxes[i]->position.y))) {//Caja a la izquierda
 						boxes[i]->isStoppedR = true;
 						//boxes[i]->isStoppedL = false; 
 					}

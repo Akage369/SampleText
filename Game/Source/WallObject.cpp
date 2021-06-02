@@ -15,12 +15,33 @@
 Wall_Obj::Wall_Obj(int x, int y) : Box(x, y)
 {
 
-	if (App->lvlManage->Getlvl() == 1) {
+	//if (App->lvlManage->Getlvl() == 1) {
+	//	zoom = 3;
+	//}
+	//else {
+	//	zoom = 1;
+	//}
+	switch (App->lvlManage->Getlvl()) {
+	case 1:
 		zoom = 3;
-	}
-	else {
+		break;
+	case 2:
+		zoom = 2;
+		break;
+	case 3:
 		zoom = 1;
+		break;
+	case 4:
+		zoom = 1;
+		break;
+	case 5:
+		zoom = 1;
+		break;
+	default:
+		zoom = 1;
+		break;
 	}
+
 
 	//wallanim.PushBack({ 1,1,24,24 });
 	currentAnim = &wallanim;

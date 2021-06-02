@@ -5,7 +5,7 @@
 #include "LevelManager.h"
 #include "Application.h"
 
-#define MAX_BOXES 75
+#define MAX_BOXES 300
 
 enum class Box_Type {
 	NO_TYPE,

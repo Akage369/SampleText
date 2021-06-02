@@ -20,6 +20,7 @@ LevelManager::~LevelManager()
 
 void LevelManager::lvlChange(int change, char op)
 {
+	if(changeScene == true)
 	switch (op) {
 	case '=':
 		lvl = change;
@@ -33,6 +34,7 @@ void LevelManager::lvlChange(int change, char op)
 	default:
 		break;
 	}
+	changeScene = false;
 	
 }
 
@@ -156,13 +158,13 @@ void LevelManager::LevelComplete()
 
 		if (boxes_lvl == 3) {
 			win = 1;
-			if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN) {
-				App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneLevel_1, 90);
-				lvlChange(1, '+');
-				boxes_lvl = 0;
-				win = 0;
-				steps = 0;
-				}
+			//if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN) {
+			//	App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneLevel_1, 90);
+			//	lvlChange(1, '+');
+			//	boxes_lvl = 0;
+			//	win = 0;
+			//	steps = 0;
+			//	}
 			
 		}
 
@@ -171,26 +173,26 @@ void LevelManager::LevelComplete()
 	case 2:
 		if (boxes_lvl == 11) {
 			win = 1;
-			if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN) {
-				App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneLevel_1, 90);
-				lvlChange(1, '+');
-				boxes_lvl = 0;
-				win = 0;
-				steps = 0;
-			}
+			//if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN) {
+			//	App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneLevel_1, 90);
+			//	lvlChange(1, '+');
+			//	boxes_lvl = 0;
+			//	win = 0;
+			//	steps = 0;
+			//}
 		}
 		break;
 
 	case 3:
 		if (boxes_lvl == 12) {
 			win = 1;
-			if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN) {
-				App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneLevel_1, 90);
-				lvlChange(1, '+');
-				boxes_lvl = 0;
-				win = 0;
-				steps = 0;
-			}
+			//if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN) {
+			//	App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneLevel_1, 90);
+			//	lvlChange(1, '+');
+			//	boxes_lvl = 0;
+			//	win = 0;
+			//	steps = 0;
+			//}
 		}
 		break;
 	}

@@ -1,19 +1,19 @@
-#ifndef __PRESENTACION_H__
-#define __PRESENTACION_H__
+#ifndef __PRESENTATION_H__
+#define __PRESENTATION_H__
 
 #include "Module.h"
 #include "Animation.h"
 
 struct SDL_Texture;
 
-class Presentacion : public Module
+class Presentation : public Module
 {
 public:
 	//Constructor
-	Presentacion(bool startEnabled);
+	Presentation(bool startEnabled);
 
 	//Destructor
-	~Presentacion();
+	~Presentation();
 
 	// Called when the module is activated
 	// Loads the necessary textures for the map background

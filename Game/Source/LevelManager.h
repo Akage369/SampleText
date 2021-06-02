@@ -36,6 +36,8 @@ public:
 	int win =0;
 
 	int max_steps = 0;
+
+	bool changeScene = true;
 };
 
 #endif
