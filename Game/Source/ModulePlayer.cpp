@@ -186,17 +186,20 @@ bool ModulePlayer::Start()
 	case 1:
 		zoom = 3;
 		break;
-	case 2:
-		zoom = 2;
-		break;
 	case 3:
-		zoom = 1;
+		zoom = 2;
 		break;
 	case 4:
 		zoom = 1;
 		break;
 	case 5:
 		zoom = 1;
+		break;
+	case 6:
+		zoom = 1;
+		break;
+	case 2:
+		zoom = 2;
 		break;
 	default:
 		zoom = 1;
@@ -293,7 +296,6 @@ void ModulePlayer::spawn(int lvl) {
 	}*/
 
 	
-
 	switch (lvl) {
 	case 0:
 		position.x = 0;
@@ -306,26 +308,26 @@ void ModulePlayer::spawn(int lvl) {
 		position.y = -24 + 48 * zoom; //240
 
 		break;
-	case 2:
+	case 3:
 		position.x = 72 * zoom;
 		position.y = 48 * zoom;
 		break;
-	case 3:
+	case 4:
 		position.x = 504 * zoom;
 		position.y = 312 * zoom;
 		break;
-	case 4:
+	case 5:
 		position.x = 360 * zoom;
 		position.y = 312 * zoom;
 		break;
-	case 5:
-		position.x = 48 * zoom;
-		position.y = 192 * zoom;
+	case 6:
+		position.x = 264 * zoom;
+		position.y = 336 * zoom;
 		break;
-	default:
-		position.x = 0;
-		position.y = 0;
-		break;
+	case 2:
+		position.x = 264 * zoom;
+		position.y = 216 * zoom;
+
 
 	}
 
@@ -334,6 +336,7 @@ void ModulePlayer::spawn(int lvl) {
 	colliderL->SetPos(0, 0);
 	colliderU->SetPos(0, 0);
 	colliderD->SetPos(0, 0);
+	collider->SetPos(0, 0);
 
 }
 
@@ -598,7 +601,9 @@ Update_Status ModulePlayer::Update()
 			if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT) && (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_IDLE)
 				&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE) && canStart == true)
 			{
-				if (isTouchingL == false && isBlockedL == false) {
+				if (isTouchingL == false && isBlockedL == false&&App->sceneLevel_1->pause==false) {
+
+					App->sceneLevel_1->noUI = false;
 
 					if (inContactL == true) {
 						isPushingL = true;
@@ -629,7 +634,9 @@ Update_Status ModulePlayer::Update()
 			if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT)
 				&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE) && canStart == true)
 			{
-				if (isTouchingR == false && isBlockedR == false) {
+				if (isTouchingR == false && isBlockedR == false && App->sceneLevel_1->pause == false) {
+
+					App->sceneLevel_1->noUI = false;
 
 					if (inContactR == true) {
 						isPushingR = true;
@@ -658,7 +665,9 @@ Update_Status ModulePlayer::Update()
 			if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_IDLE)
 				&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE) && canStart == true)
 			{
-				if (isTouchingD == false && isBlockedD == false) {
+				if (isTouchingD == false && isBlockedD == false && App->sceneLevel_1->pause == false) {
+
+					App->sceneLevel_1->noUI = false;
 
 					if (inContactD == true) {
 						isPushingD = true;
@@ -686,7 +695,9 @@ Update_Status ModulePlayer::Update()
 			if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_IDLE)
 				&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT)&& canStart==true)
 			{
-				if (isTouchingU == false && isBlockedU == false) {
+				if (isTouchingU == false && isBlockedU == false && App->sceneLevel_1->pause == false) {
+
+					App->sceneLevel_1->noUI = false;
 
 					if (inContactU == true) {
 						isPushingU = true;

@@ -35,11 +35,17 @@ bool PackInVideo::Start()
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
 
+	App->lvlManage->changeScene = true;
+
 	return ret;
 }
 
 Update_Status PackInVideo::Update()
 {
+	if (App->input->keys[SDL_SCANCODE_F4] == KEY_DOWN) {
+		App->fade->FadeToBlack(this, (Module*)App->presentation, 20);
+	}
+
 	if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN)
 	{
 
