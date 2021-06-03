@@ -336,6 +336,7 @@ void ModulePlayer::spawn(int lvl) {
 	colliderL->SetPos(0, 0);
 	colliderU->SetPos(0, 0);
 	colliderD->SetPos(0, 0);
+	collider->SetPos(0, 0);
 
 }
 
