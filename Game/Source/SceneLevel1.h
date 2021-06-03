@@ -40,6 +40,7 @@ public:
 	//SDL_Texture* bgTexture = nullptr;
 	SDL_Texture* UItexture = nullptr;
 	SDL_Texture* UItextureIn = nullptr;
+	//SDL_Texture* pauseTexture = nullptr;
 	//SDL_Texture* UItextureIn = nullptr;
 	SDL_Rect UIrect = { 1, 230, 60, 36 };
 	SDL_Rect rectlose = { 124, 268, 120, 64 };
@@ -47,6 +48,7 @@ public:
 	SDL_Rect rectNextRepeat = { 1, 156, 98, 34 };
 	SDL_Rect rectplayer;
 	SDL_Rect UIrectIn = { 61, 230, 61, 36 };
+	SDL_Rect rectPause = { 164, 1, 106, 58 };
 	//SDL_Texture* scoreBoxIn = nullptr;
 	///tiles
 	//SDL_Texture* bgTiles = nullptr;
@@ -67,6 +69,22 @@ public:
 	Collider* colliderUI = nullptr;
 
 	bool nextlvl = true;
+
+	bool pause = false;
+	bool noUI = false;
+
+	int pauseIndex = 0;
+
+	unsigned int currentTime;
+
+	unsigned int lastTime_W = 0;
+	unsigned int lastTime_S = 0;
+
+	bool firstInput_W = false;
+	bool firstInput_S = false;
+
+	int delay_W = 500;
+	int delay_S = 500;
 
 };
 

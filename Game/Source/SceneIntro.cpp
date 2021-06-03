@@ -58,6 +58,8 @@ bool SceneIntro::Start()
 	nextFx = App->audio->LoadFx("Assets"); //Falta por determinar sonido
 	backFx = App->audio->LoadFx("Assets"); //Falta por determinar sonido
 
+	App->lvlManage->changeScene = true;
+
 	optIndex = 0;
 	nextScene = false;
 	titleY = (SCREEN_HEIGHT - title.h * 3) / 2;
@@ -68,6 +70,10 @@ bool SceneIntro::Start()
 
 Update_Status SceneIntro::Update()
 {
+	if (App->input->keys[SDL_SCANCODE_F4] == KEY_DOWN) {
+		App->fade->FadeToBlack(this, (Module*)App->packInVideo, 20);
+	}
+
 	currentTime = SDL_GetTicks();
 	if (currentTime > lastTime + delay) {
 		if (titleY > 4 * 3) {
@@ -103,6 +109,7 @@ Update_Status SceneIntro::Update()
 			case 1:
 				break;
 			case 2:
+				return Update_Status::UPDATE_STOP;
 				break;
 			}
 			
@@ -119,80 +126,80 @@ Update_Status SceneIntro::Update()
 		}
 		
 	}
-
-	if ((App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_DOWN))
-	{
-		firstInput_W = true;
-	}
-
-	if ((App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT))
-	{
-		if (firstInput_W == true) {
-			if (optIndex > 0) {
-				optIndex -= 1;
-			}
-			else {
-				optIndex = 2;
-			}
-			lastTime_W = SDL_GetTicks();
-			delay_W = 500;
-			firstInput_W = false;
-		}
-		else if (currentTime > lastTime_W + delay_W) {
-			if (optIndex > 0) {
-				optIndex -= 1;
-			}
-			else {
-				optIndex = 2;
-			}
-			lastTime_W = SDL_GetTicks();
-			delay_W =150;
-			lastTime_W = currentTime;
-				
-
-
-
+	if (titleY == 4 * 3) {
+		if ((App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_DOWN))
+		{
+			firstInput_W = true;
 		}
 
-	}
-	
-	if ((App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_DOWN) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE))
-	{
-		firstInput_S = true;
-	}
-	if ((App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE))
-	{
-		if (firstInput_S == true) {
-		
+		if ((App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT))
+		{
+			if (firstInput_W == true) {
+				if (optIndex > 0) {
+					optIndex -= 1;
+				}
+				else {
+					optIndex = 2;
+				}
+				lastTime_W = SDL_GetTicks();
+				delay_W = 500;
+				firstInput_W = false;
+			}
+			else if (currentTime > lastTime_W + delay_W) {
+				if (optIndex > 0) {
+					optIndex -= 1;
+				}
+				else {
+					optIndex = 2;
+				}
+				lastTime_W = SDL_GetTicks();
+				delay_W = 150;
+				lastTime_W = currentTime;
+
+
+
+
+			}
+
+		}
+
+		if ((App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_DOWN) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE))
+		{
+			firstInput_S = true;
+		}
+		if ((App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE))
+		{
+			if (firstInput_S == true) {
+
 				if (optIndex < 2) {
 					optIndex += 1;
 				}
 				else {
 					optIndex = 0;
 				}
-			
-			lastTime_S = SDL_GetTicks();
-			delay_S = 500;
-			firstInput_S = false;
-		}
-		else if (currentTime > lastTime_S + delay_S) {
-			if (optIndex < 2) {
-				optIndex += 1;
+
+				lastTime_S = SDL_GetTicks();
+				delay_S = 500;
+				firstInput_S = false;
 			}
-			else {
-				optIndex = 0;
+			else if (currentTime > lastTime_S + delay_S) {
+				if (optIndex < 2) {
+					optIndex += 1;
+				}
+				else {
+					optIndex = 0;
+				}
+				lastTime_S = SDL_GetTicks();
+				delay_S = 150;
+				lastTime_S = currentTime;
+
+
+
+
 			}
-			lastTime_S = SDL_GetTicks();
-			delay_S = 150;
-			lastTime_S = currentTime;
-
-
-
 
 		}
-
 	}
-
 	/*
 	if (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_DOWN)
 	{
@@ -278,18 +285,21 @@ Update_Status SceneIntro::PostUpdate()
 		switch (optIndex) {
 		case 0:
 			App->fonts->BlitText((SCREEN_WIDTH - options.w * 3) / 2 + 14 * 3, titleY + title.h * 3 + 6 * 3 + 8 * 3, optFont, "PLAY", 3, 214, 0, 0, SCREEN_WIDTH, 3);
-			App->fonts->BlitText((SCREEN_WIDTH - options.w * 3) / 2 + 14 * 3, titleY + title.h * 3 + 6 * 3 + 8 * 3, optFont, "|REPEAT INTRO", 3, 0, 0, 0, SCREEN_WIDTH, 3);
-			App->fonts->BlitText((SCREEN_WIDTH - options.w * 3) / 2 + 14 * 3, titleY + title.h * 3 + 6 * 3 + 8 * 3, optFont, "||QUIT", 3, 0, 0, 0, SCREEN_WIDTH, 3);
+			App->fonts->BlitText((SCREEN_WIDTH - options.w * 3) / 2 + 14 * 3, titleY + title.h * 3 + 6 * 3 + 8 * 3, optFont, "|REPEAT INTRO", 3, 16, 16, 24, SCREEN_WIDTH, 3);
+			App->fonts->BlitText((SCREEN_WIDTH - options.w * 3) / 2 + 14 * 3, titleY + title.h * 3 + 6 * 3 + 8 * 3, optFont, "||QUIT", 3, 16, 16, 24, SCREEN_WIDTH, 3);
+			App->render->Blit(introMenu, (SCREEN_WIDTH - options.w * 3) / 2 + 5 * 3, titleY + title.h * 3 + 6 * 3 + 7 * 3, &pointRect, 0.0f, true, 3);
 			break;
 		case 1:
-			App->fonts->BlitText((SCREEN_WIDTH - options.w * 3) / 2 + 14 * 3, titleY + title.h * 3 + 6 * 3 + 8 * 3, optFont, "PLAY", 3, 0, 0, 0, SCREEN_WIDTH, 3);
+			App->fonts->BlitText((SCREEN_WIDTH - options.w * 3) / 2 + 14 * 3, titleY + title.h * 3 + 6 * 3 + 8 * 3, optFont, "PLAY", 3, 16, 16, 24, SCREEN_WIDTH, 3);
 			App->fonts->BlitText((SCREEN_WIDTH - options.w * 3) / 2 + 14 * 3, titleY + title.h * 3 + 6 * 3 + 8 * 3, optFont, "|REPEAT INTRO", 3, 214, 0, 0, SCREEN_WIDTH, 3);
-			App->fonts->BlitText((SCREEN_WIDTH - options.w * 3) / 2 + 14 * 3, titleY + title.h * 3 + 6 * 3 + 8 * 3, optFont, "||QUIT", 3, 0, 0, 0, SCREEN_WIDTH, 3);
+			App->fonts->BlitText((SCREEN_WIDTH - options.w * 3) / 2 + 14 * 3, titleY + title.h * 3 + 6 * 3 + 8 * 3, optFont, "||QUIT", 3, 16, 16, 24, SCREEN_WIDTH, 3);
+			App->render->Blit(introMenu, (SCREEN_WIDTH - options.w * 3) / 2 + 5 * 3, titleY + title.h * 3 + 6 * 3 + 18 * 3, &pointRect, 0.0f, true, 3);
 			break;
 		case 2:
-			App->fonts->BlitText((SCREEN_WIDTH - options.w * 3) / 2 + 14 * 3, titleY + title.h * 3 + 6 * 3 + 8 * 3, optFont, "PLAY", 3, 0, 0, 0, SCREEN_WIDTH, 3);
-			App->fonts->BlitText((SCREEN_WIDTH - options.w * 3) / 2 + 14 * 3, titleY + title.h * 3 + 6 * 3 + 8 * 3, optFont, "|REPEAT INTRO", 3, 0, 0, 0, SCREEN_WIDTH, 3);
+			App->fonts->BlitText((SCREEN_WIDTH - options.w * 3) / 2 + 14 * 3, titleY + title.h * 3 + 6 * 3 + 8 * 3, optFont, "PLAY", 3, 16, 16, 24, SCREEN_WIDTH, 3);
+			App->fonts->BlitText((SCREEN_WIDTH - options.w * 3) / 2 + 14 * 3, titleY + title.h * 3 + 6 * 3 + 8 * 3, optFont, "|REPEAT INTRO", 3, 16, 16, 24, SCREEN_WIDTH, 3);
 			App->fonts->BlitText((SCREEN_WIDTH - options.w * 3) / 2 + 14 * 3, titleY + title.h * 3 + 6 * 3 + 8 * 3, optFont, "||QUIT", 3, 214, 0, 0, SCREEN_WIDTH, 3);
+			App->render->Blit(introMenu, (SCREEN_WIDTH - options.w * 3) / 2 + 5 * 3, titleY + title.h * 3 + 6 * 3 + 29 * 3, &pointRect, 0.0f, true, 3);
 			break;
 		}
 	
@@ -306,7 +316,7 @@ Update_Status SceneIntro::PostUpdate()
 
 bool SceneIntro::CleanUp()
 {
-	
+	App->sceneIntro->Disable();
 	App->fonts->UnLoad(0);
 	
 	return true;

@@ -50,6 +50,7 @@ public:
 	SDL_Rect title = { 1,499,215,130 };
 	SDL_Rect copyright = { 259, 1083, 245, 16 };
 	SDL_Rect options = { 273, 84, 112, 47 };
+	SDL_Rect pointRect = { 16, 361, 9, 9 };
 	
 	Animation intro;
 

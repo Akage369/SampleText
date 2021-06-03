@@ -36,20 +36,26 @@ bool LevelMenu::Start()
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
 
+	App->lvlManage->changeScene = true;
+
 	return ret;
 }
 
 Update_Status LevelMenu::Update()
 {
+	if (App->input->keys[SDL_SCANCODE_F4] == KEY_DOWN) {
+		App->fade->FadeToBlack(this, (Module*)App->sceneIntro, 20);
+}
+
 	if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN)
 	{
-
+		App->lvlManage->lvlChange(1, '=');
 		App->fade->FadeToBlack(this, (Module*)App->sceneLevel_1, 20);
-		App->pointer->Disable();
-
+	
+		
 		//lvl++;
 		//App->player->spawn(lvl);
-		App->lvlManage->lvlChange(1, '+');
+		
 	}
 
 	return Update_Status::UPDATE_CONTINUE;
@@ -65,4 +71,11 @@ Update_Status LevelMenu::PostUpdate()
 	App->render->Blit(bgTexto, 140, 125, NULL);*/
 
 	return Update_Status::UPDATE_CONTINUE;
+}
+
+bool LevelMenu::CleanUp()
+{
+
+	App->pointer->Disable();
+	return true;
 }

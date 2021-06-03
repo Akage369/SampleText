@@ -9,6 +9,7 @@
 #include "SDL/include/SDL.h"
 #include "ModulePlayer.h"
 #include "LevelManager.h"
+#include "SceneLevel1.h"
 
 
 Box_Obj::Box_Obj(int x, int y) : Box(x, y)
@@ -17,17 +18,20 @@ Box_Obj::Box_Obj(int x, int y) : Box(x, y)
 	case 1:
 		zoom = 3;
 		break;
-	case 2:
-		zoom = 2;
-		break;
 	case 3:
-		zoom = 1;
+		zoom = 2;
 		break;
 	case 4:
 		zoom = 1;
 		break;
 	case 5:
 		zoom = 1;
+		break;
+	case 6:
+		zoom = 1;
+		break;
+	case 2:
+		zoom = 2;
 		break;
 	default:
 		zoom = 1;
@@ -366,7 +370,7 @@ void Box_Obj::Update()
 			&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE)&& canStart==true)
 		{
 
-			if (inContactR==true && isStoppedL==false) {
+			if (inContactR==true && isStoppedL==false && App->sceneLevel_1->pause == false) {
 
 				if (movy == county) {
 					if (movx == countx) {
@@ -392,7 +396,7 @@ void Box_Obj::Update()
 		if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT)
 			&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE) && canStart == true)
 		{
-			if (inContactL == true && isStoppedR == false) {
+			if (inContactL == true && isStoppedR == false && App->sceneLevel_1->pause == false) {
 				if (movy == county) {
 					if (movx == countx) {
 						movx = position.x + 24 * zoom;
@@ -416,7 +420,7 @@ void Box_Obj::Update()
 		if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_IDLE)
 			&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE) && canStart == true)
 		{
-			if (inContactU == true && isStoppedD == false) {
+			if (inContactU == true && isStoppedD == false && App->sceneLevel_1->pause == false) {
 				if (movx == countx) {
 					if (movy == county) {
 						movy = position.y + 24 * zoom;
@@ -441,7 +445,7 @@ void Box_Obj::Update()
 		if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_IDLE)
 			&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT) && canStart == true)
 		{
-			if (inContactD == true && isStoppedU == false) {
+			if (inContactD == true && isStoppedU == false && App->sceneLevel_1->pause == false) {
 				if (movx == countx) {
 					if (movy == county) {
 						movy = position.y - 24 * zoom;

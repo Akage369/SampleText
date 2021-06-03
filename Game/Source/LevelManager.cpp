@@ -40,67 +40,121 @@ void LevelManager::lvlChange(int change, char op)
 
 Update_Status LevelManager::Update() {
 
+	
+
 	if (App->input->keys[SDL_SCANCODE_F2] == KEY_DOWN) {
-		
-		win = 2;
+		if (lvl > 0 && lvl <= 6) {
+			if (App->sceneLevel_1->pause == false) {
+				win = 2;
+			}
+		}
 
 	}
 
 	if (App->input->keys[SDL_SCANCODE_F3] == KEY_DOWN) {
-
-		win = 1;
-		
+		if (lvl > 0 && lvl <= 6) {
+			if (App->sceneLevel_1->pause == false) {
+				win = 1;
+			}
+		}
 	}
 	if (App->input->keys[SDL_SCANCODE_F4] == KEY_DOWN) {
+		//if (lvl > 0 && lvl <= 6) {
+		/*
+			if (lvl == 1) {
+				lvlChange(1, '-');
+				App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->levelMenu, 30);
+			
+				boxes_lvl = 0;
+			}
+			else if (lvl == 0) {
+				lvlChange(1, '-');
+				App->fade->FadeToBlack((Module*)App->levelMenu, (Module*)App->sceneIntro, 30);
+			
+				boxes_lvl = 0;
+			}
+			else if (lvl == -1) {
+				lvlChange(1, '-');
+				App->fade->FadeToBlack((Module*)App->sceneIntro, (Module*)App->packInVideo, 30);
+				
+				boxes_lvl = 0;
+			}
+			else if (lvl == -2) {
+				lvlChange(1, '-');
+				App->fade->FadeToBlack((Module*)App->packInVideo, (Module*)App->presentation, 30);
+				
+				boxes_lvl = 0;
+			}
+			else if (lvl == -3) {
+				lvlChange(6, '=');
+				App->fade->FadeToBlack((Module*)App->presentation, (Module*)App->sceneLevel_1, 30);
+				
+				boxes_lvl = 0;
+			}
+			else {
+				lvlChange(1, '-');
+				App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneLevel_1, 30);
+
+				
+				boxes_lvl = 0;
+			}
+			*/
+		//}
+
 		
-		if (lvl==-1) {
+		if((App->sceneLevel_1->lvl>1 && App->sceneLevel_1->lvl <=6)){
+			
 			App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneLevel_1, 30);
-
-			lvlChange(6, '=');
-			boxes_lvl = 0;
-		}
-		else {
-			App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneLevel_1, 30);
-
 			lvlChange(1, '-');
+
 			boxes_lvl = 0;
 		}
-		
+		else if (App->sceneLevel_1->lvl <= 1) {
+			
+			App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->levelMenu, 30);
+			lvlChange(0, '=');
+		}
+
+
 	}
 
 	switch (win) {
 	case 0:
 		break;
 	case 1:
-		if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN) {
-			if (App->sceneLevel_1->nextlvl == true) {
-				if (lvl == 6) {
-					App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneLevel_1, 30);
-					lvlChange(0, '=');
+		if (lvl > 0 && lvl <= 6) {
+			if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN) {
+				if (App->sceneLevel_1->nextlvl == true) {
+					if (lvl == 6) {
+						App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->levelMenu, 30);
+						lvlChange(0, '=');
+					}
+					else {
+						App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneLevel_1, 30);
+						lvlChange(1, '+');
+					}
 				}
 				else {
 					App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneLevel_1, 30);
-					lvlChange(1, '+');
+					boxes_lvl = 0;
 				}
 			}
-			else {
-				App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneLevel_1, 30);
-				boxes_lvl = 0;
+			if (App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_DOWN) {
+				App->sceneLevel_1->nextlvl = true;
 			}
-		}
-		if (App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_DOWN) {
-			App->sceneLevel_1->nextlvl = true;
-		}
-		if (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_DOWN) {
-			App->sceneLevel_1->nextlvl = false;
+			if (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_DOWN) {
+				App->sceneLevel_1->nextlvl = false;
+			}
 		}
 		break;
 	case 2:
-		if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN) {
-			
+		if (lvl > 0 && lvl <= 6) {
+			if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN) {
+
 				App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneLevel_1, 30);
 				boxes_lvl = 0;
 
+			}
 		}
 		break;
 	}
@@ -127,13 +181,13 @@ void LevelManager::LevelComplete()
 		}
 		break;
 	case 2:
-		if (boxes_lvl == 11) {
+		if (boxes_lvl == 6) {
 			win = 1;
 		}
 		break;
 
 	case 3:
-		if (boxes_lvl == 12) {
+		if (boxes_lvl == 11) {
 			win = 1;
 		}
 		break;
@@ -143,12 +197,12 @@ void LevelManager::LevelComplete()
 		}
 		break;
 	case 5:
-		if (boxes_lvl == 12) {
+		if (boxes_lvl == 14) {
 			win = 1;
 		}
 		break;
 	case 6:
-		if (boxes_lvl == 12) {
+		if (boxes_lvl == 13) {
 			win = 1;
 		}
 		break;
