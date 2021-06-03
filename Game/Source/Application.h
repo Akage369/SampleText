@@ -3,7 +3,7 @@
 
 #include "Globals.h"
 
-#define NUM_MODULES 20
+#define NUM_MODULES 21
 
 class Module;
 class ModuleWindow;
@@ -26,6 +26,7 @@ class Presentation;
 class PackInVideo;
 class LevelMenu;
 class Pointer;
+class IntroAnimation;
 
 class Application
 {

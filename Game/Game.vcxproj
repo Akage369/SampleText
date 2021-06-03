@@ -153,6 +153,7 @@
     <ClCompile Include="Source\Enemy_Mech.cpp" />
     <ClCompile Include="Source\Enemy_RedBird.cpp" />
     <ClCompile Include="Source\Globals.cpp" />
+    <ClCompile Include="Source\IntroAnimation.cpp" />
     <ClCompile Include="Source\LevelManager.cpp" />
     <ClCompile Include="Source\LevelMenu.cpp" />
     <ClCompile Include="Source\Main.cpp" />
@@ -192,6 +193,7 @@
     <ClInclude Include="Source\Enemy_Mech.h" />
     <ClInclude Include="Source\Enemy_RedBird.h" />
     <ClInclude Include="Source\Globals.h" />
+    <ClInclude Include="Source\IntroAnimation.h" />
     <ClInclude Include="Source\LevelManager.h" />
     <ClInclude Include="Source\LevelMenu.h" />
     <ClInclude Include="Source\MemLeaks.h" />

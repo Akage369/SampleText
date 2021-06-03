@@ -144,6 +144,9 @@
     <ClCompile Include="Source\Pointer.cpp">
       <Filter>Archivos de recursos\Utils</Filter>
     </ClCompile>
+    <ClCompile Include="Source\IntroAnimation.cpp">
+      <Filter>Archivos de recursos\Modules\Gameplay</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Application.h">
@@ -259,6 +262,9 @@
     </ClInclude>
     <ClInclude Include="Source\Pointer.h">
       <Filter>Archivos de recursos\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\IntroAnimation.h">
+      <Filter>Archivos de recursos\Modules\Gameplay</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
