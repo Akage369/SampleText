@@ -186,17 +186,20 @@ bool ModulePlayer::Start()
 	case 1:
 		zoom = 3;
 		break;
-	case 2:
-		zoom = 2;
-		break;
 	case 3:
-		zoom = 1;
+		zoom = 2;
 		break;
 	case 4:
 		zoom = 1;
 		break;
 	case 5:
 		zoom = 1;
+		break;
+	case 6:
+		zoom = 1;
+		break;
+	case 2:
+		zoom = 2;
 		break;
 	default:
 		zoom = 1;
@@ -306,26 +309,26 @@ void ModulePlayer::spawn(int lvl) {
 		position.y = -24 + 48 * zoom; //240
 
 		break;
-	case 2:
+	case 3:
 		position.x = 72 * zoom;
 		position.y = 48 * zoom;
 		break;
-	case 3:
+	case 4:
 		position.x = 504 * zoom;
 		position.y = 312 * zoom;
 		break;
-	case 4:
+	case 5:
 		position.x = 360 * zoom;
 		position.y = 312 * zoom;
 		break;
-	case 5:
-		position.x = 48 * zoom;
-		position.y = 192 * zoom;
+	case 6:
+		position.x = 264 * zoom;
+		position.y = 336 * zoom;
 		break;
-	default:
-		position.x = 0;
-		position.y = 0;
-		break;
+	case 2:
+		position.x = 264 * zoom;
+		position.y = 216 * zoom;
+
 
 	}
 
@@ -334,6 +337,7 @@ void ModulePlayer::spawn(int lvl) {
 	colliderL->SetPos(0, 0);
 	colliderU->SetPos(0, 0);
 	colliderD->SetPos(0, 0);
+	collider->SetPos(0, 0);
 
 }
 

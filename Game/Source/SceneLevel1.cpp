@@ -61,13 +61,10 @@ bool SceneLevel1::Start()
 	case 1:
 		zoom = 3;
 		break;
-	case 2:
+	case 3:
 		zoom = 2;
 		break;
-	case 3: 
-		zoom = 1;
-		break;
-	case 4:
+	case 4: 
 		zoom = 1;
 		break;
 	case 5:
@@ -75,6 +72,9 @@ bool SceneLevel1::Start()
 		break;
 	case 6:
 		zoom = 1;
+		break;
+	case 2:
+		zoom = 2;
 		break;
 	default:
 		break;
@@ -91,25 +91,27 @@ bool SceneLevel1::Start()
 		App->tiles->genObjects(-3 - 12, -3 - 24, lvl1_map, "ooooooooooo,ooWwwwwwWoo,ooWbbBBBWoo,ooWbbbwwwWo,oWwwCbbbbWo,oWbbbWCwbWo,oWbCbWbbbWo,oWbbbWwwwwo,owwwwwooooo,ooooooooooo", zoom);
 		App->lvlManage->max_steps = 90;
 		break;
-	case 2:
+	case 3:
 		//App->tiles->genObjects(-1, -1, lvl1_map, "oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,ooooooooooooWwwwwwWooooooooooooo,ooooooooooooWbbBBBWooooooooooooo,ooooooooooooWbbbwwwWoooooooooooo,oooooooooooWwwCbbbbWoooooooooooo,oooooooooooWbbbWCwbWoooooooooooo,oooooooooooWbCbWbbbWoooooooooooo,oooooooooooWbbbWwwwwoooooooooooo,ooooooooooowwwwwoooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo", zoom);
 		App->tiles->genObjects(-2, -2, lvl1_map, "oooooooooooooooo,ooWwWwwWoWwwwWoo,oWwbwbbwwWbbbwWo,oWbbbbCbbwbCbbWo,oWbbCbbWbbbbCbWo,oWWWbWWwwWWbbbWo,oWwwbwWbbWwCwWwo,oWbCbbwwwwbBBWoo,oWbCbCbCbbBBBWoo,oWbbbbWwwWBBBWoo,oWbCCbWooWBBBWoo,oWbbWwwoowwwwwoo,owwwwooooooooooo,oooooooooooooooo", zoom);
 		App->lvlManage->max_steps = 750;
 		break;
-	case 3:
+	case 4:
 		App->tiles->genObjects(-1, -1, lvl1_map, "ooooooooooooooooooooooooooooooooo,ooooooooooooooooooooooooooooooooo,ooooooooooooooooooooooooooooooooo,ooooooooooooooooooooooooooooooooo,ooooooooooooooooooooooooooooooooo,ooooooooooooooooooooooooooooooooo,oooooooooooooooWwwwWooooooooooooo,oooooooooooooooWbbbWWwwWooooooooo,oooooooooooooooWbwCwwbbWooooooooo,oooooooooooooooWbbbbCbbWooooooooo,oooooooWwwwwwwWWbwwwbbbWooooooooo,oooooooWBBBBbbwwbCbbCWWwooooooooo,oooooooWBBBBbbbbCbCCbwWoooooooooo,oooooooWBBBBbbWWCbbCbbWoooooooooo,ooooooowwwwwwwwWbbCbbwWoooooooooo,oooooooooooooooWbCbCbbWoooooooooo,ooooooooooooooowwWbwwbWoooooooooo,oooooooooooooooooWbbbbWoooooooooo,ooooooooooooooooowwwwwwoooooooooo,ooooooooooooooooooooooooooooooooo,ooooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo", zoom);
 		App->lvlManage->max_steps = 700;
 		break;
-	case 4:
+	case 5:
 		App->tiles->genObjects(-1, -1, lvl1_map, "oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooWwwWwwwWooooooooooo,ooooooooooWwwWbbwBBBWooooooooooo,ooooooooooWbbwCbbBBBwwwwWooooooo,oooooooWwwwbCbbbWWBBBBbbWooooooo,oooooooWbbbCCwCbWWBBBBbbWooooooo,oooooooWbCbbbbbWWWWwwwbWwooooooo,oooooooWbwWwbCWwWwwbbCbWoooooooo,oooooooWbbWbCbwbwbbbCbbWoooooooo,ooooooowWbwbbbbCbbCCbWwwoooooooo,ooooooooWbbbwbCbwbbWwwoooooooooo,oooooooowwWbbwwbbWwwoooooooooooo,oooooooooowWbbbbbWoooooooooooooo,ooooooooooowwwwwwwoooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo", zoom);
 		App->lvlManage->max_steps = 1400;
 		break;
-	case 5:
+	case 6:
 		//App->tiles->genObjects(-2, -2, lvl1_map, "oooooooooooooooo,oWwwwWWwwwwwwwWoo,oWbbbWWbBBBBBBWo,oWbbWwwbBBWBwbWo,oWbCWbbBBWwBbBWo,oWwbwbCwbwbbbbWo,oWbCbbCbbbbWbwWo,oWbCWbWbCwwWCbWo,oWbbWbWbCbbWbbWo,oWbCwbwWCwbwCbWo,oWbCbbbWbbbbbbWo,owwWbbbWbwwCbWwo,ooowwwwWbbbbbWoo,ooooooowwwwwwwoo,oooooooooooooooo", zoom);
-		App->tiles->genObjects(-1, -1, lvl1_map, "oooooooooooooooo,oWwwwWWwwwwwwwWo,oWbbbWWbBBBBBBWo,oWbbWwwbBBWBwbWo,oWbbWbCBBWwBbBWo,oWwbwbbwbwbbbbWo,oWbbbbbbbbbWbwWo,oWbbWbWbbwwWbbWo,oWbbWbWbbbbWbbWo,oWbbwbwWbwbwbbWo,oWbCbbbWbbbbbbWo,owwWbbbWbwwbbWwo,ooowwwwWbbbbbWoo,ooooooowwwwwwwoo,oooooooooooooooo", zoom);
+		App->tiles->genObjects(-1, -1, lvl1_map, "oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooWwwwWWwwwwwwwWooooooooo,oooooooooWbbbWWbBBBBBBWooooooooo,oooooooooWbbWwwbBBWBwbWooooooooo,oooooooooWbCWbbBBWwBbBWooooooooo,oooooooooWwbwbCwbwbbbbWooooooooo,oooooooooWbCbbCbbbbWbwWooooooooo,oooooooooWbCWbWbCwwWCbWooooooooo,oooooooooWbbWbWbCbbWbbWooooooooo,oooooooooWbCwbwWCwbwCbWooooooooo,oooooooooWbCbbbWbbbbbbWooooooooo,ooooooooowwWbbbWbwwCbWwooooooooo,ooooooooooowwwwWbbbbbWoooooooooo,ooooooooooooooowwwwwwwoooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo", zoom);
 		App->lvlManage->max_steps = 600;
 		break;
-	case 6:
+	case 2:
+		App->tiles->genObjects(-2, -2, lvl1_map, "oooooooooooooooo,oooooooooooooooo,ooooWwwwwwwWoooo,ooooWbbbbbbWoooo,ooooWbwCCbbWoooo,ooooWbBBBwbWoooo,oooowWBBBCbwWooo,oooooWbwwbCbWooo,oooooWCbbCbbWooo,oooooWbbWbbbWooo,ooooowwwwwwwwooo,oooooooooooooooo,oooooooooooooooo,oooooooooooooooo", zoom);
+		App->lvlManage->max_steps = 120;
 		break;
 	default:
 		break;
@@ -133,22 +135,23 @@ Update_Status SceneLevel1::Update()
 		//App->lvlManage->max_steps = 750;
 		//App->lvlManage->max_steps = 700;
 		break;
-	case 2:
+	case 3:
 		//App->tiles->BlitScene(-1, -1, lvl1_map, "oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,ooooooooooooWwwwwwWooooooooooooo,ooooooooooooWbbBBBWooooooooooooo,ooooooooooooWbbbwwwWoooooooooooo,oooooooooooWwwCbbbbWoooooooooooo,oooooooooooWbbbWCwbWoooooooooooo,oooooooooooWbCbWbbbWoooooooooooo,oooooooooooWbbbWwwwwoooooooooooo,ooooooooooowwwwwoooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo", zoom);
 		App->tiles->BlitScene(-2, -2, lvl1_map, "oooooooooooooooo,ooWwWwwWoWwwwWoo,oWwbwbbwwWbbbwWo,oWbbbbCbbwbCbbWo,oWbbCbbWbbbbCbWo,oWWWbWWwwWWbbbWo,oWwwbwWbbWwCwWwo,oWbCbbwwwwbBBWoo,oWbCbCbCbbBBBWoo,oWbbbbWwwWBBBWoo,oWbCCbWooWBBBWoo,oWbbWwwoowwwwwoo,owwwwooooooooooo,oooooooooooooooo", zoom);
 		
 		break;
-	case 3:
+	case 4:
 		App->tiles->BlitScene(-1, -1, lvl1_map, "ooooooooooooooooooooooooooooooooo,ooooooooooooooooooooooooooooooooo,ooooooooooooooooooooooooooooooooo,ooooooooooooooooooooooooooooooooo,ooooooooooooooooooooooooooooooooo,ooooooooooooooooooooooooooooooooo,oooooooooooooooWwwwWooooooooooooo,oooooooooooooooWbbbWWwwWooooooooo,oooooooooooooooWbwCwwbbWooooooooo,oooooooooooooooWbbbbCbbWooooooooo,oooooooWwwwwwwWWbwwwbbbWooooooooo,oooooooWBBBBbbwwbCbbCWWwooooooooo,oooooooWBBBBbbbbCbCCbwWoooooooooo,oooooooWBBBBbbWWCbbCbbWoooooooooo,ooooooowwwwwwwwWbbCbbwWoooooooooo,oooooooooooooooWbCbCbbWoooooooooo,ooooooooooooooowwWbwwbWoooooooooo,oooooooooooooooooWbbbbWoooooooooo,ooooooooooooooooowwwwwwoooooooooo,ooooooooooooooooooooooooooooooooo,ooooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo", zoom);
 		break;
-	case 4:
+	case 5:
 		App->tiles->BlitScene(-1, -1, lvl1_map, "oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooWwwWwwwWooooooooooo,ooooooooooWwwWbbwBBBWooooooooooo,ooooooooooWbbwCbbBBBwwwwWooooooo,oooooooWwwwbCbbbWWBBBBbbWooooooo,oooooooWbbbCCwCbWWBBBBbbWooooooo,oooooooWbCbbbbbWWWWwwwbWwooooooo,oooooooWbwWwbCWwWwwbbCbWoooooooo,oooooooWbbWbCbwbwbbbCbbWoooooooo,ooooooowWbwbbbbCbbCCbWwwoooooooo,ooooooooWbbbwbCbwbbWwwoooooooooo,oooooooowwWbbwwbbWwwoooooooooooo,oooooooooowWbbbbbWoooooooooooooo,ooooooooooowwwwwwwoooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo", zoom);
 		break;
-	case 5:
-		//App->tiles->BlitScene(-2, -2, lvl1_map, "oooooooooooooooo,oWwwwWWwwwwwwwWoo,oWbbbWWbBBBBBBWo,oWbbWwwbBBWBwbWo,oWbCWbbBBWwBbBWo,oWwbwbCwbwbbbbWo,oWbCbbCbbbbWbwWo,oWbCWbWbCwwWCbWo,oWbbWbWbCbbWbbWo,oWbCwbwWCwbwCbWo,oWbCbbbWbbbbbbWo,owwWbbbWbwwCbWwo,ooowwwwWbbbbbWoo,ooooooowwwwwwwoo,oooooooooooooooo", zoom);
-		App->tiles->BlitScene(-1, -1, lvl1_map, "oooooooooooooooo,oWwwwWWwwwwwwwWo,oWbbbWWbBBBBBBWo,oWbbWwwbBBWBwbWo,oWbCWbbBBWwBbBWo,oWwbwbbwbwbbbbWo,oWbbbbbbbbbWbwWo,oWbbWbWbbwwWbbWo,oWbbWbWbbbbWbbWo,oWbbwbwWbwbwbbWo,oWbCbbbWbbbbbbWo,owwWbbbWbwwbbWwo,ooowwwwWbbbbbWoo,ooooooowwwwwwwoo,oooooooooooooooo", zoom);
-		break;
 	case 6:
+		//App->tiles->BlitScene(-2, -2, lvl1_map, "oooooooooooooooo,oWwwwWWwwwwwwwWoo,oWbbbWWbBBBBBBWo,oWbbWwwbBBWBwbWo,oWbCWbbBBWwBbBWo,oWwbwbCwbwbbbbWo,oWbCbbCbbbbWbwWo,oWbCWbWbCwwWCbWo,oWbbWbWbCbbWbbWo,oWbCwbwWCwbwCbWo,oWbCbbbWbbbbbbWo,owwWbbbWbwwCbWwo,ooowwwwWbbbbbWoo,ooooooowwwwwwwoo,oooooooooooooooo", zoom);
+		App->tiles->BlitScene(-1, -1, lvl1_map, "oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooWwwwWWwwwwwwwWooooooooo,oooooooooWbbbWWbBBBBBBWooooooooo,oooooooooWbbWwwbBBWBwbWooooooooo,oooooooooWbCWbbBBWwBbBWooooooooo,oooooooooWwbwbCwbwbbbbWooooooooo,oooooooooWbCbbCbbbbWbwWooooooooo,oooooooooWbCWbWbCwwWCbWooooooooo,oooooooooWbbWbWbCbbWbbWooooooooo,oooooooooWbCwbwWCwbwCbWooooooooo,oooooooooWbCbbbWbbbbbbWooooooooo,ooooooooowwWbbbWbwwCbWwooooooooo,ooooooooooowwwwWbbbbbWoooooooooo,ooooooooooooooowwwwwwwoooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo", zoom);
+		break;
+	case 2:
+		App->tiles->BlitScene(-2, -2, lvl1_map, "oooooooooooooooo,oooooooooooooooo,ooooWwwwwwwWoooo,ooooWbbbbbbWoooo,ooooWbwCCbbWoooo,ooooWbBBBwbWoooo,oooowWBBBCbwWooo,oooooWbwwbCbWooo,oooooWCbbCbbWooo,oooooWbbWbbbWooo,ooooowwwwwwwwooo,oooooooooooooooo,oooooooooooooooo,oooooooooooooooo", zoom);
 		break;
 	default:
 		break;
@@ -225,6 +228,7 @@ void SceneLevel1::OnCollision(Collider* c1, Collider* c2)
 			positionUI = { 22 * 3, 22 * 3 };
 		}
 	}
+	
 }
 
 bool SceneLevel1::CleanUp()

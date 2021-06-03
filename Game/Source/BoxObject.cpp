@@ -17,17 +17,20 @@ Box_Obj::Box_Obj(int x, int y) : Box(x, y)
 	case 1:
 		zoom = 3;
 		break;
-	case 2:
-		zoom = 2;
-		break;
 	case 3:
-		zoom = 1;
+		zoom = 2;
 		break;
 	case 4:
 		zoom = 1;
 		break;
 	case 5:
 		zoom = 1;
+		break;
+	case 6:
+		zoom = 1;
+		break;
+	case 2:
+		zoom = 2;
 		break;
 	default:
 		zoom = 1;
