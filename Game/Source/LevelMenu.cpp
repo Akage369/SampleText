@@ -59,7 +59,7 @@ Update_Status LevelMenu::Update()
 Update_Status LevelMenu::PostUpdate()
 {
 	// Draw everything --------------------------------------
-	App->render->Blit(bgTexture, 0, 0, NULL);
+	App->render->Blit(bgTexture, 0, 0, NULL, 1.0f, true, 3);
 	/*App->render->Blit(bgTexture, 256, 0, NULL);
 	App->render->Blit(bgTexture, 512, 0, NULL);
 	App->render->Blit(bgTexto, 140, 125, NULL);*/

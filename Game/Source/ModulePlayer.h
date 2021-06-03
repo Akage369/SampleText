@@ -80,7 +80,7 @@ public:
 
 	///frames
 	const int FPS = 60;
-	const int frameDelay = 500 / FPS;
+	const int frameDelay = 100 / FPS;
 
 	Uint32 frameStart;
 	int frameTime;

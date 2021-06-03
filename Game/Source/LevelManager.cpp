@@ -41,7 +41,7 @@ void LevelManager::lvlChange(int change, char op)
 Update_Status LevelManager::Update() {
 
 	if (App->input->keys[SDL_SCANCODE_F2] == KEY_DOWN) {
-		//App->lvlManage->max_steps = 0;
+		
 		win = 2;
 
 	}
@@ -50,70 +50,57 @@ Update_Status LevelManager::Update() {
 
 		win = 1;
 		
-
 	}
 	if (App->input->keys[SDL_SCANCODE_F4] == KEY_DOWN) {
-		//App->lvlManage->max_steps = 0;
 		
-		App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneLevel_1, 30);
-		
-		lvlChange(1, '-');
-		boxes_lvl = 0;
-		//win = 0;
-		//steps = 0;
-		
-	}
+		if (lvl==-1) {
+			App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneLevel_1, 30);
 
-
-	/*if (App->fade->frameCount == App->fade->maxFadeFrames / 2) {
-		switch (win) {
-		case 0:
-			break;
-		case 1:
-			
-				
-				lvlChange(1, '+');
-				boxes_lvl = 0;
-				//win = 0;
-				steps = 0;
-			
-			break;
-		case 2:
-			
-				//App->lvlManage->lvlChange(1, '-');
-
-				
-
-				boxes_lvl = 0;
-				//win = 0;
-				//steps = 0;
-			
-			break;
+			lvlChange(6, '=');
+			boxes_lvl = 0;
 		}
+		else {
+			App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneLevel_1, 30);
+
+			lvlChange(1, '-');
+			boxes_lvl = 0;
+		}
+		
 	}
-	*/
 
 	switch (win) {
 	case 0:
 		break;
 	case 1:
 		if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN) {
-			App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneLevel_1, 30);
-			lvlChange(1, '+');
-			//boxes_lvl = 0;
-			//win = 0;
-			//steps = 0;
+			if (App->sceneLevel_1->nextlvl == true) {
+				if (lvl == 6) {
+					App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneLevel_1, 30);
+					lvlChange(0, '=');
+				}
+				else {
+					App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneLevel_1, 30);
+					lvlChange(1, '+');
+				}
+			}
+			else {
+				App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneLevel_1, 30);
+				boxes_lvl = 0;
+			}
+		}
+		if (App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_DOWN) {
+			App->sceneLevel_1->nextlvl = true;
+		}
+		if (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_DOWN) {
+			App->sceneLevel_1->nextlvl = false;
 		}
 		break;
 	case 2:
 		if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN) {
-			//App->lvlManage->lvlChange(1, '-');
+			
+				App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneLevel_1, 30);
+				boxes_lvl = 0;
 
-			App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneLevel_1, 30);
-
-			boxes_lvl = 0;
-			//win = 0;
-			//steps = 0;
 		}
 		break;
 	}
@@ -122,77 +109,47 @@ Update_Status LevelManager::Update() {
 
 
 Update_Status LevelManager::PostUpdate() {
-	/*if (win == 2) {
-		SDL_Rect rectlose = { 124, 268, 120, 64 };
-		App->render->Blit(App->sceneLevel_1->loseTexture, (SCREEN_WIDTH - 120) / 2, (SCREEN_HEIGHT - 64) / 2, &rectlose, 0.0f, true);
-		//App->render->Blit(App->sceneLevel_1->loseTexture,0,0,&rectlose, 0.0f, false);
 
-	}
-	*/
 	return Update_Status::UPDATE_CONTINUE;
 }
 
 void LevelManager::Lose()
-{/*
-	win = 2;	
-	if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN) {
-		App->lvlManage->lvlChange(1, '-');
-
-		App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneLevel_1, 90);
-		
-		boxes_lvl = 0;
-		win = 0;
-		steps = 0;
-	}
-	*/
+{
 	win = 2;
-	
 }
 
 void LevelManager::LevelComplete()
 {
 	switch (lvl) {
 	case 1:
-
-		
-
 		if (boxes_lvl == 3) {
 			win = 1;
-			//if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN) {
-			//	App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneLevel_1, 90);
-			//	lvlChange(1, '+');
-			//	boxes_lvl = 0;
-			//	win = 0;
-			//	steps = 0;
-			//	}
-			
 		}
-
-
 		break;
 	case 2:
 		if (boxes_lvl == 11) {
 			win = 1;
-			//if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN) {
-			//	App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneLevel_1, 90);
-			//	lvlChange(1, '+');
-			//	boxes_lvl = 0;
-			//	win = 0;
-			//	steps = 0;
-			//}
 		}
 		break;
 
 	case 3:
 		if (boxes_lvl == 12) {
 			win = 1;
-			//if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN) {
-			//	App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneLevel_1, 90);
-			//	lvlChange(1, '+');
-			//	boxes_lvl = 0;
-			//	win = 0;
-			//	steps = 0;
-			//}
+		}
+		break;
+	case 4:
+		if (boxes_lvl == 12) {
+			win = 1;
+		}
+		break;
+	case 5:
+		if (boxes_lvl == 12) {
+			win = 1;
+		}
+		break;
+	case 6:
+		if (boxes_lvl == 12) {
+			win = 1;
 		}
 		break;
 	}

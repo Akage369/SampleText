@@ -77,6 +77,18 @@ public:
 	int delay = 1000;
 
 	int optFont = -1;
+
+	int optIndex = 0;
+
+	unsigned int lastTime_W = 0;
+	unsigned int lastTime_S = 0;
+	
+	bool firstInput_W = false;
+	bool firstInput_S = false;
+
+	int delay_W = 500;
+	int delay_S = 500;
+
 };
 
 #endif

@@ -42,8 +42,8 @@ bool Pointer::Start()
 	texture = App->textures->Load("Assets/Textures/spritesheet_menus.png");
 	//currentAnimation = &pointAnim;
 	pointRect = { 16, 361, 9, 9 };
-	position.x = 42;
-	position.y = 111;
+	position.x = 42 * 3;
+	position.y = 111 * 3;
 	//laserFx = App->audio->LoadFx("Assets/Audio/Fx/laser.wav");
 	//explosionFx = App->audio->LoadFx("Assets/Audio/Fx/explosion.wav");
 
@@ -66,7 +66,7 @@ Update_Status Pointer::Update()
 	{
 		firstInput_A = true;
 	}
-	if (position.x >= 42) {
+	if (position.x >= 42 * 3) {
 		if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT) && (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_IDLE)
 			&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE))
 		{
@@ -80,56 +80,62 @@ Update_Status Pointer::Update()
 		}*/
 			if (firstInput_A == true) {
 
-				if (position.x == 42) {
-					position.x = 186;
-					position.y -= 16;
+				if (position.y >= 111 * 3) {
+					if (position.x == 42 * 3) {
+						if (position.y > 111 * 3) {
+							position.x = 186 * 3;
+							position.y -= 16 * 3;
+						}
+					}
+					else {
+						position.x -= 16 * 3;
+					}
+					lastTime_A = SDL_GetTicks();
+					delay_A = 500;
+					firstInput_A = false;
 				}
-				else {
-					position.x -= 16;
-				}
-				lastTime_A = SDL_GetTicks();
-				delay_A = 500;
-				firstInput_A = false;
 			}
 			else if (currentTime > lastTime_A + delay_A) {
 				delay_A = 50;
 				//if (firstInput == false) {
-				if (position.x == 42) {
-					position.x = 186;
-					position.y -= 16;
+				if (position.y >= 111 * 3) {
+					if (position.x == 42 * 3) {
+						if (position.y > 111 * 3) {
+							position.x = 186 * 3;
+							position.y -= 16 * 3;
+						}
+					}
+					else {
+						position.x -= 16 * 3;
+					}
+					//}
+					//currentTime = SDL_GetTicks();
+					lastTime_A = currentTime;
+					//frameStart = SDL_GetTicks();
 				}
-				else {
-					position.x -= 16;
-				}
-				//}
-				//currentTime = SDL_GetTicks();
-				lastTime_A = currentTime;
-				//frameStart = SDL_GetTicks();
-
-
-
 			}
-
 		}
-
-
 	}
+
 	if ((App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_DOWN) && (App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_IDLE)
 		&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE))
 	{
 		firstInput_D = true;
 	}
-	if (position.x <= 186) {
+	if (position.x <= 186 * 3) {
 		if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT)
 			&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE))
 		{
 			if (firstInput_D == true) {
-				if (position.x == 186) {
-					position.x = 42;
-					position.y += 16;
+				if (position.x == 186 * 3 && position.y <= 159 * 3) {
+					position.x = 42 * 3;
+					position.y += 16 * 3;
+				}
+				else if (position.y > 159 * 3 && position.x > 170 * 3) {
+
 				}
 				else {
-					position.x += 16;
+					position.x += 16 * 3;
 				}
 				lastTime_D = SDL_GetTicks();
 				delay_D = 500;
@@ -138,12 +144,15 @@ Update_Status Pointer::Update()
 			else if (currentTime > lastTime_D + delay_D) {
 				delay_D = 50;
 				//if (firstInput == false) {
-				if (position.x == 186) {
-					position.x = 42;
-					position.y += 16;
+				if (position.x == 186 * 3 && position.y <= 159 * 3) {
+					position.x = 42 * 3;
+					position.y += 16 * 3;
+				}
+				else if (position.y > 159 * 3 && position.x > 170 * 3) {
+
 				}
 				else {
-					position.x += 16;
+					position.x += 16 * 3;
 				}
 				//}
 				//currentTime = SDL_GetTicks();
@@ -163,12 +172,12 @@ Update_Status Pointer::Update()
 	{
 		firstInput_S = true;
 	}
-	if (position.y <= 159) {
+	if (position.y <= 159 * 3) {
 		if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_IDLE)
 			&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE))
 		{
 			if (firstInput_S == true) {
-				position.y += 16;
+				position.y += 16 * 3;
 				lastTime_S = SDL_GetTicks();
 				delay_S = 500;
 				firstInput_S = false;
@@ -176,7 +185,7 @@ Update_Status Pointer::Update()
 			else if (currentTime > lastTime_S + delay_S) {
 				delay_S = 50;
 				//if (firstInput == false) {
-				position.y += 16;
+				position.y += 16 * 3;
 				//}
 				//currentTime = SDL_GetTicks();
 				lastTime_S = currentTime;
@@ -194,12 +203,12 @@ Update_Status Pointer::Update()
 	{
 		firstInput_W = true;
 	}
-	if (position.y >= 127) {
+	if (position.y >= 127 * 3) {
 		if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_IDLE)
 			&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT))
 		{
 			if (firstInput_W == true) {
-				position.y -= 16;
+				position.y -= 16 * 3;
 				lastTime_W = SDL_GetTicks();
 				delay_W = 500;
 				firstInput_W = false;
@@ -207,7 +216,7 @@ Update_Status Pointer::Update()
 			else if (currentTime > lastTime_W + delay_W) {
 				delay_W = 50;
 				//if (firstInput == false) {
-				position.y -= 16;
+				position.y -= 16 * 3;
 				//}
 				//currentTime = SDL_GetTicks();
 				lastTime_W = currentTime;
@@ -219,6 +228,7 @@ Update_Status Pointer::Update()
 
 		}
 	}
+
 
 	return Update_Status::UPDATE_CONTINUE;
 }
@@ -254,7 +264,7 @@ Update_Status Pointer::PostUpdate()
 
 
 	*/
-	App->render->Blit(texture, position.x, position.y, &pointRect, 0.0f, true);
+	App->render->Blit(texture, position.x, position.y, &pointRect, 0.0f, true, 3);
 	return Update_Status::UPDATE_CONTINUE;
 }
 

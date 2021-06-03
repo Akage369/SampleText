@@ -66,6 +66,8 @@ public:
 
 	Collider* colliderUI = nullptr;
 
+	bool nextlvl = true;
+
 };
 
 #endif

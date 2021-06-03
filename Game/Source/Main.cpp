@@ -1,6 +1,7 @@
 #include "Application.h"
 #include "Globals.h"
 #include "MemLeaks.h"
+#include "ModuleInput.h"
 
 #include "SDL/include/SDL.h"
 #pragma comment( lib, "SDL/libx86/SDL2.lib")
@@ -60,7 +61,10 @@ int main(int argc, char* argv[])
 				state = Main_States::MAIN_EXIT;
 			}
 			else if (status == Update_Status::UPDATE_STOP)
-			{
+			{ 
+				state = Main_States::MAIN_FINISH;
+			}
+			else if (App->input->keys[SDL_SCANCODE_ESCAPE] == Key_State::KEY_DOWN) {
 				state = Main_States::MAIN_FINISH;
 			}
 		}	break;
