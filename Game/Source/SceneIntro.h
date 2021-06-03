@@ -37,6 +37,7 @@ public:
 	SDL_Texture* scroller1 = nullptr;
 	SDL_Texture* scroller2 = nullptr;
 	SDL_Texture* introMenu = nullptr;
+
 	int scrollerY;
 	int scroller2Y;
 	int scroller3Y;
