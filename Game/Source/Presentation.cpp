@@ -29,7 +29,7 @@ bool Presentation::Start()
 
 	bgTexture = App->textures->Load("Assets/Textures/presentacion.png");
 	//bgTexto = App->textures->Load("Assets/Textures/spritesheet_intro_texto.png");
-	App->audio->PlayMusic("Assets/Audio/Music/MusicAnimation.ogg", 1.0f);
+	//App->audio->PlayMusic("Assets/Audio/Music/MusicAnimation.ogg", 1.0f);
 
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;

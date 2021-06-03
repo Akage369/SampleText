@@ -31,6 +31,7 @@ bool SceneIntro::Start()
 
 	bool ret = true;
 
+	animatedIntro = App->textures->Load("Assets/Textures/spritesheet_intro.png");
 	scroller1 = App->textures->Load("Assets/Textures/spritesheet_intro_fondo.png");
 	bgTexto = App->textures->Load("Assets/Textures/spritesheet_intro_texto.png");
 	puntero = App->textures->Load("Assets/Textures/puntero");
