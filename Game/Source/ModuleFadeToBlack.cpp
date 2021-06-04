@@ -3,6 +3,8 @@
 #include "Application.h"
 #include "ModuleRender.h"
 #include "LevelManager.h"
+#include "ModuleWindow.h"
+#include "WindowSize.h"
 
 #include "SDL/include/SDL_render.h"
 
@@ -20,14 +22,14 @@ bool ModuleFadeToBlack::Start()
 {
 	LOG("Preparing Fade Screen");
 
-	// Enable blending mode for transparency
 	SDL_SetRenderDrawBlendMode(App->render->renderer, SDL_BLENDMODE_BLEND);
+	screenRect = {0,0,App->winSize->w, App->winSize->h};
 	return true;
 }
 
 Update_Status ModuleFadeToBlack::Update()
 {
-	// Exit this function if we are not performing a fade
+
 	if (currentStep == Fade_Step::NONE) return Update_Status::UPDATE_CONTINUE;
 
 	if (currentStep == Fade_Step::TO_BLACK)
@@ -55,12 +57,12 @@ Update_Status ModuleFadeToBlack::Update()
 
 Update_Status ModuleFadeToBlack::PostUpdate()
 {
-	// Exit this function if we are not performing a fade
+	
 	if (currentStep == Fade_Step::NONE) return Update_Status::UPDATE_CONTINUE;
 
 	float fadeRatio = (float)frameCount / (float)maxFadeFrames;
 
-	// Render the black square with alpha on the screen
+	
 	SDL_SetRenderDrawColor(App->render->renderer, 0, 0, 0, (Uint8)(fadeRatio * 255.0f));
 	SDL_RenderFillRect(App->render->renderer, &screenRect);
 
@@ -69,11 +71,9 @@ Update_Status ModuleFadeToBlack::PostUpdate()
 
 bool ModuleFadeToBlack::FadeToBlack(Module* moduleToDisable, Module* moduleToEnable, float frames)
 {
-	
 
 	bool ret = false;
 
-	// If we are already in a fade process, ignore this call
 	if (currentStep == Fade_Step::NONE)
 	{
 		currentStep = Fade_Step::TO_BLACK;
@@ -86,7 +86,5 @@ bool ModuleFadeToBlack::FadeToBlack(Module* moduleToDisable, Module* moduleToEna
 		ret = true;
 	}
 	
-	
-
 	return ret;
 }

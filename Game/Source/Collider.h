@@ -23,7 +23,6 @@ struct Collider
 		MAX
 	};
 
-	//Methods
 	Collider(SDL_Rect rectangle, Type type, Module* listener = nullptr);
 
 	void SetPos(int x, int y);
@@ -32,7 +31,6 @@ struct Collider
 
 	void AddListener(Module* listener);
 
-	//Variables
 	SDL_Rect rect;
 	bool pendingToDelete = false;
 	Type type;

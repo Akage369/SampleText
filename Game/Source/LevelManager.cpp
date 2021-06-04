@@ -59,49 +59,7 @@ Update_Status LevelManager::Update() {
 		}
 	}
 	if (App->input->keys[SDL_SCANCODE_F4] == KEY_DOWN) {
-		//if (lvl > 0 && lvl <= 6) {
-		/*
-			if (lvl == 1) {
-				lvlChange(1, '-');
-				App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->levelMenu, 30);
-			
-				boxes_lvl = 0;
-			}
-			else if (lvl == 0) {
-				lvlChange(1, '-');
-				App->fade->FadeToBlack((Module*)App->levelMenu, (Module*)App->sceneIntro, 30);
-			
-				boxes_lvl = 0;
-			}
-			else if (lvl == -1) {
-				lvlChange(1, '-');
-				App->fade->FadeToBlack((Module*)App->sceneIntro, (Module*)App->packInVideo, 30);
-				
-				boxes_lvl = 0;
-			}
-			else if (lvl == -2) {
-				lvlChange(1, '-');
-				App->fade->FadeToBlack((Module*)App->packInVideo, (Module*)App->presentation, 30);
-				
-				boxes_lvl = 0;
-			}
-			else if (lvl == -3) {
-				lvlChange(6, '=');
-				App->fade->FadeToBlack((Module*)App->presentation, (Module*)App->sceneLevel_1, 30);
-				
-				boxes_lvl = 0;
-			}
-			else {
-				lvlChange(1, '-');
-				App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneLevel_1, 30);
 
-				
-				boxes_lvl = 0;
-			}
-			*/
-		//}
-
-		
 		if((App->sceneLevel_1->lvl>1 && App->sceneLevel_1->lvl <=6)){
 			
 			App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneLevel_1, 30);
@@ -115,6 +73,14 @@ Update_Status LevelManager::Update() {
 			lvlChange(0, '=');
 		}
 
+
+	}
+
+	if (App->input->keys[SDL_SCANCODE_0] == KEY_DOWN) {
+		if (App->sceneLevel_1->godmode == true) {
+			steps = 0;
+		}
+		
 
 	}
 

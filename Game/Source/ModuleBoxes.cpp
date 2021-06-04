@@ -9,7 +9,6 @@
 #include "Boxes.h"
 #include "BoxObject.h"
 #include "WallObject.h"
-#include "OrangeObject.h"
 #include "BallObject.h"
 
 #include "Collider.h"
@@ -170,9 +169,6 @@ void ModuleBoxes::SpawnBox(const BoxSpawnpoint& info)
 
 			case Box_Type::WALL:
 				boxes[i] = new Wall_Obj(info.x, info.y);
-				break;
-			case Box_Type::OR_FLOOR:
-				boxes[i] = new Orange_Obj(info.x, info.y);
 				break;
 			case Box_Type::BALL:
 				boxes[i] = new Ball_Obj(info.x, info.y);  

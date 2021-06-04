@@ -16,7 +16,6 @@ ModuleFonts::~ModuleFonts()
 
 }
 
-// Load new texture from file path
 int ModuleFonts::Load(const char* texture_path, const char* characters, uint rows)
 {
 	int id = -1;
@@ -50,16 +49,6 @@ int ModuleFonts::Load(const char* texture_path, const char* characters, uint row
 
 	font.texture = tex;
 	font.rows = rows;
-
-	
-
-	// TODO 1: Finish storing font data
-
-	// totalLength ---	length of the lookup table
-	// table ---------  All characters displayed in the same order as the texture
-	// columns -------  Amount of chars per row of the texture
-	// char_w --------	Width of each character
-	// char_h --------	Height of each character
 
 	strcpy_s(fonts[id].table, MAX_FONT_CHARS, characters);
 	font.totalLength = strlen(characters);
@@ -97,18 +86,16 @@ void ModuleFonts::BlitText(int x, int y, int font_id, const char* text, int zoom
 
 	const Font* font = &fonts[font_id];
 	SDL_Rect spriteRect;
-	//SDL_Rect fontRect{ 79, 1, 24, 24 };
+	
 	uint len = strlen(text);
 
-	spriteRect.w = 9;//*zoom;//font->char_w;
-	spriteRect.h = 8;// *zoom;// font->char_h;
+	spriteRect.w = 9;
+	spriteRect.h = 8;
 
 	for (uint i = 0; i < len; ++i)
 	{
-		// TODO 2: Find the character in the table and its position in the texture, then Blit
 		uint charIndex = 0;
 
-		// Find the location of the current character in the lookup table
 		for (uint j = 0; j < font->totalLength; ++j)
 		{
 			if (font->table[j] == text[i])
@@ -118,9 +105,8 @@ void ModuleFonts::BlitText(int x, int y, int font_id, const char* text, int zoom
 			}
 		}
 
-		// Retrieve the position of the current character in the sprite
 		spriteRect.x = spriteRect.w * (charIndex % font->columns);
-		spriteRect.y = 348;//spriteRect.h * (charIndex / font->columns);
+		spriteRect.y = 348;
 
 		if( text[i] == '|') {
 			x = x0;
@@ -133,7 +119,6 @@ void ModuleFonts::BlitText(int x, int y, int font_id, const char* text, int zoom
 			App->render->Blit(font->texture, x + zoom, y + zoom, &spriteRect, 0.0f, false, zoom,  r,  g,  b);
 			x += spriteRect.w * zoom - 2*zoom;
 		}
-		//else if (text[i] == ('0'||'1'||'2' || '3' || '4' || '5' || '6' || '7' || '8' || '9' )) {
 		else if (text[i] == '0'|| text[i] == '1' || text[i] == '2' || text[i] == '3' || text[i] == '4' || text[i] == '5' || text[i] == '6' || text[i] == '7' || text[i] == '8' || text[i] == '9' ) {
 			App->render->Blit(font->texture, x + zoom, y + zoom, &spriteRect, 0.0f, false, zoom,  r,  g,  b);
 			x += spriteRect.w * zoom - 2*zoom;
@@ -147,9 +132,5 @@ void ModuleFonts::BlitText(int x, int y, int font_id, const char* text, int zoom
 			x = x0;
 			y += spriteRect.h * zoom + zoom*down;
 		}
-
-		
-		// Advance the position where we blit the next character
-		
 	}
 }

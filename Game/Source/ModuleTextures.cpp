@@ -21,11 +21,9 @@ bool ModuleTextures::Init()
 	LOG("Init Image library");
 	bool ret = true;
 
-	// Load support for the PNG image format
 	int flags = IMG_INIT_PNG;
 	int init = IMG_Init(flags);
 
-	// Check if all flags were initialized correctly
 	if ((init & flags) != flags)
 	{
 		LOG("Could not initialize Image lib. IMG_Init: %s", IMG_GetError());
@@ -39,7 +37,6 @@ bool ModuleTextures::CleanUp()
 {
 	LOG("Freeing textures and Image library");
 
-	//Free all textures sill existing in the textures array
 	for (uint i = 0; i < MAX_TEXTURES; ++i)
 	{
 		if (textures[i] != nullptr)
@@ -49,7 +46,6 @@ bool ModuleTextures::CleanUp()
 		}
 	}
 
-	//Quit SDL_Image subsystems
 	IMG_Quit();
 	return true;
 }

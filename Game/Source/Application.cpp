@@ -8,8 +8,6 @@
 #include "ModulePlayer.h"
 #include "SceneIntro.h"
 #include "SceneLevel1.h"
-#include "ModuleParticles.h"
-#include "ModuleEnemies.h"
 #include "ModuleCollisions.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleFonts.h"
@@ -20,6 +18,8 @@
 #include "Presentation.h"
 #include "LevelMenu.h"
 #include "Pointer.h"
+#include "WindowSize.h"
+
 Application::Application()
 {
 	// The order in which the modules are added is very important.
@@ -31,28 +31,28 @@ Application::Application()
 	modules[2] = textures = new ModuleTextures(true);
 	modules[3] = audio = new ModuleAudio(true);
 	
-	modules[4] = presentation = new Presentation(true);
-	modules[5] = packInVideo = new PackInVideo(false);
-	modules[6] = sceneIntro = new SceneIntro(false);
-	modules[7] = levelMenu = new LevelMenu(false);
-	modules[8] = pointer = new Pointer(false);
+	modules[4] = winSize = new WinSize(true);
+	modules[5] = presentation = new Presentation(true);
+	modules[6] = packInVideo = new PackInVideo(false);
+	modules[7] = sceneIntro = new SceneIntro(false);
+	modules[8] = levelMenu = new LevelMenu(false);
+	modules[9] = pointer = new Pointer(false);
 
 
-	modules[9] = tiles = new Tiles(true);
-	modules[10] = boxes = new ModuleBoxes(false);
-	modules[11] = player = new ModulePlayer(false);	//Player starts disabled
-	modules[12] = particles = new ModuleParticles(true);
+	modules[10] = tiles = new Tiles(true);
+	modules[11] = boxes = new ModuleBoxes(false);
+	modules[12] = player = new ModulePlayer(false);	//Player starts disabled
 	modules[13] = sceneLevel_1 = new SceneLevel1(false);		//Gameplay scene starts disabled
-	modules[14] = enemies = new ModuleEnemies(false);	//Enemies start disabled
 
-	modules[15] = collisions = new ModuleCollisions(false);
-	modules[16] = fade = new ModuleFadeToBlack(true);
-	modules[17] = fonts = new ModuleFonts(true);
+	modules[14] = collisions = new ModuleCollisions(false);
+	modules[15] = fade = new ModuleFadeToBlack(true);
+	modules[16] = fonts = new ModuleFonts(true);
 	
 	
-	modules[18] = lvlManage = new LevelManager(true);
+	modules[17] = lvlManage = new LevelManager(true);
+	
 
-	modules[19] = render = new ModuleRender(true);
+	modules[18] = render = new ModuleRender(true);
 }
 
 Application::~Application()

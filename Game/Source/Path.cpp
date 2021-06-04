@@ -16,11 +16,11 @@ void Path::Update()
 
 	if (currentStepFrame > steps[currentStep].framesDuration)
 	{
-		if (currentStep < totalSteps - 1) // If it is not the last step, advance
+		if (currentStep < totalSteps - 1) 
 		{
 			currentStep++;
 		}
-		else if (loop) // Otherwise, if the path loops, go back to the beginning
+		else if (loop)
 		{
 			currentStep = 0;
 		}

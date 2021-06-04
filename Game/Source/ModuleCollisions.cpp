@@ -73,7 +73,6 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 
 }
 
-// Destructor
 ModuleCollisions::~ModuleCollisions()
 {
 
@@ -81,7 +80,7 @@ ModuleCollisions::~ModuleCollisions()
 
 Update_Status ModuleCollisions::PreUpdate()
 {
-	// Remove all colliders scheduled for deletion
+	
 	for (uint i = 0; i < MAX_COLLIDERS; ++i)
 	{
 		if (colliders[i] != nullptr && colliders[i]->pendingToDelete == true)
@@ -96,16 +95,15 @@ Update_Status ModuleCollisions::PreUpdate()
 
 	for (uint i = 0; i < MAX_COLLIDERS; ++i)
 	{
-		// skip empty colliders
+	
 		if (colliders[i] == nullptr)
 			continue;
 
 		c1 = colliders[i];
 
-		// avoid checking collisions already checked
 		for (uint k = i + 1; k < MAX_COLLIDERS; ++k)
 		{
-			// skip empty colliders
+
 			if (colliders[k] == nullptr)
 				continue;
 
@@ -181,7 +179,6 @@ void ModuleCollisions::DebugDraw()
 	
 }
 
-// Called before quitting
 bool ModuleCollisions::CleanUp() 
 {
 	LOG("Freeing all colliders");

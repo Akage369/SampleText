@@ -3,7 +3,7 @@
 
 #include "Globals.h"
 
-#define NUM_MODULES 20
+#define NUM_MODULES 19
 
 class Module;
 class ModuleWindow;
@@ -13,9 +13,7 @@ class ModuleAudio;
 class ModulePlayer;
 class SceneIntro;
 class SceneLevel1;
-class ModuleParticles;
 class ModuleCollisions;
-class ModuleEnemies;
 class ModuleFadeToBlack;
 class ModuleFonts;
 class ModuleRender; 
@@ -26,32 +24,27 @@ class Presentation;
 class PackInVideo;
 class LevelMenu;
 class Pointer;
+class WinSize;
 
 class Application
 {
 
 public:
 
-	//Constructor. Creates all necessary modules for the application
 	Application();
 
-	//Destructor. Removes all module objects
 	~Application();
 
-	//Initializes all modules
 	bool Init();
 
-	//Updates all modules (PreUpdate, Update and PostUpdate)
 	Update_Status Update();
 
-	//Releases all the application data
 	bool CleanUp();
 
 public:
-	// An array to store all modules
+
 	Module* modules[NUM_MODULES];
 
-	// All the modules stored individually
 	ModuleWindow* window = nullptr;
 	ModuleInput* input = nullptr;
 	ModuleTextures* textures = nullptr;
@@ -67,16 +60,14 @@ public:
 	LevelMenu* levelMenu = nullptr;
 	Pointer* pointer = nullptr;
 
-	ModuleEnemies* enemies = nullptr;
-	ModuleParticles* particles = nullptr;
-
 	ModuleCollisions* collisions = nullptr;
 	ModuleFadeToBlack* fade = nullptr;
 	ModuleFonts* fonts = nullptr;
-	///Tiles
+
 	Tiles* tiles = nullptr;
 	LevelManager* lvlManage = nullptr;
 	ModuleBoxes* boxes = nullptr;
+	WinSize* winSize = nullptr;
 
 	ModuleRender* render = nullptr;
 };

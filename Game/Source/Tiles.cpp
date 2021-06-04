@@ -32,7 +32,7 @@ int Tiles::Load(const char* texture_path, const char* tile, uint rows)
 
 	SDL_Texture* tex = App->textures->Load(texture_path);
 
-	if (tex == nullptr  || strlen(tile) >= MAX_TILES_BLOCKS)//|| tile[MAX_TILES_BLOCKS] >= MAX_TILES_BLOCKS)
+	if (tex == nullptr  || strlen(tile) >= MAX_TILES_BLOCKS)
 	{
 		LOG("Could not load tileset at %s with tiles '%s'", texture_path, tile);
 		return id;
@@ -54,21 +54,10 @@ int Tiles::Load(const char* texture_path, const char* tile, uint rows)
 	tilesptr->rows = rows;
 
 
-
-	// TODO 1: Finish storing font data
-
-	// totalLength ---	length of the lookup table
-	// table ---------  All characters displayed in the same order as the texture
-	// columns -------  Amount of chars per row of the texture
-	// char_w --------	Width of each character
-	// char_h --------	Height of each character
-
-
-
 	for (int i = 0; i < MAX_TILES_BLOCKS;i++) {
 		tiles[id].tilesTable[i] = tile[i];
 	}
-	///Donde el 6 va el total de numeros de la matriz
+	
 	tilesptr->totalLength = strlen(tile);
 	tilesptr->columns = tiles[id].totalLength / rows; 
 
@@ -92,13 +81,8 @@ void Tiles::UnLoad(int font_id)
 	}
 }
 Update_Status Tiles:: Update() {
-	/*if (App->lvlManage->Getlvl() == 1) {
-		zoom = 3;
-	}
-	else {
-		zoom = 1;
-	}
-	*/
+	
+
 	return Update_Status::UPDATE_CONTINUE;
 }
 
@@ -123,10 +107,10 @@ void Tiles::BlitScene(int x, int y, int tile_id, const char* map, int zoom) cons
 
 	for (uint i = 0; i < len; ++i)
 	{
-		// TODO 2: Find the character in the table and its position in the texture, then Blit
+	
 		uint charIndex = 0;
 
-		// Find the location of the current character in the lookup table
+		
 		for (uint j = 0; j < tilesptr->totalLength; ++j)
 		{
 			if (tilesptr->tilesTable[j] == map[i])
@@ -141,33 +125,30 @@ void Tiles::BlitScene(int x, int y, int tile_id, const char* map, int zoom) cons
 			y += (tilesptr->tile_h - 2)*zoom;
 		}
 		else if(map[i] == 'W'|| map[i] == 'w') {
-			//if (tilesptr == nullptr) {
-				// Retrieve the position of the current character in the sprite
+			
 				spriteRect.x = spriteRect.w * (charIndex % tilesptr->columns);
 				spriteRect.y = spriteRect.h * (charIndex / tilesptr->columns);
 
 				App->render->Blit(tilesptr->texture, x, y, &spriteRect, 0.0f, false,zoom);
-				//App->collisions->AddCollider({ x+1, y+1, 24, 24 }, Collider::Type::WALL);
 				
-					//App->boxes->AddBox(Box_Type::WALL, x + 1, y + 1);
 				
-				// Advance the position where we blit the next character
+				
+				
+			
 				x += (spriteRect.w - 2)*zoom;
-			//}
+			
 			
 		}
 		else if (map[i] == 'B') {
-			// Retrieve the position of the current character in the sprite
-			//if (tilesptr == nullptr) {
+		
 				spriteRect.x = spriteRect.w * (charIndex % tilesptr->columns);
 				spriteRect.y = spriteRect.h * (charIndex / tilesptr->columns);
 
 				App->render->Blit(tilesptr->texture, x, y, &spriteRect, 0.0f, false,zoom);
 				
-				//App->boxes->AddBox(Box_Type::BALL, x + 1, y + 1);
-				// Advance the position where we blit the next character
+				
 				x += (spriteRect.w - 2)*zoom;
-			//}
+			
 		}
 		else if (map[i] == 'C') {
 			spriteRect.x = spriteRect.w * (charIndex % tilesptr->columns);
@@ -176,20 +157,19 @@ void Tiles::BlitScene(int x, int y, int tile_id, const char* map, int zoom) cons
 			App->render->Blit(tilesptr->texture, x+zoom, y+zoom, &floorRect, 0.0f, false,zoom);
 
 			
-			// Advance the position where we blit the next character
+			
 			x += (spriteRect.w - 2)*zoom;
 		}
 		else {
-		// Retrieve the position of the current character in the sprite
-		//if (tilesptr == nullptr) {
+		
 		spriteRect.x = spriteRect.w * (charIndex % tilesptr->columns);
 		spriteRect.y = spriteRect.h * (charIndex / tilesptr->columns);
 
 		App->render->Blit(tilesptr->texture, x, y, &spriteRect, 0.0f, false,zoom);
 
-		// Advance the position where we blit the next character
+		
 		x += (spriteRect.w - 2)*zoom;
-		//}
+		
 		}
 		
 		
@@ -219,10 +199,10 @@ void Tiles::genObjects(int x, int y, int tile_id, const char* map, int zoom) con
 
 	for (uint i = 0; i < len; ++i)
 	{
-		// TODO 2: Find the character in the table and its position in the texture, then Blit
+		
 		uint charIndex = 0;
 
-		// Find the location of the current character in the lookup table
+	
 		for (uint j = 0; j < tilesptr->totalLength; ++j)
 		{
 			if (tilesptr->tilesTable[j] == map[i])
@@ -237,30 +217,27 @@ void Tiles::genObjects(int x, int y, int tile_id, const char* map, int zoom) con
 			y += (tilesptr->tile_h - 2)*zoom;
 		}
 		else if (map[i] == 'W' || map[i] == 'w') {
-			//if (tilesptr == nullptr) {
-				// Retrieve the position of the current character in the sprite
+			
 			spriteRect.x = spriteRect.w * (charIndex % tilesptr->columns);
 			spriteRect.y = spriteRect.h * (charIndex / tilesptr->columns);
 
-			//App->collisions->AddCollider({ x+1, y+1, 24, 24 }, Collider::Type::WALL);
 
 			App->boxes->AddBox(Box_Type::WALL, x + zoom, y + zoom);
 
-			// Advance the position where we blit the next character
+			
 			x += (spriteRect.w - 2) * zoom;
-			//}
+			
 
 		}
 		else if (map[i] == 'B') {
-			// Retrieve the position of the current character in the sprite
-			//if (tilesptr == nullptr) {
+			
 			spriteRect.x = spriteRect.w * (charIndex % tilesptr->columns);
 			spriteRect.y = spriteRect.h * (charIndex / tilesptr->columns);
 
 			App->boxes->AddBox(Box_Type::BALL, x + zoom, y + zoom);
-			// Advance the position where we blit the next character
+			
 			x += (spriteRect.w - 2) * zoom;
-			//}
+			
 		}
 		else if (map[i] == 'C') {
 			spriteRect.x = spriteRect.w * (charIndex % tilesptr->columns);
@@ -268,18 +245,16 @@ void Tiles::genObjects(int x, int y, int tile_id, const char* map, int zoom) con
 
 			App->boxes->AddBox(Box_Type::BOX, x + zoom, y + zoom);
 
-			// Advance the position where we blit the next character
 			x += (spriteRect.w - 2) * zoom;
 		}
 		else {
-			// Retrieve the position of the current character in the sprite
-			//if (tilesptr == nullptr) {
+			
 			spriteRect.x = spriteRect.w * (charIndex % tilesptr->columns);
 			spriteRect.y = spriteRect.h * (charIndex / tilesptr->columns);
 
-			// Advance the position where we blit the next character
+			
 			x += (spriteRect.w - 2) * zoom;
-			//}
+		
 		}
 
 

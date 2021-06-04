@@ -10,45 +10,40 @@ struct SDL_Texture;
 class Pointer : public Module
 {
 public:
-	// Constructor
+	
 	Pointer(bool startEnabled);
 
-	// Destructor
+	
 	~Pointer();
 
-	// Called when the module is activated
-	// Loads the necessary textures for the player
+	
 	bool Start() override;
 
-	// Called at the middle of the application loop
-	// Processes new input and handles player movement
+	
 	Update_Status Update() override;
 
-	// Called at the end of the application loop
-	// Performs the render call of the player sprite
+	
 	Update_Status PostUpdate() override;
 
 
 public:
-	// Position of the player in the map
+	
 	iPoint position;
 
-	// The speed in which we move the player (pixels per frame)
+	
 	int speed = 1;
 
-	// The player spritesheet loaded into an SDL_Texture
+	
 	SDL_Texture* texture = nullptr;
 
 	SDL_Rect pointRect;
-	// The pointer to the current player animation
-	// It will be switched depending on the player's movement direction
+	
 	Animation* currentAnimation = nullptr;
 
-	// A set of animations
+	
 	Animation pointAnim;
 
 
-	///frames
 	unsigned int currentTime;
 
 	unsigned int lastTime_A = 0;
@@ -71,6 +66,8 @@ public:
 
 	Uint32 frameStart;
 	int frameTime;
+
+	int index=1;
 
 };
 

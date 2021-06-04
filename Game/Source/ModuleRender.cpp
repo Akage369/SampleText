@@ -5,6 +5,7 @@
 #include "ModuleWindow.h"
 #include "ModuleTextures.h"
 #include "ModuleInput.h"
+#include "WindowSize.h"
 
 #include "SDL/include/SDL_render.h"
 
@@ -39,14 +40,15 @@ bool ModuleRender::Init()
 
 	return ret;
 }
+bool ModuleRender::Start() {
+	camera = { 0, 0, App->winSize->w, App->winSize->h };
+	return true;
+}
 
-// Called every draw update
 Update_Status ModuleRender::PreUpdate()
 {
-	//Set the color used for drawing operations
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 
-	//Clear rendering target
 	SDL_RenderClear(renderer);
 
 	return Update_Status::UPDATE_CONTINUE;
@@ -54,11 +56,10 @@ Update_Status ModuleRender::PreUpdate()
 
 Update_Status ModuleRender::Update()
 {
-	//Handle positive vertical movement
+	/*
 	if (App->input->keys[SDL_SCANCODE_UP] == KEY_REPEAT)
 		camera.y -= cameraSpeed;
 
-	//Handle negative vertical movement
 	if (App->input->keys[SDL_SCANCODE_DOWN] == KEY_REPEAT)
 		camera.y += cameraSpeed;
 
@@ -69,13 +70,12 @@ Update_Status ModuleRender::Update()
 	if (App->input->keys[SDL_SCANCODE_RIGHT] == KEY_REPEAT)
 		camera.x += cameraSpeed;
 
-
+		*/
 	return Update_Status::UPDATE_CONTINUE;
 }
 
 Update_Status ModuleRender::PostUpdate()
 {
-	//Update the screen
 	SDL_RenderPresent(renderer);
 
 	return Update_Status::UPDATE_CONTINUE;
@@ -85,14 +85,12 @@ bool ModuleRender::CleanUp()
 {
 	LOG("Destroying renderer");
 
-	//Destroy the rendering context
 	if (renderer != nullptr)
 		SDL_DestroyRenderer(renderer);
 
 	return true;
 }
 
-// Blit to screen
 bool ModuleRender::Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* section, float speed, bool useCamera, int mult, int r, int g, int b)
 {
 	bool ret = true;
@@ -112,7 +110,6 @@ bool ModuleRender::Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* sect
 	}
 	else
 	{
-		//Collect the texture size into rect.w and rect.h variables
 		SDL_QueryTexture(texture, nullptr, nullptr, &dstRect.w, &dstRect.h);
 	}
 

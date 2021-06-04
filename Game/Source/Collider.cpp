@@ -29,7 +29,6 @@ void Collider::AddListener(Module* listener)
 			break;
 		}
 
-		//Simple security check to avoid adding the same listener twice
 		else if (listeners[i] == listener)
 			break;
 	}

@@ -24,7 +24,6 @@ bool ModuleWindow::Init()
 	}
 	else
 	{
-		//Create window
 		Uint32 flags = SDL_WINDOW_SHOWN;
 
 		if (WIN_FULLSCREEN == true)
@@ -39,8 +38,8 @@ bool ModuleWindow::Init()
 		if (WIN_FULLSCREEN_DESKTOP == true)
 			flags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
 
-		window = SDL_CreateWindow("Super Soukoban Prototype", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH * SCREEN_SIZE, SCREEN_HEIGHT * SCREEN_SIZE, flags);
-
+		window = SDL_CreateWindow("Super Soukoban", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH * SCREEN_SIZE, SCREEN_HEIGHT * SCREEN_SIZE, flags);
+		
 		if (window == nullptr)
 		{
 			LOG("Window could not be created! SDL_Error: %s\n", SDL_GetError());
@@ -49,8 +48,11 @@ bool ModuleWindow::Init()
 		else
 		{
 			screenSurface = SDL_GetWindowSurface(window);
+			
 		}
 	}
+
+	
 
 	return ret;
 }
@@ -59,11 +61,9 @@ bool ModuleWindow::CleanUp()
 {
 	LOG("Destroying SDL window and quitting all SDL systems");
 
-	//Destroy window
 	if (window != nullptr)
 		SDL_DestroyWindow(window);
 
-	//Quit SDL subsystems
 	SDL_Quit();
 
 	return true;
