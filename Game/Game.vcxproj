@@ -149,6 +149,7 @@
     <ClCompile Include="Source\BoxObject.cpp" />
     <ClCompile Include="Source\Collider.cpp" />
     <ClCompile Include="Source\Globals.cpp" />
+    <ClCompile Include="Source\IntroAnimation.cpp" />
     <ClCompile Include="Source\LevelManager.cpp" />
     <ClCompile Include="Source\LevelMenu.cpp" />
     <ClCompile Include="Source\Main.cpp" />
@@ -181,6 +182,7 @@
     <ClInclude Include="Source\BoxObject.h" />
     <ClInclude Include="Source\Collider.h" />
     <ClInclude Include="Source\Globals.h" />
+    <ClInclude Include="Source\IntroAnimation.h" />
     <ClInclude Include="Source\LevelManager.h" />
     <ClInclude Include="Source\LevelMenu.h" />
     <ClInclude Include="Source\MemLeaks.h" />
