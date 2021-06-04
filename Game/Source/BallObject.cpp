@@ -15,22 +15,22 @@ Ball_Obj::Ball_Obj(int x, int y) : Box(x, y)
 
 	switch (App->lvlManage->Getlvl()) {
 	case 1:
-		zoom = 3;
+		zoom = 5;
 		break;
 	case 2:
-		zoom = 2;
+		zoom = 4;
 		break;
 	case 3:
-		zoom = 2;
+		zoom = 3;
 		break;
 	case 4:
-		zoom = 1;
+		zoom = 3;
 		break;
 	case 5:
-		zoom = 1;
+		zoom = 3;
 		break;
 	case 6:
-		zoom = 1;
+		zoom = 3;
 		break;
 	
 	default:

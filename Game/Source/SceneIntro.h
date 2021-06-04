@@ -85,6 +85,12 @@ public:
 	int delay_W = 500;
 	int delay_S = 500;
 
+	int scoreFont = -1;
+
+	int zoom = 3;
+	int tope = 50;
+	int zoomText = 4;
+
 };
 
 #endif

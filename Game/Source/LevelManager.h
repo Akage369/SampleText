@@ -12,9 +12,13 @@ private:
 
 public:
 
+	bool Start() override;
+
 	Update_Status Update() override;
 
 	Update_Status PostUpdate() override;
+
+	bool CleanUp();
 
 	int boxes_lvl=0;
 	bool boxes_done[3] = {false, false, false};
@@ -38,6 +42,10 @@ public:
 	int max_steps = 0;
 
 	bool changeScene = true;
+
+	bool godmode = false;
+
+	int scoreFont = -1;
 };
 
 #endif

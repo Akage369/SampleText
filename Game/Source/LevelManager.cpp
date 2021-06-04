@@ -7,6 +7,8 @@
 #include "ModuleInput.h"
 #include "ModuleRender.h"
 #include "SceneLevel1.h"
+#include "WindowSize.h"
+#include "ModuleFonts.h"
 
 LevelManager::LevelManager(bool isEnabled) : Module(isEnabled)
 {
@@ -38,51 +40,82 @@ void LevelManager::lvlChange(int change, char op)
 	
 }
 
+bool LevelManager::Start(){
+	char lookupTableChars[] = { "ABCDEFGHIJKLMNOPQRSTUVWXYZ.-?!0123456789@/ " };
+	scoreFont = App->fonts->Load("Assets/Textures/spritesheet_menus.png", lookupTableChars, 1);
+	return true;
+}
+
 Update_Status LevelManager::Update() {
 
 	
-
-	if (App->input->keys[SDL_SCANCODE_F2] == KEY_DOWN) {
+	if (App->input->keys[SDL_SCANCODE_G] == Key_State::KEY_DOWN) {
 		if (lvl > 0 && lvl <= 6) {
 			if (App->sceneLevel_1->pause == false) {
-				win = 2;
+				if (godmode == false) {
+					godmode = true;
+					}
+				else {
+					godmode = false;
+				}
 			}
 		}
-
-	}
-
-	if (App->input->keys[SDL_SCANCODE_F3] == KEY_DOWN) {
-		if (lvl > 0 && lvl <= 6) {
-			if (App->sceneLevel_1->pause == false) {
-				win = 1;
+		else {
+			if (godmode == false) {
+				godmode = true;
+			}
+			else {
+				godmode = false;
 			}
 		}
 	}
-	if (App->input->keys[SDL_SCANCODE_F4] == KEY_DOWN) {
+	
+	if (godmode == true) {
+		if (App->input->keys[SDL_SCANCODE_F2] == KEY_DOWN) {
+			if (lvl > 0 && lvl <= 6) {
+				if (App->sceneLevel_1->pause == false) {
+					win = 2;
+				}
+			}
 
-		if((App->sceneLevel_1->lvl>1 && App->sceneLevel_1->lvl <=6)){
-			
-			App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneLevel_1, 30);
-			lvlChange(1, '-');
-
-			boxes_lvl = 0;
-		}
-		else if (App->sceneLevel_1->lvl <= 1) {
-			
-			App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->levelMenu, 30);
-			lvlChange(0, '=');
 		}
 
+		if (App->input->keys[SDL_SCANCODE_F3] == KEY_DOWN) {
+			if (lvl > 0 && lvl <= 6) {
+				if (App->sceneLevel_1->pause == false) {
+					win = 1;
+				}
+			}
+		}
+		if (App->input->keys[SDL_SCANCODE_F4] == KEY_DOWN) {
 
-	}
+			if ((App->sceneLevel_1->lvl > 1 && App->sceneLevel_1->lvl <= 6)) {
 
-	if (App->input->keys[SDL_SCANCODE_0] == KEY_DOWN) {
-		if (App->sceneLevel_1->godmode == true) {
+				App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneLevel_1, 30);
+				lvlChange(1, '-');
+
+				boxes_lvl = 0;
+			}
+			else if (App->sceneLevel_1->lvl <= 1) {
+
+				App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->levelMenu, 30);
+				lvlChange(0, '=');
+			}
+
+
+		}
+		if (App->input->keys[SDL_SCANCODE_0] == KEY_DOWN) {
+
 			steps = 0;
-		}
-		
 
+
+
+		}
 	}
+
+	
+
+	
 
 	switch (win) {
 	case 0:
@@ -129,6 +162,10 @@ Update_Status LevelManager::Update() {
 
 
 Update_Status LevelManager::PostUpdate() {
+
+	if (godmode == true) {
+		App->fonts->BlitText(App->winSize->w / 2 - 4 * 9 * 3, App->winSize->h - 50 * 3, scoreFont, "GOD MODE", 3, 158, 75, 250, (App->winSize->w - 98 * 3) / 2 + 98* 3 - 5 * 3);
+	}
 
 	return Update_Status::UPDATE_CONTINUE;
 }
@@ -180,5 +217,13 @@ void LevelManager::LevelComplete()
 
 int LevelManager::Getlvl() {
 	return lvl;
+}
+
+bool LevelManager::CleanUp()
+{
+
+	App->fonts->UnLoad(0);
+
+	return true;
 }
 

@@ -20,6 +20,8 @@ public:
 
 	Update_Status PostUpdate() override;
 
+	bool CleanUp();
+
 public:
 	
 	SDL_Texture* bgTexture = nullptr;
@@ -28,7 +30,8 @@ public:
 
 	SDL_Rect rect = { 2, 372, 164, 107 };
 	int zoom=3;
-	
+
+	int scoreFont = -1;
 };
 
 #endif 

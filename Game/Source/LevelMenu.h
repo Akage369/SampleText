@@ -28,6 +28,8 @@ public:
 
 	SDL_Rect rectbg = { 259, 631, 256, 440 };
 	SDL_Rect rectlvls = { 1, 1, 161, 81 };
+
+	int scoreFont = -1;
 };
 
 #endif

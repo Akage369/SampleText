@@ -84,13 +84,7 @@
     <ClCompile Include="Source\SceneLevel1.cpp">
       <Filter>Archivos de recursos\Modules\Gameplay</Filter>
     </ClCompile>
-    <ClCompile Include="Source\LevelManager.cpp">
-      <Filter>Archivos de recursos\Utils</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Boxes.cpp">
-      <Filter>Archivos de recursos\Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\ModuleBoxes.cpp">
       <Filter>Archivos de recursos\Utils</Filter>
     </ClCompile>
     <ClCompile Include="Source\PackInVideo.cpp">
@@ -108,9 +102,6 @@
     <ClCompile Include="Source\WindowSize.cpp">
       <Filter>Archivos de recursos\Utils</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Tiles.cpp">
-      <Filter>Archivos de recursos\Utils</Filter>
-    </ClCompile>
     <ClCompile Include="Source\BallObject.cpp">
       <Filter>Archivos de recursos\Utils\Objects</Filter>
     </ClCompile>
@@ -119,6 +110,15 @@
     </ClCompile>
     <ClCompile Include="Source\WallObject.cpp">
       <Filter>Archivos de recursos\Utils\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\LevelManager.cpp">
+      <Filter>Archivos de recursos\Modules\Gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Tiles.cpp">
+      <Filter>Archivos de recursos\Modules\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ModuleBoxes.cpp">
+      <Filter>Archivos de recursos\Modules\Gameplay</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -179,13 +179,7 @@
     <ClInclude Include="Source\SceneLevel1.h">
       <Filter>Archivos de recursos\Modules\Gameplay</Filter>
     </ClInclude>
-    <ClInclude Include="Source\LevelManager.h">
-      <Filter>Archivos de recursos\Utils</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Boxes.h">
-      <Filter>Archivos de recursos\Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\ModuleBoxes.h">
       <Filter>Archivos de recursos\Utils</Filter>
     </ClInclude>
     <ClInclude Include="Source\PackInVideo.h">
@@ -203,9 +197,6 @@
     <ClInclude Include="Source\WindowSize.h">
       <Filter>Archivos de recursos\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Tiles.h">
-      <Filter>Archivos de recursos\Utils</Filter>
-    </ClInclude>
     <ClInclude Include="Source\BallObject.h">
       <Filter>Archivos de recursos\Utils\Objects</Filter>
     </ClInclude>
@@ -214,6 +205,15 @@
     </ClInclude>
     <ClInclude Include="Source\WallObject.h">
       <Filter>Archivos de recursos\Utils\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\LevelManager.h">
+      <Filter>Archivos de recursos\Modules\Gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Tiles.h">
+      <Filter>Archivos de recursos\Modules\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ModuleBoxes.h">
+      <Filter>Archivos de recursos\Modules\Gameplay</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

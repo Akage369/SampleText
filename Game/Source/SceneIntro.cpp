@@ -62,6 +62,8 @@ bool SceneIntro::Start()
 
 	App->lvlManage->changeScene = true;
 
+	zoom = 4;
+	tope = 50;
 	optIndex = 0;
 	nextScene = false;
 	titleY = (App->winSize->h - title.h * 3) / 2;
@@ -72,13 +74,14 @@ bool SceneIntro::Start()
 
 Update_Status SceneIntro::Update()
 {
-	if (App->input->keys[SDL_SCANCODE_F4] == KEY_DOWN) {
-		App->fade->FadeToBlack(this, (Module*)App->packInVideo, 20);
+	if (App->lvlManage->godmode == true) {
+		if (App->input->keys[SDL_SCANCODE_F4] == KEY_DOWN) {
+			App->fade->FadeToBlack(this, (Module*)App->packInVideo, 20);
+		}
 	}
-
 	currentTime = SDL_GetTicks();
 	if (currentTime > lastTime + delay) {
-		if (titleY > 70 * 3) {
+		if (titleY > tope * zoom) {
 			titleY -= 1;
 		}
 
@@ -98,8 +101,8 @@ Update_Status SceneIntro::Update()
 	}
 	if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN)
 	{
-		if (titleY > 70 * 3) {
-			titleY = 70 * 3;
+		if (titleY > tope * zoom) {
+			titleY = tope * zoom;
 		}
 		else {
 			switch (optIndex) {
@@ -114,7 +117,8 @@ Update_Status SceneIntro::Update()
 			}
 		}
 	}
-	if (titleY == 70 * 3) {
+	if (titleY == tope * zoom) {
+
 		if ((App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_DOWN))
 		{
 			firstInput_W = true;
@@ -192,32 +196,37 @@ Update_Status SceneIntro::PostUpdate()
 	App->render->Blit(introMenu, scrollers.w*2*3, -scrollerY, &scrollers, 1.0f, true, 3);
 	App->render->Blit(introMenu, scrollers.w*2*3, -(scrollerY - scrollers.h * 3), &scrollers, 1.0f, true, 3);
 
-	App->render->Blit(introMenu, (App->winSize->w-title.w*3-33*3)/2, titleY, &title, 1.0f, true, 3);
+	App->render->Blit(introMenu, (App->winSize->w-title.w*zoom-33*zoom)/2, titleY, &title, 1.0f, true, zoom);
 
-	App->render->Blit(introMenu, (App->winSize->w - copyright.w * 3) / 2, titleY+ title.h*3 + 62*3+60*3, &copyright, 1.0f, true, 3);
-	if (titleY<=70*3) {
-		App->render->Blit(introMenu, (App->winSize->w -options.w*3-6*3)/2, titleY + title.h * 3 + 6 * 3 + +10 * 3, &options, 1.0f, true, 3);
+	App->render->Blit(introMenu, (App->winSize->w - copyright.w * zoom) / 2, titleY+ title.h*zoom +60*zoom, &copyright, 1.0f, true, zoom);
+	if (titleY<= tope *zoom) {
+		App->render->Blit(introMenu, (App->winSize->w -options.w* zoomText)/2 - 5 * zoomText, titleY + title.h * zoomText + 6 * zoomText , &options, 1.0f, true, zoomText);
 		switch (optIndex) {
 		case 0:
-			App->fonts->BlitText((App->winSize->w - options.w * 3) / 2 + 14 * 3 - 3 * 3, titleY + title.h * 3 + 6 * 3 + 8 * 3 + 10 * 3, optFont, "PLAY", 3, 214, 0, 0, App->winSize->w, 3);
-			App->fonts->BlitText((App->winSize->w - options.w * 3) / 2 + 14 * 3-3*3, titleY + title.h * 3 + 6 * 3 + 8 * 3 + 10 * 3, optFont, "|REPEAT INTRO", 3, 16, 16, 24, App->winSize->w, 3);
-			App->fonts->BlitText((App->winSize->w - options.w * 3) / 2 + 14 * 3 - 3 * 3, titleY + title.h * 3 + 6 * 3 + 8 * 3 + 10 * 3, optFont, "||QUIT", 3, 16, 16, 24, App->winSize->w, 3);
-			App->render->Blit(introMenu, (App->winSize->w - options.w * 3) / 2 + 5 * 3 - 3 * 3, titleY + title.h * 3 + 6 * 3 + 7 * 3 +10 * 3, &pointRect, 0.0f, true, 3);
+			App->fonts->BlitText((App->winSize->w - options.w * zoomText) / 2 + 10 * zoomText , titleY + title.h * zoomText  + 13 * zoomText , optFont, "PLAY", zoomText, 214, 0, 0, App->winSize->w, zoomText);
+			App->fonts->BlitText((App->winSize->w - options.w * zoomText) / 2 + 10 * zoomText , titleY + title.h * zoomText + 13 * zoomText, optFont, "|REPEAT INTRO", zoomText, 16, 16, 24, App->winSize->w, zoomText);
+			App->fonts->BlitText((App->winSize->w - options.w * zoomText) / 2 + 10 * zoomText , titleY + title.h * zoomText  + 13 * zoomText, optFont, "||QUIT", zoomText, 16, 16, 24, App->winSize->w, zoomText);
+			App->render->Blit(introMenu, (App->winSize->w - options.w * zoomText) / 2 + 1 * zoomText, titleY + title.h * zoomText +12 * zoomText, &pointRect, 0.0f, true, zoomText);
 			break;
 		case 1:
-			App->fonts->BlitText((App->winSize->w - options.w * 3) / 2 + 14 * 3 - 3 * 3, titleY + title.h * 3 + 6 * 3 + 8 * 3 + 10 * 3, optFont, "PLAY", 3, 16, 16, 24, App->winSize->w, 3);
-			App->fonts->BlitText((App->winSize->w - options.w * 3) / 2 + 14 * 3 - 3 * 3, titleY + title.h * 3 + 6 * 3 + 8 * 3 + 10 * 3, optFont, "|REPEAT INTRO", 3, 214, 0, 0, App->winSize->w, 3);
-			App->fonts->BlitText((App->winSize->w - options.w * 3) / 2 + 14 * 3 - 3 * 3, titleY + title.h * 3 + 6 * 3 + 8 * 3+10 * 3, optFont, "||QUIT", 3, 16, 16, 24, App->winSize->w, 3);
-			App->render->Blit(introMenu, (App->winSize->w - options.w * 3) / 2 + 5 * 3 - 3 * 3, titleY + title.h * 3 + 6 * 3 + 18 * 3 + 10 * 3, &pointRect, 0.0f, true, 3);
+			App->fonts->BlitText((App->winSize->w - options.w * zoomText) / 2 + 10 * zoomText , titleY + title.h * zoomText + 13 * zoomText, optFont, "PLAY", zoomText, 16, 16, 24, App->winSize->w, zoomText);
+			App->fonts->BlitText((App->winSize->w - options.w * zoomText) / 2 + 10 * zoomText , titleY + title.h * zoomText + 13 * zoomText , optFont, "|REPEAT INTRO", zoomText, 214, 0, 0, App->winSize->w, zoomText);
+			App->fonts->BlitText((App->winSize->w - options.w * zoomText) / 2 + 10 * zoomText , titleY + title.h * zoomText + 13 * zoomText, optFont, "||QUIT", zoomText, 16, 16, 24, App->winSize->w, zoomText);
+			App->render->Blit(introMenu, (App->winSize->w - options.w * zoomText) / 2 + 1 * zoomText, titleY + title.h * zoomText + 24 * zoomText, &pointRect, 0.0f, true, zoomText);
 			break;
 		case 2:
-			App->fonts->BlitText((App->winSize->w - options.w * 3) / 2 + 14 * 3 - 3 * 3, titleY + title.h * 3 + 6 * 3 + 8 * 3 + 10 * 3, optFont, "PLAY", 3, 16, 16, 24, App->winSize->w, 3);
-			App->fonts->BlitText((App->winSize->w - options.w * 3) / 2 + 14 * 3 - 3 * 3, titleY + title.h * 3 + 6 * 3 + 8 * 3 + 10 * 3, optFont, "|REPEAT INTRO", 3, 16, 16, 24, App->winSize->w, 3);
-			App->fonts->BlitText((App->winSize->w - options.w * 3) / 2 + 14 * 3 - 3 * 3, titleY + title.h * 3 + 6 * 3 + 8 * 3 + 10 * 3, optFont, "||QUIT", 3, 214, 0, 0, App->winSize->w, 3);
-			App->render->Blit(introMenu, (App->winSize->w - options.w * 3) / 2 + 5 * 3 - 3 * 3, titleY + title.h * 3 + 6 * 3 + 29 * 3 + 10 * 3, &pointRect, 0.0f, true, 3);
+			App->fonts->BlitText((App->winSize->w - options.w * zoomText) / 2 + 10 * zoomText , titleY + title.h * zoomText + 13 * zoomText, optFont, "PLAY", zoomText, 16, 16, 24, App->winSize->w, zoomText);
+			App->fonts->BlitText((App->winSize->w - options.w * zoomText) / 2 + 10 * zoomText , titleY + title.h * zoomText + 13  * zoomText, optFont, "|REPEAT INTRO", zoomText, 16, 16, 24, App->winSize->w, zoomText);
+			App->fonts->BlitText((App->winSize->w - options.w * zoomText) / 2 + 10 * zoomText, titleY + title.h * zoomText + 13 * zoomText, optFont, "||QUIT", zoomText, 214, 0, 0, App->winSize->w, zoomText);
+			App->render->Blit(introMenu, (App->winSize->w - options.w * zoomText) / 2 + 1 * zoomText , titleY + title.h * zoomText + 36 * zoomText, &pointRect, 0.0f, true, zoomText);
 			break;
 		}
 	}
+
+	if (App->lvlManage->godmode == true) {
+		App->fonts->BlitText(App->winSize->w / 2 - 4 * 9 * 3, App->winSize->h - 50 * 3, scoreFont, "GOD MODE", 3, 158, 75, 250, (App->winSize->w - 98 * 3) / 2 + 98 * 3 - 5 * 3);
+	}
+
 	return Update_Status::UPDATE_CONTINUE;
 }
 

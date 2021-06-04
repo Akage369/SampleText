@@ -16,6 +16,7 @@
 #include "SDL/include/SDL.h"
 
 #include <stdio.h>
+#include "WindowSize.h"
 
 
 ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
@@ -148,23 +149,24 @@ bool ModulePlayer::Start()
 
 	switch (App->lvlManage->Getlvl()) {
 	case 1:
-		zoom = 3;
-		break;
-	case 3:
-		zoom = 2;
-		break;
-	case 4:
-		zoom = 1;
-		break;
-	case 5:
-		zoom = 1;
-		break;
-	case 6:
-		zoom = 1;
+		zoom = 5;
 		break;
 	case 2:
-		zoom = 2;
+		zoom = 4;
 		break;
+	case 3:
+		zoom = 3;
+		break;
+	case 4:
+		zoom = 3;
+		break;
+	case 5:
+		zoom = 3;
+		break;
+	case 6:
+		zoom = 3;
+		break;
+	
 	default:
 		zoom = 1;
 		break;
@@ -221,28 +223,28 @@ void ModulePlayer::spawn(int lvl) {
 		position.y = 0;
 		break;
 	case 1:
-		position.x = -12 + 96 * zoom; 
-		position.y = -24 + 48 * zoom; 
+		position.x = ((App->winSize->w - 21 * 24 * zoom) / 2) + (9*24*zoom);
+		position.y =((App->winSize->h - 12 * 24 * zoom) / 2) + (3*24*zoom); 
 		break;
 	case 2:
-		position.x = 264 * zoom;
-		position.y = 216 * zoom;
+		position.x = ( (App->winSize->w - 21 * 24 * zoom)) / 2 + (13*24*zoom);
+		position.y = ( (App->winSize->h - 13 * 24 * zoom)) / 2 + (9 * 24 * zoom);
 		break;
 	case 3:
-		position.x = 72 * zoom;
-		position.y = 48 * zoom;
+		position.x = ((App->winSize->w - 34 * 24 * zoom)) / 2 + (12 * 24 * zoom);
+		position.y = ((App->winSize->h - 18 * 24 * zoom)) / 2 + (4 * 24 * zoom);
 		break;
 	case 4:
-		position.x = 504 * zoom;
-		position.y = 312 * zoom;
+		position.x = ((App->winSize->w - 33 * 24 * zoom)) / 2 + (21 * 24 * zoom);
+		position.y = ((App->winSize->h - 21 * 24 * zoom)) / 2 + (11 * 24 * zoom);
 		break;
 	case 5:
-		position.x = 360 *zoom ;
-		position.y = 312 * zoom;
+		position.x = ((App->winSize->w - 32 * 24 * zoom)) / 2 + (15 * 24 * zoom);
+		position.y = ((App->winSize->h - 21 * 24 * zoom)) / 2 + (11 * 24 * zoom);
 		break;
 	case 6:
-		position.x = 240 * zoom;
-		position.y = 336 * zoom;
+		position.x = ((App->winSize->w - 32 * 24 * zoom)) / 2 + (10 * 24 * zoom);
+		position.y = ((App->winSize->h - 21 * 24 * zoom)) / 2 + (11 * 24 * zoom);
 		break;
 	}
 
@@ -261,7 +263,7 @@ Update_Status ModulePlayer::Update()
 	
 	score = App->lvlManage->boxes_lvl;
 	if (App->lvlManage->steps >= App->lvlManage->max_steps) {
-		if (App->sceneLevel_1->godmode == false) {
+		if (App->lvlManage->godmode == false) {
 			App->lvlManage->Lose();
 		}
 	

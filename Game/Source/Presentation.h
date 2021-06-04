@@ -24,9 +24,10 @@ public:
 public:
 
 	SDL_Texture* bgTexture = nullptr;
-	SDL_Texture* bgTexto = nullptr;
-	SDL_Texture* introAnimation = nullptr;
 
+	int scoreFont = -1;
+
+	int w, h;
 };
 
 #endif

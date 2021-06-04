@@ -36,11 +36,10 @@ public:
 	
 	SDL_Texture* texture = nullptr;
 
-	SDL_Rect pointRect;
+	SDL_Rect pointRect = { 16, 361, 9, 9 };
 	
 	Animation* currentAnimation = nullptr;
 
-	
 	Animation pointAnim;
 
 
@@ -68,6 +67,8 @@ public:
 	int frameTime;
 
 	int index=1;
+
+	int zoom = 3;
 
 };
 

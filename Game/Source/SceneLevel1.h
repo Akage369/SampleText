@@ -47,6 +47,8 @@ public:
 	char stageText[3] = { "\0" };
 	char limitText[5] = { "\0" };
 	int scoreFont = -1;
+	int zoomUI=3;
+	int zoomWL=3;
 
 	bool contactUI = false;
 	
@@ -74,7 +76,6 @@ public:
 
 	int w=0, h=0;
 
-	bool godmode = false;
 };
 
 #endif
