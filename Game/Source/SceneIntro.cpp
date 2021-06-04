@@ -32,7 +32,7 @@ bool SceneIntro::Start()
 
 	bool ret = true;
 
-	
+	animatedIntro = App->textures->Load("Assets/Textures/spritesheet_intro.png");
 	scroller1 = App->textures->Load("Assets/Textures/spritesheet_intro_fondo.png");
 	bgTexto = App->textures->Load("Assets/Textures/spritesheet_intro_texto.png");
 	puntero = App->textures->Load("Assets/Textures/puntero");
@@ -55,7 +55,7 @@ bool SceneIntro::Start()
 	p_pos.x = p_x;
 	p_pos.y = p_y;
 
-	MenuMusic = App->audio->PlayMusic("Assets/Music/MenuMusic", 1.0f); //Falta por determinar sonido
+	MenuMusic = App->audio->PlayMusic("Assets/Music/", 1.0f); //Falta por determinar sonido
 	selectFx = App->audio->LoadFx("Assets"); //Falta por determinar sonido
 	nextFx = App->audio->LoadFx("Assets"); //Falta por determinar sonido
 	backFx = App->audio->LoadFx("Assets"); //Falta por determinar sonido
