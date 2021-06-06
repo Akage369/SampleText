@@ -20,7 +20,78 @@
 
 IntroAnimation::IntroAnimation(bool startEnabled) :Module(startEnabled)
 {
+	ImCarAnim.PushBack({ 1, 1, 164, 113 });
+	ImCarAnim.PushBack({ 166, 1, 164, 113 });
+	ImCarAnim.PushBack({ 331, 1, 164, 113 });
+	ImCarAnim.PushBack({ 496, 1, 164, 113 });
+	ImCarAnim.PushBack({ 661, 1, 164, 113 });
+	ImCarAnim.PushBack({ 826, 1, 164, 113 });
+	ImCarAnim.PushBack({ 991, 1, 164, 113 });
+
+	ImCarAnim.PushBack({ 1, 115, 164, 113 });
+	ImCarAnim.PushBack({ 166, 115, 164, 113 });
+	ImCarAnim.PushBack({ 331, 115, 164, 113 });
+	ImCarAnim.PushBack({ 496, 115, 164, 113 });
+	ImCarAnim.PushBack({ 661, 115, 164, 113 });
+	ImCarAnim.PushBack({ 826, 115, 164, 113 });
+	ImCarAnim.PushBack({ 991, 115, 164, 113 });
+
+	ImCarAnim.PushBack({ 1, 230, 164, 113 });
+	ImCarAnim.PushBack({ 166, 230, 164, 113 });
+	ImCarAnim.PushBack({ 331, 230, 164, 113 });
+	ImCarAnim.PushBack({ 496, 230, 164, 113 });
+	ImCarAnim.PushBack({ 661, 230, 164, 113 });
+	ImCarAnim.PushBack({ 826, 230, 164, 113 });
+	ImCarAnim.PushBack({ 991, 230, 164, 113 });
+
+	ImCarAnim.PushBack({ 1, 343, 164, 113 });
+	ImCarAnim.PushBack({ 166, 343, 164, 113 });
+	ImCarAnim.PushBack({ 331, 343, 164, 113 });
+	ImCarAnim.PushBack({ 496, 343, 164, 113 });
+	ImCarAnim.PushBack({ 661, 343, 164, 113 });
+	ImCarAnim.PushBack({ 826, 343, 164, 113 });
+	ImCarAnim.PushBack({ 991, 343, 164, 113 });
+
+	ImCarAnim.PushBack({ 1, 457, 164, 113 });
+	ImCarAnim.PushBack({ 166, 457, 164, 113 });
+	ImCarAnim.PushBack({ 331, 457, 164, 113 });
+	ImCarAnim.PushBack({ 496, 457, 164, 113 });
+	ImCarAnim.PushBack({ 661, 457, 164, 113 });
+	ImCarAnim.PushBack({ 826, 457, 164, 113 });
+	ImCarAnim.PushBack({ 991, 457, 164, 113 });
+
+	ImCarAnim.PushBack({ 1, 571, 164, 113 });
+	ImCarAnim.PushBack({ 166, 571, 164, 113 });
+	ImCarAnim.PushBack({ 331, 571, 164, 113 });
+	ImCarAnim.PushBack({ 496, 571, 164, 113 });
+	ImCarAnim.PushBack({ 661, 571, 164, 113 });
+	ImCarAnim.PushBack({ 826, 571, 164, 113 });
+	ImCarAnim.PushBack({ 991, 571, 164, 113 });
+
+	ImCarAnim.PushBack({ 1, 685, 164, 113 });
+	ImCarAnim.PushBack({ 166, 685, 164, 113 });
+	ImCarAnim.PushBack({ 331, 685, 164, 113 });
+	ImCarAnim.PushBack({ 496, 685, 164, 113 });
+	ImCarAnim.PushBack({ 661, 685, 164, 113 });
+	ImCarAnim.PushBack({ 826, 685, 164, 113 });
+	ImCarAnim.PushBack({ 991, 685, 164, 113 });
+
+	ImCarAnim.PushBack({ 1, 799, 164, 113 });
+	ImCarAnim.PushBack({ 166, 799, 164, 113 });
+	ImCarAnim.PushBack({ 331, 799, 164, 113 });
+	ImCarAnim.PushBack({ 496, 799, 164, 113 });
+	ImCarAnim.PushBack({ 661, 799, 164, 113 });
+	ImCarAnim.PushBack({ 826, 799, 164, 113 });
+	ImCarAnim.PushBack({ 991, 799, 164, 113 });
+
+	ImCarAnim.PushBack({ 1, 913, 164, 113 });
+	ImCarAnim.PushBack({ 166, 913, 164, 113 });
+	ImCarAnim.PushBack({ 331, 913, 164, 113 });
+	ImCarAnim.PushBack({ 496, 913, 164, 113 });
 	
+	ImCarAnim.pingpong = false;
+	ImCarAnim.loop = false;
+	ImCarAnim.speed = 1;
 }
 
 IntroAnimation ::~IntroAnimation() {
@@ -38,6 +109,8 @@ bool IntroAnimation::Start() {
 	
 	char lookupTableChars[] = { "ABCDEFGHIJKLMNOPQRSTUVWXYZ.-?!0123456789@/ " };
 	menuFont = App->fonts->Load("Assets/Textures/spritesheet_menus.png", lookupTableChars, 1);
+
+	carTexture = App->textures->Load("assets/textures/imagine_car.png");
 
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
@@ -71,6 +144,8 @@ Update_Status IntroAnimation::Update() {	// plays animation
 
 	screen_w = App->winSize->w;
 	screen_h = App->winSize->h;
+
+	currentAnimationCar = &ImCarAnim;
 
 	if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN)
 	{
@@ -311,7 +386,7 @@ Update_Status IntroAnimation::Update() {	// plays animation
 			case 9:
 				if (blueSmall.y>(screen_h-sky.h*zoom)/2 + 64*zoom) {
 					blueSmall.y-=2*zoom;
-					delay = 3000;
+					delay = 1200;
 				}
 				else if ((blueSmall.y < (screen_h - sky.h * zoom) / 2 + 64 * zoom)) {
 					blueSmall.y = (screen_h - sky.h * zoom) / 2 + 64 * zoom;
@@ -353,6 +428,7 @@ Update_Status IntroAnimation::Update() {	// plays animation
 
 		if (sadMan.x != (screen_w - sky.w * zoom) / 2 + 102 * zoom && sadMan.y != (screen_h - sky.h * zoom) / 2 + 45 * zoom) {
 			sadMan = { (screen_w - sky.w * zoom) / 2 + 102 * zoom, (screen_h - sky.h * zoom) / 2 + 45 * zoom };
+			//lastTime = currentTime;
 		}
 		if (currentTime >= lastTime + 100) {
 
@@ -360,17 +436,37 @@ Update_Status IntroAnimation::Update() {	// plays animation
 
 			if (smokeM.y <= ground.y) {
 				smokeM.y += 5 * zoom;
+				
 			}
 			else {
-				delay = 30;
+			
+				delay = 1000;
 			}
 
 		}
+		if (currentTime >= lastTime +2000) {
+			animIndex = 7;
+
+		}
+
 
 			
 			
 	
 
+		break;
+	case 7:
+		currentAnimationCar->Update();
+		if (currentAnimationCar->HasFinished() == true)
+		{
+			if (currentTime >= lastTime + 4900) {
+				App->fade->FadeToBlack(this, (Module*)App->sceneIntro, 20);
+
+			}
+		}
+		else {
+			lastTime =currentTime;
+		}
 		break;
 	default:
 		break;
@@ -518,6 +614,18 @@ Update_Status IntroAnimation::PostUpdate() {
 			App->render->Blit(introTexture, imaginCar.x, imaginCar.y, &imagination, 1.0f, true, zoom);
 		}
 		break;
+	case 7:
+		if (smokeM.x != 0 && smokeM.y != 0) {
+			App->render->Blit(introTexture, smokeM.x, smokeM.y, &smoke, 1.0f, true, zoom);
+		}
+		App->render->Blit(introTexture, (screen_w - ground.w * zoom) / 2, (screen_h - sky.h * zoom) / 2 + (sky.h - ground.h) * zoom, &ground, 1.0f, true, zoom);
+		App->render->Blit(introTexture, yellowSmall.x, yellowSmall.y, &yellowCarSmall, 1.0f, true, zoom);
+		if (sadMan.x != 0 && sadMan.y != 0) {
+			App->render->Blit(introTexture, sadMan.x, sadMan.y, &sadProtagonist, 1.0f, true, zoom);
+		}
+		ImCar_rect = currentAnimationCar->GetCurrentFrame();
+		App->render->Blit(carTexture, (App->winSize->w -sky.w * zoom) / 2, (App->winSize->h - sky.h * zoom) / 2, &ImCar_rect, 1.0f, true, zoom);
+		break;
 	default:
 		break;
 	}
@@ -543,7 +651,7 @@ bool IntroAnimation::CleanUp()
 {
 	App->fonts->UnLoad(menuFont);
 	App->textures->Unload(introTexture);
+	App->textures->Unload(carTexture);
 	App->introAnim->Disable();
-
 	return true;
 }

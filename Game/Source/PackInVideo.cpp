@@ -12,6 +12,7 @@
 #include "ModuleWindow.h"
 #include "WindowSize.h"
 #include "ModuleFonts.h"
+#include "SDL/include/SDL.h"
 
 PackInVideo::PackInVideo(bool startEnabled) : Module(startEnabled)
 {
@@ -68,20 +69,25 @@ bool PackInVideo::Start()
 	//bgTexture = App->textures->Load("Assets/Textures/spritesheet_menus.png");
 	bgTexture = App->textures->Load("Assets/Textures/pack_in_video.png");
 
-	
+
 
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
+	canWait = true;
 
 	App->lvlManage->changeScene = true;
 	zoom = 4;
 	canInput = false;
 	currentAnimationPack = &packAnim;
+	lastTime = SDL_GetTicks();
+
 	return ret;
 }
+	
 
 Update_Status PackInVideo::Update()
 {
+	currentTime = SDL_GetTicks();
 	currentAnimationPack = &packAnim;
 	if (App->lvlManage->godmode == true) {
 		if (App->input->keys[SDL_SCANCODE_F4] == KEY_DOWN) {
@@ -91,6 +97,12 @@ Update_Status PackInVideo::Update()
 
 	if (currentAnimationPack->GetCurrentFrame().x == 1 && currentAnimationPack->GetCurrentFrame().y == 1 && canInput == true) {
 		currentAnimationPack->speed = 0;
+	}
+
+	if (currentTime >= lastTime + delay) {
+		currentAnimationPack->pingpong = true;
+		App->fade->FadeToBlack(this, (Module*)App->introAnim, 60);
+
 	}
 
 	if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN && canInput == true)
@@ -107,9 +119,14 @@ Update_Status PackInVideo::Update()
 
 	}
 	
+	
+
 	if (currentAnimationPack->HasFinished()) 
 	{
+		
+		
 		canInput = true;
+		
 		
 	}
 	currentAnimationPack->Update();
@@ -135,6 +152,8 @@ bool PackInVideo::CleanUp()
 	delete currentAnimationPack;
 	App->fonts->UnLoad(scoreFont);
 	App->textures->Unload(bgTexture);
+	currentAnimationPack = nullptr;
+	delete currentAnimationPack;
 	App->packInVideo->Disable();
 	return true;
 }

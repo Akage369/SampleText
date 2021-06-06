@@ -35,6 +35,13 @@ public:
 	bool canInput = false;
 
 	int scoreFont = -1;
+
+	unsigned int currentTime;
+
+	unsigned int lastTime = 0;
+
+	int delay = 7000;
+	bool canWait = true;
 };
 
 #endif 
