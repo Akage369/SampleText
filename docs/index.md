@@ -22,4 +22,4 @@ The game can be very difficult because of 2 things you always have to keep in mi
 ### The results:
 Since we started this new project, we have learned a lot about how does a game work internally and we are very proud of the results we have obtained at the end.
 
-Take a look at [this video]()! It sums up our project.
+Take a look at [this video](https://youtu.be/M5DhaPk5DC4)! It sums up our project.
