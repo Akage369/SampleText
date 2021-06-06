@@ -78,6 +78,8 @@ public:
 	int tope = 50;
 	int zoomText = 4;
 
+	int delayPunt = 400;
+	int lastTimePunt;
 };
 
 #endif

@@ -54,6 +54,11 @@ bool LevelManager::Start(){
 	//lvlmusic = App->audio->Mix_LoadMUS("Assets/Audio/Music/lose.ogg");
 	//App->audio->loseMusic = App->audio->Mix_LoadMUS("Assets/Audio/Music/lose.ogg");
 
+	indexEffects[0] = App->audio->LoadFx("Assets/Audio/Fx/car_fx.wav");
+	indexEffects[1] = App->audio->LoadFx("Assets/Audio/Fx/enter_fx.wav");
+	indexEffects[2] = App->audio->LoadFx("Assets/Audio/Fx/options_fx.wav");
+	indexEffects[3] = App->audio->LoadFx("Assets/Audio/Fx/pointer_fx.wav");
+
 	return true;
 
 }
@@ -142,6 +147,7 @@ if (App->input->keys[SDL_SCANCODE_0] == KEY_DOWN) {
 			
 			if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN) {
 				//App->audio->Disable();
+				App->audio->PlayFx(App->lvlManage->indexEffects[1], 0);
 				if (App->sceneLevel_1->nextlvl == true) {
 					if (lvl == 6) {
 						App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->levelMenu, 30);
@@ -158,10 +164,19 @@ if (App->input->keys[SDL_SCANCODE_0] == KEY_DOWN) {
 				}
 			}
 			if (App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_DOWN) {
-				App->sceneLevel_1->nextlvl = true;
+				if (App->sceneLevel_1->nextlvl == false) {
+					App->sceneLevel_1->nextlvl = true;
+					App->audio->PlayFx(App->lvlManage->indexEffects[3], 0);
+
+				}
+				
 			}
 			if (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_DOWN) {
-				App->sceneLevel_1->nextlvl = false;
+				if (App->sceneLevel_1->nextlvl == true) {
+					App->sceneLevel_1->nextlvl = false;
+					App->audio->PlayFx(App->lvlManage->indexEffects[3], 0);
+				}
+				
 			}
 		}
 		break;
@@ -290,7 +305,7 @@ int LevelManager::Getlvl() {
 
 bool LevelManager::CleanUp()
 {
-
+	
 	App->fonts->UnLoad(0);
 
 	return true;

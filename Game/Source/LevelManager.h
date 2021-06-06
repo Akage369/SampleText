@@ -64,8 +64,10 @@ public:
 	bool firstCaption = true;
 
 	//Mix_Music* lvlmusic;
+	uint indexEffects[4];
 	
 
+	
 	
 };
 

@@ -58,28 +58,35 @@ Update_Status LevelMenu::Update()
 
 	if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN)
 	{
+		
 		switch (App->pointer->index) {
 		case 1:
+			App->audio->PlayFx(App->lvlManage->indexEffects[1], 0);
 			App->lvlManage->lvlChange(1, '=');
 			App->fade->FadeToBlack(this, (Module*)App->sceneLevel_1, 20);
 			break;
 		case 10:
+			App->audio->PlayFx(App->lvlManage->indexEffects[1], 0);
 			App->lvlManage->lvlChange(2, '=');
 			App->fade->FadeToBlack(this, (Module*)App->sceneLevel_1, 20);
 			break;
 		case 22:
+			App->audio->PlayFx(App->lvlManage->indexEffects[1], 0);
 			App->lvlManage->lvlChange(3, '=');
 			App->fade->FadeToBlack(this, (Module*)App->sceneLevel_1, 20);
 			break;
 		case 23:
+			App->audio->PlayFx(App->lvlManage->indexEffects[1], 0);
 			App->lvlManage->lvlChange(4, '=');
 			App->fade->FadeToBlack(this, (Module*)App->sceneLevel_1, 20);
 			break;
 		case 44:
+			App->audio->PlayFx(App->lvlManage->indexEffects[1], 0);
 			App->lvlManage->lvlChange(5, '=');
 			App->fade->FadeToBlack(this, (Module*)App->sceneLevel_1, 20);
 			break;
 		case 50:
+			App->audio->PlayFx(App->lvlManage->indexEffects[1], 0);
 			App->lvlManage->lvlChange(6, '=');
 			App->fade->FadeToBlack(this, (Module*)App->sceneLevel_1, 20);
 			break;

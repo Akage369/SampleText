@@ -211,6 +211,7 @@ Update_Status SceneLevel1::Update()
 	}
 
 	if (App->input->keys[SDL_SCANCODE_P] == Key_State::KEY_DOWN) {
+		App->audio->PlayFx(App->lvlManage->indexEffects[2],0);
 		if (App->lvlManage->win == 0) {
 			if (pause == false) {
 				pause = true;
@@ -235,9 +236,11 @@ Update_Status SceneLevel1::Update()
 	{
 		if (firstInput_W == true) {
 			if (pauseIndex > 0) {
+				App->audio->PlayFx(App->lvlManage->indexEffects[3], 0);
 				pauseIndex -= 1;
 			}
 			else {
+				App->audio->PlayFx(App->lvlManage->indexEffects[3], 0);
 				pauseIndex = 2;
 			}
 			lastTime_W = SDL_GetTicks();
@@ -246,9 +249,17 @@ Update_Status SceneLevel1::Update()
 		}
 		else if (currentTime > lastTime_W + delay_W) {
 			if (pauseIndex > 0) {
+				if (currentTime >= lastTimePunt + delayPunt) {
+					App->audio->PlayFx(App->lvlManage->indexEffects[3], 0);
+					lastTimePunt = currentTime;
+				}
 				pauseIndex -= 1;
 			}
 			else {
+				if (currentTime >= lastTimePunt + delayPunt) {
+					App->audio->PlayFx(App->lvlManage->indexEffects[3], 0);
+					lastTimePunt = currentTime;
+				}
 				pauseIndex = 2;
 			}
 			lastTime_W = SDL_GetTicks();
@@ -272,9 +283,11 @@ Update_Status SceneLevel1::Update()
 
 				if (pauseIndex < 2) {
 					pauseIndex += 1;
+					App->audio->PlayFx(App->lvlManage->indexEffects[3], 0);
 				}
 				else {
 					pauseIndex = 0;
+					App->audio->PlayFx(App->lvlManage->indexEffects[3], 0);
 				}
 
 				lastTime_S = SDL_GetTicks();
@@ -284,9 +297,17 @@ Update_Status SceneLevel1::Update()
 			else if (currentTime > lastTime_S + delay_S) {
 				if (pauseIndex < 2) {
 					pauseIndex += 1;
+					if (currentTime >= lastTimePunt + delayPunt) {
+						App->audio->PlayFx(App->lvlManage->indexEffects[3], 0);
+						lastTimePunt = currentTime;
+					}
 				}
 				else {
 					pauseIndex = 0;
+					if (currentTime >= lastTimePunt + delayPunt) {
+						App->audio->PlayFx(App->lvlManage->indexEffects[3], 0);
+						lastTimePunt = currentTime;
+					}
 				}
 				lastTime_S = SDL_GetTicks();
 				delay_S = 150;
@@ -306,14 +327,17 @@ Update_Status SceneLevel1::Update()
 		if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN) {
 			switch (pauseIndex) {
 			case 0:
+				App->audio->PlayFx(App->lvlManage->indexEffects[1], 0);
 				pause = false;
 				break;
 			case 1:
+				App->audio->PlayFx(App->lvlManage->indexEffects[1], 0);
 				App->fade->FadeToBlack(this, (Module*)App->levelMenu, 30);
 				App->lvlManage->lvlChange(0, '=');
 				
 				break;
 			case 2:
+				App->audio->PlayFx(App->lvlManage->indexEffects[1], 0);
 				App->fade->FadeToBlack(this, (Module*)App->sceneIntro, 30);
 				
 				break;

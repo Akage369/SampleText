@@ -48,7 +48,7 @@ public:
 
 	// The current playing music
 	Mix_Music* music = nullptr;
-	Mix_Music* loseMusic = nullptr;
+	
 private:
 	// An array of all the loaded sound effects
 	// Allows us to keep track of all sound fx and handle them through indices

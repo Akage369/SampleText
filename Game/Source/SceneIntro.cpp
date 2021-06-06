@@ -100,12 +100,15 @@ Update_Status SceneIntro::Update()
 		else {
 			switch (optIndex) {
 			case 0:
+				App->audio->PlayFx(App->lvlManage->indexEffects[1], 0);
 				App->fade->FadeToBlack(this, (Module*)App->levelMenu, 20);
 				break;
 			case 1:
+				App->audio->PlayFx(App->lvlManage->indexEffects[1], 0);
 				App->fade->FadeToBlack(this, (Module*)App->introAnim, 20);
 				break;
 			case 2:
+				App->audio->PlayFx(App->lvlManage->indexEffects[1], 0);
 				return Update_Status::UPDATE_STOP;
 				break;
 			}
@@ -116,26 +119,45 @@ Update_Status SceneIntro::Update()
 		if ((App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_DOWN))
 		{
 			firstInput_W = true;
+			
 		}
 
 		if ((App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT))
 		{
 			if (firstInput_W == true) {
+				//App->audio->PlayFx(App->lvlManage->indexEffects[3], 0);
 				if (optIndex > 0) {
 					optIndex -= 1;
+					
+						App->audio->PlayFx(App->lvlManage->indexEffects[3], 0);
+						lastTimePunt = currentTime;
+					
 				}
 				else {
 					optIndex = 2;
+					
+						App->audio->PlayFx(App->lvlManage->indexEffects[3], 0);
+						lastTimePunt = currentTime;
+					
 				}
 				lastTime_W = SDL_GetTicks();
 				delay_W = 500;
 				firstInput_W = false;
 			}
 			else if (currentTime > lastTime_W + delay_W) {
+				
 				if (optIndex > 0) {
 					optIndex -= 1;
+					if (currentTime >= lastTimePunt + delayPunt) {
+						App->audio->PlayFx(App->lvlManage->indexEffects[3], 0);
+						lastTimePunt = currentTime;
+					}
 				}
 				else {
+					if (currentTime >= lastTimePunt + delayPunt) {
+						App->audio->PlayFx(App->lvlManage->indexEffects[3], 0);
+						lastTimePunt = currentTime;
+					}
 					optIndex = 2;
 				}
 				lastTime_W = SDL_GetTicks();
@@ -148,15 +170,24 @@ Update_Status SceneIntro::Update()
 		if ((App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_DOWN) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE))
 		{
 			firstInput_S = true;
+		
 		}
 		if ((App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE))
 		{
 			if (firstInput_S == true) {
-
+				
 				if (optIndex < 2) {
+					
+						App->audio->PlayFx(App->lvlManage->indexEffects[3], 0);
+						lastTimePunt = currentTime;
+					
 					optIndex += 1;
 				}
 				else {
+					
+						App->audio->PlayFx(App->lvlManage->indexEffects[3], 0);
+						lastTimePunt = currentTime;
+					
 					optIndex = 0;
 				}
 
@@ -165,10 +196,19 @@ Update_Status SceneIntro::Update()
 				firstInput_S = false;
 			}
 			else if (currentTime > lastTime_S + delay_S) {
+				
 				if (optIndex < 2) {
+					if (currentTime >= lastTimePunt + delayPunt) {
+						App->audio->PlayFx(App->lvlManage->indexEffects[3], 0);
+						lastTimePunt = currentTime;
+					}
 					optIndex += 1;
 				}
 				else {
+					if (currentTime >= lastTimePunt + delayPunt) {
+						App->audio->PlayFx(App->lvlManage->indexEffects[3], 0);
+						lastTimePunt = currentTime;
+					}
 					optIndex = 0;
 				}
 				lastTime_S = SDL_GetTicks();

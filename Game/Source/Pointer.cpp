@@ -57,6 +57,7 @@ Update_Status Pointer::Update()
 		&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE))
 	{
 		firstInput_A = true;
+		
 	}
 	if (position.x >= (App->winSize->w - App->levelMenu->rectlvls.w * zoom) / 2 - 6 * zoom) {
 		if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT) && (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_IDLE)
@@ -70,11 +71,19 @@ Update_Status Pointer::Update()
 							position.x = (App->winSize->w + App->levelMenu->rectlvls.w * zoom) / 2 - 7 * zoom - 16 * zoom;
 							position.y -= 16 * zoom;
 							index--;
+							
+								App->audio->PlayFx(App->lvlManage->indexEffects[3], 0);
+								lastTimePunt = currentTime;
+							
 						}
 					}
 					else {
 						position.x -= 16 * zoom;
 						index--;
+						
+							App->audio->PlayFx(App->lvlManage->indexEffects[3], 0);
+							lastTimePunt = currentTime;
+						
 					}
 					lastTime_A = SDL_GetTicks();
 					delay_A = 500;
@@ -90,11 +99,19 @@ Update_Status Pointer::Update()
 							position.x = (App->winSize->w + App->levelMenu->rectlvls.w * zoom) / 2 - 7 * zoom - 16 * zoom;
 							position.y -= 16 * zoom;
 							index--;
+							if (currentTime >= lastTimePunt + delayPunt) {
+								App->audio->PlayFx(App->lvlManage->indexEffects[3], 0);
+								lastTimePunt = currentTime;
+							}
 						}
 					}
 					else {
 						position.x -= 16 * zoom;
 						index--;
+						if (currentTime >= lastTimePunt + delayPunt) {
+							App->audio->PlayFx(App->lvlManage->indexEffects[3], 0);
+							lastTimePunt = currentTime;
+						}
 					}
 				
 					lastTime_A = currentTime;
@@ -108,6 +125,7 @@ Update_Status Pointer::Update()
 		&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE))
 	{
 		firstInput_D = true;
+		
 	}
 	if (position.x <= ((App->winSize->w + App->levelMenu->rectlvls.w * zoom) / 2 - 7 * zoom - 16 * zoom)) {
 		if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT)
@@ -118,6 +136,10 @@ Update_Status Pointer::Update()
 					position.x = (App->winSize->w - App->levelMenu->rectlvls.w * zoom) / 2 - 6 * zoom;
 					position.y += 16 * zoom;
 					index++;
+					
+						App->audio->PlayFx(App->lvlManage->indexEffects[3], 0);
+						lastTimePunt = currentTime;
+					
 				}
 				else if (position.y > 160 * zoom && position.x > ((App->winSize->w + App->levelMenu->rectlvls.w * zoom) / 2 - 7 * zoom - 16 * 2 * zoom)) {
 
@@ -125,6 +147,10 @@ Update_Status Pointer::Update()
 				else {
 					position.x += 16 * zoom;
 					index++;
+					
+						App->audio->PlayFx(App->lvlManage->indexEffects[3], 0);
+						lastTimePunt = currentTime;
+					
 				}
 				lastTime_D = SDL_GetTicks();
 				delay_D = 500;
@@ -137,6 +163,11 @@ Update_Status Pointer::Update()
 					position.x = (App->winSize->w - App->levelMenu->rectlvls.w * zoom) / 2 - 6 * zoom;
 					position.y += 16 * zoom;
 					index++;
+					if (currentTime >= lastTimePunt + delayPunt) {
+						App->audio->PlayFx(App->lvlManage->indexEffects[3], 0);
+						lastTimePunt = currentTime;
+					}
+					
 				}
 				else if (position.y > 160 * zoom && position.x > ((App->winSize->w + App->levelMenu->rectlvls.w * zoom) / 2 - 7 * zoom - 16 * 2*zoom)) {
 
@@ -144,6 +175,11 @@ Update_Status Pointer::Update()
 				else {
 					position.x += 16 * zoom;
 					index++;
+					if (currentTime >= lastTimePunt + delayPunt) {
+						App->audio->PlayFx(App->lvlManage->indexEffects[3], 0);
+						lastTimePunt = currentTime;
+					}
+					//App->audio->PlayFx(App->lvlManage->indexEffects[3], 0);
 				}
 			
 				lastTime_D = currentTime;
@@ -158,6 +194,7 @@ Update_Status Pointer::Update()
 		&& (App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE))
 	{
 		firstInput_S = true;
+		
 	}
 	if (position.y <= 160 * zoom) {
 		if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_IDLE)
@@ -166,6 +203,10 @@ Update_Status Pointer::Update()
 			if (firstInput_S == true) {
 				position.y += 16 * zoom;
 				index+=10;
+				
+					App->audio->PlayFx(App->lvlManage->indexEffects[3], 0);
+					lastTimePunt = currentTime;
+				
 				lastTime_S = SDL_GetTicks();
 				delay_S = 500;
 				firstInput_S = false;
@@ -175,6 +216,10 @@ Update_Status Pointer::Update()
 	
 				position.y += 16 * zoom;
 				index += 10;
+				if (currentTime >= lastTimePunt + delayPunt) {
+					App->audio->PlayFx(App->lvlManage->indexEffects[3], 0);
+					lastTimePunt = currentTime;
+				}
 				lastTime_S = currentTime;
 			}
 
@@ -185,6 +230,7 @@ Update_Status Pointer::Update()
 		&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_IDLE))
 	{
 		firstInput_W = true;
+		
 	}
 	if (position.y >= 128 * zoom) {
 		if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_IDLE)
@@ -193,6 +239,10 @@ Update_Status Pointer::Update()
 			if (firstInput_W == true) {
 				position.y -= 16 * zoom;
 				index -= 10;
+				
+					App->audio->PlayFx(App->lvlManage->indexEffects[3], 0);
+					lastTimePunt = currentTime;
+				
 				lastTime_W = SDL_GetTicks();
 				delay_W = 500;
 				firstInput_W = false;
@@ -202,6 +252,10 @@ Update_Status Pointer::Update()
 		
 				position.y -= 16 * zoom;
 				index -= 10;
+				if (currentTime >= lastTimePunt + delayPunt) {
+					App->audio->PlayFx(App->lvlManage->indexEffects[3], 0);
+					lastTimePunt = currentTime;
+				}
 		
 				lastTime_W = currentTime;
 	
@@ -211,30 +265,6 @@ Update_Status Pointer::Update()
 			}
 
 		}
-	}
-
-	if (position.x == 42 * zoom && position.y == 127 * zoom) {
-	//	index = 1;
-	}
-
-	if (position.x == 90 * zoom && position.y == 127 * zoom) {
-	//	index = 2;
-	}
-
-	if (position.x == 58 * zoom && position.y == 127 * zoom) {
-		//index = 3;
-	}
-
-	if (position.x == 42 * zoom && position.y == 127 * zoom) {
-	//	index = 4;
-	}
-
-	if (position.x == 42 * zoom && position.y == 127 * zoom) {
-		//index = 5;
-	}
-
-	if (position.x == 42 * zoom && position.y == 127 * zoom) {
-		//index = 6;
 	}
 
 	return Update_Status::UPDATE_CONTINUE;
