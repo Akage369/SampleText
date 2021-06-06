@@ -37,7 +37,7 @@ bool Pointer::Start()
 	zoom = 4;
 	
 	position.x = (App->winSize->w - App->levelMenu->rectlvls.w*zoom)/2 - 6* zoom;
-	//position.x = (App->winSize->w + App->levelMenu->rectlvls.w * zoom) / 2 - 7 * zoom - 16 * zoom;
+
 	position.y = 112 * zoom;
 	index = 1;
 
@@ -249,5 +249,10 @@ Update_Status Pointer::PostUpdate()
 	return Update_Status::UPDATE_CONTINUE;
 }
 
-
+bool Pointer::CleanUp()
+{
+	App->textures->Unload(texture);
+	
+	return true;
+}
 

@@ -9,6 +9,9 @@
 #include "SceneLevel1.h"
 #include "WindowSize.h"
 #include "ModuleFonts.h"
+#include "ModuleAudio.h"
+#include "MusicManager.h"
+#include "SDL/include/SDL.h"
 
 LevelManager::LevelManager(bool isEnabled) : Module(isEnabled)
 {
@@ -43,12 +46,21 @@ void LevelManager::lvlChange(int change, char op)
 bool LevelManager::Start(){
 	char lookupTableChars[] = { "ABCDEFGHIJKLMNOPQRSTUVWXYZ.-?!0123456789@/ " };
 	scoreFont = App->fonts->Load("Assets/Textures/spritesheet_menus.png", lookupTableChars, 1);
+	//loseFX = App->audio->LoadFx("Assets/Audio/Music/lose.ogg");
+	//lvlmusic = Mix_LoadMUS("Assets/Audio/Music/lose.ogg");
+
+	//Mix_Music* musiclvl;
+	//musiclvl = Mix_LoadMUS("Assets/Audio/Music/lose.ogg");
+	//lvlmusic = App->audio->Mix_LoadMUS("Assets/Audio/Music/lose.ogg");
+	//App->audio->loseMusic = App->audio->Mix_LoadMUS("Assets/Audio/Music/lose.ogg");
+
 	return true;
+
 }
 
 Update_Status LevelManager::Update() {
 
-	
+	currentTime = SDL_GetTicks();
 	if (App->input->keys[SDL_SCANCODE_G] == Key_State::KEY_DOWN) {
 		if (lvl > 0 && lvl <= 6) {
 			if (App->sceneLevel_1->pause == false) {
@@ -87,42 +99,49 @@ Update_Status LevelManager::Update() {
 				}
 			}
 		}
-		if (App->input->keys[SDL_SCANCODE_F4] == KEY_DOWN) {
+if (App->input->keys[SDL_SCANCODE_F4] == KEY_DOWN) {
 
-			if ((App->sceneLevel_1->lvl > 1 && App->sceneLevel_1->lvl <= 6)) {
+	if ((App->sceneLevel_1->lvl > 1 && App->sceneLevel_1->lvl <= 6)) {
 
-				App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneLevel_1, 30);
-				lvlChange(1, '-');
+		App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneLevel_1, 30);
+		lvlChange(1, '-');
 
-				boxes_lvl = 0;
-			}
-			else if (App->sceneLevel_1->lvl <= 1) {
+		boxes_lvl = 0;
+	}
+	else if (App->sceneLevel_1->lvl <= 1) {
 
-				App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->levelMenu, 30);
-				lvlChange(0, '=');
-			}
-
-
-		}
-		if (App->input->keys[SDL_SCANCODE_0] == KEY_DOWN) {
-
-			steps = 0;
-
-
-
-		}
+		App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->levelMenu, 30);
+		lvlChange(0, '=');
 	}
 
-	
 
-	
+}
+if (App->input->keys[SDL_SCANCODE_0] == KEY_DOWN) {
+
+	steps = 0;
+
+
+
+}
+	}
+
+
+
+
 
 	switch (win) {
 	case 0:
 		break;
 	case 1:
+
 		if (lvl > 0 && lvl <= 6) {
+			if (firstCaption == true) {
+				App->audio->PlayMusic("Assets/Audio/Music/win.ogg",0);
+				firstCaption = false;
+			}
+			
 			if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN) {
+				//App->audio->Disable();
 				if (App->sceneLevel_1->nextlvl == true) {
 					if (lvl == 6) {
 						App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->levelMenu, 30);
@@ -148,6 +167,23 @@ Update_Status LevelManager::Update() {
 		break;
 	case 2:
 		if (lvl > 0 && lvl <= 6) {
+			if (playEffect == true) {
+				//playMusicLose();
+				//App->audio->Mix_PlayMusic(App->audio->music, 1);
+			}
+			else {
+				//disableMusic(7200);
+	
+			}
+			if (firstCaption == true) {
+				App->audio->PlayMusic("Assets/Audio/Music/lose.ogg", 0);
+				lastTime = SDL_GetTicks();
+				firstCaption = false;
+			}
+			else {
+				disableMusic(7200);
+			}
+			//App->audio->PlayMusic("Assets/Audio/Music/lose.ogg");
 			if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN) {
 
 				App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneLevel_1, 30);
@@ -160,6 +196,39 @@ Update_Status LevelManager::Update() {
 	return Update_Status::UPDATE_CONTINUE;
 }
 
+void LevelManager::playMusicLose() {
+	//App->audio->music = nullptr;
+
+	//App->musicManage->playMusic("Assets/Audio/Music/lose.ogg");
+	lastTime = SDL_GetTicks();
+
+	//Mix_PlayMusic(App->audio->music, 1);
+	//App->audio->PlayMusic("Assets/Audio/Music/lose.ogg", 0);
+	//App->audio->PlayFx(loseFX, 1);
+	playEffect = false;
+
+
+}
+
+void LevelManager::disableMusic(int delay) {
+	if (firstCaption == true){
+		
+		firstCaption = false;
+		
+	}
+	
+	
+	if (currentTime >= lastTime + delay) {
+		App->audio->PlayMusic("Assets/Audio/Music/nada.ogg",0);
+		//if(App->audio->isEnabled()== true){}
+		//App->audio->Disable();
+		//App->audio->music = nullptr;
+		//firstCaption = true;
+	}
+
+
+	
+}
 
 Update_Status LevelManager::PostUpdate() {
 

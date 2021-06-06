@@ -25,6 +25,8 @@ public:
 	
 	Update_Status PostUpdate() override;
 
+	bool CleanUp() override;
+
 
 public:
 	
@@ -37,11 +39,6 @@ public:
 	SDL_Texture* texture = nullptr;
 
 	SDL_Rect pointRect = { 16, 361, 9, 9 };
-	
-	Animation* currentAnimation = nullptr;
-
-	Animation pointAnim;
-
 
 	unsigned int currentTime;
 

@@ -19,7 +19,7 @@ public:
 	Update_Status Update() override;
 
 	Update_Status PostUpdate() override;
-	bool CleanUp();
+	bool CleanUp() override;
 
 public:
 

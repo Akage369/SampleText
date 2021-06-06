@@ -20,22 +20,16 @@ public:
 
 	Update_Status PostUpdate() override;
 
-	bool CleanUp();
+	bool CleanUp() override;
 
 public:
 
-	SDL_Texture* bgTexture = nullptr;
-	SDL_Texture* bgTexto = nullptr;
-	SDL_Texture* puntero = nullptr;
-	SDL_Texture* scroller1 = nullptr;
-	SDL_Texture* scroller2 = nullptr;
 	SDL_Texture* introMenu = nullptr;
-	SDL_Texture* animatedIntro = nullptr;
 
 	int scrollerY;
 	int scroller2Y;
 	int scroller3Y;
-	SDL_Texture* BoxMenu = nullptr;
+
 
 	int p_x = 155;
 	int p_y = 145;
@@ -49,18 +43,11 @@ public:
 	
 	Animation intro;
 
-	int menuFont = -1;
-
 	const int B_play = 2;
 	const int B_Coop = 1;
 	const int B_Edit = 0;
 
 	int M_index = 2;
-
-	uint MenuMusic = 0;
-	uint selectFx = 0;
-	uint nextFx = 0;
-	uint backFx = 0;
 
 	bool nextScene;
 

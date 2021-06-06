@@ -31,14 +31,11 @@ bool SceneIntro::Start()
 	LOG("Loading background assets");
 
 	bool ret = true;
+	//if (App->audio->IsEnabled() == false) {
+		//App->audio->Enable();
+	//}
 
-	animatedIntro = App->textures->Load("Assets/Textures/spritesheet_intro.png");
-	scroller1 = App->textures->Load("Assets/Textures/spritesheet_intro_fondo.png");
-	bgTexto = App->textures->Load("Assets/Textures/spritesheet_intro_texto.png");
-	puntero = App->textures->Load("Assets/Textures/puntero");
-	scroller2 = App->textures->Load("Assets/Textures/spritesheet_intro_fondo.png");
 	introMenu = App->textures->Load("Assets/Textures/spritesheet_menus.png");
-	BoxMenu = App->textures->Load("Assets/Textures/menu_caja");
 	App->audio->PlayMusic("Assets/Audio/Music/introTitle.ogg", 1.0f);
 
 	char lookupTableChars[] = { "ABCDEFGHIJKLMNOPQRSTUVWXYZ.-?!0123456789@/ " };
@@ -55,10 +52,6 @@ bool SceneIntro::Start()
 	p_pos.x = p_x;
 	p_pos.y = p_y;
 
-	MenuMusic = App->audio->PlayMusic("Assets/Music/", 1.0f); //Falta por determinar sonido
-	selectFx = App->audio->LoadFx("Assets"); //Falta por determinar sonido
-	nextFx = App->audio->LoadFx("Assets"); //Falta por determinar sonido
-	backFx = App->audio->LoadFx("Assets"); //Falta por determinar sonido
 
 	App->lvlManage->changeScene = true;
 
@@ -76,7 +69,7 @@ Update_Status SceneIntro::Update()
 {
 	if (App->lvlManage->godmode == true) {
 		if (App->input->keys[SDL_SCANCODE_F4] == KEY_DOWN) {
-			App->fade->FadeToBlack(this, (Module*)App->packInVideo, 20);
+			App->fade->FadeToBlack(this, (Module*)App->introAnim, 20);
 		}
 	}
 	currentTime = SDL_GetTicks();
@@ -110,6 +103,7 @@ Update_Status SceneIntro::Update()
 				App->fade->FadeToBlack(this, (Module*)App->levelMenu, 20);
 				break;
 			case 1:
+				App->fade->FadeToBlack(this, (Module*)App->introAnim, 20);
 				break;
 			case 2:
 				return Update_Status::UPDATE_STOP;
@@ -232,8 +226,10 @@ Update_Status SceneIntro::PostUpdate()
 
 bool SceneIntro::CleanUp()
 {
+	App->textures->Unload(introMenu);
+	//App->audio->Disable();
 	App->sceneIntro->Disable();
-	App->fonts->UnLoad(0);
+	App->fonts->UnLoad(optFont);
 	
 	return true;
 }

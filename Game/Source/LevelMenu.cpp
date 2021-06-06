@@ -12,6 +12,7 @@
 #include "Pointer.h"
 #include "WindowSize.h"
 #include "ModuleFonts.h"
+#include "ModuleAudio.h"
 
 LevelMenu::LevelMenu(bool startEnabled) : Module(startEnabled)
 {
@@ -30,11 +31,12 @@ bool LevelMenu::Start()
 
 	bool ret = true;
 	App->pointer->Enable();
+	//App->audio->Enable();
 	bgTexture = App->textures->Load("Assets/Textures/spritesheet_menus.png");
 
 	char lookupTableChars[] = { "ABCDEFGHIJKLMNOPQRSTUVWXYZ.-?!0123456789@/ " };
-		scoreFont = App->fonts->Load("Assets/Textures/spritesheet_menus.png", lookupTableChars, 1);
-
+	scoreFont = App->fonts->Load("Assets/Textures/spritesheet_menus.png", lookupTableChars, 1);
+	App->audio->PlayMusic("Assets/Audio/Music/levelsMusic.ogg");
 
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
@@ -101,6 +103,9 @@ Update_Status LevelMenu::PostUpdate()
 
 bool LevelMenu::CleanUp()
 {
+	App->textures->Unload(bgTexto);
+	App->textures->Unload(bgTexture);
 	App->pointer->Disable();
+	App->fonts->UnLoad(scoreFont);
 	return true;
 }

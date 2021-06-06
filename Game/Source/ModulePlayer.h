@@ -22,6 +22,8 @@ public:
 
 	Update_Status PostUpdate() override;
 
+	bool CleanUp() override;
+
 	void OnCollision(Collider* c1, Collider* c2) override;
 	void walkx();
 	void walky();

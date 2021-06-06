@@ -24,7 +24,7 @@ public:
 
 	void OnCollision(Collider* c1, Collider* c2) override;
 
-	bool CleanUp();
+	bool CleanUp() override;
 
 public:
 	bool isIni = false;
@@ -75,6 +75,8 @@ public:
 	int delay_S = 500;
 
 	int w=0, h=0;
+
+	//Mix_Music* lvlmusic = nullptr;
 
 };
 

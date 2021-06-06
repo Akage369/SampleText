@@ -3,7 +3,7 @@
 
 #include "Globals.h"
 
-#define NUM_MODULES 19
+#define NUM_MODULES 21
 
 class Module;
 class ModuleWindow;
@@ -25,6 +25,8 @@ class PackInVideo;
 class LevelMenu;
 class Pointer;
 class WinSize;
+class IntroAnimation;
+class MusicManager;
 
 class Application
 {
@@ -52,8 +54,10 @@ public:
 
 	ModulePlayer* player = nullptr;
 
-	PackInVideo* packInVideo = nullptr;
+
 	Presentation* presentation = nullptr;
+	PackInVideo* packInVideo = nullptr;
+	IntroAnimation* introAnim = nullptr;
 	SceneIntro* sceneIntro = nullptr;
 	SceneLevel1* sceneLevel_1 = nullptr;
 
@@ -68,6 +72,7 @@ public:
 	LevelManager* lvlManage = nullptr;
 	ModuleBoxes* boxes = nullptr;
 	WinSize* winSize = nullptr;
+	MusicManager* musicManage = nullptr;
 
 	ModuleRender* render = nullptr;
 };

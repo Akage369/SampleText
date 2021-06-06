@@ -4,6 +4,7 @@
 #include "Module.h"
 #include "ModuleBoxes.h"
 
+
 class LevelManager: public Module
 {
 private:
@@ -18,7 +19,7 @@ public:
 
 	Update_Status PostUpdate() override;
 
-	bool CleanUp();
+	bool CleanUp() override;
 
 	int boxes_lvl=0;
 	bool boxes_done[3] = {false, false, false};
@@ -46,6 +47,26 @@ public:
 	bool godmode = false;
 
 	int scoreFont = -1;
+
+	uint loseFX;
+
+	bool playEffect = true;
+	void playMusicLose();
+
+	unsigned int currentTime;
+
+	unsigned int lastTime = 0;
+
+	int delay = 700;
+
+	void disableMusic(int delay);
+
+	bool firstCaption = true;
+
+	//Mix_Music* lvlmusic;
+	
+
+	
 };
 
 #endif

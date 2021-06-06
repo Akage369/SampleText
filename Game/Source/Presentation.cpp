@@ -76,8 +76,10 @@ Update_Status Presentation::PostUpdate()
 
 bool Presentation::CleanUp()
 {
+	App->textures->Unload(bgTexture);
+	
+	App->fonts->UnLoad(scoreFont);
 	App->presentation->Disable();
-	App->fonts->UnLoad(0);
 
 	return true;
 }

@@ -42,11 +42,14 @@ public:
 	// Plays a previously loaded WAV
 	// Receives an index from the sound fx array
 	bool PlayFx(uint index, int repeat = 0);
+	
+	//Mix_Music* Mix_LoadMUS(const char* file);
+	//int Mix_PlayMusic(Mix_Music* music, int loops);
 
-private:
 	// The current playing music
 	Mix_Music* music = nullptr;
-
+	Mix_Music* loseMusic = nullptr;
+private:
 	// An array of all the loaded sound effects
 	// Allows us to keep track of all sound fx and handle them through indices
 	Mix_Chunk* soundFx[MAX_FX] = { nullptr };

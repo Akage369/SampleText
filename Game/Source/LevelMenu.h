@@ -20,7 +20,7 @@ public:
 
 	Update_Status PostUpdate() override;
 
-	bool CleanUp();
+	bool CleanUp() override;
 
 public:
 	SDL_Texture* bgTexture = nullptr;

@@ -11,6 +11,7 @@ public:
 
 	void Update() override;
 
+	bool CleanUp();
 	
 	
 

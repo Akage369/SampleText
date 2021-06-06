@@ -19,6 +19,8 @@
 #include "LevelMenu.h"
 #include "Pointer.h"
 #include "WindowSize.h"
+#include "IntroAnimation.h"
+#include "MusicManager.h"
 
 Application::Application()
 {
@@ -34,25 +36,27 @@ Application::Application()
 	modules[4] = winSize = new WinSize(true);
 	modules[5] = presentation = new Presentation(true);
 	modules[6] = packInVideo = new PackInVideo(false);
-	modules[7] = sceneIntro = new SceneIntro(false);
-	modules[8] = levelMenu = new LevelMenu(false);
-	modules[9] = pointer = new Pointer(false);
+	modules[7] = introAnim = new IntroAnimation(false);
+	modules[8] = sceneIntro = new SceneIntro(false);
+	modules[9] = levelMenu = new LevelMenu(false);
+	modules[10] = pointer = new Pointer(false);
 
 
-	modules[10] = tiles = new Tiles(true);
-	modules[11] = boxes = new ModuleBoxes(false);
-	modules[12] = player = new ModulePlayer(false);	//Player starts disabled
-	modules[13] = sceneLevel_1 = new SceneLevel1(false);		//Gameplay scene starts disabled
+	modules[11] = tiles = new Tiles(true);
+	modules[12] = boxes = new ModuleBoxes(false);
+	modules[13] = player = new ModulePlayer(false);	//Player starts disabled
+	modules[14] = sceneLevel_1 = new SceneLevel1(false);		//Gameplay scene starts disabled
 
-	modules[14] = collisions = new ModuleCollisions(false);
-	modules[15] = fade = new ModuleFadeToBlack(true);
-	modules[16] = fonts = new ModuleFonts(true);
+	modules[15] = collisions = new ModuleCollisions(false);
+	modules[16] = fade = new ModuleFadeToBlack(true);
+	modules[17] = fonts = new ModuleFonts(true);
 	
 	
-	modules[17] = lvlManage = new LevelManager(true);
+	modules[18] = lvlManage = new LevelManager(true);
+	modules[19] = musicManage = new MusicManager(true);
 	
 
-	modules[18] = render = new ModuleRender(true);
+	modules[20] = render = new ModuleRender(true);
 }
 
 Application::~Application()

@@ -218,6 +218,19 @@ Box::Update();
 
 }
 
+bool Box_Obj::CleanUp() {
+
+	colliderBR->pendingToDelete = true;
+	App->collisions->RemoveCollider(colliderBR);
+	colliderBL->pendingToDelete = true;
+	App->collisions->RemoveCollider(colliderBL);
+	colliderBU->pendingToDelete = true;
+	App->collisions->RemoveCollider(colliderBU);
+	colliderBD->pendingToDelete = true;
+	App->collisions->RemoveCollider(colliderBD);
+	return true;
+}
+
 
 
 

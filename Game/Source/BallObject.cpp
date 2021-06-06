@@ -54,3 +54,6 @@ void Ball_Obj::Update()
 
 	collider->SetPos(position.x, position.y);
 }
+
+
+

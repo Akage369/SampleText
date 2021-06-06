@@ -12,6 +12,7 @@ public:
 
 	void Update() override;
 
+	bool CleanUp();
 	
 
 	bool posInix = true;

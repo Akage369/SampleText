@@ -20,16 +20,19 @@ public:
 
 	Update_Status PostUpdate() override;
 
-	bool CleanUp();
+	bool CleanUp() override;
 
 public:
 	
+	Animation* currentAnimationPack = nullptr;
 	SDL_Texture* bgTexture = nullptr;
 
-	SDL_Texture* bgTexto = nullptr;
 
+	Animation packAnim;
+	SDL_Rect pack_rect;
 	SDL_Rect rect = { 2, 372, 164, 107 };
 	int zoom=3;
+	bool canInput = false;
 
 	int scoreFont = -1;
 };

@@ -139,8 +139,8 @@ bool ModulePlayer::Start()
 	texture = App->textures->Load("Assets/Textures/spritesheet_player.png");
 	currentAnimation = &idleLeft;
 
-	laserFx = App->audio->LoadFx("Assets/Audio/Fx/laser.wav");
-	explosionFx = App->audio->LoadFx("Assets/Audio/Fx/explosion.wav");
+	//laserFx = App->audio->LoadFx("Assets/Audio/Fx/laser.wav");
+	//explosionFx = App->audio->LoadFx("Assets/Audio/Fx/explosion.wav");
 	
 	posInix = true;
 	posIniy = true;
@@ -350,6 +350,11 @@ Update_Status ModulePlayer::Update()
 						isPushingL = true;
 					}
 
+					isPushingU = false;
+					isPushingD = false;
+					
+					isPushingR = false;
+
 					if (movy == county) {
 						if (movx == countx) {
 							movx = position.x - 24 * zoom;
@@ -376,6 +381,11 @@ Update_Status ModulePlayer::Update()
 					if (inContactR == true) {
 						isPushingR = true;
 					}
+
+					isPushingU = false;
+					isPushingD = false;
+					isPushingL = false;
+				
 
 					if (movy == county) {
 						if (movx == countx) {
@@ -405,6 +415,10 @@ Update_Status ModulePlayer::Update()
 					if (inContactD == true) {
 						isPushingD = true;
 					}
+					isPushingU = false;
+					
+					isPushingL = false;
+					isPushingR = false;
 
 					if (movx == countx) {
 						if (movy == county) {
@@ -434,6 +448,10 @@ Update_Status ModulePlayer::Update()
 					if (inContactU == true) {
 						isPushingU = true;
 					}
+					
+					isPushingD = false;
+					isPushingL = false;
+					isPushingR = false;
 
 					if (movx == countx) {
 						if (movy == county) {
@@ -554,5 +572,18 @@ void ModulePlayer::Push(char d) {
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 {
 
+}
+
+bool ModulePlayer::CleanUp() {
+	App->collisions->RemoveCollider(collider);
+	App->collisions->RemoveCollider(colliderR);
+	App->collisions->RemoveCollider(colliderL);
+	App->collisions->RemoveCollider(colliderU);
+	App->collisions->RemoveCollider(colliderD);
+	App->textures->Unload(texture);
+	currentAnimation = nullptr;
+	delete currentAnimation;
+	
+	return true;
 }
 

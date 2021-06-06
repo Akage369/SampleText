@@ -15,6 +15,7 @@
 #include "ModuleFadeToBlack.h"
 #include "ModuleWindow.h"
 #include "WindowSize.h"
+#include "MusicManager.h"
 
 #include "SDL/include/SDL.h"
 
@@ -46,8 +47,10 @@ bool SceneLevel1::Start()
 	App->player->Enable();
 	App->boxes->Enable();
 	App->collisions->Enable();
+	//App->audio->Enable();
 	
 	App->lvlManage->changeScene = true;
+	
 
 	char tilesetTable[] = { "WwobCcB" };
 	lvl1_map = App->tiles->Load("Assets/Textures/spritesheet_tiles.png", tilesetTable, 1);
@@ -62,6 +65,8 @@ bool SceneLevel1::Start()
 	lvl = App->lvlManage->Getlvl();
 	App->lvlManage->boxes_lvl = 0;
 	App->lvlManage->steps = 0;
+	App->lvlManage->playEffect = true;
+	App->lvlManage->firstCaption = true;
 
 	pause = false;
 	noUI = false;
@@ -99,33 +104,42 @@ bool SceneLevel1::Start()
 
 		case 1:
 			App->tiles->genObjects(-zoom + (App->winSize->w - 21 * 24 * zoom) / 2, -zoom + (App->winSize->h - 12 * 24 * zoom) / 2, lvl1_map, "ooooooooooooooooooooo,ooooooooooooooooooooo,oooooooWwwwwwWooooooo,oooooooWbbBBBWooooooo,oooooooWbbbwwwWoooooo,ooooooWwwCbbbbWoooooo,ooooooWbbbWCwbWoooooo,ooooooWbCbWbbbWoooooo,ooooooWbbbWwwwwoooooo,oooooowwwwwoooooooooo,ooooooooooooooooooooo,ooooooooooooooooooooo", zoom);
+			
+			//lvlmusic = ("Assets / Audio / Music / stage1.ogg");
+			//App->musicManage->playMusic("Assets/Audio/Music/stage1.ogg",0);
+			App->audio->PlayMusic("Assets/Audio/Music/stage1.ogg",0);
 			App->lvlManage->max_steps = 90;
 			sprintf_s(stageText, 3, "%02d", 1);
 			break;
 		case 2:
 			App->tiles->genObjects(-zoom + (App->winSize->w - 21 * 24 * zoom) / 2, -zoom + (App->winSize->h - 13 * 24 * zoom) / 2, lvl1_map, "ooooooooooooooooooooo,ooooooooooooooooooooo,ooooooWwwwwwwWooooooo,ooooooWbbbbbbWooooooo,ooooooWbwCCbbWooooooo,ooooooWbBBBwbWooooooo,oooooowWBBBCbwWoooooo,oooooooWbwwbCbWoooooo,oooooooWCbbCbbWoooooo,oooooooWbbWbbbWoooooo,ooooooowwwwwwwwoooooo,ooooooooooooooooooooo,ooooooooooooooooooooo,ooooooooooooooooooooo", zoom);
+			App->audio->PlayMusic("Assets/Audio/Music/stage2.ogg", 0);
 			App->lvlManage->max_steps = 120;
 			sprintf_s(stageText, 3, "%02d", 10);
 			break;
 		case 3:
 			//App->tiles->genObjects(-1, -1, lvl1_map, "oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,ooooooooooooWwwwwwWooooooooooooo,ooooooooooooWbbBBBWooooooooooooo,ooooooooooooWbbbwwwWoooooooooooo,oooooooooooWwwCbbbbWoooooooooooo,oooooooooooWbbbWCwbWoooooooooooo,oooooooooooWbCbWbbbWoooooooooooo,oooooooooooWbbbWwwwwoooooooooooo,ooooooooooowwwwwoooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo", zoom);
 			App->tiles->genObjects(-zoom + (App->winSize->w - 34 * 24 * zoom) / 2, -zoom + (App->winSize->h - 18 * 24 * zoom) / 2, lvl1_map, "oooooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooooo,oooooooooooWwWwwWoWwwwWooooooooooo,ooooooooooWwbwbbwwWbbbwWoooooooooo,ooooooooooWbbbbCbbwbCbbWoooooooooo,ooooooooooWbbCbbWbbbbCbWoooooooooo,ooooooooooWWWbWWwwWWbbbWoooooooooo,ooooooooooWwwbwWbbWwCwWwoooooooooo,ooooooooooWbCbbwwwwbBBWooooooooooo,ooooooooooWbCbCbCbbBBBWooooooooooo,ooooooooooWbbbbWwwWBBBWooooooooooo,ooooooooooWbCCbWooWBBBWooooooooooo,ooooooooooWbbWwwoowwwwwooooooooooo,oooooooooowwwwoooooooooooooooooooo,oooooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooooo", zoom);
+			App->audio->PlayMusic("Assets/Audio/Music/stage2.ogg", 0);
 			App->lvlManage->max_steps = 750;
 			sprintf_s(stageText, 3, "%02d", 22);
 			break;
 		case 4:
 			App->tiles->genObjects(-zoom + (App->winSize->w - 33 * 24 * zoom) / 2, -zoom + (App->winSize->h - 25 * 24 * zoom) / 2, lvl1_map, "ooooooooooooooooooooooooooooooooo,ooooooooooooooooooooooooooooooooo,ooooooooooooooooooooooooooooooooo,ooooooooooooooooooooooooooooooooo,ooooooooooooooooooooooooooooooooo,ooooooooooooooooooooooooooooooooo,oooooooooooooooWwwwWooooooooooooo,oooooooooooooooWbbbWWwwWooooooooo,oooooooooooooooWbwCwwbbWooooooooo,oooooooooooooooWbbbbCbbWooooooooo,oooooooWwwwwwwWWbwwwbbbWooooooooo,oooooooWBBBBbbwwbCbbCWWwooooooooo,oooooooWBBBBbbbbCbCCbwWoooooooooo,oooooooWBBBBbbWWCbbCbbWoooooooooo,ooooooowwwwwwwwWbbCbbwWoooooooooo,oooooooooooooooWbCbCbbWoooooooooo,ooooooooooooooowwWbwwbWoooooooooo,oooooooooooooooooWbbbbWoooooooooo,ooooooooooooooooowwwwwwoooooooooo,ooooooooooooooooooooooooooooooooo,ooooooooooooooooooooooooooooooooo,ooooooooooooooooooooooooooooooooo", zoom);
+			App->audio->PlayMusic("Assets/Audio/Music/stage1.ogg", 0);
 			App->lvlManage->max_steps = 700;
 			sprintf_s(stageText, 3, "%02d", 23);
 			break;
 		case 5:
 			App->tiles->genObjects(-zoom + (App->winSize->w - 32 * 24 * zoom) / 2, -zoom + (App->winSize->h - 21 * 24 * zoom) / 2, lvl1_map, "oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooWwwWwwwWooooooooooo,ooooooooooWwwWbbwBBBWooooooooooo,ooooooooooWbbwCbbBBBwwwwWooooooo,oooooooWwwwbCbbbWWBBBBbbWooooooo,oooooooWbbbCCwCbWWBBBBbbWooooooo,oooooooWbCbbbbbWWWWwwwbWwooooooo,oooooooWbwWwbCWwWwwbbCbWoooooooo,oooooooWbbWbCbwbwbbbCbbWoooooooo,ooooooowWbwbbbbCbbCCbWwwoooooooo,ooooooooWbbbwbCbwbbWwwoooooooooo,oooooooowwWbbwwbbWwwoooooooooooo,oooooooooowWbbbbbWoooooooooooooo,ooooooooooowwwwwwwoooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo", zoom);
+			App->audio->PlayMusic("Assets/Audio/Music/stage2.ogg", 0);
 			App->lvlManage->max_steps = 1400;
 			sprintf_s(stageText, 3, "%02d", 44);
 			break;
 		case 6:
 			//App->tiles->genObjects(-2, -2, lvl1_map, "oooooooooooooooo,oWwwwWWwwwwwwwWoo,oWbbbWWbBBBBBBWo,oWbbWwwbBBWBwbWo,oWbCWbbBBWwBbBWo,oWwbwbCwbwbbbbWo,oWbCbbCbbbbWbwWo,oWbCWbWbCwwWCbWo,oWbbWbWbCbbWbbWo,oWbCwbwWCwbwCbWo,oWbCbbbWbbbbbbWo,owwWbbbWbwwCbWwo,ooowwwwWbbbbbWoo,ooooooowwwwwwwoo,oooooooooooooooo", zoom);
 			App->tiles->genObjects(-zoom + (App->winSize->w - 32 * 24 * zoom) / 2, -zoom + (App->winSize->h - 21 * 24 * zoom) / 2, lvl1_map, "oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooWwwwWWwwwwwwwWooooooooo,oooooooooWbbbWWbBBBBBBWooooooooo,oooooooooWbbWwwbBBWBwbWooooooooo,oooooooooWbCWbbBBWwBbBWooooooooo,oooooooooWwbwbCwbwbbbbWooooooooo,oooooooooWbCbbCbbbbWbwWooooooooo,oooooooooWbCWbWbCwwWCbWooooooooo,oooooooooWbbWbWbCbbWbbWooooooooo,oooooooooWbCwbwWCwbwCbWooooooooo,oooooooooWbCbbbWbbbbbbWooooooooo,ooooooooowwWbbbWbwwCbWwooooooooo,ooooooooooowwwwWbbbbbWoooooooooo,ooooooooooooooowwwwwwwoooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo,oooooooooooooooooooooooooooooooo", zoom);
+			App->audio->PlayMusic("Assets/Audio/Music/stage1.ogg", 0);
 			App->lvlManage->max_steps = 600;
 			sprintf_s(stageText, 3, "%02d", 50);
 			break;
@@ -408,11 +422,14 @@ void SceneLevel1::OnCollision(Collider* c1, Collider* c2)
 bool SceneLevel1::CleanUp()
 {
 	pause = false;
+	App->collisions->RemoveCollider(colliderUI);
 	App->player->Disable();
 	App->collisions->Disable();
 	App->tiles->UnLoad(0);
 	App->fonts->UnLoad(0);
 	App->boxes->Disable();
+	App->textures->Unload(UItexture);
+	App->textures->Unload(UItextureIn);
 	return true;
 }
 
