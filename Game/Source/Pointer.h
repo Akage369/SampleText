@@ -66,6 +66,8 @@ public:
 	int index=1;
 
 	int zoom = 3;
+	int delayPunt = 350;
+	int lastTimePunt;
 
 };
 

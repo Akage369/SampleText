@@ -76,6 +76,9 @@ public:
 
 	int w=0, h=0;
 
+	int delayPunt = 400;
+	int lastTimePunt;
+
 	//Mix_Music* lvlmusic = nullptr;
 
 };

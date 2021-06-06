@@ -29,7 +29,7 @@ bool Presentation::Start()
 
 	bool ret = true;
 
-	bgTexture = App->textures->Load("Assets/Textures/presentacion.png");
+	bgTexture = App->textures->Load("Assets/Textures/presentation.png");
 	char lookupTableChars[] = { "ABCDEFGHIJKLMNOPQRSTUVWXYZ.-?!0123456789@/ " };
 	scoreFont = App->fonts->Load("Assets/Textures/spritesheet_menus.png", lookupTableChars, 1);
 
