@@ -82,6 +82,8 @@ bool PackInVideo::Start()
 
 Update_Status PackInVideo::Update()
 {
+	GamePad& pad = App->input->pads[0];
+
 	currentAnimationPack = &packAnim;
 	if (App->lvlManage->godmode == true) {
 		if (App->input->keys[SDL_SCANCODE_F4] == KEY_DOWN) {

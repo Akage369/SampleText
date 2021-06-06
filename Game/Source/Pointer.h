@@ -69,6 +69,12 @@ public:
 	int delayPunt = 350;
 	int lastTimePunt;
 
+	bool StopPad_S = false;
+	bool StopPad_W = false;
+	bool StopPad_A = false;
+	bool StopPad_D = false;
+	unsigned int DelayPad = 500;
+	unsigned int LastTPad;
 };
 
 #endif //!__MODULE_PLAYER_H__

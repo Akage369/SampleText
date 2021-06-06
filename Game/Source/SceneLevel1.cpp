@@ -70,7 +70,12 @@ bool SceneLevel1::Start()
 
 	pause = false;
 	noUI = false;
-
+	StopPad_Y = false;
+	lastTime_Y = currentTime;
+	lastTime_Start = currentTime;
+	StopPad_Start = false;
+	StopPad_W = false;
+	lastTime_W = SDL_GetTicks();
 	switch (lvl) {
 	case 1:
 		zoom = 5;
@@ -160,6 +165,7 @@ bool SceneLevel1::Start()
 
 Update_Status SceneLevel1::Update()
 {
+	GamePad& pad = App->input->pads[0];
 	//POR CADA ELEMENTO, +1 EN W
 	//POR CADA STRING, +1 EN H
 	switch (lvl) {
@@ -192,43 +198,58 @@ Update_Status SceneLevel1::Update()
 
 }
 
-	
+	w = App->window->screenSurface->w;
 
-	if (App->input->keys[SDL_SCANCODE_O] == Key_State::KEY_DOWN) {
-		if (App->lvlManage->win == 0) {
+	if (App->input->keys[SDL_SCANCODE_O] == Key_State::KEY_DOWN || (pad.y == KEY_DOWN)) {
+		
+			if (currentTime >= lastTime_Y + 200) {
+				if (App->lvlManage->win == 0) {
 
-			w = App->window->screenSurface->w;
 
-			if (pause == false) {
-				if (noUI == false) {
-					noUI = true;
+
+					lastTime_Y = currentTime;
+					
+
+					if (pause == false) {
+						if (noUI == false) {
+							noUI = true;
+						}
+						else {
+							noUI = false;
+						}
+					}
+					StopPad_Y = true;
+				}
+			}
+		
+	}
+
+	if (App->input->keys[SDL_SCANCODE_P] == Key_State::KEY_DOWN || (pad.start == KEY_DOWN)) {
+		App->audio->PlayFx(App->lvlManage->indexEffects[2],0);
+		if (currentTime >= lastTime_Start + 200) {
+			if (App->lvlManage->win == 0) {
+				if (pause == false) {
+					pause = true;
+					pauseIndex = 0;
+
+					
 				}
 				else {
-					noUI = false;
+					pause = false;
 				}
+				lastTime_Start = currentTime;
+				StopPad_Start = true;
 			}
 		}
 	}
-
-	if (App->input->keys[SDL_SCANCODE_P] == Key_State::KEY_DOWN) {
-		App->audio->PlayFx(App->lvlManage->indexEffects[2],0);
-		if (App->lvlManage->win == 0) {
-			if (pause == false) {
-				pause = true;
-				pauseIndex = 0;
-			}
-			else {
-				pause = false;
-			}
-		}
-	}
+	currentTime = SDL_GetTicks();
 	if (pause == true) {
-		currentTime = SDL_GetTicks();
+		
 	if ((App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_DOWN))
 	{
 		if (pause == true) {
 			firstInput_W = true;
-	}
+		}
 		
 	}
 
@@ -271,6 +292,64 @@ Update_Status SceneLevel1::Update()
 
 		}
 
+	}
+
+	if ((pad.up == KEY_DOWN) && (pad.left_y < 0.0f))
+	{
+		if (pause == true) {
+			if (PauseTest == false) {
+				StopPad_W = false;
+				PauseTest = true;
+			}
+		}
+
+	}
+	if ((pad.up == 0) && (pad.left_y == 0.0f)) {
+		PauseTest = false;
+		StopPad_W = false;
+	}
+	if (PauseTest == false) {
+		if ((pad.up == KEY_DOWN) || (pad.left_y < 0.0f))
+		{
+			if (StopPad_W == false) {
+				if (pauseIndex > 0) {
+					App->audio->PlayFx(App->lvlManage->indexEffects[3], 0);
+					pauseIndex -= 1;
+				}
+				else {
+					App->audio->PlayFx(App->lvlManage->indexEffects[3], 0);
+					pauseIndex = 2;
+				}
+				lastTime_W = currentTime + 500;
+				delay_W = 50;
+				StopPad_W = true;
+			}
+			else if (currentTime > lastTime_W + delay_W) {
+				delay_W = 50;
+				if (pauseIndex > 0) {
+					if (currentTime >= lastTimePunt + delayPunt) {
+						App->audio->PlayFx(App->lvlManage->indexEffects[3], 0);
+						lastTimePunt = currentTime;
+					}
+					pauseIndex -= 1;
+				}
+				else {
+					if (currentTime >= lastTimePunt + delayPunt) {
+						App->audio->PlayFx(App->lvlManage->indexEffects[3], 0);
+						lastTimePunt = currentTime;
+					}
+					pauseIndex = 2;
+				}
+				lastTime_W = SDL_GetTicks();
+				delay_W = 150;
+				lastTime_W = currentTime;
+
+
+
+
+			}
+
+		}
 	}
 	
 		if ((App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_DOWN) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE))
@@ -316,6 +395,63 @@ Update_Status SceneLevel1::Update()
 			}
 
 		}
+
+		if ((pad.down == KEY_DOWN) && (pad.left_y > 0.0f))
+		{
+			if (pause == true) {
+				if (PauseTest2 == false) {
+					StopPad_S = false;
+					PauseTest2 = true;
+				}
+			}
+		}
+
+		if ((pad.down == 0) && (pad.left_y == 0.0f)) {
+			PauseTest2 = false;
+			StopPad_S = false;
+		}
+		if (PauseTest2 == false) {
+			if ((pad.down == KEY_DOWN) || (pad.left_y > 0.0f))
+			{
+				if (StopPad_S == false) {
+
+					if (pauseIndex < 2) {
+						pauseIndex += 1;
+						App->audio->PlayFx(App->lvlManage->indexEffects[3], 0);
+					}
+					else {
+						pauseIndex = 0;
+						App->audio->PlayFx(App->lvlManage->indexEffects[3], 0);
+					}
+
+					lastTime_S = currentTime + 500;
+					delay_S = 50;
+					StopPad_S = true;
+				}
+				else if (currentTime > lastTime_S + delay_S) {
+					delay_S = 50;
+					if (pauseIndex < 2) {
+						pauseIndex += 1;
+						if (currentTime >= lastTimePunt + delayPunt) {
+							App->audio->PlayFx(App->lvlManage->indexEffects[3], 0);
+							lastTimePunt = currentTime;
+						}
+					}
+					else {
+						pauseIndex = 0;
+						if (currentTime >= lastTimePunt + delayPunt) {
+							App->audio->PlayFx(App->lvlManage->indexEffects[3], 0);
+							lastTimePunt = currentTime;
+						}
+					}
+					lastTime_S = SDL_GetTicks();
+					delay_S = 150;
+					lastTime_S = currentTime;
+
+				}
+
+			}
+		}
 	}
 
 	colliderUI->SetPos(positionUI.x, positionUI.y);
@@ -324,7 +460,7 @@ Update_Status SceneLevel1::Update()
 
 	if (pause == true) {
 
-		if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN) {
+		if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN || (pad.a == KEY_DOWN)) {
 			switch (pauseIndex) {
 			case 0:
 				App->audio->PlayFx(App->lvlManage->indexEffects[1], 0);

@@ -262,6 +262,27 @@ Update_Status ModulePlayer::Update()
 	currentTime = SDL_GetTicks();
 	
 	score = App->lvlManage->boxes_lvl;
+	// Get gamepad info
+	GamePad& pad = App->input->pads[0];
+
+	// Debug key for gamepad rumble testing purposes
+	if (App->input->keys[SDL_SCANCODE_1] == Key_State::KEY_DOWN)
+	{
+		App->input->ShakeController(0, 12, 0.33f);
+	}
+
+	// Debug key for gamepad rumble testing purposes
+	if (App->input->keys[SDL_SCANCODE_2] == Key_State::KEY_DOWN)
+	{
+		App->input->ShakeController(0, 36, 0.66f);
+	}
+
+	// Debug key for gamepad rumble testing purposes
+	if (App->input->keys[SDL_SCANCODE_3] == Key_State::KEY_DOWN)
+	{
+		App->input->ShakeController(0, 60, 1.0f);
+	}
+
 	if (App->lvlManage->steps >= App->lvlManage->max_steps) {
 		if (App->lvlManage->godmode == false) {
 			App->lvlManage->Lose();
@@ -273,7 +294,9 @@ Update_Status ModulePlayer::Update()
 	if ((currentTime > lastTime + delay)) {
 
 		if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_DOWN) || (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_DOWN)
-			|| (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_DOWN) || (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_DOWN))
+			|| (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_DOWN) || (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_DOWN) || (pad.left == KEY_DOWN) || (pad.right == KEY_DOWN) ||
+			(pad.up == KEY_DOWN) || (pad.down == KEY_DOWN) || (pad.left_x < 0.0f) || (pad.left_x > 0.0f) || (pad.left_y < 0.0f) || (pad.left_y > 0.0f) || (pad.a == KEY_DOWN) || (pad.b == KEY_DOWN)
+			|| (pad.start == KEY_DOWN))
 		{
 			canStart = true;
 		}
@@ -340,7 +363,7 @@ Update_Status ModulePlayer::Update()
 		
 		if (App->lvlManage->win == 0) {
 			if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT) && (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_IDLE)
-				&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE) && canStart == true)
+				&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE) || ((pad.left == KEY_DOWN) || (pad.left_x < 0.0f)) && canStart == true)
 			{
 				if (isTouchingL == false && isBlockedL == false&&App->sceneLevel_1->pause==false) {
 
@@ -372,7 +395,7 @@ Update_Status ModulePlayer::Update()
 			}
 
 			if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT)
-				&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE) && canStart == true)
+				&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE) || ((pad.right == KEY_DOWN) || (pad.left_x > 0.0f)) && canStart == true)
 			{
 				if (isTouchingR == false && isBlockedR == false && App->sceneLevel_1->pause == false) {
 
@@ -406,7 +429,7 @@ Update_Status ModulePlayer::Update()
 			}
 
 			if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_IDLE)
-				&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE) && canStart == true)
+				&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE) || ((pad.down == KEY_DOWN) || (pad.left_y > 0.0f)) && canStart == true)
 			{
 				if (isTouchingD == false && isBlockedD == false && App->sceneLevel_1->pause == false) {
 
@@ -439,7 +462,7 @@ Update_Status ModulePlayer::Update()
 			}
 
 			if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_IDLE)
-				&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT)&& canStart==true)
+				&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT) || ((pad.up == KEY_DOWN) || (pad.left_y < 0.0f)) && canStart==true)
 			{
 				if (isTouchingU == false && isBlockedU == false && App->sceneLevel_1->pause == false) {
 

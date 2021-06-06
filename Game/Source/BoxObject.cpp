@@ -77,9 +77,12 @@ Collider* Box_Obj::GetLateralColliderBD() {
 
 void Box_Obj::Update()
 {
+	GamePad& pad = App->input->pads[0];
 
 	if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_DOWN) || (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_DOWN)
-		|| (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_DOWN) || (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_DOWN))
+		|| (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_DOWN) || (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_DOWN) || (pad.left == KEY_DOWN) || (pad.right == KEY_DOWN) ||
+		(pad.up == KEY_DOWN) || (pad.down == KEY_DOWN) || (pad.left_x < 0.0f) || (pad.left_x > 0.0f) || (pad.left_y < 0.0f) || (pad.left_y > 0.0f) || (pad.a == KEY_DOWN) || (pad.b == KEY_DOWN)
+		|| (pad.start == KEY_DOWN))
 	{
 		canStart = true;
 	}
@@ -116,7 +119,7 @@ void Box_Obj::Update()
 	if (inContactR==true|| inContactL== true || inContactU == true || inContactD == true ) {
 
 		if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT) && (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_IDLE)
-			&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE)&& canStart==true)
+			&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE) || ((pad.left == KEY_DOWN) || (pad.left_x < 0.0f)) && canStart==true)
 		{
 
 			if (inContactR==true && isStoppedL==false && App->sceneLevel_1->pause == false) {
@@ -136,7 +139,7 @@ void Box_Obj::Update()
 		}
 
 		if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT)
-			&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE) && canStart == true)
+			&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE) || ((pad.right == KEY_DOWN) || (pad.left_x > 0.0f)) && canStart == true)
 		{
 			if (inContactL == true && isStoppedR == false && App->sceneLevel_1->pause == false) {
 				if (movy == county) {
@@ -156,7 +159,7 @@ void Box_Obj::Update()
 		}
 
 		if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_IDLE)
-			&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE) && canStart == true)
+			&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE) || ((pad.down == KEY_DOWN) || (pad.left_y > 0.0f)) && canStart == true)
 		{
 			if (inContactU == true && isStoppedD == false && App->sceneLevel_1->pause == false) {
 				if (movx == countx) {
@@ -174,7 +177,7 @@ void Box_Obj::Update()
 		}
 
 		if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_IDLE)
-			&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT) && canStart == true)
+			&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT) || ((pad.up == KEY_DOWN) || (pad.left_y < 0.0f)) && canStart == true)
 		{
 			if (inContactD == true && isStoppedU == false && App->sceneLevel_1->pause == false) {
 				if (movx == countx) {

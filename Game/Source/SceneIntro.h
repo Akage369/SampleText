@@ -80,6 +80,10 @@ public:
 
 	int delayPunt = 400;
 	int lastTimePunt;
+	bool StopPad_S = false;
+	bool StopPad_W = false;
+	unsigned int DelayPad = 500;
+	unsigned int LastTPad; 
 };
 
 #endif

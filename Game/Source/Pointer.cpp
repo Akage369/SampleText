@@ -50,18 +50,18 @@ bool Pointer::Start()
 
 Update_Status Pointer::Update()
 {
-
+	GamePad& pad = App->input->pads[0];
 
 	currentTime = SDL_GetTicks();
 	if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_DOWN) && (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_IDLE)
-		&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE))
+		&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE) || ((pad.left == KEY_DOWN) || (pad.left_x < 0.0f)))
 	{
 		firstInput_A = true;
 		
 	}
 	if (position.x >= (App->winSize->w - App->levelMenu->rectlvls.w * zoom) / 2 - 6 * zoom) {
 		if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT) && (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_IDLE)
-			&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE))
+			&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE) || ((pad.left == KEY_REPEAT) || (pad.left_x < 0.0f)))
 		{
 			if (firstInput_A == true) {
 
@@ -116,6 +116,74 @@ Update_Status Pointer::Update()
 				
 					lastTime_A = currentTime;
 					
+				}
+			}
+		}
+	}
+
+	if ((pad.left == 0) && (pad.left_x == 0.0f))
+	{
+		StopPad_A = false;
+
+	}
+	if (position.x >= (App->winSize->w - App->levelMenu->rectlvls.w * zoom) / 2 - 6 * zoom) {
+		if ((pad.left == KEY_DOWN) || (pad.left_x < 0.0f))
+		{
+			if (firstInput_A == true) {
+
+				if (position.y >= 112 * zoom) {
+					if (position.x == (App->winSize->w - App->levelMenu->rectlvls.w * zoom) / 2 - 6 * zoom) {
+						if (position.y > 112 * zoom) {
+							position.x = (App->winSize->w + App->levelMenu->rectlvls.w * zoom) / 2 - 7 * zoom - 16 * zoom;
+							position.y -= 16 * zoom;
+							index--;
+
+							App->audio->PlayFx(App->lvlManage->indexEffects[3], 0);
+							lastTimePunt = currentTime;
+
+						}
+					}
+					else {
+						position.x -= 16 * zoom;
+						index--;
+
+						App->audio->PlayFx(App->lvlManage->indexEffects[3], 0);
+						lastTimePunt = currentTime;
+
+					}
+					lastTime_A = currentTime + 500;
+					delay_A = 500;
+					StopPad_A = true;
+				}
+			}
+			else if (currentTime > lastTime_A + 50) {
+				delay_A = 50;
+
+				if (position.y >= 112 * zoom) {
+					if (position.x == (App->winSize->w - App->levelMenu->rectlvls.w * zoom) / 2 - 6 * zoom) {
+						if (position.y > 112 * zoom) {
+							position.x = (App->winSize->w + App->levelMenu->rectlvls.w * zoom) / 2 - 7 * zoom - 16 * zoom;
+							position.y -= 16 * zoom;
+							index--;
+							if (currentTime >= lastTimePunt + delayPunt) {
+								App->audio->PlayFx(App->lvlManage->indexEffects[3], 0);
+								lastTimePunt = currentTime;
+							}
+						}
+					}
+					else {
+						position.x -= 16 * zoom;
+						index--;
+						if (currentTime >= lastTimePunt + delayPunt) {
+							App->audio->PlayFx(App->lvlManage->indexEffects[3], 0);
+							lastTimePunt = currentTime;
+						}
+					}
+
+					lastTime_A = SDL_GetTicks();
+					delay_A = 150;
+					lastTime_A = currentTime;
+
 				}
 			}
 		}
@@ -189,6 +257,74 @@ Update_Status Pointer::Update()
 		}
 	}
 
+	if ((pad.right == 0) && (pad.left_x == 0.0f))
+	{
+		StopPad_D = false;
+
+	}
+	if (position.x <= ((App->winSize->w + App->levelMenu->rectlvls.w * zoom) / 2 - 7 * zoom - 16 * zoom)) {
+		if ((pad.right == KEY_DOWN) || (pad.left_x > 0.0f))
+		{
+			if (StopPad_D == false) {
+				if (position.x == ((App->winSize->w + App->levelMenu->rectlvls.w * zoom) / 2 - 7 * zoom - 16 * zoom) && position.y <= 160 * zoom) {
+					position.x = (App->winSize->w - App->levelMenu->rectlvls.w * zoom) / 2 - 6 * zoom;
+					position.y += 16 * zoom;
+					index++;
+
+					App->audio->PlayFx(App->lvlManage->indexEffects[3], 0);
+					lastTimePunt = currentTime;
+
+				}
+				else if (position.y > 160 * zoom && position.x > ((App->winSize->w + App->levelMenu->rectlvls.w * zoom) / 2 - 7 * zoom - 16 * 2 * zoom)) {
+
+				}
+				else {
+					position.x += 16 * zoom;
+					index++;
+
+					App->audio->PlayFx(App->lvlManage->indexEffects[3], 0);
+					lastTimePunt = currentTime;
+
+				}
+				lastTime_D = currentTime + 500;
+				delay_D = 500;
+				StopPad_D = true;
+			}
+			else if (currentTime > lastTime_D + 50) {
+				delay_D = 50;
+
+				if (position.x == ((App->winSize->w + App->levelMenu->rectlvls.w * zoom) / 2 - 7 * zoom - 16 * zoom) && position.y <= 160 * zoom) {
+					position.x = (App->winSize->w - App->levelMenu->rectlvls.w * zoom) / 2 - 6 * zoom;
+					position.y += 16 * zoom;
+					index++;
+					if (currentTime >= lastTimePunt + delayPunt) {
+						App->audio->PlayFx(App->lvlManage->indexEffects[3], 0);
+						lastTimePunt = currentTime;
+					}
+
+				}
+				else if (position.y > 160 * zoom && position.x > ((App->winSize->w + App->levelMenu->rectlvls.w * zoom) / 2 - 7 * zoom - 16 * 2 * zoom)) {
+
+				}
+				else {
+					position.x += 16 * zoom;
+					index++;
+					if (currentTime >= lastTimePunt + delayPunt) {
+						App->audio->PlayFx(App->lvlManage->indexEffects[3], 0);
+						lastTimePunt = currentTime;
+					}
+					//App->audio->PlayFx(App->lvlManage->indexEffects[3], 0);
+				}
+
+				lastTime_D = SDL_GetTicks();
+				delay_D = 150;
+				lastTime_D = currentTime;
+
+			}
+
+		}
+	}
+
 
 	if ((App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_DOWN) && (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_IDLE)
 		&& (App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE))
@@ -226,6 +362,44 @@ Update_Status Pointer::Update()
 		}
 	}
 
+	if ((pad.down == 0) && (pad.left_y == 0.0f))
+	{
+		StopPad_S = false;
+
+	}
+	if (position.y <= 160 * zoom) {
+		if ((pad.down == KEY_DOWN) || (pad.left_y > 0.0f))
+		{
+			if (StopPad_S == false) {
+				position.y += 16 * zoom;
+				index += 10;
+
+				App->audio->PlayFx(App->lvlManage->indexEffects[3], 0);
+				lastTimePunt = currentTime;
+
+				lastTime_S = currentTime + 500;
+				delay_S = 500;
+
+				StopPad_S = true;
+			}
+			else if (currentTime > lastTime_S + 50) {
+				delay_S = 50;
+
+				position.y += 16 * zoom;
+				index += 10;
+				if (currentTime >= lastTimePunt + delayPunt) {
+					App->audio->PlayFx(App->lvlManage->indexEffects[3], 0);
+					lastTimePunt = currentTime;
+				}
+				lastTime_S = SDL_GetTicks();
+				delay_S = 150;
+				lastTime_S = currentTime;
+
+			}
+
+		}
+	}
+
 	if ((App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_DOWN) && (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_IDLE)
 		&& (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE) && (App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_IDLE))
 	{
@@ -258,10 +432,45 @@ Update_Status Pointer::Update()
 				}
 		
 				lastTime_W = currentTime;
-	
+			}
 
+		}
+	}
 
+	if ((pad.up == 0) && (pad.left_y == 0.0f))
+	{
+		StopPad_W = false;
 
+	}
+	if (position.y >= 128 * zoom) {
+		if ((pad.up == KEY_DOWN) || (pad.left_y < 0.0f))
+		{
+			if (StopPad_W == false) {
+				position.y -= 16 * zoom;
+				index -= 10;
+
+				App->audio->PlayFx(App->lvlManage->indexEffects[3], 0);
+				lastTimePunt = currentTime;
+
+				lastTime_W = currentTime + 500;
+				delay_W = 500;
+				
+				StopPad_W = true;
+			}
+			else if (currentTime > lastTime_W + 50) {
+				delay_W = 50;
+
+				position.y -= 16 * zoom;
+				index -= 10;
+				if (currentTime >= lastTimePunt + delayPunt) {
+					App->audio->PlayFx(App->lvlManage->indexEffects[3], 0);
+					lastTimePunt = currentTime;
+				}
+
+				lastTime_W = SDL_GetTicks();
+				delay_W = 150;
+				lastTime_W = currentTime;
+				
 			}
 
 		}

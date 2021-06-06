@@ -46,13 +46,15 @@ bool Presentation::Start()
 
 Update_Status Presentation::Update()
 {
+	GamePad& pad = App->input->pads[0];
+
 	if (App->lvlManage->godmode == true) {
 		if (App->input->keys[SDL_SCANCODE_F4] == KEY_DOWN) {
 			App->fade->FadeToBlack(this, (Module*)App->sceneLevel_1, 20);
 			App->lvlManage->lvlChange(6, '=');
 		}
 	}
-	if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN)
+	if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN || (pad.a == KEY_DOWN))
 	{
 
 

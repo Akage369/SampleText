@@ -79,6 +79,16 @@ public:
 	int delayPunt = 400;
 	int lastTimePunt;
 
+	bool StopPad_Y = false;
+	bool StopPad_Start = false;
+	bool StopPad_W = false;
+	bool StopPad_S = false;
+	bool PauseTest = false;
+	bool PauseTest2 = false;
+	
+	unsigned int lastTime_Y = 0;
+	unsigned int lastTime_Start = 0;
+	
 	//Mix_Music* lvlmusic = nullptr;
 
 };

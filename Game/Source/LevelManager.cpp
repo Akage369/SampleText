@@ -64,7 +64,7 @@ bool LevelManager::Start(){
 }
 
 Update_Status LevelManager::Update() {
-
+	GamePad& pad = App->input->pads[0];
 	currentTime = SDL_GetTicks();
 	if (App->input->keys[SDL_SCANCODE_G] == Key_State::KEY_DOWN) {
 		if (lvl > 0 && lvl <= 6) {
@@ -145,7 +145,7 @@ if (App->input->keys[SDL_SCANCODE_0] == KEY_DOWN) {
 				firstCaption = false;
 			}
 			
-			if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN) {
+			if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN || (pad.a == KEY_DOWN)) {
 				//App->audio->Disable();
 				App->audio->PlayFx(App->lvlManage->indexEffects[1], 0);
 				if (App->sceneLevel_1->nextlvl == true) {
@@ -163,7 +163,7 @@ if (App->input->keys[SDL_SCANCODE_0] == KEY_DOWN) {
 					boxes_lvl = 0;
 				}
 			}
-			if (App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_DOWN) {
+			if (App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_DOWN || ((pad.left == KEY_DOWN) || (pad.left_x < 0.0f))) {
 				if (App->sceneLevel_1->nextlvl == false) {
 					App->sceneLevel_1->nextlvl = true;
 					App->audio->PlayFx(App->lvlManage->indexEffects[3], 0);
@@ -171,7 +171,7 @@ if (App->input->keys[SDL_SCANCODE_0] == KEY_DOWN) {
 				}
 				
 			}
-			if (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_DOWN) {
+			if (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_DOWN || ((pad.right == KEY_DOWN) || (pad.left_x > 0.0f))) {
 				if (App->sceneLevel_1->nextlvl == true) {
 					App->sceneLevel_1->nextlvl = false;
 					App->audio->PlayFx(App->lvlManage->indexEffects[3], 0);
@@ -199,7 +199,7 @@ if (App->input->keys[SDL_SCANCODE_0] == KEY_DOWN) {
 				disableMusic(7200);
 			}
 			//App->audio->PlayMusic("Assets/Audio/Music/lose.ogg");
-			if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN) {
+			if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN || (pad.a == KEY_DOWN)) {
 
 				App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneLevel_1, 30);
 				boxes_lvl = 0;

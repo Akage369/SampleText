@@ -72,6 +72,7 @@ Update_Status IntroAnimation::Update() {	// plays animation
 	screen_w = App->winSize->w;
 	screen_h = App->winSize->h;
 
+	GamePad& pad = App->input->pads[0];
 	if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN)
 	{
 
@@ -81,7 +82,7 @@ Update_Status IntroAnimation::Update() {	// plays animation
 	}
 
 	if (App->lvlManage->godmode == true) {
-		if (App->input->keys[SDL_SCANCODE_F4] == KEY_DOWN) {
+		if (App->input->keys[SDL_SCANCODE_F4] == KEY_DOWN ) {
 			App->fade->FadeToBlack(this, (Module*)App->packInVideo, 20);
 		}
 	}

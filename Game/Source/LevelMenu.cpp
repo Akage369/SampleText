@@ -45,11 +45,13 @@ bool LevelMenu::Start()
 
 Update_Status LevelMenu::Update()
 {
+	GamePad& pad = App->input->pads[0];
+
 	if (App->input->keys[SDL_SCANCODE_F4] == KEY_DOWN) {
 		App->fade->FadeToBlack(this, (Module*)App->sceneIntro, 20);
 	}
 
-	if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN)
+	if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN || (pad.a == KEY_DOWN))
 	{
 		switch (App->pointer->index) {
 		case 1:
