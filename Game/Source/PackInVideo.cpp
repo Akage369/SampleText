@@ -95,7 +95,7 @@ Update_Status PackInVideo::Update()
 		currentAnimationPack->speed = 0;
 	}
 
-	if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN && canInput == true)
+	if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN || (pad.a == KEY_DOWN) && canInput == true)
 	{
 		
 			currentAnimationPack->pingpong = true;
