@@ -1,37 +1,23 @@
-## Welcome to GitHub Pages
+## SampleText
+We are a group of 4 people who have decided to make a tribute to the japanese game Super Sokoban, launched in the 90s for the SNES.
 
-You can use the [editor on GitHub](https://github.com/Akage369/SampleText/edit/main/docs/index.md) to maintain and preview the content for your website in Markdown files.
+![Image](https://cdn.discordapp.com/attachments/818237646945517608/851066139337424946/sampletext_integrants.jpeg)
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+We are:
+Pau Almendrote, Xavier Casadó, Alejandro Belchí and Joan Damià.
 
-### Markdown
+## Our first project, Super Soukoban
+For the Project 1 subject we chose Super Soukoban as a game to replicate at the beginning of the course.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+![Image](https://wowroms-photos.com/emulators-roms-logo/48/29697/420-420/Super+Soukoban+(Japan)-image.jpg)
 
-```markdown
-Syntax highlighted code block
+This is a SNES japanese puzzle game about a man who has to work very hard and push boxes to earn money.
+The game can be very difficult because of 2 things you always have to keep in mind while playing. These are:
 
-# Header 1
-## Header 2
-### Header 3
+1. You have a maximum number of steps you can do per level.
+2. You only can push boxes if they are in front of your character, so they can get blocked very easily if they touch a wall.
 
-- Bulleted
-- List
+### The results:
+Since we started this new project, we have learned a lot about how does a game work internally and we are very proud of the results we have obtained at the end.
 
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/Akage369/SampleText/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+Take a look at [this video]()! It sums up our project.
