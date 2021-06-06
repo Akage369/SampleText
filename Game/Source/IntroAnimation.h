@@ -33,6 +33,7 @@ public:
 public:
 	// The scene sprite sheet loaded into an SDL_Texture
 	SDL_Texture* introTexture = nullptr;
+	SDL_Texture* carTexture = nullptr;
 	int zoom = 1;
 	SDL_Rect closeUp = { 1,1,256,223 };
 	SDL_Rect closeUpOposite = { 259,1,256,223 };
@@ -58,6 +59,10 @@ public:
 	SDL_Rect disapoint = { 259,2261,35,39 };
 	SDL_Rect sky = { 1,2485,256,224 };
 	SDL_Rect black = { 259,2485,256,224 };
+
+	Animation ImCarAnim;
+	Animation* currentAnimationCar = nullptr;
+	SDL_Rect ImCar_rect;
 
 	Animation intro;
 

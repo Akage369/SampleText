@@ -35,6 +35,8 @@ bool LevelMenu::Start()
 
 	char lookupTableChars[] = { "ABCDEFGHIJKLMNOPQRSTUVWXYZ.-?!0123456789@/ " };
 	FontText = App->fonts->Load("Assets/Textures/spritesheet_menus.png", lookupTableChars, 1);
+	App->audio->PlayMusic("Assets/Audio/Music/levelsMusic.ogg");
+
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
 
@@ -55,26 +57,32 @@ Update_Status LevelMenu::Update()
 	{
 		switch (App->pointer->index) {
 		case 1:
+			App->audio->PlayFx(App->lvlManage->indexEffects[1], 0);
 			App->lvlManage->lvlChange(1, '=');
 			App->fade->FadeToBlack(this, (Module*)App->sceneLevel_1, 20);
 			break;
 		case 10:
+			App->audio->PlayFx(App->lvlManage->indexEffects[1], 0);
 			App->lvlManage->lvlChange(2, '=');
 			App->fade->FadeToBlack(this, (Module*)App->sceneLevel_1, 20);
 			break;
 		case 22:
+			App->audio->PlayFx(App->lvlManage->indexEffects[1], 0);
 			App->lvlManage->lvlChange(3, '=');
 			App->fade->FadeToBlack(this, (Module*)App->sceneLevel_1, 20);
 			break;
 		case 23:
+			App->audio->PlayFx(App->lvlManage->indexEffects[1], 0);
 			App->lvlManage->lvlChange(4, '=');
 			App->fade->FadeToBlack(this, (Module*)App->sceneLevel_1, 20);
 			break;
 		case 44:
+			App->audio->PlayFx(App->lvlManage->indexEffects[1], 0);
 			App->lvlManage->lvlChange(5, '=');
 			App->fade->FadeToBlack(this, (Module*)App->sceneLevel_1, 20);
 			break;
 		case 50:
+			App->audio->PlayFx(App->lvlManage->indexEffects[1], 0);
 			App->lvlManage->lvlChange(6, '=');
 			App->fade->FadeToBlack(this, (Module*)App->sceneLevel_1, 20);
 			break;
@@ -91,7 +99,7 @@ Update_Status LevelMenu::PostUpdate()
 	App->render->Blit(bgTexture, (App->winSize->w - (rectlvls.w * 4)) / 2, 111 * 4, &rectlvls, 1.0f, true, 4);
 	App->render->Blit(bgTexture, (App->winSize->w - (rectTop.w * 4)) / 2, 4 * 4, &rectTop, 1.0f, true, 4);
 	App->render->Blit(bgTexture, (App->winSize->w - (rectDown.w * 4)) / 2, 84 * 4, &rectDown, 1.0f, true, 4);
-	App->render->Blit(bgTexture, (App->winSize->w - (rectD.w * 4)) / 2, 196 * 4, &rectD, 1.0f, true, 4);
+	App->render->Blit(bgTexture, (App->winSize->w - (rectD.w * 4)) / 2, 196 * 4 + 10*4, &rectD, 1.0f, true, 4);
 	App->fonts->BlitText((App->winSize->w - text.w * 3) / 2 + 14 * 3 - 5 * 3, titleY + title.h * 3 + 6 * 3 + 8 * 3 - 130 * 3, FontText, "LEVELS FROM", 3, 0, 0, 0, App->winSize->w, 3);
 	App->fonts->BlitText((App->winSize->w - text.w * 3) / 2 + 14 * 3 + 10 * 3, titleY + title.h * 3 + 6 * 3 + 8 * 3 - 130 * 3, FontText, "|1 TO 50", 3, 0, 0, 0, App->winSize->w, 3);
 	App->fonts->BlitText((App->winSize->w - text.w * 3) / 2 + 14 * 3 - 11 * 3, titleY + title.h * 3 + 6 * 3 + 8 * 3 - 110 * 3, FontText, "||ONLY PLAYABLE", 3, 0, 0, 0, App->winSize->w, 3);
@@ -101,7 +109,7 @@ Update_Status LevelMenu::PostUpdate()
 
 	App->fonts->BlitText((App->winSize->w - text.w * 3) / 2 + 14 * 3 - 15 * 3, titleY + title.h * 3 + 6 * 3 + 8 * 3 - 22 * 3, FontText, "LEVEL SELECTOR", 3, 0, 0, 0, App->winSize->w, 3);
 
-	App->fonts->BlitText((App->winSize->w - text.w * 3) / 2 + 14 * 3 - 7 * 3, titleY + title.h * 3 + 6 * 3 + 8 * 3 + 127 * 3, FontText, "JZN22QAK8Y4J", 3, 0, 0, 0, App->winSize->w, 3);
+	App->fonts->BlitText((App->winSize->w - text.w * 3) / 2 + 14 * 3 - 7 * 3, titleY + title.h * 3 + 6 * 3 + 8 * 3 + 127 * 3 + 10 * 4, FontText, "JZN22QAK8Y4J", 3, 0, 0, 0, App->winSize->w, 3);
 
 	return Update_Status::UPDATE_CONTINUE;
 }
