@@ -12,16 +12,13 @@ Pau Almendrote, Xavier Casadó, Alejandro Belchí and Joan Damià.
 
 - Profiles:
   - Xavier Casadó (lead):
-[https://github.com/Akage369])(https://github.com/Akage369)
+[https://github.com/Akage369](https://github.com/Akage369)
   - Pau Almendrote (art):
 [https://github.com/PauAl19](https://github.com/PauAl19)
   - Alejandro Belchí (programmer):
 [https://github.com/Bright-Me](https://github.com/Bright-Me)
   - Joan Damià (design):
 [https://github.com/JoanDamia](https://github.com/JoanDamia)
-
-Xavier Casadó
-
 
 ## Our first project, Super Soukoban
 For the Project 1 subject we chose Super Soukoban as a game to replicate at the beginning of the course.
