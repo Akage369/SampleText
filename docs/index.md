@@ -23,3 +23,5 @@ The game can be very difficult because of 2 things you always have to keep in mi
 Since we started this new project, we have learned a lot about how does a game work internally and we are very proud of the results we have obtained at the end.
 
 Take a look at [this video](https://youtu.be/M5DhaPk5DC4)! It sums up our project.
+
+Don't forget to cheek out our latest release [here](https://github-releases.githubusercontent.com/339489531/af186780-c72d-11eb-8ef8-35)!
