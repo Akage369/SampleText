@@ -8,11 +8,11 @@ Pau Almendrote, Xavier Casadó, Alejandro Belchí and Joan Damià.
 
 ### Our Github:
 - Team:
-https://github.com/Akage369/SampleText
+[https://github.com/Akage369/SampleText](https://github.com/Akage369/SampleText)
 
 - Profiles:
   - Xavier Casadó (lead):
-https://github.com/Akage369
+[https://github.com/Akage369]
   - Pau Almendrote (art):
 https://github.com/PauAl19
   - Alejandro Belchí (programmer):
