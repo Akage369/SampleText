@@ -2,6 +2,9 @@
 Project I - My first amazing arcade game
 https://github.com/Akage369/SampleText
 
+Website of the project:
+https://akage369.github.io/SampleText/
+
 -Xavier Casadó, Akage369
 https://github.com/Akage369
 
