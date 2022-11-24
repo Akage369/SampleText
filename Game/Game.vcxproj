@@ -81,6 +81,7 @@
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>$(SolutionDir)/Game/Source/External;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)/Game/Source/External;$(LibraryPath)</LibraryPath>
+    <IntDir>$(SolutionDir)$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
