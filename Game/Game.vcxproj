@@ -74,7 +74,8 @@
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(SolutionDir)/Game/Source/External;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)/Game/Source/External;$(LibraryPath)</LibraryPath>
-    <OutDir>.\Debug</OutDir>
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
