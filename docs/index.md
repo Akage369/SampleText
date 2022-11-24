@@ -1,7 +1,7 @@
 ## SampleText
 We are a group of 4 people who have decided to make a tribute to the japanese game Super Sokoban, launched in the 1992 for the SNES.
 
-![Image](https://cdn.discordapp.com/attachments/818237646945517608/851249054762926120/sampletext_integrants_photoshoped.jpg)
+![image](https://user-images.githubusercontent.com/79162780/203670402-ef1cb2aa-1fe9-4f6a-9e05-15cbbd8c0cbc.png)
 
 We are:
 Pau Almendrote, Xavier Casadó, Alejandro Belchí and Joan Damià.
