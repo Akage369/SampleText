@@ -1,5 +1,5 @@
 # SampleText
-Project I - My first amazing arcade game
+Project I - My first arcade game
 https://github.com/Akage369/SampleText
 
 Website of the project:
